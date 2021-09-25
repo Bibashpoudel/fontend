@@ -53,17 +53,20 @@ const data = {
                    _id:'1',
                    name:'service1',
                    description:'about service',
+                   
                    price:45000
-
                },
                {
                 _id:'2',
-                name:'service1',
-                price:45000
+                name:'Cattering Service',
+                PerPlate:true,
+                price:800
+                ,
+                description:'Type of food and dish',
             },
             {
                 _id:'3',
-                name:'service1',
+                name:'service3',
                 price:45000
             },
             ],

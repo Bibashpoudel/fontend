@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Signin } from '../Action/UserAction';
 
 
 
-function SignInPage(){
+function SignInPage(props){
+
+    const [phone ,SetPhone] = useState();
+    const [password , setPassword] =useState()
+
+
+    const userSignin = useSelector(state => state.userSignin);
+    const { loading, userInfo, error} = userSignin;
+
+
+    const dispatch = useDispatch();
+    const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+    const Signinhandaler = (e) =>{
+        e.preventDefault();
+        dispatch(Signin(phone, password));
+    }
+    useEffect(() =>{
+        if(userInfo){
+            props.history.push(redirect);
+            window.alert("log in successfull")
+            
+        }
+
+    }, [props.history,redirect,  userInfo]);
+
+    
     return(
         <div className="main top_center">
             <div className="col-1">
@@ -15,7 +42,7 @@ function SignInPage(){
             </div>
             <div className="form col-2">
 
-                <form>
+                <form onSubmit={Signinhandaler}>
                     <div>
                         <h2>Log In  !</h2>
                     </div>
@@ -28,7 +55,7 @@ function SignInPage(){
                             type="text" 
                             id="phone" 
                             placeholder="Email Or Phone"
-                            
+                            onChange ={(e) => SetPhone(e.target.value)}
                             
                         ></input>
                     </div>
@@ -39,7 +66,7 @@ function SignInPage(){
                             type="password" 
                             id="password" 
                             placeholder="Password"
-                            
+                            onChange ={(e) => setPassword(e.target.value)}
                             
                         ></input>
                     </div>

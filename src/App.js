@@ -7,8 +7,24 @@ import SignupPage from './ClientPage/signupPage';
 import SignupPageVendor from './VenderPage/signupPage';
 import SignInPage from './ClientPage/signinPage';
 import Vendorpage from './VenderPage/VenderPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from './Action/UserAction';
+import CartScreen from './ClientPage/Cartpage';
 
 function App() {
+
+
+  const userSignin = useSelector(state => state.userSignin);
+    const {  userInfo} = userSignin;
+
+
+    const dispatch = useDispatch();
+
+  const Signouthandler = (e) =>{
+      e.preventDefault();
+      window.alert("clicked")
+      dispatch(signout());
+  }
   return (
       <BrowserRouter>
     <div className="grid-container">
@@ -19,11 +35,11 @@ function App() {
                 </div>
                 <div className="nav-left-menu">
                     <div>
-                        <a href="">venues</a>
+                      <Link to="/venue">Venue</Link>
                         
                     </div>
                     <div>
-                        <a href="">Home</a>
+                    <Link to="/home">Home</Link>
                     </div>
                     <div>
                         |
@@ -31,12 +47,29 @@ function App() {
                     <div>
                         |s
                     </div>
-                    <div>
-                        <a href="">Sign Up</a>
+                   {
+                     userInfo ?(
+                      <div>
+                      <Link to="/profile">{userInfo.name}</Link>
+                      </div>
+                      
+                     ):
+                     <div>
+                    <Link to="/register">Sign Up</Link>
                     </div>
-                    <div>
-                        <a href="">Sign In</a>
+                   }
+                    {
+                     userInfo ?(
+                      <div onClick={Signouthandler}>
+                      <Link to="/" >signout</Link>
+                      </div>
+                      
+                     ):
+                     <div>
+                    <Link to="/signin">Sign In</Link>
                     </div>
+                   }
+                   
 
                 </div>
             </div>
@@ -56,7 +89,7 @@ function App() {
 
 
                 {/* Client screen */}
-
+                <Route path='/cart/:id?' component={CartScreen}></Route>
             <Route path='/signin' component={SignInPage}></Route>
             <Route path="/register" component={SignupPage}></Route>
             <Route path="/venue/:id" component={VenueDetailsPage}></Route>

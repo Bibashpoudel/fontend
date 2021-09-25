@@ -1,5 +1,4 @@
 import React from 'react';
-import '../stylesheet/client.css';
 
 
 export default function LoadingBox(){

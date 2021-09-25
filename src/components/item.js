@@ -1,6 +1,5 @@
 import React from 'react'
-import data from '../data'
-import Venue from './venues'
+
 
 import Carousel from 'react-elastic-carousel'
 

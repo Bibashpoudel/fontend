@@ -5,14 +5,34 @@ import React from 'react'
 function Dashboard(){
     return (
         <div className="das_details">
-            <div className="main top">
+            <div className="main center">
                 <div className="box">
+                    <div className=" box-items">
+                    <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <div>
+                        50
+                    </div>
+                    <div> Orders</div>
+                </div>
+                <div className="box">
+                <div className=" box-items">
+                    <i className="fa fa-line-chart"></i>
+                    </div>
+                    <div>
+                        50
+                    </div>
+                    <div> Orders</div>
 
                 </div>
                 <div className="box">
-
-                </div>
-                <div className="box">
+                <div className=" box-items">
+                    <i class="fa fa-inr"></i>
+                    </div>
+                    <div>
+                        50
+                    </div>
+                    <div> Orders</div>
 
                 </div>
 

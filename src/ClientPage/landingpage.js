@@ -1,20 +1,13 @@
 import React from 'react'
 import pwed from '../pwed.png'
-import data from '../data.js'
-import Venue from '../components/venues';
+;
 import TrendingSlider from '../components/TrendingSlider';
-import Slider from 'react-slick';
+
 
 
 function LandingPage(){
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      }
+    
     return(
         <div>
         <div className="main">
