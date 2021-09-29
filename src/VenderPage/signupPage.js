@@ -1,13 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Signup } from '../Action/UserAction';
 
 
 
-function SignupPageVendor(){
+function SignupPageVendor(props){
+    const[name, SetName] =useState();
+    const [email, SetEmail] =useState();
+    const [phone, SetPhone] = useState();
+    const [password, setPassword] = useState();
+    const customer_type ="Vendor"
+
+    const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+
+    const userRegister = useSelector(state => state.userRegister);
+    const { loading, userInfo, error} =userRegister;
+
+    const dispatch = useDispatch();
+    const SignUphandaler =(e)=>{
+        e.preventDefault();
+        
+        dispatch(Signup(name, email, phone, customer_type, password));
+    }
+    useEffect(() =>{
+        if(userInfo){
+            props.history.push(redirect);
+            
+        }
+
+    }, [props.history,redirect,  userInfo]);
+
     return(
         <div className="main top_center vendor">
             <div className="col-1">
-                <img className="ven_reg" src="../images/vendorregister.jpg" alt="registerimg"></img>
+                <img className="large" src="../images/vendorregister.jpg" alt="registerimg"></img>
             </div>
             <div className="form col-2">
 

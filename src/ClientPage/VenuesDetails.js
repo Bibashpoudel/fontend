@@ -1,86 +1,181 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import GallerySlider from '../components/item';
-import data from '../data';
+import { useDispatch, useSelector } from 'react-redux';
+import { VenueDetails, VenueServices } from '../Action/VenueAction';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import Rating from '../components/Rating';
+
+import data from '../data'
 
 
 
 
 function VenueDetailsPage(props){
-    const venue = data.venders.find((x) => x._id === props.match.params.id);
+    const venue1 = data.venders.find((x) => x._id === props.match.params.id);
 
-    const productId = props.match.params.id;
+    const venueId = props.match.params.id;
 
-    const [service, SetService] = useState(
-        new Array(venue.service.length).fill(false)
-    )
-
+    const dispatch = useDispatch();
+   
+    const DetailsVenue = useSelector((state) =>state.DetailsVenue);
+    const {loading, error, venue} = DetailsVenue;
+    const ServiceVenue = useSelector((state) =>state.ServiceVenue);
+    const {loading_service, error_service, services}  = ServiceVenue;
+    const [venueService, setvenueService] = useState(['']);
+    
+  
         
   const [total, setTotal] = useState(0);
-  const [people, SetPeople] = useState()
- 
+  const [people, SetPeople] = useState(0)
 
+
+    const [fetchService , SetFetchService] = useState([]);
+    useEffect(() =>{
+        dispatch(VenueServices())
+        dispatch(VenueDetails(venueId));
+       
+        
+    }, [dispatch, venueId, ] );
+    
+
+    
+    
+  
+  const [checkedState, setCheckedState] = useState(new Array((services? services.fill(false):null)))
+ 
+    console.log(services)
+    
+    // console.log(services)
   const handleOnChange = (position) => {
-    const updatedCheckedState = service.map((item, index) =>
+    const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
-    SetService(updatedCheckedState);
+    setCheckedState(updatedCheckedState);
     
     
     const totalPrice = updatedCheckedState.reduce(
-      (sum, currentState, index) => {
+      (sum,  currentState, index) => {
          
         if (currentState === true) {
-          if(venue.service[index].PerPlate ===true){
+           
+            
+          if(services[index].PerPlate ===true){
 
-            return sum + venue.service[index].price * people;
+            return sum + services[index].price * people;
+          }
+          else{
+            return sum + services[index].price
           }
         }
-        return sum;
+        return sum ;
       },
       0
     );
     const finalprice  =venue.price+totalPrice
-
     setTotal( finalprice);
+
+    // for adding service name
+    const SelectedService = updatedCheckedState.reduce(
+        (names, currentState, index) =>{
+            if(currentState === true){
+                return  names + services[index].name
+            }
+            return names;
+        },
+        ''
+
+    );
+    setvenueService(SelectedService)
+    
    
   };
 
 
     
     const addtoCart=(e)=>{
-        e.preventDefault();
-        console.log(service)
-        // dispatch(addtoCart(productId ))
+        props.history.push(`/cart/${venueId}?people=${people}?total=${total}?services=${venueService}`)
+
 
     }
     
-
-     
     
-   
-    
-
-   
 
     const [IsOpen, setIsOpen] = useState(false);
     return(
-        <div className="main top">
+        
+        <div>
+        {
+            loading? <LoadingBox></LoadingBox>
+        :
+            error? <MessageBox variant="danger">{error}</MessageBox>
+        :
+        <div> 
+        <div className="main top_center">
             <div className="col-1">
-               <div>
-                    <img id="myimage"  className=" large" src={venue.image} alt={venue.name}></img>
-               </div>
-               <div className="">
-                   
-                   
-                           <GallerySlider key={venue._id} venue={venue}></GallerySlider>
-                       
+              
+                    <img id="myimage"  className="large" src={venue.display_image} alt={venue.name}></img>
+               
+               <div className="venue_details_margin">
+                   <div className="venue_details_row">
+                    <div>{venue.name}</div>
+                    <div>
+                        
+                        {/* <Rating rating={venue.rating} numReviews={venue.numReviews}></Rating> */}
+                    
+                        </div>
+                   </div>
+                   <div className="venue_details_row">
+                       <span>
+                       <i className="fa fa-location"></i>
+                        {venue.location}
+                       </span>
+                   </div>
+                   <div className="venue_details_row_buttom">
+                        <div className="colm-4">
+                            <i className="fa fa-image"></i>
+                            {/* {venue.gallery.length} */}
+                        </div>
+                        <div className="colm-4">
+                        <i className="fa fa-image"></i>
+                           
+                        </div>
+                        <div className="colm-4">
+                        <i className="fa fa-share"></i>
+                           
+                        
+                        </div>
+                        <div className="colm-4">
+                        <i className="fa fa-heart-o" aria-hidden="true"></i>
 
+                        </div>
+                   </div>
+                   
                </div>
+               <div className="venue_details">
+                        <div className="venue_details_row">
+                            <div>
+                                Photos
+                            </div>
+                            <div>
+                                About
+                            </div>
+                            <div>
+                                Review
+                            </div>
+                            <div>
+                               Map View
+                            </div>
+                        </div>
+                   </div>
             </div>
-            <form>
-            <div className="col-2">
+            <form className="form col-2">
+            <div className="">
+            {
+            loading_service? <LoadingBox></LoadingBox>
+        :
+            error_service? <MessageBox variant="danger">{error}</MessageBox>
+        :
                 <div className="g_service">
                     <div className="g_ser_hed">
                         <h3>
@@ -88,9 +183,9 @@ function VenueDetailsPage(props){
                         </h3>
                     </div>
                     {
-                        venue.service.map((serv, index) =>(
+                        services.map((serv, index) =>(
                            
-                            <div key={serv._id} className="Ven_service">
+                            <div key={serv.id} className="Ven_service">
                         <div className="dts_service">
                            <div className="dts_col_1">
                                 {serv.PerPlate? (
@@ -103,7 +198,7 @@ function VenueDetailsPage(props){
                                                 id={`custom-checkbox-${index}`}
                                                 name={serv.name}
                                                 value={serv.name}
-                                                checked={service[index]}
+                                                checked={serv[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />
                                        
@@ -119,15 +214,15 @@ function VenueDetailsPage(props){
                                     <input
                                     type="checkbox"
                                         id={`custom-checkbox-${index}`}
-                                        name={serv.name}
-                                        value={serv.name}
-                                        checked={service[index]}
+                                        name={serv.service}
+                                        value={serv.service}
+                                        checked={serv[index]}
                                         onChange={() => handleOnChange(index)}
                                     />
                                 </span>
                                 }
                                <span>
-                               <label htmlFor={`custom-checkbox-${index}`}>{serv.name}</label>
+                               <label htmlFor={`custom-checkbox-${index}`}>{serv.service}</label>
                                </span>
                                <span>
                                    {serv.price}
@@ -242,9 +337,33 @@ function VenueDetailsPage(props){
                         </div>
                     </div>
                 </div>
+}
             </div>
             </form>
+            
         </div>
+        <div className="main top">
+                        <div className="venue_details_row">
+                            <div>
+                                Photos
+                            </div>
+                            <div>
+                                About
+                            </div>
+                            <div>
+                                Review
+                            </div>
+                            <div>
+                               Map View
+                            </div>
+                        </div>
+        </div>
+        
+
+    
+        </div>
+}
+</div>
     )
 }
 

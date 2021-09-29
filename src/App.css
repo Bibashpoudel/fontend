@@ -55,6 +55,15 @@ body {
   opacity: 1;
 }
 /* global design */
+
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+a:hover {
+  color: #ff8000;
+}
 input,
 select,
 textarea,
@@ -85,7 +94,12 @@ img.medium {
 }
 img.large {
   max-width: 62rem;
+ 
   width: 100%;
+  min-width: 30rem;
+  max-height:62rem;
+
+  
 }
 .single_row  {
   display:flex;
@@ -274,7 +288,7 @@ footer {
 .column1{
   flex:none;
   margin:0 auto;
-  border: 0.5rem dashed black;
+  
 }
 .column1 div a{
   padding: 1rem;
@@ -453,9 +467,44 @@ footer {
 /* design venues  details page */
 
 .col-1{
-  flex:1 2 25rem;
-  border: 0.5rem dashed #ff8000;
+  flex:30%;
+  
+  justify-content: center;
+  text-align: center;
   margin:0  0rem;
+}
+.venue_details_margin{
+  background-color: #fff;
+  margin-top:-3rem;
+  margin-left:8%;
+  margin-right: 8%;
+  position: relative;
+  border:.2rem solid #f3f3f3;
+  
+}
+.venue_details_row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin:1rem;
+}
+.venue_details_row_buttom {
+  background-color:rgb(233, 224, 224);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+}
+.colm-4{
+  padding:1rem;
+  color:rgb(92, 89, 89);
+  font-size: 2.3rem;
+}
+.venue_details{
+  margin-top:2rem;
+  background-color: #fff;
+ 
+  border:.2rem solid #f3f3f3;
 }
 .gallery_image{
   display: flex;
@@ -472,9 +521,7 @@ footer {
 }
 
 .col-2 {
-  flex: 1 2 25rem;
-  border: 0.5rem dashed blue;
-  margin-right:4rem;
+  flex:70%;
 
 }
 
@@ -503,7 +550,7 @@ footer {
   
 }
 .dts_col_1{
-  
+  display: flex;
   font-size: 1.7rem;
 
 }
@@ -568,7 +615,7 @@ footer {
 }
 .top_center{
   align-items: flex-start;
-  margin:1rem 2rem 0rem 2rem;
+  margin:7rem 2rem 0rem 2rem;
 }
 .form{
   max-width: 60rem;
@@ -624,7 +671,8 @@ footer {
 /* -------------------design Vendor Sign up page-------------------- */
 
 .vendor{
-  border:.5rem solid green;
+  margin:8rem 6.5rem;
+  
   background-color: #FCE4E4;
 }
 
@@ -672,21 +720,27 @@ img.cus_log{
 .das_aside{
     background-color: white;
     width:25%;
-    border: 0.5rem dashed #ff8000;
+    border:.3rem solid #c0c0c0;
+    box-shadow: 0.1rem 0.1rem 1rem rgb(196, 196, 196);
+    border-radius: 0.5rem;
     margin:0  0rem;
-    height:80vh;
+    height:100vh;
   
 }
 .das_aside div{
   padding:1rem;
   font-size:2rem;
-  border:.1rem solid blue;
+
+}
+.das_aside div:nth-child(even){
+  background-color: #c0c0c0;
+  border-radius: 1rem;
 }
 
 .ven_col-2{
  
     flex: 1 2 25rem;
-    border: 0.5rem dashed blue;
+  margin:2rem;
     
 }
 
@@ -719,6 +773,231 @@ img.cus_log{
   text-align: center;
 }
 
-.box-items{
+/* .box-items{
    
+} */
+
+
+
+
+
+/* Deesigning Service managementScreen */
+.ven_serv_manage form{
+display: flex;
+justify-content: center;
+align-content: center;
+text-align: center;
+align-items: center;
+flex-direction: column;
+max-width:100rem;
+  margin:0;
+}
+.form-col-2{
+ 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+ 
+  align-content: center;
+  
+}
+.form-col-2 input{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:100%;
+}
+.ser-mng-col-3 {
+  margin-left:2rem;
+}
+.form-col-2 .image_field input{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:65%;
+}
+.form-col-2 select{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:73%;
+}
+.form-row-2{
+  width: 100%;
+
+}
+.form-row-2 > div{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+ margin:2rem;
+}
+.form-row-2 textarea{
+  width: 95%;
+  height:15rem;
+  margin:0;
+}
+
+
+
+
+
+
+
+/* --------------------------------------- */
+/* profile page */
+
+.profile{
+  display: flex;
+  flex-wrap: wrap;
+  margin:0;
+  padding: 0;
+  background-color: #f8f8ff;
+  
+}
+.pro_col-1-main{
+  /* flex:20%; */
+  
+}
+.profile_bar{
+  position: fixed;
+  width: 25rem;
+  height: 100%;
+ 
+  z-index: 1000;
+  transform: translateX(-50rem);
+  transition: all 0.5s;
+}
+.profile_bar.open {
+  transform: translateX(0);
+}
+.pro_col-1{
+  background-color: #efefef;
+  width: 25rem;
+  height: 100vh;
+  text-align: center;
+}
+.pro_setting{
+  padding:1rem;
+  background-color:#c0c0c0;
+  margin-bottom: .1rem;
+  cursor: pointer;
+}
+.pro_setting:hover{
+  color:white;
+  background-color: #f02020;
+
+}
+.pro_col-2{
+  /* flex:70%; */
+  border:.1rem solid red;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------- */
+
+
+
+/* aside section */
+aside {
+  position: fixed;
+  width: 30rem;
+  height: 100%;
+  background-color: #efefef;
+  z-index: 1000;
+  transform: translateX(-30rem);
+  transition: all 0.5s;
+}
+aside.open {
+  transform: translateX(0);
+}
+
+button.open-sidebar {
+  font-size: 2rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.5rem;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+  border:none;
+}
+button.open-sidebar:hover {
+  border-color: #ffffff;
+  border: 0.1rem solid white;
+}
+aside ul {
+  padding: 0;
+  list-style: none;
+}
+aside li {
+  /* display: flex;
+  justify-content: space-between; */
+  padding: 0.5rem;
+  
+}
+button.close-sidebar {
+  padding: 0.3rem 0.8rem;
+}
+.aside-category ul li{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.sub_category div{
+  display: none;
+}
+.sub_category .open{
+  display: block;
+}
+.close_category{
+  display: none;
+}
+
+/* ----------------------------------------------- */
+
+/* designing for drop down*/
+
+.dropdown{
+	display: inline-block;
+	position: relative;
+ 
+
+}
+.dropdown-content{
+	position: absolute;
+	display:none;
+	right: 0;
+	min-width: 12rem;
+	padding: 1rem;
+	z-index: 1;
+	background-color: whitesmoke;
+	margin: 0;
+	border-radius: 0.5rem;
+  color:black;
+}
+.dropdown-content li{
+	list-style-type: none;
+  color:black;
+}
+.dropdown:hover .dropdown-content {
+	display: block;
+  
+
+}
+.dropdown-content li a{
+  color:black;
+}
+.dropdown-content li a:hover{
+  color:#D4133E;
 }

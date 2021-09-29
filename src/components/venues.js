@@ -8,12 +8,12 @@ import Rating from './Rating';
     return(
         <div key={Venue._id} className="card">
                     
-                      <Link to={`/venue/${venue._id}`}>
-                        <img className="medium" src={venue.image} alt ={Venue.name}></img>
+                      <Link to={`/venue/${venue.id}`}>
+                        <img className="medium" src={venue.display_image} alt ={Venue.name}></img>
                       </Link>
                       <div className="card-body">
                         
-                          <Link to={`/venue/${venue._id}`}>
+                          <Link to={`/venue/${venue.id}`}>
                               <h2 >
                                 {venue.name}
                               </h2>

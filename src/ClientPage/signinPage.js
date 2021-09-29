@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Signin } from '../Action/UserAction';
+import { Signin, UserProfileView } from '../Action/UserAction';
 
 
 
@@ -13,6 +13,8 @@ function SignInPage(props){
 
     const userSignin = useSelector(state => state.userSignin);
     const { loading, userInfo, error} = userSignin;
+    // const ProfileUser = useSelector(state => state.useSelector)
+    // const {UserProfile} = ProfileUser;
 
 
     const dispatch = useDispatch();
@@ -23,16 +25,17 @@ function SignInPage(props){
     }
     useEffect(() =>{
         if(userInfo){
-            props.history.push(redirect);
-            window.alert("log in successfull")
+            props.history.push('/');
+            dispatch(UserProfileView())
+           
             
         }
 
-    }, [props.history,redirect,  userInfo]);
+    }, [dispatch, props.history, userInfo]);
 
     
     return(
-        <div className="main top_center">
+        <div className="main top_center ">
             <div className="col-1">
                 <div className="cli_log">
                     <h3>Book your wedding venue now !!</h3>

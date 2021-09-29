@@ -2,8 +2,9 @@
 import thunk from 'redux-thunk';
 
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
-import { userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
+import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
+import { VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer } from './Reducer/venueReducer';
 
 
 const initialState = {
@@ -17,14 +18,17 @@ const initialState = {
         userInfo: localStorage.getItem('userInfo')
         ? JSON.parse(localStorage.getItem('userInfo'))
         : null,
-        userProfile: localStorage.getItem('userProfile')
-        ? JSON.parse(localStorage.getItem('userProfile'))
-        : null,
+        
     },
     cart:{
         cartItems:localStorage.getItem('cartItems')
         ? JSON.parse(localStorage.getItem('cartItems'))
         : []
+    },
+    ProfileUser:{
+        UserProfile: localStorage.getItem('UserProfile')
+        ? JSON.parse(localStorage.getItem('UserProfile'))
+        : null,
     }
 
 
@@ -35,6 +39,10 @@ const reducer = combineReducers({
     userSignin:userSigninReducer,
     userRegister:userRegisterReducer,
     cart:cartReducer,
+    Listvenue:VenueListReducer,
+    DetailsVenue:VenueDetailsListReducer,
+    ServiceVenue:VenueServiceListReducer,
+    ProfileUser:UserProfileReducer,
     
 
 

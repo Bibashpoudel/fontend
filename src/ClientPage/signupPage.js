@@ -38,7 +38,7 @@ function SignupPage(props){
 
 
     return(
-        <div className="main top_center">
+        <div className="main top_center vendor">
             <div className="col-1">
                 <img className="large" src="../images/customerregister.png" alt="registerimg"></img>
             </div>

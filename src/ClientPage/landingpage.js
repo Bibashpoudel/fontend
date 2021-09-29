@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import pwed from '../pwed.png'
 ;
 import TrendingSlider from '../components/TrendingSlider';
 
 
 
+
+
 function LandingPage(){
 
+    
     
     return(
         <div>
@@ -69,8 +72,13 @@ function LandingPage(){
                 </div>
                   
                 <div className="trends" >
-                    <TrendingSlider></TrendingSlider>
+                   
+                        <TrendingSlider>
+                      
+                        </TrendingSlider>
+                    
                 </div>
+                        
             </div>
         </div>
     )
