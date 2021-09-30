@@ -1,14 +1,12 @@
 // import pictures from './images/wp.png';
 import './App.css';
-import { BrowserRouter, Link, Route } from 'react-router-dom'
+import { BrowserRouter,  Route } from 'react-router-dom'
 import LandingPage from './ClientPage/landingpage';
 import VenueDetailsPage from './ClientPage/VenuesDetails';
 import SignupPage from './ClientPage/signupPage';
 import SignupPageVendor from './VenderPage/signupPage';
 import SignInPage from './ClientPage/signinPage';
 import Vendorpage from './VenderPage/VenderPage';
-import { useDispatch, useSelector } from 'react-redux';
-import { signout } from './Action/UserAction';
 import CartScreen from './ClientPage/Cartpage';
 import NavBar from './Header/navbar';
 import ProfilePage from './ClientPage/Profile';

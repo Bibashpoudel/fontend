@@ -27,7 +27,7 @@ function ServicesManage(){
 
 
 
-    const DisplayPrice ="bibahs"
+    
     return (
         <div className="ven_serv_manage">
             <form className=" ">

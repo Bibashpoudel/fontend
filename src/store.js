@@ -5,6 +5,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
 import { VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer } from './Reducer/venueReducer';
+import { VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer } from './Reducer/vendorReducer';
 
 
 const initialState = {
@@ -44,6 +45,12 @@ const reducer = combineReducers({
     ServiceVenue:VenueServiceListReducer,
     ProfileUser:UserProfileReducer,
     
+
+
+    // vendor Reducer
+    VendorCitys:VendorCityListReducer,
+    VendorTypes:VendorTypeListReducer,
+    vendorRegister:VendorRegisterReducer,
 
 
 });

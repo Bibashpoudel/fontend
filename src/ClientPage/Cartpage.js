@@ -8,8 +8,8 @@ import { addtoCart, reomveFromCart } from '../Action/CartAction';
 import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
-    const productId = props.match.params.id;
-    const  qty = props.location.search ? Number(props.location.search.split('=')[1]):1;
+    const venueId = props.match.params.id;
+    console.log(props.match.params.id)
 
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
@@ -17,13 +17,13 @@ function CartScreen(props){
     const dispatch = useDispatch();
 
     useEffect(() =>{
-        if(productId){
-            dispatch(addtoCart(productId, qty));
+        if(venueId){
+            dispatch(addtoCart(venueId));
         }
-    },[dispatch, productId, qty]);
+    },[dispatch, venueId]);
 
-    const removeCartHandaler =(productId) =>{
-        dispatch(reomveFromCart(productId))
+    const removeCartHandaler =(venueId) =>{
+        dispatch(reomveFromCart(venueId))
 
     }
     const checkOuthandaler =()=>{

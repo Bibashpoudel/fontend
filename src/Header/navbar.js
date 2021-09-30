@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { batch, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signout } from '../Action/UserAction';
 
@@ -26,6 +26,7 @@ function  NavBar(){
 
     const loadCategory =(e)=>{
         e.preventDefault()
+        setDivOpen(true)
     }
     return(
         <div>
@@ -60,13 +61,13 @@ function  NavBar(){
              userInfo ?(
                 <span className="dropdown">
                   <Link to="#">
-                    {UserProfile.username} {' '}
+                    {userInfo.username} {' '}
                       <i className="fa fa-caret-down"></i>
                     </Link>
                     <ul className="dropdown-content">
                       
                       <li>
-                        <Link to={`/profile/${UserProfile.username}`} >Profile</Link>
+                        <Link to={`/profile/${userInfo.username}`} >Profile</Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>

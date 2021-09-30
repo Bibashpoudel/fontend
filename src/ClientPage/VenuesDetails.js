@@ -3,15 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { VenueDetails, VenueServices } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Rating from '../components/Rating';
-
-import data from '../data'
 
 
 
 
 function VenueDetailsPage(props){
-    const venue1 = data.venders.find((x) => x._id === props.match.params.id);
+    // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
 
     const venueId = props.match.params.id;
 
@@ -29,7 +26,7 @@ function VenueDetailsPage(props){
   const [people, SetPeople] = useState(0)
 
 
-    const [fetchService , SetFetchService] = useState([]);
+   
     useEffect(() =>{
         dispatch(VenueServices())
         dispatch(VenueDetails(venueId));
@@ -41,9 +38,9 @@ function VenueDetailsPage(props){
     
     
   
-  const [checkedState, setCheckedState] = useState(new Array((services? services.fill(false):null)))
+  const [checkedState, setCheckedState] = useState([false, false, false,false])
  
-    console.log(services)
+    console.log(checkedState)
     
     // console.log(services)
   const handleOnChange = (position) => {
@@ -79,7 +76,7 @@ function VenueDetailsPage(props){
     const SelectedService = updatedCheckedState.reduce(
         (names, currentState, index) =>{
             if(currentState === true){
-                return  names + services[index].name
+                return  names = names + " "+ services[index].service
             }
             return names;
         },
@@ -196,8 +193,8 @@ function VenueDetailsPage(props){
                                             <input className="tooltip"
                                             type="checkbox"
                                                 id={`custom-checkbox-${index}`}
-                                                name={serv.name}
-                                                value={serv.name}
+                                                name={serv.service}
+                                                value={serv.service}
                                                 checked={serv[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />

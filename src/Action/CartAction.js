@@ -1,17 +1,14 @@
 import axios from "axios"
 import { ADD_CART_ITEM, REOMVE_CART_ITEM } from "../Constants/cartConstants";
-import data from '../data.js'
-export const addtoCart = (productId, venueName, total,people) =>async(dispatch, getState)=>{
-    // const {data} = await axios.get(`/api/product/${productId}`);
-   
+
+export const addtoCart = (venueId, venueName, total,people) =>async(dispatch, getState)=>{
+    const {data} = await axios.get(`/api/garden/admin/${venueId}`);
+    console.log(data)
     dispatch({
         type:ADD_CART_ITEM,
         payload:{
             
-            Service:venueName,
-            Totalprice:total,
-            guestno:people,
-            product:productId
+            
             
         }
     });
