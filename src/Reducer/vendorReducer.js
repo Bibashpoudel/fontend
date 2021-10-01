@@ -1,5 +1,5 @@
-import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNOUT } from "../Constants/UserConstant";
-import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS } from "../Constants/vendorConstants";
+
+import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_PAN_ADD_FAIL, VENDOR_GST_PAN_ADD_REQUEST, VENDOR_GST_PAN_ADD_SUCCESS, VENDOR_REGISTER_FAIL, VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS, VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS } from "../Constants/vendorConstants";
 
 
 
@@ -47,25 +47,44 @@ export const VendorTypeListReducer = (state = {types:[]}, action ) =>{
 
 export const VendorRegisterReducer = (state ={}, action)=>{
     switch(action.type){
-        case USER_REGISTER_REQUEST:
+        case VENDOR_REGISTER_REQUEST:
             return {
                 loading:true
             }
-        case USER_REGISTER_SUCCESS:
+        case VENDOR_REGISTER_SUCCESS:
             return{
                 loading:false,
-                userInfo:action.payload
+                VendorInfo:action.payload
             }
         
-        case USER_REGISTER_FAIL:
+        case VENDOR_REGISTER_FAIL:
             return{
                 loading:false,
                 error:action.payload
-            } 
-        case USER_SIGNOUT:
-            return {}       
-        
+            }
         default:
             return state;
+    }
+}
+
+export const GSTPANAddReducer =(state={}, action) =>{
+    switch(action.type){
+        case VENDOR_GST_PAN_ADD_REQUEST:
+            return{
+                loading:true,
+
+            }
+        case VENDOR_GST_PAN_ADD_SUCCESS:
+            return{
+                loading:false,
+                gstpan:action.payload
+            }
+        case VENDOR_GST_PAN_ADD_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state    
     }
 }

@@ -781,7 +781,7 @@ img.cus_log{
 
 
 
-/* Deesigning Service managementScreen */
+/* Deesigning Service management Screen and venue management sections*/
 .ven_serv_manage form{
 display: flex;
 justify-content: center;
@@ -810,20 +810,26 @@ max-width:100rem;
   margin-bottom:1.2rem;
   width:100%;
 }
+.form-col-2 select{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:109%;
+}
 .ser-mng-col-3 {
-  margin-left:2rem;
+  margin-left:1.8rem;
 }
 .form-col-2 .image_field input{
   outline: none;
   background-color:white ;
   margin-bottom:1.2rem;
-  width:65%;
+  width:72%;
 }
-.form-col-2 select{
+.form-col-2 .ser-mng-col-3 select{
   outline: none;
   background-color:white ;
   margin-bottom:1.2rem;
-  width:73%;
+  width:80%;
 }
 .form-row-2{
   width: 100%;

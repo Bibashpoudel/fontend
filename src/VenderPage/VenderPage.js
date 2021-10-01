@@ -3,6 +3,7 @@ import { BrowserRouter, Link , Route } from 'react-router-dom';
 import Account from './SubPage/Acccount';
 import Bookingorder from './SubPage/BookingOrders';
 import Dashboard from './SubPage/Dashboard';
+import { ProductList } from './SubPage/productList';
 import ServicesManage from './SubPage/servicesmanage';
 import UploadImage from './SubPage/UploadsImages';
 
@@ -16,7 +17,7 @@ function Vendorpage(){
 
                     
                         <div>
-                           <Link to='/dashboard'>
+                           <Link to='/dashboard' >
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Dashboard
                            </Link>
@@ -33,6 +34,13 @@ function Vendorpage(){
                            <Link to='/manageServices'>
                                 <i className="fa fa-dashboard"></i>
                                     {' '}  Manage Services
+                           </Link>
+                           
+                        </div>
+                        <div>
+                           <Link to='/myproduct'>
+                                <i className="fa fa-dashboard"></i>
+                                    {' '} My Product 
                            </Link>
                            
                         </div>
@@ -54,7 +62,7 @@ function Vendorpage(){
                    
                </div>
                <div className="ven_col-2">
-
+                     <Route path="/myproduct" component={ProductList}></Route>
                     <Route path="/account" exact component={Account}></Route>
                     <Route path="/upload_image" exact  component={UploadImage}></Route>
                     <Route path="/manageServices" exact component={ServicesManage}></Route>

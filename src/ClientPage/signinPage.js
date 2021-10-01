@@ -18,20 +18,20 @@ function SignInPage(props){
 
 
     const dispatch = useDispatch();
-    //const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+    const redirect = props.location.search ? props.location.search.split('=')[1]: '/';
     const Signinhandaler = (e) =>{
         e.preventDefault();
         dispatch(Signin(phone, password));
     }
     useEffect(() =>{
         if(userInfo){
-            props.history.push('/');
+            props.history.push(redirect);
             dispatch(UserProfileView())
            
             
         }
 
-    }, [dispatch, props.history, userInfo]);
+    }, [dispatch, redirect, props.history, userInfo]);
 
     
     return(
@@ -79,7 +79,7 @@ function SignInPage(props){
                     <div>
                         <span>
                            New Customer? { ' '} 
-                            <Link  style={{ color:"blue"}}>
+                            <Link to={`/register?redirect=${redirect}`} style={{ color:"blue"}}>
                             Create A account
                             </Link> 
                         </span>

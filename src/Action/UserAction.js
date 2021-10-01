@@ -5,10 +5,10 @@ import { USER_REGISTER_REQUEST, USER_REGISTER_FAIL,  USER_REGISTER_SUCCESS, USER
 export const Signup = (name, email, phone, customer_type, password) => async( dispatch) =>{
     dispatch({
         type:USER_REGISTER_REQUEST,
-        payload: {username:name, email:email, mobile:phone, user_type:customer_type, password:password}
+        payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password}
     });
     try {
-        const {data} = await axios.post('/api/user/add/', {username:name, email:email, mobile:phone, user_type:customer_type, password:password})
+        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password})
         dispatch({
             type:USER_REGISTER_SUCCESS,
             payload:data
@@ -20,33 +20,27 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
         dispatch({
             type:USER_REGISTER_FAIL,
             payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
+                error.response && error.response.data.message.mobile 
+                    ? error.response.data.message.mobile 
+                    : error.mobile
+                    
         })
         
     }
 }
 
-export const Signin = (phone, password) => async(dispatch) =>{
+export const Signin = (email, password) => async(dispatch) =>{
     dispatch({
         type: USER_SIGNIN_REQUEST,
-        payload:{username:phone, password}
+        payload:{email:email, password}
     })
     try {
-        const {data} = await axios.post('/api/user/token/', {username:phone, password})
-        
-        
-            
-          
-                
+        const {data} = await axios.post('/api/user/token/', {email:email, password}) 
 
                 dispatch({
                     type:USER_SIGNIN_SUCCESS,
                     payload:data.access
                 });
-                
-                
                 
                 localStorage.setItem('userInfo', JSON.stringify(data.access));   
     } 

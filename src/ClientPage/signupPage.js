@@ -17,7 +17,7 @@ function SignupPage(props){
     const [password, setPassword] = useState();
     const customer_type ="Customer"
 
-    const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+    const redirect = props.location.search ? props.location.search.split('=')[1]: '/';
 
     const userRegister = useSelector(state => state.userRegister);
     const { loading, userInfo, error} =userRegister;
@@ -104,7 +104,7 @@ function SignupPage(props){
                     <div>
                         <span>
                             Already Have account? { ' '}
-                            <Link  style={{ color:"blue"}}>
+                            <Link to={`/signin?redirect=${redirect}`} style={{ color:"blue"}}>
                                 Sign In
                             </Link> 
                         </span>

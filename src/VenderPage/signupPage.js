@@ -1,14 +1,15 @@
 import React, { useEffect, useState, } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Signin, } from '../Action/UserAction.js';
 
-import { VendorCityList,    VendorSignup,    VendorTypeList } from '../Action/vendorAction.js';
+import { GSTPANAdd, VendorCityList,    VendorSignup,    VendorTypeList } from '../Action/vendorAction.js';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
+import swal from 'sweetalert'
 
-
-
+window.Swal = swal;
 
 function SignupPageVendor(props){
     const[name, SetName] =useState();
@@ -28,6 +29,8 @@ function SignupPageVendor(props){
 
     // const userRegister = useSelector(state => state.userRegister);
     // const {  userInfo, } =userRegister;
+    const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+
     const VendorCitys = useSelector((state) => state.VendorCitys);
     const {loading:loading_city, error:error_city, citys} = VendorCitys;
 
@@ -35,7 +38,11 @@ function SignupPageVendor(props){
     const {loading:loading_types, error:error_types, types} =VendorTypes;
 
     const vendorRegister = useSelector(state => state.vendorRegister);
-    const{userInfo} = vendorRegister
+    const{loading:loading_user, error:error_user, VendorInfo} = vendorRegister
+    const userSignin = useSelector(state => state.userSignin);
+    const{ userInfo} = userSignin;
+    const addGstPan = useSelector(state => state.addGstPan);
+    const {gstpan} = addGstPan
 
 
     const [form, setform] = useState(true);
@@ -57,24 +64,48 @@ function SignupPageVendor(props){
         e.preventDefault();
         if(otp ==='1234'){
             dispatch(VendorSignup(name, email, phone, customer_type, vendor_type, city,  password));
-            setOtpform(false)
-            setPanform(true)
+            console.log(VendorInfo)
+             setTimeout((e) => {
+                dispatch(Signin(email, password))
+                console.log("run after 3 second")
+            }, 3000);
         }
     }
     const panhandaler = (e) =>{
+
         e.preventDefault()
-        window.alert("successfull")
+        dispatch(GSTPANAdd(gst,  pan))
+       
+    }
+    const backButton = (e) =>{
+        e.preventDefault()
+        setform(true)
+        setOtpform(false)
     }
     useEffect(() =>{
-
-        dispatch(VendorCityList())
-        dispatch(VendorTypeList())
-        if(userInfo){
-            window.alert("register successfull")
+        
+       if(!VendorInfo ){
+           
+            dispatch(VendorCityList())
+            dispatch(VendorTypeList())
+       }
+       
+       
+           
+        if(userInfo && VendorInfo ){
+            
+            setOtpform(false)
+            setPanform(true)
+        }
+        if(gstpan){
+           swal("Account Approval in process!!!", "You will be notified soon checked your mail ", "success");
+           window.alert('bibash')
         }
         
+        
+        
 
-    }, [dispatch, userInfo]);
+    }, [dispatch,VendorInfo,userInfo,gstpan]);
 
     
 
@@ -194,7 +225,7 @@ function SignupPageVendor(props){
                     <div>
                         <span>
                             Already Have account? { ' '}
-                            <Link  style={{ color:"blue"}}>
+                            <Link to={`/signin?redirect=${redirect}`}   style={{ color:"blue"}}>
                                 Sign In
                             </Link> 
                         </span>
@@ -211,12 +242,25 @@ function SignupPageVendor(props){
 }
             {otpform ?
                 <div className="form_hide">
+                   
+                    
                     <form className="form" onSubmit={otphandaler}>
                     <div>
                         <h2>
                             “Business with Sevenoath"<br></br>
                             Sign Up to access your Dashboard
                         </h2>
+                        {
+                            loading_user ? <LoadingBox></LoadingBox>
+                            :
+                                error_user? <span>
+                                    <MessageBox variant="danger">{error_user}</MessageBox>
+                                    <div className="btn_center">
+                                        <button type="submit" onClick={backButton} className="block primary">back</button>
+                                    </div>
+                                </span>
+                            :<span> </span>
+                        }
                         
                     </div>
                         <div> 
@@ -230,11 +274,13 @@ function SignupPageVendor(props){
                                 ></input>
                             </div>
                             <div className="btn_center">
-                                <button type="submit" className="block primary">verify</button>
+                                <button type="submit" className="block secondary">verify</button>
                             </div>
                                 
                         </div>
+                    
                     </form>
+
                 </div>
                 :<span></span>
             }
@@ -243,8 +289,8 @@ function SignupPageVendor(props){
                     <form className="form" onSubmit={panhandaler}>
                     <div>
                         <h2>
-                            “Business with Sevenoath"<br></br>
-                            Sign Up to access your Dashboard
+                            Enter Pan And GST Number<br></br>
+                            To approve as a Vendor
                         </h2>
                         
                     </div>
@@ -268,7 +314,7 @@ function SignupPageVendor(props){
                                     ></input>
                                 </div>
                                 <div className="btn_center">
-                                    <button type="submit" className="block primary">Sign in r</button>
+                                    <button type="submit" className="block secondary">Save </button>
                                 </div>
                         </div>
                     </form>

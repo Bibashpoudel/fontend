@@ -58,20 +58,26 @@ function  NavBar(){
             </div>
            <div>
            {
-             userInfo ?(
+             UserProfile ?(
                 <span className="dropdown">
                   <Link to="#">
-                    {userInfo.username} {' '}
+                    {UserProfile.fullname} {' '}
                       <i className="fa fa-caret-down"></i>
                     </Link>
                     <ul className="dropdown-content">
                       
                       <li>
-                        <Link to={`/profile/${userInfo.username}`} >Profile</Link>
+                        <Link to={`/profile/${UserProfile.fullname}`} >Profile</Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>
                       </li>
+                      {
+                        UserProfile.user_type = "Vendor" ?
+                        <li><Link to="/dashboard">Dashboard</Link></li>
+                        :
+                        <span></span>
+                      }
                       <li>
                           <Link to="/" onClick={Signouthandler}>sign out</Link>
                       </li>
@@ -93,9 +99,9 @@ function  NavBar(){
      <aside className={sidebarIsOpen ? 'open' : ''}>
      <div className="aside-top" style={{color:'black', textAlign:'center'}}>
        {
-         userInfo ? (
-             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${UserProfile.username}`}>
-               {UserProfile.username}
+         UserProfile ? (
+             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${UserProfile.fullname}`}>
+               {UserProfile.fullname}
              </Link> 
          )
          :
@@ -115,45 +121,7 @@ function  NavBar(){
            <i className="fa fa-close"></i>
          </button>
        </li>
-       {/* <li className={divOpen ? 'close_category': ''}>
-       {
-                 loading? <LoadingBox></LoadingBox>
-             :
-                 error? <MessageBox variant="danger">{error}</MessageBox>
-             :  
-             
-             <form onSubmit={submitHandaler}>
-               <div className="aside-category">
-               <ul  >
-                     {
-                     categories.map((category)=>(    
-                         <li  > 
-                           <div >
-                             <Link 
-                               to={`/category/${category.cat_name}/${category.id}`}
-                               style={{color:"blueviolet"}}
-                               onClick={() => setSidebarIsOpen(false)}
-                             >  
-                             
-                               {category.cat_name}
-                           </Link>
-                           </div>
-                           <div >
-                             <button type="submit" onClick={(e) =>setCategory(e.target.value)}
-                               value={category.cat_name} 
-                               style={{style:"font-weight: bolder"}}
-                             >
-                               
-                             </button>
-                           </div>
-                         </li>    
-                     ))
-                     }
-                   </ul>
-               </div> 
-             </form> 
-         }
-       </li> */}
+       
 
      </ul>
        <ul className="sub_category">
@@ -171,6 +139,9 @@ function  NavBar(){
      
 
    </aside>
+ 
+
+  
    </div>
     )
 }

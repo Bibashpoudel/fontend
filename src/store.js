@@ -4,8 +4,8 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer } from './Reducer/venueReducer';
-import { VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer } from './Reducer/vendorReducer';
+import { AddvenueReducer, VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
+import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer } from './Reducer/vendorReducer';
 
 
 const initialState = {
@@ -51,6 +51,9 @@ const reducer = combineReducers({
     VendorCitys:VendorCityListReducer,
     VendorTypes:VendorTypeListReducer,
     vendorRegister:VendorRegisterReducer,
+    addGstPan:GSTPANAddReducer,
+    venueTypeList:VenuetypeListReducer,
+    addVenue:AddvenueReducer,
 
 
 });
