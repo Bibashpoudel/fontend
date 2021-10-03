@@ -263,7 +263,7 @@ function ServicesManage(props){
                                 </td>
                                 <td>
                                     <div>
-                                        <button className="btn_edit">edit</button>
+                                        <button className="btn_edit" onClick={() => props.history.push(`/venue/${vv.id}/edit`)}>edit</button>
                                         {'    '}
                                         <button className="btn_danger">Delete</button>
                                     </div>

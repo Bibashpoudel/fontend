@@ -1,4 +1,4 @@
-import { VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS, VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
+import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS, VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
 
 
 
@@ -104,6 +104,26 @@ export const AddvenueReducer = (state={},action)=>{
             return state
     }
 }
+export const detailsVenueReducer = (state={loading:true},action)=>{
+    switch(action.type){
+        case VENDOR_VENUE_DETAILS_REQUEST:
+            return{
+                loading:true
+            }
+        case VENDOR_VENUE_DETAILS_SUCCESS:
+            return{
+                loading:false,
+                vvDetails:action.payload
+            }
+        case VENDOR_VENUE_DETAILS_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state
+    }
+}
 export const updateVenueReducer = (state={},action)=>{
     switch(action.type){
         case VENUE_UPDATE_REQUEST:
@@ -113,12 +133,18 @@ export const updateVenueReducer = (state={},action)=>{
         case VENUE_UPDATE_SUCCESS:
             return{
                 loading:false,
-                updateV:action.payload
+                success:true
             }
         case VENUE_UPDATE_FAIL:
             return{
                 loading:false,
                 error:action.payload
             }
+        case VENUE_UPDATE_RESET:
+            return{
+
+            }
+        default:
+            return state
     }
 }

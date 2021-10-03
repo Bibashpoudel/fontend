@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-export function ProductList() {
+export function ServiceManage() {
         return(
                 <div>
                     

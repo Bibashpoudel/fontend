@@ -13,6 +13,7 @@ import ProfilePage from './ClientPage/Profile';
 import { Footer } from './components/Footer';
 
 
+
 function App() {
 
 
@@ -37,10 +38,12 @@ function App() {
 
 
                 {/*vender Screeen  */}
+                
             <Route path="/dashboard" component={Vendorpage}></Route>
+            <Route path="/venue/:id/edit" component={Vendorpage}>  </Route>
             <Route path="/account"  component={Vendorpage}></Route>
             <Route path="/upload_image"   component={Vendorpage}></Route>
-            <Route path="/manageServices"  component={Vendorpage}></Route>
+            <Route path="/venuemanage"  component={Vendorpage}></Route>
             <Route path="/orders"  component={Vendorpage}></Route>
             <Route path="/vendor_register" component={SignupPageVendor}></Route>
 
