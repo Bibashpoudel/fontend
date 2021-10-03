@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
-import { VendorCityList } from '../../Action/vendorAction';
+import { VendorCityList, VendorVenueList } from '../../Action/vendorAction';
 import {  addVenueAction, VenueTypeList } from '../../Action/VenueAction';
 
 import LoadingBox from '../../components/LoadingBox'
 import MessageBox from '../../components/MessageBox'
-function ServicesManage(){
-
+function ServicesManage(props){
+    const vendorid = props.match.params.id;
+    
     const [Name, setName] = useState();
     const [price, setPrice] = useState();
     const [displayprice, SetDisplayPrice] = useState();
@@ -25,7 +26,10 @@ function ServicesManage(){
     const {loading:loading_city, error:error_city, citys} = VendorCitys;
     const addVenue = useSelector(state =>state.addVenue);
     const{loading:loading_venueadd, error:error_venueadd, venueadd} = addVenue;
+    const VVenues = useSelector(state =>state.VVenues)
+    const{loading:loading_vv,error:error_vv, VendorVenues} = VVenues;
 
+    
     const annotate =() =>{
         const typed= document.getElementById("gardenPrice").value;
 
@@ -45,8 +49,13 @@ function ServicesManage(){
       }
 
       const dispatch = useDispatch();
+     
+     
       useEffect(()=>{
+          
+          dispatch(VendorVenueList())
           dispatch(VenueTypeList())
+          
           dispatch(VendorCityList())
           if(venueadd){
             swal("congratulations! your Garden has been added successfully", "Thanks for believing us", "success");
@@ -57,6 +66,7 @@ function ServicesManage(){
 
       const addVenuehandaler =(e)=>{
           e.preventDefault()
+         
           dispatch(addVenueAction(Name, price, displayprice, city, venue_type, image, about, features))
       }
 
@@ -73,6 +83,15 @@ function ServicesManage(){
              loading_city ?<LoadingBox></LoadingBox>
              :
              error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
+             :
+             
+             loading_vv ?<LoadingBox></LoadingBox>
+             :
+             error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+             :
+             loading_venueadd ?<LoadingBox></LoadingBox>
+             :
+             error_venueadd ? <MessageBox variant="danger">{error_venueadd}</MessageBox>
              :
             <div>   
             <div className="ven_serv_manage">
@@ -189,6 +208,76 @@ function ServicesManage(){
                         
                         
                 </form>
+            </div>
+            <div>
+            {
+                    loading_vv ?<LoadingBox></LoadingBox>
+                    :
+                    error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+                    :
+                <table>
+                    <thead>
+                        <tr>
+                            
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                Name of Venue
+                            </th>
+                            <th>
+                                Garden type
+                            </th>
+                            <th>
+                                price
+                            </th>
+                            <th>
+                                City
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    {VendorVenues ?
+                        <tbody>
+                        
+                            {
+                                VendorVenues.map((vv )=>(
+                            
+                            <tr key={vv.id}>
+                                <td >
+                                    {vv.id}
+                                </td>
+                                <td>
+                                    {vv.name}
+                                </td>
+                                <td>
+                                    {vv.venue_type}
+                                </td>
+                                <td>
+                                    {vv.actual_price}
+                                </td>
+                                <td>
+                                    {vv.city}
+                                </td>
+                                <td>
+                                    <div>
+                                        <button className="btn_edit">edit</button>
+                                        {'    '}
+                                        <button className="btn_danger">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                                
+                                ))
+                                }
+                        </tbody>
+    :
+    <span></span>
+                            }
+                </table>
+}
             </div>
             </div>
 }

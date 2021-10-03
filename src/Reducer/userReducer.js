@@ -63,7 +63,7 @@ export const UserProfileReducer =(state ={}, action) =>{
         case USER_PROFILE_SUCCESS:
             return{
                 loading:false,
-                UserProfile:action.payload
+                profile:action.payload
             } 
         case USER_PROFILE_FAIL:
             return{

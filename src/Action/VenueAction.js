@@ -1,5 +1,5 @@
 import axios from "axios";
-import { VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS, VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS } from "../Constants/venueConstants"
+import { VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS, VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
 
 
 export const VenueTypeList = () =>async(dispatch)=>{
@@ -148,4 +148,36 @@ export const addVenueAction =( Name, price, displayprice, city, venue_type, imag
                 : error.message
             })
     }
+}
+
+
+
+export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
+    dispatch({
+        type:VENUE_UPDATE_REQUEST,
+        payload:venue
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        const{userProfileView:{profile}} = getState();
+        const {data} = await axios.put(`/api/venue/particularvendor/${profile.id}/`,{venue},{
+            headers:{
+                'Authorization': 'Bearer '+userInfo
+            }
+        })
+        dispatch({
+            type:VENUE_UPDATE_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:VENUE_UPDATE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        })
+        
+    }
+
 }

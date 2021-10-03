@@ -9,8 +9,8 @@ function  NavBar(){
 
     const userSignin = useSelector(state => state.userSignin);
     const {  userInfo} = userSignin;
-    const ProfileUser = useSelector((state) => state.ProfileUser);
-    const {UserProfile} = ProfileUser;
+    const userProfileView = useSelector((state) => state.userProfileView);
+    const {profile} = userProfileView;
 
 
     const dispatch = useDispatch();
@@ -58,25 +58,26 @@ function  NavBar(){
             </div>
            <div>
            {
-             UserProfile ?(
+             profile ?(
                 <span className="dropdown">
                   <Link to="#">
-                    {UserProfile.fullname} {' '}
+                    {profile.fullname} {' '}
                       <i className="fa fa-caret-down"></i>
                     </Link>
                     <ul className="dropdown-content">
                       
                       <li>
-                        <Link to={`/profile/${UserProfile.fullname}`} >Profile</Link>
+                        <Link to={`/profile/${profile.fullname}`} >Profile</Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>
                       </li>
                       {
-                        UserProfile.user_type = "Vendor" ?
+                        profile && profile.user_type === "Vendor" &&(
                         <li><Link to="/dashboard">Dashboard</Link></li>
-                        :
-                        <span></span>
+                        
+                        )
+                        
                       }
                       <li>
                           <Link to="/" onClick={Signouthandler}>sign out</Link>
@@ -99,9 +100,9 @@ function  NavBar(){
      <aside className={sidebarIsOpen ? 'open' : ''}>
      <div className="aside-top" style={{color:'black', textAlign:'center'}}>
        {
-         UserProfile ? (
-             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${UserProfile.fullname}`}>
-               {UserProfile.fullname}
+         profile ? (
+             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${profile.fullname}`}>
+               {profile.fullname}
              </Link> 
          )
          :

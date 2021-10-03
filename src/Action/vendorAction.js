@@ -1,6 +1,7 @@
 import axios from "axios"
 
-import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_PAN_ADD_FAIL, VENDOR_GST_PAN_ADD_REQUEST, VENDOR_GST_PAN_ADD_SUCCESS, VENDOR_REGISTER_FAIL, VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS,  VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS } from "../Constants/vendorConstants"
+import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_PAN_ADD_FAIL, VENDOR_GST_PAN_ADD_REQUEST, VENDOR_GST_PAN_ADD_SUCCESS, VENDOR_REGISTER_FAIL, VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS,  VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS, VENDOR_VENUE_LIST_FAIL, VENDOR_VENUE_LIST_REQUEST, VENDOR_VENUE_LIST_SUCCESS } from "../Constants/vendorConstants"
+
 
 export const VendorCityList = () => async(dispatch)=>{
     dispatch({
@@ -100,6 +101,38 @@ export const GSTPANAdd =(gst, pan) => async(dispatch, getState)=>{
                 error.response && error.response.data.message 
                 ? error.response.data.message 
                 : error
+        })
+    }
+}
+
+
+export const VendorVenueList = () => async(dispatch, getState) =>{
+    dispatch({
+        type:VENDOR_VENUE_LIST_REQUEST,
+      
+    })
+   
+    try {
+        const {userSignin:{userInfo}} = getState();
+        const{userProfileView:{profile}} = getState();
+      
+        const {data} = await axios.get(`/api/venue/particularvendor/${profile.id}/`, {
+        headers:{
+            'Authorizations': 'Bearer '+ userInfo
+        }
+    })
+    dispatch({
+        type:VENDOR_VENUE_LIST_SUCCESS,
+        payload:data
+    })
+    } catch (error) {
+        dispatch({
+            type:VENDOR_VENUE_LIST_FAIL,
+            payload:
+            error.response && error.response.data.message 
+                ? error.response.data.message 
+                : error
+            
         })
     }
 }

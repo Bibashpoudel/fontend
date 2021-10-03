@@ -5,7 +5,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
-import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer } from './Reducer/vendorReducer';
+import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 
 
 const initialState = {
@@ -26,9 +26,9 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('cartItems'))
         : []
     },
-    ProfileUser:{
-        UserProfile: localStorage.getItem('UserProfile')
-        ? JSON.parse(localStorage.getItem('UserProfile'))
+    userProfileView:{
+        profile: localStorage.getItem('profile')
+        ? JSON.parse(localStorage.getItem('profile'))
         : null,
     }
 
@@ -43,7 +43,7 @@ const reducer = combineReducers({
     Listvenue:VenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
     ServiceVenue:VenueServiceListReducer,
-    ProfileUser:UserProfileReducer,
+    userProfileView:UserProfileReducer,
     
 
 
@@ -54,6 +54,7 @@ const reducer = combineReducers({
     addGstPan:GSTPANAddReducer,
     venueTypeList:VenuetypeListReducer,
     addVenue:AddvenueReducer,
+    VVenues:VendorVenueListReducer,
 
 
 });

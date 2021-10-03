@@ -71,12 +71,12 @@ export const UserProfileView = () => async(dispatch, getState)=>{
              }
             
         })
-        console.log("bibash" + data)
+        console.log( data)
         dispatch({
             type:USER_PROFILE_SUCCESS,
             payload:data
         })
-        localStorage.setItem('UserProfile', JSON.stringify(data));  
+        localStorage.setItem('profile', JSON.stringify(data));  
         
     } catch (error) {
         
@@ -93,6 +93,7 @@ export const UserProfileView = () => async(dispatch, getState)=>{
 export const signout = () => (dispatch)=>{
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
+    localStorage.removeItem('profile')
     dispatch({
         type:USER_SIGNOUT,
     });

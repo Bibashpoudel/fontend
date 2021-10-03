@@ -56,6 +56,9 @@ body {
 }
 /* global design */
 
+button .btn_danger{
+  background-color: red;;
+}
 
 a {
   text-decoration: none;

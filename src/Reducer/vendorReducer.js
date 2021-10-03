@@ -1,5 +1,5 @@
 
-import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_PAN_ADD_FAIL, VENDOR_GST_PAN_ADD_REQUEST, VENDOR_GST_PAN_ADD_SUCCESS, VENDOR_REGISTER_FAIL, VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS, VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS } from "../Constants/vendorConstants";
+import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_PAN_ADD_FAIL, VENDOR_GST_PAN_ADD_REQUEST, VENDOR_GST_PAN_ADD_SUCCESS, VENDOR_REGISTER_FAIL, VENDOR_REGISTER_REQUEST, VENDOR_REGISTER_SUCCESS, VENDOR_TYPE_FAIL, VENDOR_TYPE_REQUEST, VENDOR_TYPE_SUCCESS, VENDOR_VENUE_LIST_FAIL, VENDOR_VENUE_LIST_REQUEST, VENDOR_VENUE_LIST_SUCCESS } from "../Constants/vendorConstants";
 
 
 
@@ -86,5 +86,26 @@ export const GSTPANAddReducer =(state={}, action) =>{
             }
         default:
             return state    
+    }
+}
+export const VendorVenueListReducer = (state={Vendorvenues:[]}, action) =>{
+    switch(action.type){
+        case VENDOR_VENUE_LIST_REQUEST:
+            return{
+                loading:true
+            }
+        case VENDOR_VENUE_LIST_SUCCESS:
+            return{
+                loading:false,
+                VendorVenues:action.payload
+            }
+        case VENDOR_VENUE_LIST_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state
+
     }
 }
