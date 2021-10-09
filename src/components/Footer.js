@@ -69,7 +69,7 @@ export function Footer() {
               </div>
 
             </div>
-             <div className="main-footer row center">
+             <div className="main-footer  center">
               All Right Reserved 
              </div>
 

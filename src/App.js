@@ -38,19 +38,28 @@ function App() {
 
 
                 {/*vender Screeen  */}
-                
-            <Route path="/dashboard" component={Vendorpage}></Route>
-            <Route path="/venue/:id/edit" component={Vendorpage}>  </Route>
-            <Route path="/account"  component={Vendorpage}></Route>
-            <Route path="/upload_image"   component={Vendorpage}></Route>
-            <Route path="/venuemanage"  component={Vendorpage}></Route>
-            <Route path="/orders"  component={Vendorpage}></Route>
-            <Route path="/vendor_register" component={SignupPageVendor}></Route>
+             
+              
+              <Route path="/dashboard" component={Vendorpage}></Route>
+              <Route path="/service/:id/edit"  component={Vendorpage}></Route>
+              <Route path="/venue/:id/edit" component={Vendorpage}>  </Route>
+              <Route path="/accounts"  component={Vendorpage}></Route>
+              <Route path="/upload_image"   component={Vendorpage}></Route>
+              <Route path="/serviceManage" exact component={Vendorpage}></Route>
+              <Route path="/VenueManage"  component={Vendorpage}></Route>
+              <Route path="/orders"  component={Vendorpage}></Route>
+              <Route path="/vendor_register" component={SignupPageVendor}></Route>
 
 
                 {/* Client screen */}
-                <Route path="/profile" component={ProfilePage}></Route>
-                <Route path='/cart' component={CartScreen}></Route>
+
+
+                <Route path="/account"  component={ProfilePage}></Route>
+                    <Route path="/orders" component={ProfilePage}></Route>
+                    <Route path="/wishlist" component={ProfilePage}></Route>
+                    <Route path="/reviews" component={ProfilePage}></Route>
+               
+                <Route path='/cart/:id?' component={CartScreen}></Route>
             <Route path='/signin' component={SignInPage}></Route>
             <Route path="/register" component={SignupPage}></Route>
             <Route path="/venue/:id" component={VenueDetailsPage}></Route>

@@ -35,7 +35,7 @@ export default function ProfilePage(){
                     </div>
                 </div>    
                 <div className="pro_col-2">
-                    <Route path="/account" component={Account}></Route>
+                    <Route path="/account" exact component={Account}></Route>
                     <Route path="/orders" component={Orders}></Route>
                     <Route path="/wishlist" component={Wishlist}></Route>
                     <Route path="/reviews" component={Review}></Route>

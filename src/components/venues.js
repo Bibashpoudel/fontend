@@ -9,7 +9,7 @@ import Rating from './Rating';
         <div key={Venue._id} className="card">
                     
                       <Link to={`/venue/${venue.id}`}>
-                        <img className="medium" src={venue.display_image} alt ={Venue.name}></img>
+                        <img className="medium" src={venue.display_image} alt ={venue.name}></img>
                       </Link>
                       <div className="card-body">
                         

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS, VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
+import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
 
 
 export const VenueTypeList = () =>async(dispatch)=>{
@@ -31,7 +31,7 @@ export const VenueList =() =>async(dispatch)=>{
     });
 
     try {
-        const {data} = await axios.get('/api/garden/admin/');
+        const {data} = await axios.get('/api/venue/admin/');
 
         dispatch({
             type:VENUE_LIST_SUCCESS,
@@ -50,14 +50,14 @@ export const VenueList =() =>async(dispatch)=>{
 
 
 }
-export const VenueDetails =(productId) =>async(dispatch)=>{
+export const VenueDetails =(venueId) =>async(dispatch)=>{
     dispatch({
         type:VENUE_DETAILS_REQUEST,
-        payload:productId
+        payload:venueId
     });
 
     try {
-        const {data} = await axios.get(`/api/garden/admin/${productId}`);
+        const {data} = await axios.get(`/api/venue/admin/${venueId}/`);
 
         dispatch({
             type:VENUE_DETAILS_SUCCESS,
@@ -75,36 +75,7 @@ export const VenueDetails =(productId) =>async(dispatch)=>{
     }
 }
 
-// venue services list action
-export const VenueServices =() =>async(dispatch)=>{
-    dispatch({
-        type:VENUE_SERVICE_LIST_REQUEST,
-        
-    });
 
-    try {
-        const {data} = await axios.get('/api/user/services/',{
-            headers: { 
-                'Content-Type': 'application/json'
-             }
-            
-        })
-
-        dispatch({
-            type:VENUE_SERVICE_LIST_SUCCESS,
-            payload:data
-        })
-        
-    } catch (error) {
-        dispatch({
-            type:VENUE_SERVICE_LIST_FAIL,
-            payload: 
-            error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message
-        });
-    }
-}
 
 
 
@@ -121,6 +92,9 @@ export const VenueServices =() =>async(dispatch)=>{
 //     }
 // }
 
+// Name, price, displayprice, city, venue_type, image, about, features
+// ame:Name, actual_price:price, display_price:displayprice, city:city, venue_type:venue_type, display_image:image, about:about, features:features
+
 
 export const addVenueAction =( Name, price, displayprice, city, venue_type, image, about, features)=> async(dispatch, getState)=>{
     dispatch({
@@ -130,8 +104,25 @@ export const addVenueAction =( Name, price, displayprice, city, venue_type, imag
     try {
         
         const {userSignin:{userInfo}} = getState();
-        const {data} = await axios.post('/api/venue/vendor/' ,{name:Name, actual_price:price, display_price:displayprice, city:city, venue_type:venue_type, display_image:image, about:about, features:features},{
+
+
+       
+            const uploadData = new FormData();
+            uploadData.append('name', Name);
+            uploadData.append('actual_price', price);
+            uploadData.append('display_price', displayprice);
+            uploadData.append('city', city);
+            uploadData.append('venue_type', venue_type);
+            uploadData.append('display_image', image);
+            uploadData.append('about', about);
+            uploadData.append('features', features);
+            
+
+       
+
+        const {data} = await axios.post('/api/venue/vendor/' ,uploadData,{
             headers:{
+              
                 'Authorization': 'Bearer '+ userInfo
             }
         })
@@ -185,6 +176,15 @@ export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
+        // const uploadData = new FormData();
+        // uploadData.append('name', Name);
+        // uploadData.append('actual_price', price);
+        // uploadData.append('display_price', displayprice);
+        // uploadData.append('city', city);
+        // uploadData.append('venue_type', venue_type);
+        // uploadData.append('display_image', image);
+        // uploadData.append('about', about);
+        // uploadData.append('features', features);
         
         const {data} = await axios.put(`/api/venue/vendor/${venue.id}/`,venue,{
             headers:{

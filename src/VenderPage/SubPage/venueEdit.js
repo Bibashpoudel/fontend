@@ -38,7 +38,7 @@ export default function VenueEdit(props) {
                 type:VENUE_UPDATE_RESET
             })
             swal("congratulations! your Garden has been  successfully updated", "Thank you for believing us", "success");
-            props.history.push('/manageServices');
+            props.history.push('/VenueManage');
             
         }
         dispatch(VenueTypeList())
@@ -170,10 +170,10 @@ export default function VenueEdit(props) {
                                 <div className=" image_field">
                                     
                                     <input 
-                                        type="text" 
+                                        type="file" 
                                         id="image" 
                                         placeholder="image"
-                                        onChange={e =>setImage(e.target.value)}
+                                        onChange={e =>setImage(e.target.files[0])}
                                         value={display_image}
                                     ></input>
                                 </div>
@@ -226,8 +226,8 @@ export default function VenueEdit(props) {
                                 ></textarea>
                             </div>
                             <div className="btn_center">
-                        <button type="submit" className="block secondary">Update Venue</button>
-                        </div>
+                                <button type="submit" className="block secondary">Update Venue</button>
+                            </div>
                         </div>
                         
                         

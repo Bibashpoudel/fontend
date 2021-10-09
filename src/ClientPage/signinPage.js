@@ -72,6 +72,9 @@ function SignInPage(props){
                             onChange ={(e) => setPassword(e.target.value)}
                             
                         ></input>
+                        <div>
+                           <Link to='/forget'></Link>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" className="block primary">Sign Up</button>

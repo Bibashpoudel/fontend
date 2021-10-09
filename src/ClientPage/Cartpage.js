@@ -9,7 +9,15 @@ import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
     const venueId = props.match.params.id;
-    console.log(props.match.params.id)
+    
+    const urls = window.location.href;
+    console.log(urls.pathname)
+    const split = urls.split( '=' )
+    console.log(split)
+    console.log(split[1][0])
+    const people = split[1][0]
+    const totalprice = split[2][0]
+    const services = split[3]
 
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
@@ -18,22 +26,22 @@ function CartScreen(props){
 
     useEffect(() =>{
         if(venueId){
-            dispatch(addtoCart(venueId));
+            dispatch(addtoCart(venueId, people,totalprice, services));
         }
-    },[dispatch, venueId]);
+    },[dispatch, venueId,people, totalprice, services]);
 
     const removeCartHandaler =(venueId) =>{
         dispatch(reomveFromCart(venueId))
 
     }
     const checkOuthandaler =()=>{
-        props.history.push('/signin?redirect=shipping') // if user is already login it will redirect to shiping
+        props.history.push('/signin?redirect=payment') // if user is already login it will redirect to shiping
     }
     
 
     return(
-        <div className="row top">
-            <div className="col-2">
+        <div className="cart-row top">
+            <div className="cart-col-2">
                 <h2>  Shopping Cart </h2>
                 {cartItems.length === 0?
                 <MessageBox>
@@ -45,26 +53,41 @@ function CartScreen(props){
                         {
                             cartItems.map((item) =>(
                                 <li key={item._id}>
-                                    <div className="row">
+                                    <div className="cart-main">
                                         <div>
-                                            <img src={item.images} alt={item.name} className="small"></img>
+                                            <img src={item.image} alt={item.name} className="small"></img>
                                         </div>
 
                                     
-                                    <div className="min-30">
-                                        <Link to={`/product/${item.vendors}`}>{item.name}</Link>
+                                        <div className="min-30">
+                                            <label>Garden Name:</label>{' '}
+                                            <Link to={`/venue/${item.id}`}>{item.name}</Link>
 
-                                    </div>
-                                    <div>
-                                        
-                                        
-                                    </div>
-                                    <div>
-                                        {item.price}
-                                    </div>
-                                    <div>
-                                        <button type="button" onClick={()=> removeCartHandaler(item.product)}>Delete</button>
-                                    </div>
+                                        </div>
+                                        {item.service === '' ?
+                                            <div>
+                                                
+                                            </div>
+                                            :<div>
+                                            <label>Selected Services:</label>{' '}
+                                                {item.service}
+                                            </div>
+                                        }
+                                        {
+                                            item.totalPrice === '0' ?
+                                            <div>
+                                                <label>Venue Price:</label>{' '}
+                                                {item.price}
+                                            </div>
+                                            :
+                                            <div>
+                                                <label>Total Price:</label>{' '}
+                                                {item.totalPrice}
+                                            </div>
+                                        }
+                                        <div>
+                                            <button type="button" onClick={()=> removeCartHandaler(item.product)}>Delete</button>
+                                        </div>
                                     </div>
                                 </li>
                             ))
@@ -74,10 +97,32 @@ function CartScreen(props){
             }
 
             </div>
-            <div className="col-1">
+            <div className="cart-col-1">
                 <div className="card card-body">
                     <ul>
+                        {
+                            cartItems.map((item) =>(
                         
+                            <li>
+                                    {
+                                            item.totalPrice === '0' ?
+                                                    
+                                            
+                                    <h2>
+                                        Subtotal:
+                                        $ ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
+
+                                    </h2>
+                                    :
+                                    <h2>
+                                        Subtotal:
+                                        $ ( {cartItems.reduce((a,c)=> a + c.totalPrice,0  ) } )
+
+                                    </h2>
+
+                                    }
+                            </li>
+                            ))}
                         <li>
                             <button type="button" onClick={checkOuthandaler} className="primary block " disabled={cartItems.length === 0}>Check Out</button>
                         </li>

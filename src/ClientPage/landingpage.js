@@ -2,6 +2,7 @@ import React, {  } from 'react'
 import pwed from '../pwed.png'
 ;
 import TrendingSlider from '../components/TrendingSlider';
+import Categories from '../components/Categories';
 
 
 
@@ -22,7 +23,7 @@ function LandingPage(){
                           <div>
                             <select value="Select City">
 
-                                <option>Kathmandu</option>
+                                <option>Jaipur</option>
                                 <option>Kathmandu</option>
                                 <option>Kathmandu</option>
                                 <option>Kathmandu</option>
@@ -61,7 +62,7 @@ function LandingPage(){
                 </div>
 
             </div>
-            <div className="trend_venues">
+            <div className="">
                 <div className="trend_text">
                     <div>
                     <h2>Trending Now</h2>
@@ -78,7 +79,11 @@ function LandingPage(){
                         </TrendingSlider>
                     
                 </div>
+                
                         
+            </div>
+            <div className="categories">
+                    <Categories></Categories>
             </div>
         </div>
     )

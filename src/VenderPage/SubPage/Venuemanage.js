@@ -7,8 +7,8 @@ import {  addVenueAction, VenueTypeList } from '../../Action/VenueAction';
 
 import LoadingBox from '../../components/LoadingBox'
 import MessageBox from '../../components/MessageBox'
-function ServicesManage(props){
-    const vendorid = props.match.params.id;
+function Venuemanage(props){
+    
     
     const [Name, setName] = useState();
     const [price, setPrice] = useState();
@@ -55,7 +55,6 @@ function ServicesManage(props){
           
           dispatch(VendorVenueList())
           dispatch(VenueTypeList())
-          
           dispatch(VendorCityList())
           if(venueadd){
             swal("congratulations! your Garden has been added successfully", "Thanks for believing us", "success");
@@ -95,7 +94,7 @@ function ServicesManage(props){
              :
             <div>   
             <div className="ven_serv_manage">
-                <form className=" " onSubmit={addVenuehandaler}>
+                <form className=" " onSubmit={addVenuehandaler} enctype="multipart/form-data">
                     <div>
                             <h2 style={{textAlign:'center'}}>Update Your's venue Details !</h2>
                     </div>
@@ -148,10 +147,10 @@ function ServicesManage(props){
                                 <div className=" image_field">
                                     
                                     <input 
-                                        type="text" 
+                                        type="file" 
                                         id="image" 
                                         placeholder="image"
-                                        onChange={e =>setImage(e.target.value)}
+                                        onChange={e =>setImage(e.target.files[0])}
                                         
                                     ></input>
                                 </div>
@@ -285,4 +284,4 @@ function ServicesManage(props){
     )
 }
 
-export default ServicesManage;
+export default Venuemanage;

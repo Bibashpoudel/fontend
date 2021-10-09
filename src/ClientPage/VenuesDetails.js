@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { VenueDetails, VenueServices } from '../Action/VenueAction';
+import { ServicesListaction } from '../Action/ServicesAction';
+import { VenueDetails } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -16,23 +17,29 @@ function VenueDetailsPage(props){
    
     const DetailsVenue = useSelector((state) =>state.DetailsVenue);
     const {loading, error, venue} = DetailsVenue;
-    const ServiceVenue = useSelector((state) =>state.ServiceVenue);
-    const {loading_service, error_service, services}  = ServiceVenue;
-    const [venueService, setvenueService] = useState(['']);
     
-  
-        
-  const [total, setTotal] = useState(0);
-  const [people, SetPeople] = useState(0)
+    const venueService =useSelector(state =>state.venueService);
+    const {loading:loading_service, error:error_service, vService} = venueService;
 
+
+    const [serviceADD, setserviceADD] = useState(['']);
+    const [total, setTotal] = useState(0);
+    const [people, SetPeople] = useState(0)
+    
 
    
     useEffect(() =>{
-        dispatch(VenueServices())
+        
+        
+        
         dispatch(VenueDetails(venueId));
        
+      
+        dispatch(ServicesListaction(venueId))
+       
+       
         
-    }, [dispatch, venueId, ] );
+    }, [dispatch, venueId] );
     
 
     
@@ -56,43 +63,48 @@ function VenueDetailsPage(props){
          
         if (currentState === true) {
            
-            
-          if(services[index].PerPlate ===true){
+            const calcpric = parseInt(vService[index].display_price);
 
-            return sum + services[index].price * people;
+          if(vService[index].is_true ===true){
+
+            
+
+            return sum +  calcpric * people;
           }
           else{
-            return sum + services[index].price
+            return sum + calcpric;
           }
         }
         return sum ;
       },
       0
     );
-    const finalprice  =venue.price+totalPrice
+    const venueprice = parseInt(venue.display_price);
+    const finalprice  = venueprice + totalPrice;
     setTotal( finalprice);
 
     // for adding service name
     const SelectedService = updatedCheckedState.reduce(
         (names, currentState, index) =>{
             if(currentState === true){
-                return  names = names + " "+ services[index].service
+                return  names = names + " "+ vService[index].name;
             }
             return names;
         },
         ''
 
     );
-    setvenueService(SelectedService)
+    setserviceADD(SelectedService)
     
    
   };
 
 
     
-    const addtoCart=(e)=>{
-        props.history.push(`/cart/${venueId}?people=${people}?total=${total}?services=${venueService}`)
-
+    const addtoCart=()=>{
+        
+        props.history.push(`/cart/${venueId}/people=${people}/total=${total}/services=${serviceADD}`);
+        // ?total=${total}?services=${serviceADD}
 
     }
     
@@ -171,7 +183,7 @@ function VenueDetailsPage(props){
             {
             loading_service? <LoadingBox></LoadingBox>
         :
-            error_service? <MessageBox variant="danger">{error}</MessageBox>
+            error_service? <MessageBox variant="danger">{error_service}</MessageBox>
         :
                 <div className="g_service">
                     <div className="g_ser_hed">
@@ -180,12 +192,12 @@ function VenueDetailsPage(props){
                         </h3>
                     </div>
                     {
-                        services.map((serv, index) =>(
+                        vService.map((serv, index) =>(
                            
                             <div key={serv.id} className="Ven_service">
                         <div className="dts_service">
                            <div className="dts_col_1">
-                                {serv.PerPlate? (
+                                {serv.is_true? (
                                     <span>
                                         {/* <i className="fa fa-plus"></i> */}
 
@@ -193,8 +205,8 @@ function VenueDetailsPage(props){
                                             <input className="tooltip"
                                             type="checkbox"
                                                 id={`custom-checkbox-${index}`}
-                                                name={serv.service}
-                                                value={serv.service}
+                                                name={serv.name}
+                                                value={serv.name}
                                                 checked={serv[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />
@@ -211,20 +223,20 @@ function VenueDetailsPage(props){
                                     <input
                                     type="checkbox"
                                         id={`custom-checkbox-${index}`}
-                                        name={serv.service}
-                                        value={serv.service}
+                                        name={serv.name}
+                                        value={serv.name}
                                         checked={serv[index]}
                                         onChange={() => handleOnChange(index)}
                                     />
                                 </span>
                                 }
                                <span>
-                               <label htmlFor={`custom-checkbox-${index}`}>{serv.service}</label>
+                               <label htmlFor={`custom-checkbox-${index}`}>{serv.name}</label>
                                </span>
                                <span>
-                                   {serv.price}
+                                   {serv.display_price}
                                    {
-                                       serv.PerPlate ? (
+                                       serv.is_true ? (
                                            <span> Per Plate</span>
                                        ):
                                        <span></span>
@@ -256,7 +268,7 @@ function VenueDetailsPage(props){
                             <span className={IsOpen ? 'open' : ''}>
                                 
                                 {
-                                    serv.PerPlate ? (
+                                    serv.is_true ? (
                                         <span  className={IsOpen ? 'open' : ''}>
                                         <input type="number" placeholder="no of guest eg(50)" onChange={(e) =>SetPeople(e.target.value)}></input>
                                     </span>
@@ -284,7 +296,7 @@ function VenueDetailsPage(props){
                             
                             <div>
                                 
-                                    {venue.price}
+                                    {venue.display_price}
                                                                     
                             </div>
                         </div>
@@ -340,9 +352,14 @@ function VenueDetailsPage(props){
             
         </div>
         <div className="main top">
-                        <div className="venue_details_row">
-                            <div>
-                                Photos
+                        <div className="venue_details_row-bottom">
+                            <div className="photos">
+                                <div className="image">
+                                        images
+                                </div>
+                                <div className="video">
+                                        video
+                                </div>
                             </div>
                             <div>
                                 About

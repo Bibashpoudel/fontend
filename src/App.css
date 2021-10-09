@@ -7,9 +7,8 @@ body {
   margin: 0px;
   height: 100%;
   font-size: 1.6rem;
-  font-family: helvetica, Arial, sans-serif;
-  
-  
+  font-family: helvetica !important;
+
 }
 #root {
   height: 100%;
@@ -83,7 +82,14 @@ button {
 }
 
 img {
-  border-radius: 0.5rem;
+  
+  object-fit: cover;
+}
+img.custom{
+  max-width:10rem;
+  width:100%;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
 }
 img.small{
   max-width: 10rem;
@@ -269,8 +275,36 @@ main{
 .main.space{
   justify-content: space-between;
 }
+.main.center.margin{
+  margin-top:2rem;
+}
 
-
+.main.center.margin {
+  
+  
+  margin: .1rem;
+ 
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 47%;
+}
+.row.center{
+  justify-content: center;
+}
+.row .items{
+  display: flex;
+  justify-content: space-between;
+  background-color: #15cff0;
+  margin:.5rem;
+  width:100%;
+  
+}
+.items-data{
+  margin:6rem 0 0 6rem;
+}
 
 
 
@@ -409,7 +443,6 @@ footer {
 .trend_venues{
   margin: 0 4rem;
  
-  border:0.5rem dashed blue;
   
   
 }
@@ -417,6 +450,7 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin:0 6rem;
 }
 
 
@@ -488,8 +522,20 @@ footer {
 .venue_details_row{
   display: flex;
   flex-wrap: wrap;
+  
   justify-content: space-between;
   margin:1rem;
+}
+.venue_details_row-bottom{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  margin:1rem;
+}
+.venue_details_row-bottom .photos{
+  display: flex;
+  
 }
 .venue_details_row_buttom {
   background-color:rgb(233, 224, 224);
@@ -498,6 +544,7 @@ footer {
   justify-content: space-between;
   
 }
+
 .colm-4{
   padding:1rem;
   color:rgb(92, 89, 89);
@@ -718,26 +765,30 @@ img.cus_log{
 
 .dashboard{
   background-color: #f7f7f7;
-  padding:0.5rem;
+  
 }
 .das_aside{
     background-color: white;
     width:25%;
-    border:.3rem solid #c0c0c0;
-    box-shadow: 0.1rem 0.1rem 1rem rgb(196, 196, 196);
+    /* border:.3rem solid #c0c0c0; */
+    box-shadow: 0.5rem 0.5rem 1rem rgb(196, 196, 196);
     border-radius: 0.5rem;
     margin:0  0rem;
     height:100vh;
+    
   
 }
 .das_aside div{
   padding:1rem;
   font-size:2rem;
+  border-bottom: 0.1rem solid #c0c0c0;
 
 }
-.das_aside div:nth-child(even){
-  background-color: #c0c0c0;
-  border-radius: 1rem;
+.das_aside div a{
+  color:black;
+}
+.das_aside div a:hover{
+  color:#D4133E;
 }
 
 .ven_col-2{
@@ -753,7 +804,6 @@ img.cus_log{
   width:100%;
   height:10rem;
   background-color:#ffffff;
-  
   border-radius: .8rem;
   padding:2rem;
   margin:1rem 2rem;
@@ -901,7 +951,7 @@ max-width:100rem;
 
 }
 .pro_col-2{
-  /* flex:70%; */
+  flex:40%;
   border:.1rem solid red;
 }
 
@@ -1016,3 +1066,100 @@ button.close-sidebar {
 /* vendor registration from hide and display */
 
 
+/* design cart page */
+
+
+.cart-col-1 {
+  flex: 1 1 25rem;
+  border: 0.5rem dashed #ff8000;
+}
+.cart-col-2 {
+  flex: 2 1 40rem;
+  border: 0.5rem dashed #ff8000;
+}
+.cart-row{
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  
+}
+.cart-row li{
+  list-style: none;
+}
+.top{
+  margin-top:2rem;
+
+}
+.cart-row.top{
+  align-items: flex-start;
+}
+.cart-main{
+  display: flex;
+  flex-direction: column;
+}
+.cart-main div{
+  padding:1rem
+}
+
+/* carousel design */
+/* square buttons */
+.rec.rec-arrow {
+  border-radius: 0;
+}
+/* round buttons on hover */
+.rec.rec-arrow:hover {
+  border-radius: 50%;
+  background-color: #fff;
+  color:#f02020;
+}
+.rec.rec-arrow{
+ padding-bottom:1rem;
+ background-color: white;
+ border:none !important;
+}
+
+.gaaBdk{
+  box-shadow: 0 0 0 0 #fff !important;
+}
+/* hide disabled buttons */
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
+/* disable default outline on focused items */
+/* add custom outline on focused items */
+.rec-carousel-item:focus {
+  outline: none;
+  box-shadow: inset 0 0 1px 1px lightgrey;
+}
+
+
+/* profile screen */
+
+.Profile-Account{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  
+}
+
+.pro-info{
+  display: flex;  
+  justify-content: flex-start;
+  margin:0 3rem 1rem 0;
+  
+  
+}
+
+.pro-info-items{
+  display: flex;
+  flex-direction: column;
+  margin-left:20%;
+}
+
+.pro-info-items div{
+  padding: 1rem;
+}

@@ -1,11 +1,10 @@
-
 import thunk from 'redux-thunk';
-
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, detailsVenueReducer, updateVenueReducer, VenueDetailsListReducer, VenueListReducer, VenueServiceListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
+import { AddvenueReducer, detailsVenueReducer, updateVenueReducer, VenueDetailsListReducer, VenueListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
+import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 
 
 const initialState = {
@@ -29,7 +28,7 @@ const initialState = {
     userProfileView:{
         profile: localStorage.getItem('profile')
         ? JSON.parse(localStorage.getItem('profile'))
-        : null,
+        : null
     }
 
 
@@ -42,7 +41,7 @@ const reducer = combineReducers({
     cart:cartReducer,
     Listvenue:VenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
-    ServiceVenue:VenueServiceListReducer,
+    servicelist:ServiceListReducer,
     userProfileView:UserProfileReducer,
     
 
@@ -57,6 +56,10 @@ const reducer = combineReducers({
     VVenues:VendorVenueListReducer,
     vvDetailsList:detailsVenueReducer,
     venueUpdate:updateVenueReducer,
+    addService:ServiceAddReducer,
+    updateService:ServiceupdateReducer,
+    venueService:VenueServiceListReducer,
+    vsDetails:detailsServiceReducer,
 
 
 });

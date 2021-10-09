@@ -23,6 +23,24 @@ function TrendingSlider( ){
     
 
     }, [ dispatch]);
+    const breakPoints = [
+        {
+            width:500, itemsToShow:1
+            
+        },
+        {
+            width:600, itemsToShow:2
+            
+        },
+        {
+            width:800, itemsToShow:3
+            
+        },
+        {
+            width:1200, itemsToShow:4
+            
+        }
+    ]
   
     return(
      
@@ -34,7 +52,8 @@ function TrendingSlider( ){
                             error? <MessageBox variant="danger">{error}</MessageBox>
                         :  
              
-              <Carousel itemsToShow={2} itemsToScroll={2}>
+              <Carousel breakPoints={breakPoints}
+              onResize={currentBreakPoint => console.log(currentBreakPoint)}>
               {
                                 venues.map((venue)=>(
                                     <Venue key={venue.id} venue={venue}></Venue>
