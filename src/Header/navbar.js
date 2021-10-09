@@ -50,6 +50,7 @@ function  NavBar(props){
    
     const Signouthandler = () =>{
         dispatch(signout());
+       
       
     }
 

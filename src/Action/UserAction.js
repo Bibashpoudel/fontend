@@ -13,8 +13,8 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
             type:USER_REGISTER_SUCCESS,
             payload:data
         })
-        dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-        localStorage.setItem('userInfo', JSON.stringify(data));
+        
+        
         
     } catch (error) {
         dispatch({
@@ -93,7 +93,7 @@ export const UserProfileViewAction = () => async(dispatch, getState)=>{
 export const signout = () => (dispatch)=>{
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
-    localStorage.removeItem('profile')
+    localStorage.removeItem('profile');
     dispatch({
         type:USER_SIGNOUT,
     });

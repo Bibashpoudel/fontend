@@ -2,7 +2,7 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, detailsVenueReducer, updateVenueReducer, VenueDetailsListReducer, VenueListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
+import { AddvenueReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer } from './Reducer/imageReducer';
@@ -62,6 +62,7 @@ const reducer = combineReducers({
     venueService:VenueServiceListReducer,
     vsDetails:detailsServiceReducer,
     imageAdd:addimageReducer,
+    deleteVenue:venueDeleteReducer,
 
 
 });

@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import { VendorCityList, VendorVenueList } from '../../Action/vendorAction';
-import {  addVenueAction, VenueTypeList } from '../../Action/VenueAction';
+import {  addVenueAction, venueDeleteAction, VenueTypeList } from '../../Action/VenueAction';
 
 import LoadingBox from '../../components/LoadingBox'
 import MessageBox from '../../components/MessageBox'
+import { VENUE_ADD_RESET, VENUE_DELETE_RESET } from '../../Constants/venueConstants';
 function Venuemanage(props){
     
     
@@ -28,6 +29,8 @@ function Venuemanage(props){
     const{loading:loading_venueadd, error:error_venueadd, venueadd} = addVenue;
     const VVenues = useSelector(state =>state.VVenues)
     const{loading:loading_vv,error:error_vv, VendorVenues} = VVenues;
+    const deleteVenue = useSelector(state => state.deleteVenue);
+    const {loading: loadingDelete, error:errorDelete, success:successDelete} = deleteVenue;
 
     
     const annotate =() =>{
@@ -52,21 +55,34 @@ function Venuemanage(props){
      
      
       useEffect(()=>{
+        if(venueadd){
+            dispatch({
+                type:VENUE_ADD_RESET
+            })
+            swal("congratulations! your Garden has been added successfully", "Thanks for believing us", "success");
+          }
+          if(successDelete){
+              dispatch({
+                  type:VENUE_DELETE_RESET
+              })
+            swal("Your Venue has been deleted SuccessFully !!!", "Venue Delete", "success");
+          }
+
           
           dispatch(VendorVenueList())
           dispatch(VenueTypeList())
           dispatch(VendorCityList())
-          if(venueadd){
-            swal("congratulations! your Garden has been added successfully", "Thanks for believing us", "success");
-          }
-
+         
           
-      },[dispatch,venueadd])
+      },[dispatch,venueadd,successDelete])
 
       const addVenuehandaler =(e)=>{
           e.preventDefault()
          
           dispatch(addVenueAction(Name, price, displayprice, city, venue_type, image, about, features))
+      }
+      const deleteHandaler = (vv)=>{
+          dispatch(venueDeleteAction(vv.id))
       }
 
 
@@ -74,6 +90,9 @@ function Venuemanage(props){
     
     return (
         <div>
+            {loadingDelete && <LoadingBox ></LoadingBox>}
+            {
+            errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
             {loading ? <LoadingBox ></LoadingBox>
             :
             error ? <MessageBox variant="danger">{error}</MessageBox>
@@ -201,8 +220,8 @@ function Venuemanage(props){
                                 ></textarea>
                             </div>
                             <div className="btn_center">
-                        <button type="submit" className="block secondary">Add Venue</button>
-                        </div>
+                            <button type="submit" className="block secondary">Add Venue</button>
+                            </div>
                         </div>
                         
                         
@@ -264,7 +283,7 @@ function Venuemanage(props){
                                     <div>
                                         <button className="btn_edit" onClick={() => props.history.push(`/venue/${vv.id}/edit`)}>edit</button>
                                         {'    '}
-                                        <button className="btn_danger">Delete</button>
+                                        <button className="btn_danger" onClick={() => deleteHandaler(vv)}>Delete</button>
                                     </div>
                                 </td>
                             </tr>

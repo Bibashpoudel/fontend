@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import { Signup } from '../Action/UserAction';
+import { Signin, Signup } from '../Action/UserAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -27,6 +27,10 @@ function SignupPage(props){
         e.preventDefault();
         
         dispatch(Signup(name, email, phone, customer_type, password));
+        setTimeout((e) => {
+            dispatch(Signin(email, password))
+            console.log("run after 3 second")
+        }, 2000);
     }
     useEffect(() =>{
         if(userInfo){

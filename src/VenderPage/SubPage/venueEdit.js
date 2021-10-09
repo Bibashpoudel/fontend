@@ -174,8 +174,11 @@ export default function VenueEdit(props) {
                                         id="image" 
                                         placeholder="image"
                                         onChange={e =>setImage(e.target.files[0])}
-                                        value={display_image}
+                                      
                                     ></input>
+                                </div>
+                                <div>
+                                    <img src={display_image}></img>
                                 </div>
                                 {/* <div className="">
                                     

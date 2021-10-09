@@ -94,6 +94,8 @@ export const GSTPANAdd =(gst, pan) => async(dispatch, getState)=>{
             type:VENDOR_GST_PAN_ADD_SUCCESS,
             payload:data
         })
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('VendorInfo');
     } catch (error) {
         dispatch({
             type:VENDOR_GST_PAN_ADD_FAIL,

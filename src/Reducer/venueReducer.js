@@ -1,4 +1,4 @@
-import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
+import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_RESET, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_RESET, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
 
 
 
@@ -81,6 +81,8 @@ export const AddvenueReducer = (state={},action)=>{
                 loading:false,
                 error:action.payload
             }
+        case VENUE_ADD_RESET:
+        return{}
         default:
             return state
     }
@@ -128,4 +130,32 @@ export const updateVenueReducer = (state={},action)=>{
         default:
             return state
     }
+}
+
+
+export const venueDeleteReducer = (state={}, action) =>{
+
+    switch(action.type){
+        case VENUE_DELETE_REQUEST:
+            return{
+                loading:true
+            }
+        case VENUE_DELETE_SUCCESS:
+            return{
+                loading:false,
+                success:true
+            }
+        case VENUE_DELETE_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        case VENUE_DELETE_RESET:
+            return{
+
+            }
+        default:
+            return state
+    }
+
 }
