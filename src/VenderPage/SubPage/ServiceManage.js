@@ -12,7 +12,8 @@ export function ServiceManage(props) {
         const [name, setName] = useState('');
     const [actual_price, setPrice] = useState('');
     const [display_price, SetDisplayPrice] =useState('');
-    const [display_image, setImage] =useState('');
+    const [display_image, setImages] =useState('');
+    const [images, setImage] =useState('');
     const [description, setDescription] =useState('');
     const [ is_true ,setisChecked] = useState(false);
     const [venue, setVenue] = useState('');
@@ -54,7 +55,12 @@ export function ServiceManage(props) {
 
         
       }
-      
+      const onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          setImage(URL.createObjectURL(event.target.files[0]));
+          setImages(event.target.files[0]);
+        }
+       }
       useEffect(()=>{
               if(success){
                       swal("congratulations! your Services has been added successfully", "Thanks for believing us", "success")
@@ -119,13 +125,16 @@ export function ServiceManage(props) {
                                                         <div className=" image_field">
                                                         
                                                         <input 
-                                                                type="text" 
+                                                                type="file" 
                                                                 id="image" 
                                                                 placeholder="image"
 
-                                                                onChange={e =>setImage(e.target.value)}
+                                                                onChange={onImageChange}
                                                                 
                                                         ></input>
+                                                        <div>
+                                                        <img className='small' src={images} alt="preview " ></img>
+                                                        </div>
                                                         </div>
                                                         <div>
                                                         {
@@ -136,7 +145,7 @@ export function ServiceManage(props) {
                                                         :
                                                         <div className="">
                                                         
-                                                        <select value={venue} onChange={e =>setVenue(e.target.value)}>
+                                                        <select  onChange={e =>setVenue(e.target.value)}>
                                                         <option  value="" >Select Your venue</option>
                                                                 {VendorVenues.map(ven =>(
                                                                 <option key={ven.id} value={ven.id}>{ven.name}</option>

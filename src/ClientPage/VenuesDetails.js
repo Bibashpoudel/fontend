@@ -4,6 +4,7 @@ import { ServicesListaction } from '../Action/ServicesAction';
 import { VenueDetails } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import {Link} from 'react-scroll'
 
 
 
@@ -164,16 +165,16 @@ function VenueDetailsPage(props){
                <div className="venue_details">
                         <div className="venue_details_row">
                             <div>
-                                Photos
+                               <Link to='photo' activeStyle={{color: "red"}} activeClass="active" style={{color:'black',cursor:'pointer'}} spy={true} smooth={true}>Photo</Link>
                             </div>
                             <div>
-                                About
+                               <Link to ='about' activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>About</Link>
                             </div>
                             <div>
-                                Review
+                                <Link to='features'  activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Features</Link>
                             </div>
                             <div>
-                               Map View
+                              <Link to="reviews"  activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Reviews</Link>
                             </div>
                         </div>
                    </div>
@@ -353,7 +354,7 @@ function VenueDetailsPage(props){
         </div>
         <div className="main top">
                         <div className="venue_details_row-bottom">
-                            <div className="photos">
+                            <div className="photos" id ="photo">
                                 <div className="image">
                                         images
                                 </div>
@@ -361,11 +362,13 @@ function VenueDetailsPage(props){
                                         video
                                 </div>
                             </div>
-                            <div>
-                                About
+                            <div id="about">
+                               <h4> About Venues</h4>
+                                {venue.about}
                             </div>
-                            <div>
-                                Review
+                            <div id="features">
+                               <h4> Venues Features</h4>
+                                {venue.features}
                             </div>
                             <div>
                                Map View

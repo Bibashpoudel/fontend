@@ -1,13 +1,22 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { UserProfileViewAction } from '../../Action/UserAction';
+import LoadingBox from '../../components/LoadingBox';
+import MessageBox from '../../components/MessageBox';
 
 
 
 export function Account(){
     const userProfileView = useSelector(state => state.userProfileView)
-    const {profile} = userProfileView;
+    const {loading, error, profile} = userProfileView;
 
 
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+      dispatch(UserProfileViewAction())
+    }, [dispatch])
 
 
     return (
@@ -15,18 +24,21 @@ export function Account(){
             <div>
                 <h2> My Profile</h2>
             </div>
-            {profile.length === 0?
             
-        <div>error</div>:<div></div>}
-            {profile.map((user) =>(
-            <div key={user.id}>
+           {loading ? <LoadingBox></LoadingBox> 
+           :
+           error ? <MessageBox variant="danger">{error}</MessageBox>
+           :
+        <div>
+            
+            <div key={profile.id}>
                 <div className="pro-info">
                     <div className="pro-info-items">
                         <div>
                             Full Name
                         </div>
                         <div>
-                            {user.fulname}
+                            {profile.fulname}
                         </div>
 
                     </div>
@@ -35,7 +47,7 @@ export function Account(){
                         email
                         </div>
                         <div>
-                        {user.email}
+                        {profile.email}
                         </div>
 
                     </div>
@@ -44,7 +56,7 @@ export function Account(){
                         Mobile
                         </div>
                         <div>
-                            {user.mobile}
+                            {profile.mobile}
                         </div>
 
                     </div>
@@ -55,16 +67,16 @@ export function Account(){
                         Date Of birth
                         </div>
                         <div>
-                            Full name
+                           
                         </div>
 
                     </div>
                     <div className="pro-info-items">
                         <div>
-                        email
+                            Gender
                         </div>
                         <div>
-                            email
+                           
                         </div>
 
                     </div>
@@ -73,10 +85,10 @@ export function Account(){
                 <div className="pro-info">
                     <div className="pro-info-items">
                     <div>
-                        <button className="secondary">Edit Profile</button>
+                        <button className="btn secondary">Edit Profile</button>
                         </div>
                         <div>
-                            <button className="secondary">    Change Password</button>
+                            <button className="btn secondary">    Change Password</button>
                         </div>
 
 
@@ -85,7 +97,9 @@ export function Account(){
                 
                 </div>
             </div>
-            ))}
+         
+            </div>
+}
             
         </div>
     )

@@ -120,7 +120,19 @@ export const ServiceAdd = (name, venue, actual_price, display_price, display_ima
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        const {data} = await axios.post('/api/service/vendor/',{name, venue, actual_price, display_price, display_image,description,is_true},{
+
+        const uploadData = new FormData();
+        uploadData.append("name", name);
+        uploadData.append("venue", venue);
+        uploadData.append("actual_price", actual_price);
+        uploadData.append("display_price", display_price);
+        uploadData.append("display_image", display_image);
+        uploadData.append("description", description);
+        uploadData.append("is_true", is_true);
+
+
+
+        const {data} = await axios.post('/api/service/vendor/',uploadData,{
             headers:{
                 'Authorization': 'Bearer '+ userInfo
             }

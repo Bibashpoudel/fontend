@@ -1,7 +1,6 @@
 {
   "name": "fontend",
-  
-  "proxy":"http://127.0.0.1:8000/",
+  "proxy": "http://127.0.0.1:8000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +14,7 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-scroll": "^1.8.4",
     "react-slick": "^0.28.1",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",

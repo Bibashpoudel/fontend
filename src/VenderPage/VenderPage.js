@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Link , Route } from 'react-router-dom';
+import { BrowserRouter, Link , NavLink, Route } from 'react-router-dom';
 import Account from './SubPage/Acccount';
 import Bookingorder from './SubPage/BookingOrders';
 import Dashboard from './SubPage/Dashboard';
@@ -21,45 +21,45 @@ function Vendorpage(){
 
                     
                         <div>
-                           <Link to='/dashboard' >
+                           <NavLink to='/dashboard' activeStyle={{color: "red"}} >
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Dashboard
-                           </Link>
+                           </NavLink>
                            
                         </div>
                         <div>
-                           <Link to='/orders'>
+                           <NavLink to='/orders'activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Booking Orders
-                           </Link>
+                           </NavLink>
                            
                         </div>
                         <div>
-                           <Link to='/VenueManage'>
+                           <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
                                     {' '}  Venue Manage
-                           </Link>
+                           </NavLink>
                            
                         </div>
                         <div>
-                           <Link to='/serviceManage'>
+                           <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Service Manage
-                           </Link>
+                           </NavLink>
                            
                         </div>
                         <div>
-                           <Link to='/upload_image'>
+                           <NavLink to='/upload_image' activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Upload Image
-                           </Link>
+                           </NavLink>
                            
                         </div>
                         <div>
-                           <Link to='/account'>
+                           <NavLink to='/account' activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
                                     {' '} Acccount Setting
-                           </Link>
+                           </NavLink>
                            
                         </div>
                     

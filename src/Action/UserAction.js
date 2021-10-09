@@ -57,7 +57,7 @@ export const Signin = (email, password) => async(dispatch) =>{
     
 }
 
-export const UserProfileView = () => async(dispatch, getState)=>{
+export const UserProfileViewAction = () => async(dispatch, getState)=>{
     dispatch({
         type:USER_PROFILE_REQUEST
     })

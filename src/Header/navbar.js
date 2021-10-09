@@ -77,12 +77,10 @@ function  NavBar(props){
         </div>
         <div className="nav-left-menu">
             <div>
-              <Link to="/venue">Venue</Link>
+              <Link to="/vendor_register">Vender Register</Link>
                 
             </div>
-            <div>
-            <Link to="/home">Home</Link>
-            </div>
+           
             <div>
                 |
             </div>

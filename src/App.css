@@ -55,8 +55,9 @@ body {
 }
 /* global design */
 
-button .btn_danger{
-  background-color: red;;
+ .btn_danger{
+  background-color: #BB2124;
+  color:white;
 }
 
 a {

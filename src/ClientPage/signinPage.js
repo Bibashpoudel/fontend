@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Signin, UserProfileView } from '../Action/UserAction';
+import { Signin, UserProfileViewAction } from '../Action/UserAction';
 
 
 
@@ -26,7 +26,7 @@ function SignInPage(props){
     useEffect(() =>{
         if(userInfo){
             props.history.push(redirect);
-            dispatch(UserProfileView())
+            dispatch(UserProfileViewAction())
            
             
         }
