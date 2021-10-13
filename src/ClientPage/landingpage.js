@@ -13,8 +13,8 @@ function LandingPage(){
     
     
     return(
-        <div>
-        <div className="main">
+        <div className="land-top">
+        <div className="main top">
                 <div className="ms1_search" >
                     {/* <img src={pictures} alt="pictures"></img> */}
                     <div className="ms1_text">

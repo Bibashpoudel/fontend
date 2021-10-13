@@ -123,7 +123,7 @@ function SignupPageVendor(props){
         :
        
 
-        <div className="main top_center vendor">
+        <div className="main top_center ">
             <div className="col-1">
                 <img className="large" src="../images/vendorregister.jpg" alt="registerimg"></img>
             </div>

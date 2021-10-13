@@ -243,6 +243,7 @@ width: 100%;
     text-decoration: none;
     
 }
+
 main{
     margin-top:5.4rem;
     
@@ -260,9 +261,12 @@ main{
   flex-wrap: wrap;
   
 }
+.land-top{
+  margin-top: 6rem;
+}
 
 .top{
-  margin-top:2rem;
+  margin-top:5rem;
 }
 
 .main.top {
@@ -503,10 +507,19 @@ footer {
 
 
 /* design venues  details page */
+.col-1_signin{
+  flex:30.1%;
+  justify-content: center;
+  text-align: center;
+  margin:0  0rem;
+}
+
+
+
+
 
 .col-1{
   flex:30%;
-  
   justify-content: center;
   text-align: center;
   margin:0  0rem;
@@ -1014,6 +1027,10 @@ button.close-sidebar {
     justify-content: space-between;
     
 }
+.aside-menu a{
+  color:Black;
+}
+
 .sub_category div{
   display: none;
 }
@@ -1163,4 +1180,24 @@ button.close-sidebar {
 
 .pro-info-items div{
   padding: 1rem;
+}
+
+.hidden{
+  display: none;
+}
+.hidden .fa-lock, .fa-user{
+  font-size:2.3rem;
+  color:white;
+  padding:1rem;
+
+}
+
+@media only screen and (max-width: 570px){
+  /* designing header section */
+  .nav-left-menu{
+    display: none;
+  }
+  .hidden{
+    display: block;
+  }
 }

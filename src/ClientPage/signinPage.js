@@ -36,7 +36,7 @@ function SignInPage(props){
     
     return(
         <div className="main top_center ">
-            <div className="col-1">
+            <div className="col-1_signin">
                 <div className="cli_log">
                     <h3>Book your wedding venue now !!</h3>
                 </div>

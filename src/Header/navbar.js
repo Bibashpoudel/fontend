@@ -76,21 +76,22 @@ function  NavBar(props){
                   </button>
            <Link to=''> Sevenoath</Link>
         </div>
-        <div className="nav-left-menu">
+        <div >
+            <div className="nav-left-menu">
+              <div>
+                <Link to="/vendor_register">Vender Register</Link>
+                  
+              </div>
+            
+              <div>
+                  |
+              </div>
+              <div>
+                  |s
+              </div>
             <div>
-              <Link to="/vendor_register">Vender Register</Link>
-                
-            </div>
-           
-            <div>
-                |
-            </div>
-            <div>
-                |s
-            </div>
-           <div>
-           {
-             profile ?(
+              {
+              profile ?(
                 <span className="dropdown">
                   <Link to="#">
                     {profile.fullname} {' '}
@@ -117,11 +118,66 @@ function  NavBar(props){
                       </ul>
                  </span>
               
-             ):
-             <div>
-              <Link to="/register">Sign Up</Link>
+                ):
+                <div>
+                  <Link to="/register">Sign Up</Link>
+                </div>
+                }
             </div>
-           }
+           </div>
+           <div className="hidden">
+             <div className="hidden-display">
+             {
+              profile ?(
+                <span className="dropdown">
+                  <Link to="#">
+                    {profile.fullname} {' '}
+                      <i className="fa fa-user"></i>
+                    </Link>
+                    <ul className="dropdown-content">
+                      
+                      <li>
+                        <Link to={`/account`} >Profile</Link>
+                      </li>
+                      <li>
+                        <Link to="/order" >My Order</Link>
+                      </li>
+                      {
+                        profile && profile.user_type === "Vendor" &&(
+                        <li><Link to="/dashboard">Dashboard</Link></li>
+                        
+                        )
+                        
+                      }
+                      <li>
+                          <Link to="/" onClick={Signouthandler}>sign out</Link>
+                      </li>
+                      </ul>
+                 </span>
+              
+                ):
+             
+                  <span className="dropdown">
+                 
+                  
+                        <i className="fa fa-user"></i>
+                    
+                      <ul className="dropdown-content">
+                        
+                        <li>
+                          <Link to={`/account`} >Profile</Link>
+                        </li>
+                        <li>
+                          <Link to="/order" >My Order</Link>
+                        </li>
+                        
+                      
+                      </ul>
+                 </span>
+                
+                }
+             </div>
+            
            </div>
            
            
@@ -130,6 +186,7 @@ function  NavBar(props){
     </div>
     </header>
      <aside className={sidebarIsOpen ? 'open' : ''}>
+       <div>
      <div className="aside-top" style={{color:'black', textAlign:'center'}}>
        {
          profile ? (
@@ -174,7 +231,7 @@ function  NavBar(props){
                 
        <div>
          
-         <li onClick={() => handleOnChange(index)}>
+         <li onMouseEnter={() => handleOnChange(index)}>
            {t.type} {
                       checkedState[index] ?
                       <i className="fa fa-angle-up"></i>
@@ -207,7 +264,13 @@ function  NavBar(props){
             ))}
      </div>
   }
-
+    <div style={{borderTop:'.1rem solid grey'}} className="aside-menu">
+      <h3>Helps And Settings</h3>
+      <ul>
+        <Link to="/vendor_register">Vendor Register</Link>
+      </ul>
+    </div>
+    </div>
    </aside>
  
 

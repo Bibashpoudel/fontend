@@ -176,17 +176,17 @@ export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        // const uploadData = new FormData();
-        // uploadData.append('name', Name);
-        // uploadData.append('actual_price', price);
-        // uploadData.append('display_price', displayprice);
-        // uploadData.append('city', city);
-        // uploadData.append('venue_type', venue_type);
-        // uploadData.append('display_image', image);
-        // uploadData.append('about', about);
-        // uploadData.append('features', features);
+        const uploadData = new FormData();
         
-        const {data} = await axios.put(`/api/venue/vendor/${venue.id}/`,venue,{
+        uploadData.append('actual_price', venue.price);
+        uploadData.append('display_price', venue.displayprice);
+        uploadData.append('city', venue.city);
+        uploadData.append('venue_type', venue.venue_type);
+        uploadData.append('display_image', venue.image);
+        uploadData.append('about', venue.about);
+        uploadData.append('features', venue.features);
+        
+        const {data} = await axios.put(`/api/venue/vendor/${venue.id}/`,uploadData,{
             headers:{
                 'Authorization': 'Bearer '+userInfo
             }
