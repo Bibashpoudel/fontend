@@ -14,7 +14,7 @@ function LandingPage(){
     
     return(
         <div className="land-top">
-        <div className="main top">
+        <div className="main ">
                 <div className="ms1_search" >
                     {/* <img src={pictures} alt="pictures"></img> */}
                     <div className="ms1_text">
@@ -56,7 +56,7 @@ function LandingPage(){
 
                     </div>
                     <div className="pto_section_column2">
-                        <img src={pwed} alt="wed"></img>
+                        <img className="pto_section_image"src={pwed} alt="wed"></img>
                     </div>
 
                 </div>

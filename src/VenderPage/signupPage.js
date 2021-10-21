@@ -68,8 +68,10 @@ function SignupPageVendor(props){
              setTimeout((e) => {
                 dispatch(Signin(email, password))
                 console.log("run after 3 second")
-            }, 3000);
+            }, 5000);
         }
+        setOtpform(false);
+        setPanform(true)
     }
     const panhandaler = (e) =>{
 
@@ -123,7 +125,7 @@ function SignupPageVendor(props){
         :
        
 
-        <div className="main top_center ">
+        <div className="main  ">
             <div className="col-1">
                 <img className="large" src="../images/vendorregister.jpg" alt="registerimg"></img>
             </div>

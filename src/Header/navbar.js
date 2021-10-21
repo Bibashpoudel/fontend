@@ -60,13 +60,13 @@ function  NavBar(props){
 
     const loadCategory =(e)=>{
         e.preventDefault()
-        setDivOpen(true)
+        setSidebarIsOpen(false)
     }
     return(
-        <div>
-        <header>
-        <div className="header">
-        <div className="brand">
+        <div className="top_section">
+        <header >
+        <div className="header" >
+        <div className="brand" >
         <button
                     type="button"
                     className="open-sidebar"
@@ -74,9 +74,11 @@ function  NavBar(props){
                   >
                     <i className="fa fa-bars" style={{color:"black"}}></i>
                   </button>
-           <Link to=''> Sevenoath</Link>
+           <span onClick={() => setSidebarIsOpen(false)} >
+              <  Link to='' > Sevenoath</Link>
+           </span>
         </div>
-        <div >
+        <div onClick={loadCategory}>
             <div className="nav-left-menu">
               <div>
                 <Link to="/vendor_register">Vender Register</Link>
@@ -100,7 +102,7 @@ function  NavBar(props){
                     <ul className="dropdown-content">
                       
                       <li>
-                        <Link to={`/account`} >Profile</Link>
+                        <Link to={`/profile`} >Profile</Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>
@@ -119,7 +121,7 @@ function  NavBar(props){
                  </span>
               
                 ):
-                <div>
+                <div style={{marginTop:"-0.5rem"}}> 
                   <Link to="/register">Sign Up</Link>
                 </div>
                 }
@@ -131,7 +133,7 @@ function  NavBar(props){
               profile ?(
                 <span className="dropdown">
                   <Link to="#">
-                    {profile.fullname} {' '}
+                    
                       <i className="fa fa-user"></i>
                     </Link>
                     <ul className="dropdown-content">
@@ -165,10 +167,10 @@ function  NavBar(props){
                       <ul className="dropdown-content">
                         
                         <li>
-                          <Link to={`/account`} >Profile</Link>
+                          <Link to="/register">Sign Up</Link>
                         </li>
                         <li>
-                          <Link to="/order" >My Order</Link>
+                          <Link to="/vendor_register">Vendor Register</Link>
                         </li>
                         
                       
@@ -185,17 +187,20 @@ function  NavBar(props){
         </div>
     </div>
     </header>
-     <aside className={sidebarIsOpen ? 'open' : ''}>
+     <aside className={sidebarIsOpen ? 'open' : ''} onClick={loadCategory}>
        <div>
      <div className="aside-top" style={{color:'black', textAlign:'center'}}>
        {
          profile ? (
              <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${profile.fullname}`}>
-               {profile.fullname}
+               {profile.fullname}bibash
              </Link> 
          )
          :
          <div>
+                <div > 
+                  <Link style={{color:"black"}} to="/signin">Sign In</Link>
+                </div>
          </div>
        }
      </div>
@@ -232,12 +237,13 @@ function  NavBar(props){
        <div>
          
          <li onMouseEnter={() => handleOnChange(index)}>
-           {t.type} {
+           {t.type} 
+           {/* {
                       checkedState[index] ?
                       <i className="fa fa-angle-up"></i>
                       :
                       <i className="fa fa-angle-down"></i>
-                  }
+                  } */}
          </li>
            
        </div>
@@ -252,12 +258,15 @@ function  NavBar(props){
           venueType.map(VT =>(
               <li className={`display-${index}`}>
                   {VT.type}
+                
               </li>
           ))
           
           :<li></li>
       }   
+      <hr></hr>
        </ul>
+       
        :<span></span>
   }
      </div>

@@ -32,10 +32,14 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
 export const Signin = (email, password) => async(dispatch) =>{
     dispatch({
         type: USER_SIGNIN_REQUEST,
-        payload:{email:email, password}
+        payload:{email:email, password:password}
     })
     try {
-        const {data} = await axios.post('/api/user/token/', {email:email, password}) 
+        const {data} = await axios.post('/api/user/token/', {email:email, password:password},{
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }) 
 
                 dispatch({
                     type:USER_SIGNIN_SUCCESS,

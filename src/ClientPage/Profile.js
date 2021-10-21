@@ -11,37 +11,46 @@ export default function ProfilePage(){
     // const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
     return(
-        <BrowserRouter>
-            <div className="profile">
+      
+           
             
-            <div className="pro_col-1-main">
-                    <div  className="pro_col-1">
-                        <div className="pro_setting">
-                           <Link to='/account'> Manage Account</Link>
-                        </div>
-                        <div className="pro_setting">
-                        <Link to='/orders'> My Orders</Link>
-                        </div>
-                        <div className="pro_setting">
-                        <Link to='/wishlist'> My Wishlist</Link>
-                        </div>
-                        <div className="pro_setting">
-                        <Link to='/reviews'> My Reviews</Link>
-                        </div>
+            <div className="">
+                <h2>Your Account </h2>
+                    <div  className="main center">
+                        <Link to='/account'>
+                            <div className="pro_setting">
+                               <img className=""src="../images/order-tracking.png" alt="order" ></img>
+                                <div style={{display:'grid'}}>
+                                    <h5 style={{color:'black'}}> Your Profiles </h5>
+                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                </div>
+                                
+                            </div>
+                        </Link>
+                        <Link to='/orders'>
+                            <div className="pro_setting">
+                            My Orders
+                            </div>
+                        </Link>
+                        <Link to='/wishlist'>
+                            <div className="pro_setting">
+                            My Wishlist
+                            </div>
+                        </Link>
+                        <Link to='/reviews'>
+                            <div className="pro_setting">
+                            My Reviews
+                            </div>
+                        </Link>
                         {/* <div className="pro_setting">
                         <Link to='account'> Manage Account</Link>
                         </div> */}
                   
                     </div>
                 </div>    
-                <div className="pro_col-2">
-                    <Route path="/account" exact component={Account}></Route>
-                    <Route path="/orders" component={Orders}></Route>
-                    <Route path="/wishlist" component={Wishlist}></Route>
-                    <Route path="/reviews" component={Review}></Route>
-                </div>
+               
            
-            </div>
-        </BrowserRouter>
+          
+    
     )
 }

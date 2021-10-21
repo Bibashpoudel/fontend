@@ -11,6 +11,10 @@ import CartScreen from './ClientPage/Cartpage';
 import NavBar from './Header/navbar';
 import ProfilePage from './ClientPage/Profile';
 import { Footer } from './components/Footer';
+import { Orders } from './ClientPage/Profile/orders';
+import { Account } from './ClientPage/Profile/account';
+import { Wishlist } from './ClientPage/Profile/Wishlist';
+import { Review } from './ClientPage/Profile/Review';
 
 
 
@@ -54,10 +58,11 @@ function App() {
                 {/* Client screen */}
 
 
-                <Route path="/account"  component={ProfilePage}></Route>
-                    <Route path="/orders" component={ProfilePage}></Route>
-                    <Route path="/wishlist" component={ProfilePage}></Route>
-                    <Route path="/reviews" component={ProfilePage}></Route>
+                <Route path="/account"  component={Account}></Route>
+                    <Route path="/order" component={Orders}></Route>
+                    <Route path="/wishlist" component={Wishlist}></Route>
+                    <Route path="/reviews" component={Review}></Route>
+                    <Route path ='/profile' component ={ProfilePage}></Route>
                
                 <Route path='/cart/:id?' component={CartScreen}></Route>
             <Route path='/signin' component={SignInPage}></Route>

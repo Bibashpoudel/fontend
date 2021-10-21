@@ -30,7 +30,7 @@ function SignupPage(props){
         setTimeout((e) => {
             dispatch(Signin(email, password))
             console.log("run after 3 second")
-        }, 2000);
+        }, 3000);
     }
     useEffect(() =>{
         if(userInfo){
@@ -42,7 +42,7 @@ function SignupPage(props){
 
 
     return(
-        <div className="main top_center vendor">
+        <div className="main">
             <div className="col-1">
                 <img className="large" src="../images/customerregister.png" alt="registerimg"></img>
             </div>
