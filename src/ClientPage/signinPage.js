@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Signin, UserProfileViewAction } from '../Action/UserAction';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import loginimg from '../login.png'
 
 
 
@@ -12,7 +15,7 @@ function SignInPage(props){
 
 
     const userSignin = useSelector(state => state.userSignin);
-    const {  userInfo, } = userSignin;
+    const {  loading, userInfo,error} = userSignin;
     // const ProfileUser = useSelector(state => state.useSelector)
     // const {UserProfile} = ProfileUser;
 
@@ -40,15 +43,23 @@ function SignInPage(props){
                 <div className="cli_log">
                     <h3>Book your wedding venue now !!</h3>
                 </div>
-                <img className="cus_log" src="../images/customerlogin.png" alt="registerimg"></img>
+                <img className="cus_log" src={loginimg} alt="LogIn"></img>
                 
             </div>
             <div className="form col-2">
+
+
 
                 <form onSubmit={Signinhandaler}>
                     <div>
                         <h2>Log In  !</h2>
                     </div>
+                    {
+                        loading ? <LoadingBox></LoadingBox>
+                        :
+                        error ? <MessageBox variant="danger">{error}</MessageBox>
+                        : <span></span>
+}
                     
                     
                     

@@ -11,8 +11,8 @@ import MessageBox from '../components/MessageBox';
 
 function  NavBar(props){
 
-    const userSignin = useSelector(state => state.userSignin);
-    const {  userInfo} = userSignin;
+    // const userSignin = useSelector(state => state.userSignin);
+    // const {  userInfo} = userSignin;
     const userProfileView = useSelector((state) => state.userProfileView);
     const {profile} = userProfileView;
     const VendorTypes = useSelector((state) => state.VendorTypes);
@@ -29,9 +29,9 @@ function  NavBar(props){
 
         
     },[dispatch])
-    const [checkedState, setCheckedState] = useState([false, false, false,false])
+    const [checkedState, setCheckedState] = useState([false, false, false,false, false, false, false, false,false,false])
  
-    console.log(checkedState)
+    
     
     // console.log(services)
     const handleOnChange = (position) => {
@@ -39,24 +39,24 @@ function  NavBar(props){
       index === position ? !item : false
      
     );
-    console.log(position)
+    
 
     setCheckedState(updatedCheckedState);
     }
-    console.log(checkedState)
+   
     
 
 
    
     const Signouthandler = () =>{
         dispatch(signout());
+        window.location.reload();
        
       
     }
 
     const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-    const [divOpen, setDivOpen] = useState(false);
-
+    
 
     const loadCategory =(e)=>{
         e.preventDefault()
@@ -71,27 +71,27 @@ function  NavBar(props){
                     type="button"
                     className="open-sidebar"
                     onClick={() => setSidebarIsOpen(true)}
+                   
                   >
-                    <i className="fa fa-bars" style={{color:"black"}}></i>
+                    <i className="fa fa-bars" style={{color:"whitesmoke"}}></i>
                   </button>
-           <span onClick={() => setSidebarIsOpen(false)} >
+           <span onClick={loadCategory} >
               <  Link to='' > Sevenoath</Link>
            </span>
         </div>
+        <div className="nav-search" onClick={loadCategory}>
+                <input  className="search" type="text" placeholder="search"></input>
+                <span className="btn-search"><i className="fa fa-search"></i></span>
+              </div>
         <div onClick={loadCategory}>
             <div className="nav-left-menu">
-              <div>
+              {/* <div>
                 <Link to="/vendor_register">Vender Register</Link>
                   
-              </div>
+              </div> */}
             
+              
               <div>
-                  |
-              </div>
-              <div>
-                  |s
-              </div>
-            <div>
               {
               profile ?(
                 <span className="dropdown">
@@ -139,7 +139,7 @@ function  NavBar(props){
                     <ul className="dropdown-content">
                       
                       <li>
-                        <Link to={`/account`} >Profile</Link>
+                        <Link to={`/profile`} >Profile</Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>
@@ -186,14 +186,18 @@ function  NavBar(props){
 
         </div>
     </div>
+        <div className="mob-search">
+                <input  className="search" type="text" placeholder="search"></input>
+                <span className="btn-search"><i className="fa fa-search"></i></span>
+        </div>     
     </header>
-     <aside className={sidebarIsOpen ? 'open' : ''} onClick={loadCategory}>
-       <div>
-     <div className="aside-top" style={{color:'black', textAlign:'center'}}>
+     <aside className={sidebarIsOpen ? 'open' : ''} >
+      <div>
+     <div className="aside-top" style={{color:'black', textAlign:'center'}} onClick={loadCategory}>
        {
          profile ? (
-             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile/${profile.fullname}`}>
-               {profile.fullname}bibash
+             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile`} >
+               {profile.fullname}
              </Link> 
          )
          :
@@ -227,65 +231,77 @@ function  NavBar(props){
           </div>
      {
             types.map((t, index) =>(
-     <div>
-     <ul className="categories">
-       <li>
-         
-       </li>
-       
-                
-       <div>
-         
-         <li onMouseEnter={() => handleOnChange(index)}>
-           {t.type} 
-           {/* {
-                      checkedState[index] ?
+     <div className="categories">
+     <ul >
+        <li onMouseEnter={() => handleOnChange(index)}>
+          {t.type} 
+          {/* {
+                    checkedState[index] ?
                       <i className="fa fa-angle-up"></i>
                       :
                       <i className="fa fa-angle-down"></i>
                   } */}
-         </li>
-           
-       </div>
-    
-       
-
-     </ul>
-     { checkedState[index] ?
-       <ul className="sub_category">
-       {
-          t.type === "Marriage Gardens" ?
-          venueType.map(VT =>(
-              <li className={`display-${index}`}>
-                  {VT.type}
-                
-              </li>
-          ))
-          
-          :<li></li>
-      }   
-      <hr></hr>
-       </ul>
-       
-       :<span></span>
-  }
-     </div>
-            ))}
-     </div>
-  }
-    <div style={{borderTop:'.1rem solid grey'}} className="aside-menu">
-      <h3>Helps And Settings</h3>
-      <ul>
-        <Link to="/vendor_register">Vendor Register</Link>
+        </li>
+      
+        { checkedState[index] ?
+        <div className="sub_category" onClick={loadCategory}>
+          {
+            t.type === "Marriage Gardens" ?
+            venueType.map(VT =>(
+                <li className={`display-${index}`}>
+                    {VT.type}
+                  
+                </li>
+            ))
+            
+            :<li></li>
+          }   
+        </div>
+        
+        
+        :<span></span>
+        
+      }
       </ul>
-    </div>
-    </div>
-   </aside>
- 
+      </div>
+              ))}
+      </div>
+    }
+      <div className="aside-menu" onClick={loadCategory}>
+        <h3>Helps And Settings</h3>
+        {
+          profile ?
+          <ul>
+              <li>
+                <Link to='/profile'>
+                  Your Account
+                </Link>
+              </li>
+              <li>
+                <Link to="/" onClick={Signouthandler}>Sign Out</Link>
+              </li>
+          </ul>:
+          <ul>
+          <li>
+            <Link to="/signin">Sign In</Link>
+            
+          </li>
+          <li>
+            <Link to="/vendor_register">Vendor Register</Link>
+          </li>
+        </ul>
 
+        }
+       
+        
+      </div>
+      </div>
+    </aside>
   
-   </div>
-    )
-}
+
+    
+    </div>
+      )
+  }
 
 export default NavBar;

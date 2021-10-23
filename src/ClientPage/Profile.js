@@ -1,9 +1,10 @@
 import React, {  } from'react'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
-import { Account } from './Profile/account'
-import { Orders } from './Profile/orders'
-import { Review } from './Profile/Review'
-import { Wishlist } from './Profile/Wishlist'
+import {Link } from 'react-router-dom'
+import profile from  '../profile.png'
+import wishlist from '../wishlist.png'
+import ordertrack from '../order.png'
+import positivereview from '../review.png'
+
 
 
 export default function ProfilePage(){
@@ -14,33 +15,48 @@ export default function ProfilePage(){
       
            
             
-            <div className="">
-                <h2>Your Account </h2>
+            <div className="top_center">
+                <h2 style={{marginLeft:'5%'}}>Your Account </h2>
                     <div  className="main center">
-                        <Link to='/account'>
-                            <div className="pro_setting">
-                               <img className=""src="../images/order-tracking.png" alt="order" ></img>
+                        <Link to='/user' className="pro_setting">
+                            
+                               <img className="extra-small"src={profile} alt="profile" ></img>
                                 <div style={{display:'grid'}}>
                                     <h5 style={{color:'black'}}> Your Profiles </h5>
                                     <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
                                 </div>
                                 
-                            </div>
+                            
                         </Link>
-                        <Link to='/orders'>
-                            <div className="pro_setting">
-                            My Orders
-                            </div>
+                        <Link to='/order' className="pro_setting">
+                            
+                               <img className="extra-small"src={ordertrack} alt="order" ></img>
+                                <div style={{display:'grid'}}>
+                                    <h5 style={{color:'black'}}>Orders </h5>
+                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                </div>
+                                
+                            
                         </Link>
-                        <Link to='/wishlist'>
-                            <div className="pro_setting">
-                            My Wishlist
-                            </div>
+                        <Link to='/wishlist' className="pro_setting">
+                           
+                               <img className="extra-small"src={wishlist} alt="wishlist" ></img>
+                                <div style={{display:'grid'}}>
+                                    <h5 style={{color:'black'}}> Your Wishlist </h5>
+                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                </div>
+                                
+                            
                         </Link>
-                        <Link to='/reviews'>
-                            <div className="pro_setting">
-                            My Reviews
-                            </div>
+                        <Link to='/reviews' className="pro_setting">
+                            
+                               <img className="extra-small"src={positivereview} alt="review" ></img>
+                                <div style={{display:'grid'}}>
+                                    <h5 style={{color:'black'}}> Your Reviews </h5>
+                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                </div>
+                                
+                            
                         </Link>
                         {/* <div className="pro_setting">
                         <Link to='account'> Manage Account</Link>

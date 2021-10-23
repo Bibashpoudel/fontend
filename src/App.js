@@ -12,9 +12,15 @@ import NavBar from './Header/navbar';
 import ProfilePage from './ClientPage/Profile';
 import { Footer } from './components/Footer';
 import { Orders } from './ClientPage/Profile/orders';
-import { Account } from './ClientPage/Profile/account';
+import {  Accounts } from './ClientPage/Profile/account';
 import { Wishlist } from './ClientPage/Profile/Wishlist';
 import { Review } from './ClientPage/Profile/Review';
+import EditProfile from './ClientPage/Profile/EditProfile';
+import PrivateRoute from './components/PrivateRoute';
+import VendorRoute from './components/VendorRoute';
+import Terms from './ImpFiles/Terms';
+import Policy from './ImpFiles/Policy';
+
 
 
 
@@ -22,10 +28,7 @@ function App() {
 
 
   
-
-
-   
-
+ 
  
   return (
       <BrowserRouter>
@@ -37,38 +40,42 @@ function App() {
        
           
       
-        <main>
+        <main  >
               {/* Admin Screen */}
 
 
                 {/*vender Screeen  */}
              
               
-              <Route path="/dashboard" component={Vendorpage}></Route>
-              <Route path="/service/:id/edit"  component={Vendorpage}></Route>
-              <Route path="/venue/:id/edit" component={Vendorpage}>  </Route>
-              <Route path="/accounts"  component={Vendorpage}></Route>
-              <Route path="/upload_image"   component={Vendorpage}></Route>
-              <Route path="/serviceManage" exact component={Vendorpage}></Route>
-              <Route path="/VenueManage"  component={Vendorpage}></Route>
-              <Route path="/orders"  component={Vendorpage}></Route>
-              <Route path="/vendor_register" component={SignupPageVendor}></Route>
+                <VendorRoute path="/dashboard" component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/service/:id/edit"  component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/venue/:id/edit" component={Vendorpage}>  </VendorRoute>
+                <VendorRoute path="/accounts"  component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/upload_image"   component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/serviceManage" exact component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/VenueManage"  component={Vendorpage}></VendorRoute>
+                <VendorRoute path="/orders"  component={Vendorpage}></VendorRoute>
+                <Route path="/vendor_register" component={SignupPageVendor}></Route>
 
 
                 {/* Client screen */}
 
-
-                <Route path="/account"  component={Account}></Route>
-                    <Route path="/order" component={Orders}></Route>
-                    <Route path="/wishlist" component={Wishlist}></Route>
-                    <Route path="/reviews" component={Review}></Route>
-                    <Route path ='/profile' component ={ProfilePage}></Route>
-               
+                
+                <PrivateRoute path="/user"  component={Accounts}></PrivateRoute>
+                <PrivateRoute path="/order" component={Orders}></PrivateRoute>
+                <PrivateRoute path="/wishlist" component={Wishlist}></PrivateRoute>
+                <PrivateRoute path ='/edit/profile' component ={EditProfile}></PrivateRoute>
+                <PrivateRoute path="/review" component={Review}></PrivateRoute>
+                <PrivateRoute path ='/profile' component ={ProfilePage}></PrivateRoute>
+                
+                    
+                <Route path="/terms&Conditions" component={Terms}></Route>
+                <Route path="/PrivacyPolicy" component={Policy}></Route>
                 <Route path='/cart/:id?' component={CartScreen}></Route>
-            <Route path='/signin' component={SignInPage}></Route>
-            <Route path="/register" component={SignupPage}></Route>
-            <Route path="/venue/:id" component={VenueDetailsPage}></Route>
-            <Route path="/" component={LandingPage} exact></Route>
+                <Route path='/signin' component={SignInPage}></Route>
+                <Route path="/register" component={SignupPage}></Route>
+                <Route path="/venue/:id" component={VenueDetailsPage}></Route>
+                <Route path="/" component={LandingPage} exact></Route>
             
             
            

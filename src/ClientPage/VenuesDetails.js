@@ -47,8 +47,15 @@ function VenueDetailsPage(props){
     
   
   const [checkedState, setCheckedState] = useState([false, false, false,false])
- 
-    console.log(checkedState)
+
+  const [imageDisplay , setImageDispaly] = useState([false, false])
+  const changeState = (position) => {
+    const updatedCheckedState = imageDisplay.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  }
     
     // console.log(services)
   const handleOnChange = (position) => {
@@ -354,12 +361,22 @@ function VenueDetailsPage(props){
         </div>
         <div className="main top">
                         <div className="venue_details_row-bottom">
-                            <div className="photos" id ="photo">
-                                <div className="image">
-                                        images
+                           
+                            <div  id ="photo">
+                                <h4>Pictures</h4>   
+                                <div className="photos">
+                                    <div className="image" onclick={changeState}>
+                                            Images
+                                    </div>
+                                    <div className="video">
+                                            Videos
+                                    </div>
                                 </div>
-                                <div className="video">
-                                        video
+                                <div className="img-area">
+
+                                </div>
+                                <div className="img-area">
+
                                 </div>
                             </div>
                             <div id="about">

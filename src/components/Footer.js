@@ -69,8 +69,43 @@ export function Footer() {
               </div>
 
             </div>
+             <div className="mob-footer">
+                <div>
+                  <div className="footerlink">
+                    <Link to="/about">Careers</Link>
+                  </div>
+                  <div className="footerlink">
+                    <Link to="about">Blog</Link>
+                  </div>
+                  <div className="footerlink">
+                    <Link to="about">About Sevenoath</Link>
+                  </div>
+                </div>
+                <div>
+                  <div className="footerlink">
+                    <Link to="about">Affilate With us</Link>
+                  </div>
+                  <div className="footerlink">
+                    <Link to="about">Advertise Your Service</Link>
+                  </div > 
+                </div>
+
+             </div>
              <div className="main-footer  center">
+              <div className=" main center footer_items">
+                  <div>
+                   <Link to="/terms&Conditions"> Terms and Conditions </Link>
+                  </div>
+                  <div>
+                    <Link to="PrivacyPolicy">Privacy and Policy</Link>
+                  </div>
+              </div>
+
+              
+              <div style={{textAlign:'center'}}>
               All Right Reserved 
+              </div>
+             
              </div>
 
           </div>

@@ -21,12 +21,12 @@ function LandingPage(){
                       <h1>Select best venues for your wedding</h1>
                       <div className="search_city">
                           <div>
-                            <select value="Select City">
+                            <select >
 
-                                <option>Jaipur</option>
-                                <option>Kathmandu</option>
-                                <option>Kathmandu</option>
-                                <option>Kathmandu</option>
+                                <option value='jaipur'>Jaipur</option>
+                                <option value='jaipur' >Mumbai</option>
+                                <option value='jaipur'>Kolkota</option>
+                                <option value='jaipur'>Goa</option>
                             </select>
                           </div>
                           <div>
@@ -39,13 +39,13 @@ function LandingPage(){
             </div>
             <div className="wg2_gallary">
                 <div className="wg2_title">
-                    Wedding Gallary
+                    Wedding Gallery
                 </div>
                 <div className="pto_section">
                     <div className="pto_section_column1">
                         <div className="pto_sec_col1_content">
                             <div className="pto_sec_col1_text">
-                            Browse 100+ wedding photos
+                                Browse 100+ wedding photos
                             </div>
                             <div>
                                 <button>
@@ -82,7 +82,7 @@ function LandingPage(){
                 
                         
             </div>
-            <div className="categories">
+            <div>
                     <Categories></Categories>
             </div>
         </div>

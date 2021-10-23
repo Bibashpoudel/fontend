@@ -6,7 +6,7 @@ import MessageBox from '../../components/MessageBox';
 
 
 
-export function Account(){
+export function Accounts(props){
     const userProfileView = useSelector(state => state.userProfileView)
     const {loading, error, profile} = userProfileView;
 
@@ -20,16 +20,16 @@ export function Account(){
 
 
     return (
-        <div className="Profile-Account">
+        <div className="Profile-Account top">
             <div>
-                <h2> My Profile</h2>
+                <h2 style={{marginLeft:'10%'}}> My Profile</h2>
             </div>
             
            {loading ? <LoadingBox></LoadingBox> 
            :
            error ? <MessageBox variant="danger">{error}</MessageBox>
            :
-        <div>
+            <div>
             
             <div key={profile.id}>
                 <div className="pro-info">
@@ -38,13 +38,13 @@ export function Account(){
                             Full Name
                         </div>
                         <div>
-                            {profile.fulname}
+                            {profile.fullname}
                         </div>
 
                     </div>
                     <div className="pro-info-items">
                         <div>
-                        email
+                        Email
                         </div>
                         <div>
                         {profile.email}
@@ -64,7 +64,7 @@ export function Account(){
                 <div className="pro-info">
                     <div className="pro-info-items">
                         <div>
-                        Date Of birth
+                        Date of Birth
                         </div>
                         <div>
                            
@@ -85,10 +85,10 @@ export function Account(){
                 <div className="pro-info">
                     <div className="pro-info-items">
                     <div>
-                        <button className="btn secondary">Edit Profile</button>
+                        <button className="btn secondary_size" onClick={() => props.history.push(`/edit/profile`)}>Edit Profile</button>
                         </div>
                         <div>
-                            <button className="btn secondary">    Change Password</button>
+                            <button className="btn secondary_size">    Change Password</button>
                         </div>
 
 

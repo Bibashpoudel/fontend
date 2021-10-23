@@ -1,6 +1,6 @@
 import React from 'react'
-import { BrowserRouter, Link , NavLink, Route } from 'react-router-dom';
-import Account from './SubPage/Acccount';
+import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import Account from './SubPage/Account';
 import Bookingorder from './SubPage/BookingOrders';
 import Dashboard from './SubPage/Dashboard';
 import ServiceEdit from './SubPage/ServiceEdit';

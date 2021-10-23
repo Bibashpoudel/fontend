@@ -25,7 +25,7 @@ export default function Categories() {
     },[dispatch])
     const [checkedState, setCheckedState] = useState([false, false, false,false])
  
-    console.log(checkedState)
+    
     
     // console.log(services)
     const handleOnChange = (position) => {
@@ -33,12 +33,10 @@ export default function Categories() {
       index === position ? !item : false
      
     );
-    console.log(position)
-
+   
     setCheckedState(updatedCheckedState);
     }
-    console.log(checkedState)
-    
+ 
     
     return (
         <div>
@@ -55,23 +53,12 @@ export default function Categories() {
             
                      {
                         types.map((t, index) =>(
-                            <div className="row center" key={t.id}>
+                            <div className="row center" key={t.id} onClick={() => handleOnChange(index)}>
                                 <div  className={`items type-${t.id} `} >
-                                   <div className="items-data" onClick={() => handleOnChange(index)}>
-                                        {t.type} {
-                                                checkedState[index] ?
-                                                <i className="fa fa-angle-up"></i>
-                                                :
-                                                <i className="fa fa-angle-down"></i>
-                                            }
-                                   </div>
-                                   <div>
-                                   <img className="custom" src="../images/vendorregister.jpg" alt="registerimg"></img>
-                                   </div>
-                                </div>
-                             
-                                
-                              { checkedState[index] ?
+                                   <div className="items-data" >
+                                        {t.type} 
+                                        <div>
+                                        { checkedState[index] ?
                                    <div class="sub-item">
                                    {
                                        t.type === "Marriage Gardens" ?
@@ -81,11 +68,26 @@ export default function Categories() {
                                            </div>
                                        ))
                                        
-                                       :<div></div>
+                                       :
+                                       t.type === 'Decorators' ?
+                                       <div>Decorators </div>
+                                       :
+                                       t.type === 'Catering' ?
+                                       <div>Catering </div>
+                                       :<span></span>
                                    }   
                                    </div>
                                    :<span></span>
                               }
+                                        </div>
+                                   </div>
+                                   <div>
+                                   <img className="custom" src="../images/vendorregister.jpg" alt="registerimg"></img>
+                                   </div>
+                                </div>
+                             
+                                
+                              
                            
                         </div>
 

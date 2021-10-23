@@ -5,7 +5,7 @@ import { Signin, Signup } from '../Action/UserAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-
+import regimg from '../registerclient.png'
 
 function SignupPage(props){
 
@@ -44,7 +44,7 @@ function SignupPage(props){
     return(
         <div className="main">
             <div className="col-1">
-                <img className="large" src="../images/customerregister.png" alt="registerimg"></img>
+                <img className="large" src={regimg} alt="register"></img>
             </div>
             <div className="form col-2">
 

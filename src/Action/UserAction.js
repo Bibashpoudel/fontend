@@ -94,6 +94,41 @@ export const UserProfileViewAction = () => async(dispatch, getState)=>{
         
     }
 }
+export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
+    dispatch({
+        type:USER_PROFILE_REQUEST,
+        payload:user
+
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        console.log(userInfo)
+        const {data} = await axios.put('/api/user/profile/',user,{
+            headers: { 
+                
+                'Authorization': 'Bearer ' + userInfo
+             }
+            
+        })
+        console.log( data)
+        dispatch({
+            type:USER_PROFILE_SUCCESS,
+            payload:data
+        })
+        localStorage.setItem('profile', JSON.stringify(data));  
+        
+    } catch (error) {
+        
+            dispatch({
+                type:USER_PROFILE_FAIL,
+                payload: 
+                    error.response && error.response.data.message
+                        ? error.response.data.message
+                        : error.message
+            })
+        
+    }
+}
 export const signout = () => (dispatch)=>{
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');

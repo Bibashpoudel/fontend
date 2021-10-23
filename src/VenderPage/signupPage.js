@@ -6,6 +6,7 @@ import { Signin, } from '../Action/UserAction.js';
 import { GSTPANAdd, VendorCityList,    VendorSignup,    VendorTypeList } from '../Action/vendorAction.js';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import venimg  from '../vreg.jpg'
 
 import swal from 'sweetalert'
 
@@ -127,7 +128,7 @@ function SignupPageVendor(props){
 
         <div className="main  ">
             <div className="col-1">
-                <img className="large" src="../images/vendorregister.jpg" alt="registerimg"></img>
+                <img className="large" src={venimg} alt="register"></img>
             </div>
             <div className="form col-2">
 
@@ -235,7 +236,7 @@ function SignupPageVendor(props){
                     </div>
                     
                     <div className="btn_center">
-                        <button type="submit" className="block primary">Sign in as Customer</button>
+                        <button onClick={()=>props.history.push('/signin')} className="block primary">Sign in as Customer</button>
                     </div>
                     
                 </form>
