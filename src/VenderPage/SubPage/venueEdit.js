@@ -68,7 +68,7 @@ export default function VenueEdit(props) {
             display_price, 
             city, 
             venue_type, 
-            display_image, 
+            
             about, 
             features
         }))

@@ -31,7 +31,7 @@ function Venuemanage(props){
     const{loading:loading_vv,error:error_vv, VendorVenues} = VVenues;
     const deleteVenue = useSelector(state => state.deleteVenue);
     const {loading: loadingDelete, error:errorDelete, success:successDelete} = deleteVenue;
-
+ 
     
     const annotate =() =>{
         const typed= document.getElementById("gardenPrice").value;
@@ -191,7 +191,7 @@ function Venuemanage(props){
                                                 <option key={c.id} value={c.id}>{c.city}</option>
                                         ))}
                                         
-                                        <option>city2</option>
+                                        
                                     </select>
 }
                                 </div>

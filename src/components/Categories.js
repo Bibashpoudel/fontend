@@ -53,8 +53,8 @@ export default function Categories() {
             
                      {
                         types.map((t, index) =>(
-                            <div className="row center" key={t.id} onClick={() => handleOnChange(index)}>
-                                <div  className={`items type-${t.id} `} >
+                            <div className="row center items" key={t.id} onClick={() => handleOnChange(index)}>
+                                <div  className={`item-cat type-${t.id} `} >
                                    <div className="items-data" >
                                         {t.type} 
                                         <div>

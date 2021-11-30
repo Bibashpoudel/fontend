@@ -8,7 +8,7 @@ function Dashboard(){
             <div className="main center">
                 <div className="box">
                     <div className=" box-items">
-                    <i class="fa fa-shopping-cart"></i>
+                    <i className="fa fa-shopping-cart"></i>
                     </div>
                     <div>
                         50
@@ -27,7 +27,7 @@ function Dashboard(){
                 </div>
                 <div className="box">
                 <div className=" box-items">
-                    <i class="fa fa-inr"></i>
+                    <i className="fa fa-inr"></i>
                     </div>
                     <div>
                         50

@@ -62,17 +62,29 @@ function SignupPage(props){
                         <h2>Welcome !</h2>
                     </div>
                     
-                    <div className="">
+                    <div className=" fields">
                        
                         <input 
                             type="text" 
                             id="name" 
-                            placeholder="Name"
+                            placeholder="First Name"
                             onChange={(e) => SetName(e.target.value)}
                             
                         ></input>
+                        <label>First Name</label>
                     </div>
-                    <div className="">
+                    <div className=" fields">
+                       
+                        <input 
+                            type="text" 
+                            id="name" 
+                            placeholder="Last Name"
+                            onChange={(e) => SetName(e.target.value)}
+                            
+                        ></input>
+                        <label>Last Name</label>
+                    </div>
+                    <div className=" fields">
                         
                         <input 
                             type="text" 
@@ -80,8 +92,9 @@ function SignupPage(props){
                             placeholder="Email"
                             onChange={(e) => SetEmail(e.target.value)}
                         ></input>
+                         <label>Email</label>
                     </div>
-                    <div className="">
+                    <div className="fields">
                         
                         <input 
                             type="text" 
@@ -90,9 +103,10 @@ function SignupPage(props){
                             onChange={(e)=>SetPhone(e.target.value)}
                             
                         ></input>
+                         <label>Phone</label>
                     </div>
                     
-                    <div className="">
+                    <div className=" fields">
                        
                         <input 
                             type="password" 
@@ -101,6 +115,7 @@ function SignupPage(props){
                             onChange={(e)=>setPassword(e.target.value)}
                             
                         ></input>
+                         <label>Password</label>
                     </div>
                     <div>
                         <button type="submit" className="block primary">Sign Up</button>

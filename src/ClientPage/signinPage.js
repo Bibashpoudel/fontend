@@ -5,7 +5,7 @@ import { Signin, UserProfileViewAction } from '../Action/UserAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import loginimg from '../login.png'
-
+import '../sass/signin.scss'
 
 
 function SignInPage(props){
@@ -63,7 +63,7 @@ function SignInPage(props){
                     
                     
                     
-                    <div className="">
+                    <div className="fields">
                         
                         <input 
                             type="text" 
@@ -72,9 +72,13 @@ function SignInPage(props){
                             onChange ={(e) => SetPhone(e.target.value)}
                             
                         ></input>
+                        <span>
+                            <label>Email Or phone</label>
+                        </span>
+                        
                     </div>
                     
-                    <div className="">
+                    <div className="fields">
                        
                         <input 
                             type="password" 
@@ -83,8 +87,12 @@ function SignInPage(props){
                             onChange ={(e) => setPassword(e.target.value)}
                             
                         ></input>
+                      
+                            <span>
+                                <label> Password</label>
+                            </span>
                         <div>
-                           <Link to='/forget'></Link>
+                           <Link to='/forget'> Forget Password</Link>
                         </div>
                     </div>
                     <div>

@@ -5,6 +5,8 @@ import { VenueDetails } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {Link} from 'react-scroll'
+import { VenueImageList } from '../Action/ImageAction';
+import CartScreen from './Cartpage';
 
 
 
@@ -21,11 +23,17 @@ function VenueDetailsPage(props){
     
     const venueService =useSelector(state =>state.venueService);
     const {loading:loading_service, error:error_service, vService} = venueService;
+    const venueImage = useSelector(state => state.venueImage);
+    const { loading:loadingImage, error:errorImage, venImg} = venueImage
 
 
     const [serviceADD, setserviceADD] = useState(['']);
     const [total, setTotal] = useState(0);
-    const [people, SetPeople] = useState(0)
+    const [people, SetPeople] = useState(0);
+    const [checkedState, setCheckedState] = useState([false, false, false,false])
+
+    const [imageDisplay , setImageDispaly] = useState(false);
+    const [videoDisplay , setVideoDispaly] = useState(false);
     
 
    
@@ -37,6 +45,7 @@ function VenueDetailsPage(props){
        
       
         dispatch(ServicesListaction(venueId))
+        dispatch(VenueImageList(venueId))
        
        
         
@@ -46,15 +55,16 @@ function VenueDetailsPage(props){
     
     
   
-  const [checkedState, setCheckedState] = useState([false, false, false,false])
-
-  const [imageDisplay , setImageDispaly] = useState([false, false])
-  const changeState = (position) => {
-    const updatedCheckedState = imageDisplay.map((item, index) =>
-      index === position ? !item : item
-    );
-
-    setCheckedState(updatedCheckedState);
+  
+  const DisplayImage = () => {
+    
+    setImageDispaly(true);
+    setVideoDispaly(false);
+  }
+  const DisplayVideo = () => {
+    
+    setVideoDispaly(true);
+    setImageDispaly(false);
   }
     
     // console.log(services)
@@ -95,7 +105,7 @@ function VenueDetailsPage(props){
     const SelectedService = updatedCheckedState.reduce(
         (names, currentState, index) =>{
             if(currentState === true){
-                return  names = names + " "+ vService[index].name;
+                return  names = names + ","+ vService[index].id;
             }
             return names;
         },
@@ -113,6 +123,7 @@ function VenueDetailsPage(props){
         
         props.history.push(`/cart/${venueId}/people=${people}/total=${total}/services=${serviceADD}`);
         // ?total=${total}?services=${serviceADD}
+        
 
     }
     
@@ -127,8 +138,13 @@ function VenueDetailsPage(props){
         :
             error? <MessageBox variant="danger">{error}</MessageBox>
         :
+        loadingImage? <LoadingBox></LoadingBox>
+        :
+            errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
+        :
         <div> 
         <div className="main top_center">
+            {/* <CartScreen service={serviceADD} venueId={venueId}/> */}
             <div className="col-1">
               
                     <img id="myimage"  className="large" src={venue.display_image} alt={venue.name}></img>
@@ -214,7 +230,7 @@ function VenueDetailsPage(props){
                                             type="checkbox"
                                                 id={`custom-checkbox-${index}`}
                                                 name={serv.name}
-                                                value={serv.name}
+                                                value={serv.id}
                                                 checked={serv[index]}
                                                 onChange={() => handleOnChange(index)}
                                             />
@@ -232,7 +248,7 @@ function VenueDetailsPage(props){
                                     type="checkbox"
                                         id={`custom-checkbox-${index}`}
                                         name={serv.name}
-                                        value={serv.name}
+                                        value={serv.id}
                                         checked={serv[index]}
                                         onChange={() => handleOnChange(index)}
                                     />
@@ -361,24 +377,46 @@ function VenueDetailsPage(props){
         </div>
         <div className="main top">
                         <div className="venue_details_row-bottom">
+                            {
+                                loadingImage? <LoadingBox></LoadingBox>
+                                :
+                                    errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
+                                :
+                                
                            
                             <div  id ="photo">
                                 <h4>Pictures</h4>   
                                 <div className="photos">
-                                    <div className="image" onclick={changeState}>
+                                    <div className="image" onClick={DisplayImage} style={{cursor:'pointer'}}>
                                             Images
                                     </div>
-                                    <div className="video">
+                                    <div className="video" onClick={DisplayVideo} style={{cursor:'pointer'}}>
                                             Videos
                                     </div>
                                 </div>
-                                <div className="img-area">
-
-                                </div>
-                                <div className="img-area">
-
-                                </div>
+                                {
+                                    imageDisplay ?
+                                    <div className="img-area">
+                                        {
+                                            venImg.map((img)=>(
+                                                <span>
+                                                    <img className="small" src={img.media} alt="imgs"></img>
+                                                </span>
+                                            ))
+                                        }
+                                    </div>
+                                    :<span></span>
+                                }
+                                {
+                                    videoDisplay ?
+                                    <div className="img-area">
+                                            Video
+                                            
+                                    </div>
+                                    :<span></span>
+                                }
                             </div>
+}
                             <div id="about">
                                <h4> About Venues</h4>
                                 {venue.about}

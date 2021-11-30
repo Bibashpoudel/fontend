@@ -58,23 +58,26 @@ function UploadImage(){
 
            <form onSubmit={addImage} enctype="multipart/form-data"> 
                <div>
-               
-                    <div className="">
-                    {
+               {
                     loading_vv ? <LoadingBox></LoadingBox>
                     :
                     error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
                     
                     :
-                    <select  onChange={e =>setVenue(e.target.value)}>
-                    <option  value="" >Select Your venue</option>
-                            {VendorVenues.map(ven =>(
-                            <option key={ven.id} value={ven.id}>{ven.name}</option>
-                            ))}
-                    </select>
-}
+                    <div className="">
+                        { VendorVenues ?
+                            <select  onChange={e =>setVenue(e.target.value)}>
+                                <option  value="" >Select Your venue</option>
+                                    {VendorVenues.map((ven) =>(
+                                    <option key={ven.id} value={ven.id}>{ven.name}</option>
+                                    ))}
+                            </select>
+                            :
+                            <div>{error_vv}</div>
+                        }
+
                     </div>
-                    
+}               
                </div>
                 <div>
                     <input type="file" onChange={onImageChange} className="filetype" />

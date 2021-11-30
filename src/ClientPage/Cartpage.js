@@ -8,16 +8,20 @@ import { addtoCart, reomveFromCart } from '../Action/CartAction';
 import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
-    const venueId = props.match.params.id;
-    
+    // const venueId = props.match.params.id;
+    const venueId = props.venueId;
+    console.log(venueId)
     const urls = window.location.href;
     console.log(urls.pathname)
-    const split = urls.split( '=' )
-    console.log(split)
-    console.log(split[1][0])
-    const people = split[1][0]
-    const totalprice = split[2][0]
-    const services = split[3]
+    const splits = urls.split( '/' )
+    // console.log(splits)
+    // const servicess = splits[7]
+    // const serv = servicess.split('=')
+    // console.log(serv[1].split(','))
+    const people = splits[1][0]
+    const totalprice = splits[2][0]
+    const services = splits[3]
+    console.log(props.service)
 
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
@@ -86,7 +90,7 @@ function CartScreen(props){
                                             </div>
                                         }
                                         <div>
-                                            <button type="button" onClick={()=> removeCartHandaler(item.product)}>Delete</button>
+                                            <button type="button" onClick={()=> removeCartHandaler(item.venue)}>Delete</button>
                                         </div>
                                     </div>
                                 </li>

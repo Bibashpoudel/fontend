@@ -1,8 +1,12 @@
-import React, {  } from 'react'
+import React, { useEffect, useState } from 'react'
 import pwed from '../pwed.png'
 ;
 import TrendingSlider from '../components/TrendingSlider';
 import Categories from '../components/Categories';
+import { useDispatch, useSelector } from 'react-redux';
+import { VendorCityList } from '../Action/vendorAction';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 
 
@@ -10,6 +14,19 @@ import Categories from '../components/Categories';
 
 function LandingPage(){
 
+    const [setCity] = useState()
+    const VendorCitys = useSelector((state) => state.VendorCitys);
+    const {loading:loading_city, error:error_city, citys} = VendorCitys;
+
+    const dispatch = useDispatch();
+    useEffect(() =>{
+        dispatch(VendorCityList())
+    },[dispatch])
+
+    const Venuehandaler = ()=>{
+        
+        
+    }
     
     
     return(
@@ -20,17 +37,30 @@ function LandingPage(){
                     <div className="ms1_text">
                       <h1>Select best venues for your wedding</h1>
                       <div className="search_city">
+                          {
+                               
+                               loading_city ?<LoadingBox></LoadingBox>
+                               :
+                               error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
+                               :
+                        
                           <div>
-                            <select >
-
-                                <option value='jaipur'>Jaipur</option>
-                                <option value='jaipur' >Mumbai</option>
-                                <option value='jaipur'>Kolkota</option>
-                                <option value='jaipur'>Goa</option>
-                            </select>
+                            {
+                                citys ?
+                                <select onChange={e=>setCity(e.target.value)}>
+                                        <option  value="">Select City</option>
+                                        {citys.map(c=>(
+                                                <option key={c.id} value={c.id}>{c.city}</option>
+                                        ))}
+                                        
+                                        
+                                    </select>
+                                    :<span>{error_city}</span>
+                            }
                           </div>
+}
                           <div>
-                              <button>Get Started</button>
+                              <button onClick={Venuehandaler}>Get Started</button>
                           </div>
                       </div>
                     </div>

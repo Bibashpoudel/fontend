@@ -1,5 +1,5 @@
 import axios from "axios";
-import { VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
+import { CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
 
 
 export const VenueTypeList = () =>async(dispatch)=>{
@@ -168,7 +168,6 @@ export const vendorVenueDetails = (venueId) => async(dispatch, getState)=>{
     }
 }
 
-
 export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
     dispatch({
         type:VENUE_UPDATE_REQUEST,
@@ -176,17 +175,9 @@ export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        const uploadData = new FormData();
         
-        uploadData.append('actual_price', venue.price);
-        uploadData.append('display_price', venue.displayprice);
-        uploadData.append('city', venue.city);
-        uploadData.append('venue_type', venue.venue_type);
-        uploadData.append('display_image', venue.image);
-        uploadData.append('about', venue.about);
-        uploadData.append('features', venue.features);
         
-        const {data} = await axios.put(`/api/venue/vendor/${venue.id}/`,uploadData,{
+        const {data} = await axios.put(`/api/venue/vendor/${venue.id}/`,venue,{
             headers:{
                 'Authorization': 'Bearer '+userInfo
             }
@@ -236,5 +227,42 @@ export const venueDeleteAction = (venueId) => async(dispatch, getState)=>{
                 : error.message
         })
         
+    }
+}
+
+
+
+
+
+// display venue by city
+
+
+
+export const VendorVenueList = (cityId) => async(dispatch) =>{
+    dispatch({
+        type:CITY_VENUE_LIST_REQUEST,
+        payload:cityId
+      
+    })
+   
+    try {
+        
+      
+        const {data} = await axios.get(`/api/venue/particularcity/${cityId}/`
+       
+    )
+    dispatch({
+        type:CITY_VENUE_LIST_SUCCESS,
+        payload:data
+    })
+    } catch (error) {
+        dispatch({
+            type:CITY_VENUE_LIST_FAIL,
+            payload:
+            error.response && error.response.data.message 
+                ? error.response.data.message 
+                : error
+            
+        })
     }
 }

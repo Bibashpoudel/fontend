@@ -65,16 +65,28 @@ export function ServiceManage(props) {
               if(success){
                       swal("congratulations! your Services has been added successfully", "Thanks for believing us", "success")
               }
-              dispatch(VenueServicesList())
+
               dispatch(VendorVenueList())
+              dispatch(VenueServicesList())
+             
               
-      },[success,dispatch])
+              
+      },[dispatch,success])
      
         return(
                 <div>{
                         addloading ? <LoadingBox></LoadingBox>
                         :
                         adderror ? <MessageBox variant="danger">{adderror}</MessageBox>
+                        :
+                        loading_vv ? <LoadingBox></LoadingBox>
+                        :
+                        error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+                        
+                        :
+                        loading_vs ?<LoadingBox></LoadingBox>
+                        :
+                        error_vs ? <MessageBox variant="danger">{error_vs}</MessageBox>
                         :
                         <div className="ven_serv_manage">
                                 <form className=" " onSubmit={addServicehandaler}>
@@ -144,13 +156,16 @@ export function ServiceManage(props) {
                                                         
                                                         :
                                                         <div className="">
-                                                        
-                                                        <select  onChange={e =>setVenue(e.target.value)}>
-                                                        <option  value="" >Select Your venue</option>
-                                                                {VendorVenues.map(ven =>(
-                                                                <option key={ven.id} value={ven.id}>{ven.name}</option>
-                                                                ))}
-                                                        </select>
+                                                        { VendorVenues ?
+                                                                <select  onChange={e =>setVenue(e.target.value)}>
+                                                                <option  value="" >Select Your venue</option>
+                                                                        {VendorVenues.map((ven) =>(
+                                                                        <option key={ven.id} value={ven.id}>{ven.name}</option>
+                                                                        ))}
+                                                                </select>
+                                                                :
+                                                                <div>{error_vv}</div>
+                                                                        }
                                                         </div>
                                                         }
                                         

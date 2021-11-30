@@ -31,13 +31,14 @@ export default function ServiceEdit(props) {
     const updateServicehandaler =(e) =>{
         e.preventDefault();
         dispatch(ServiceUpdateAction(
-            {id:serviceId,
-            name,
-            actual_price, 
-            display_price,
-            venue, 
-            is_true,
-            description
+            {
+                id:serviceId,
+                name,
+                actual_price, 
+                display_price,
+                venue, 
+                is_true,
+                description
         }))
     }
     const chekcedhandaler = ()=>{
@@ -48,7 +49,7 @@ export default function ServiceEdit(props) {
         const typed= document.getElementById("gardenPrice").value;
 
         const price = parseInt(typed);
-        const DisplayPrice = price + price * 0.05;
+        const DisplayPrice = parseInt(price + price * 0.05);
         console.log(DisplayPrice)
         setPrice(price);
         SetDisplayPrice(DisplayPrice)
@@ -71,7 +72,7 @@ export default function ServiceEdit(props) {
         }
 
       
-        if(!vService || vService !== serviceId  || updateSuccess){
+        if(!vService){
                 dispatch({
                         type:SERVICE_UPDATE_RESET
                     })

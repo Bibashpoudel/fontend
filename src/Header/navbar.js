@@ -192,7 +192,7 @@ function  NavBar(props){
         </div>     
     </header>
      <aside className={sidebarIsOpen ? 'open' : ''} >
-      <div>
+      <div className="aside-padding">
      <div className="aside-top" style={{color:'black', textAlign:'center'}} onClick={loadCategory}>
        {
          profile ? (
@@ -231,7 +231,7 @@ function  NavBar(props){
           </div>
      {
             types.map((t, index) =>(
-     <div className="categories">
+     <div className="categories" key={t.id}>
      <ul >
         <li onMouseEnter={() => handleOnChange(index)}>
           {t.type} 
@@ -248,7 +248,7 @@ function  NavBar(props){
           {
             t.type === "Marriage Gardens" ?
             venueType.map(VT =>(
-                <li className={`display-${index}`}>
+                <li className={`display-${index}`} key={VT.id}>
                     {VT.type}
                   
                 </li>
