@@ -6,7 +6,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {Link} from 'react-scroll'
 import { VenueImageList } from '../Action/ImageAction';
-import CartScreen from './Cartpage';
+
+import { addtoCartS, reomveFromCartS } from '../Action/CartAction';
 
 
 
@@ -28,7 +29,7 @@ function VenueDetailsPage(props){
 
 
     const [serviceADD, setserviceADD] = useState(['']);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState();
     const [people, SetPeople] = useState(0);
     const [checkedState, setCheckedState] = useState([false, false, false,false])
 
@@ -46,7 +47,7 @@ function VenueDetailsPage(props){
       
         dispatch(ServicesListaction(venueId))
         dispatch(VenueImageList(venueId))
-       
+        setTotal( venue.display_price);
        
         
     }, [dispatch, venueId] );
@@ -103,11 +104,24 @@ function VenueDetailsPage(props){
 
     // for adding service name
     const SelectedService = updatedCheckedState.reduce(
-        (names, currentState, index) =>{
+        (serviceId, currentState, index) =>{
             if(currentState === true){
-                return  names = names + ","+ vService[index].id;
+                // return  names = names + ","+ vService[index].id;
+                const serviceId = vService[index].id
+                dispatch(addtoCartS(serviceId))
+                console.log(serviceId)
+                return serviceId;
+                
+
             }
-            return names;
+           else{
+                
+
+                dispatch(reomveFromCartS(serviceId));
+                
+
+            }
+            return serviceId;
         },
         ''
 
@@ -121,7 +135,7 @@ function VenueDetailsPage(props){
     
     const addtoCart=()=>{
         
-        props.history.push(`/cart/${venueId}/people=${people}/total=${total}/services=${serviceADD}`);
+        props.history.push(`/cart/${venueId}`,{totalPrice:total,service:serviceADD});
         // ?total=${total}?services=${serviceADD}
         
 
@@ -144,7 +158,7 @@ function VenueDetailsPage(props){
         :
         <div> 
         <div className="main top_center">
-            {/* <CartScreen service={serviceADD} venueId={venueId}/> */}
+         
             <div className="col-1">
               
                     <img id="myimage"  className="large" src={venue.display_image} alt={venue.name}></img>

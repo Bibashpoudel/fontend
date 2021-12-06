@@ -1,7 +1,7 @@
 import axios from "axios"
 import { ADD_CART_ITEM, REOMVE_CART_ITEM } from "../Constants/cartConstants";
 
-export const addtoCart = (venueId,  people,totalprice, services) =>async(dispatch, getState)=>{
+export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
     const {data} = await axios.get(`/api/venue/admin/${venueId}`);
     
     console.log(data)
@@ -12,38 +12,50 @@ export const addtoCart = (venueId,  people,totalprice, services) =>async(dispatc
             price:data.display_price,
             name:data.name,
             image:data.display_image,
-            totalPrice:totalprice,
-            people:people,
-            service:services,
+           
         }
     });
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
     
 }
-// export const addtoCartS = (venueId,  people,totalprice, serviceId) =>async(dispatch, getState)=>{
-//     const {data} = await axios.get(`/api/service/admin/${serviceId}`);
+export const addtoCartS = (serviceId) =>async(dispatch, getState)=>{
+    const {data} = await axios.get(`/api/service/admin/${serviceId}`);
     
-//     console.log(data)
-//     dispatch({
-//         type:ADD_CART_ITEM,
-//         payload:{
-//             venue:venueId,
-//             price:data.display_price,
-//             name:data.name,
-//             image:data.display_image,
-//             totalPrice:totalprice,
-//             people:people,
-//             service:services,
-//         }
-//     });
-//     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    console.log(data)
+    dispatch({
+        type:ADD_CART_ITEM,
+        payload:{
+            service:serviceId,
+            price:data.display_price,
+            name:data.name,
+            
+        }
+    });
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
     
-// }
+}
+export const reomveFromCartS =(serviceId)=>(dispatch, getState)=>{
+    dispatch({
+        type: REOMVE_CART_ITEM,
+        payload:serviceId
+    });
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
 
 export const reomveFromCart =(venueId)=>(dispatch, getState)=>{
     dispatch({
         type: REOMVE_CART_ITEM,
         payload:venueId
+    });
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const reomveFromCarta =(serviceId)=>(dispatch, getState)=>{
+    dispatch({
+        type: REOMVE_CART_ITEM,
+        payload:serviceId
     });
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))

@@ -8,21 +8,11 @@ import { addtoCart, reomveFromCart } from '../Action/CartAction';
 import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
-    // const venueId = props.match.params.id;
-    const venueId = props.venueId;
-    console.log(venueId)
-    const urls = window.location.href;
-    console.log(urls.pathname)
-    const splits = urls.split( '/' )
-    // console.log(splits)
-    // const servicess = splits[7]
-    // const serv = servicess.split('=')
-    // console.log(serv[1].split(','))
-    const people = splits[1][0]
-    const totalprice = splits[2][0]
-    const services = splits[3]
-    console.log(props.service)
+    const venueId = props.match.params.id;
+    
+    
 
+    
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
 
@@ -30,16 +20,17 @@ function CartScreen(props){
 
     useEffect(() =>{
         if(venueId){
-            dispatch(addtoCart(venueId, people,totalprice, services));
+            dispatch(addtoCart(venueId));
         }
-    },[dispatch, venueId,people, totalprice, services]);
+    },[dispatch, venueId]);
 
     const removeCartHandaler =(venueId) =>{
         dispatch(reomveFromCart(venueId))
 
     }
+    const amount = cartItems.reduce((a,c)=> a + c.price,0  )
     const checkOuthandaler =()=>{
-        props.history.push('/signin?redirect=payment') // if user is already login it will redirect to shiping
+        props.history.push('/signin?redirect=payment',{amount: amount*100 }) // if user is already login it will redirect to shiping
     }
     
 
@@ -120,7 +111,7 @@ function CartScreen(props){
                                     :
                                     <h2>
                                         Subtotal:
-                                        $ ( {cartItems.reduce((a,c)=> a + c.totalPrice,0  ) } )
+                                        $ ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
 
                                     </h2>
 

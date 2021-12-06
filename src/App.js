@@ -20,6 +20,7 @@ import PrivateRoute from './components/PrivateRoute';
 import VendorRoute from './components/VendorRoute';
 import Terms from './ImpFiles/Terms';
 import Policy from './ImpFiles/Policy';
+import PaymentScreen from './ClientPage/paymentScreen';
 
 
 
@@ -67,8 +68,9 @@ function App() {
                 <PrivateRoute path ='/edit/profile' component ={EditProfile}></PrivateRoute>
                 <PrivateRoute path="/review" component={Review}></PrivateRoute>
                 <PrivateRoute path ='/profile' component ={ProfilePage}></PrivateRoute>
-                
-                    
+              
+              
+                <PrivateRoute path="/payment" component={PaymentScreen}></PrivateRoute>      
                 <Route path="/terms&Conditions" component={Terms}></Route>
                 <Route path="/PrivacyPolicy" component={Policy}></Route>
                 <Route path='/cart/:id?' component={CartScreen}></Route>

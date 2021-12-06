@@ -6,6 +6,7 @@ import { AddvenueReducer, detailsVenueReducer, updateVenueReducer, venueDeleteRe
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
+import { PayOrderReducer } from './Reducer/payReducer';
 
 
 const initialState = {
@@ -64,6 +65,7 @@ const reducer = combineReducers({
     imageAdd:addimageReducer,
     deleteVenue:venueDeleteReducer,
     venueImage:venueImageListReducer,
+    payOrder:PayOrderReducer,
 
 
 });
