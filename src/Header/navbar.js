@@ -19,6 +19,8 @@ function  NavBar(props){
     const {loading:loading_types, error:error_types, types} =VendorTypes;
     const venueTypeList = useSelector(state =>state.venueTypeList)
     const {loading, error, venueType} = venueTypeList;
+    const cart = useSelector((state) => state.cart);
+    const { cartItems } = cart;
 
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -85,12 +87,14 @@ function  NavBar(props){
               </div>
         <div onClick={loadCategory}>
             <div className="nav-left-menu">
-              {/* <div>
-                <Link to="/vendor_register">Vender Register</Link>
-                  
-              </div> */}
-            
-              
+              <div>
+              < Link to="/cart">cart
+                    {cartItems.length > 0 && (
+                      <span className="badge">{cartItems.length}</span>
+                      )
+                    }
+                    </Link>
+              </div>
               <div>
               {
               profile ?(
@@ -129,6 +133,7 @@ function  NavBar(props){
            </div>
            <div className="hidden">
              <div className="hidden-display">
+               
              {
               profile ?(
                 <span className="dropdown">
@@ -140,6 +145,14 @@ function  NavBar(props){
                       
                       <li>
                         <Link to={`/profile`} >Profile</Link>
+                      </li>
+                      <li>
+                      < Link to="/cart">cart
+                        {cartItems.length > 0 && (
+                          <span className="badge">{cartItems.length}</span>
+                          )
+                        }
+                    </Link>
                       </li>
                       <li>
                         <Link to="/order" >My Order</Link>

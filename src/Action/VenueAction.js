@@ -47,9 +47,9 @@ export const VenueList =() =>async(dispatch)=>{
                 : error.message
         });
     }
-
-
 }
+
+
 export const VenueDetails =(venueId) =>async(dispatch)=>{
     dispatch({
         type:VENUE_DETAILS_REQUEST,
@@ -238,7 +238,7 @@ export const venueDeleteAction = (venueId) => async(dispatch, getState)=>{
 
 
 
-export const VendorVenueList = (cityId) => async(dispatch) =>{
+export const CityVenueList = (cityId) => async(dispatch) =>{
     dispatch({
         type:CITY_VENUE_LIST_REQUEST,
         payload:cityId
