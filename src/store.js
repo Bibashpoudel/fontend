@@ -2,11 +2,11 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
+import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
-import { PayOrderReducer } from './Reducer/payReducer';
+import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 
 
 const initialState = {
@@ -46,6 +46,9 @@ const reducer = combineReducers({
     DetailsVenue:VenueDetailsListReducer,
     servicelist:ServiceListReducer,
     userProfileView:UserProfileReducer,
+    ReviewAdd:AddvenueReviewReducer,
+    ReviewDisplay:VenueReviewListReducer,
+    Razorpay:PayReducer,
     
 
 

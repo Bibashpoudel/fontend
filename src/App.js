@@ -21,6 +21,7 @@ import VendorRoute from './components/VendorRoute';
 import Terms from './ImpFiles/Terms';
 import Policy from './ImpFiles/Policy';
 import PaymentScreen from './ClientPage/paymentScreen';
+import CityVenue from './ClientPage/CityVenue';
 
 
 
@@ -70,9 +71,10 @@ function App() {
                 <PrivateRoute path ='/profile' component ={ProfilePage}></PrivateRoute>
               
               
-                <PrivateRoute path="/payment" component={PaymentScreen}></PrivateRoute>      
+                <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>      
                 <Route path="/terms&Conditions" component={Terms}></Route>
                 <Route path="/PrivacyPolicy" component={Policy}></Route>
+                <Route path="/city/venue/:id" component={CityVenue}></Route>
                 <Route path='/cart/:id?' component={CartScreen}></Route>
                 <Route path='/signin' component={SignInPage}></Route>
                 <Route path="/register" component={SignupPage}></Route>

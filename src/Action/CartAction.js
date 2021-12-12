@@ -2,6 +2,7 @@ import axios from "axios"
 import { ADD_CART_ITEM, REOMVE_CART_ITEM } from "../Constants/cartConstants";
 
 export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
+   try {
     const {data} = await axios.get(`/api/venue/admin/${venueId}`);
     
     console.log(data)
@@ -16,6 +17,9 @@ export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
         }
     });
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+   } catch (error) {
+       
+   }
     
 }
 export const addtoCartS = (serviceId) =>async(dispatch, getState)=>{
@@ -28,6 +32,8 @@ export const addtoCartS = (serviceId) =>async(dispatch, getState)=>{
             service:serviceId,
             price:data.display_price,
             name:data.name,
+            no_of_days:0,
+            no_of_guest:0,
             
         }
     });

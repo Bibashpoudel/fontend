@@ -10,7 +10,7 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
             if(exitsItem){
                 return{
                     ...state,
-                    cartItems: state.cartItems.map(x =>x.venue ===exitsItem.venue? item: x), // if previously add item then update value of x with new item
+                    cartItems: state.cartItems.map(x =>x.venue === exitsItem.venue? item: x), // if previously add item then update value of x with new item
                 } 
             }
             else{

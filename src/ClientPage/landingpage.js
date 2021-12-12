@@ -12,9 +12,9 @@ import MessageBox from '../components/MessageBox';
 
 
 
-function LandingPage(){
+function LandingPage(props){
 
-    const [setCity] = useState()
+    const [ city, setCity] = useState()
     const VendorCitys = useSelector((state) => state.VendorCitys);
     const {loading:loading_city, error:error_city, citys} = VendorCitys;
 
@@ -24,7 +24,7 @@ function LandingPage(){
     },[dispatch])
 
     const Venuehandaler = ()=>{
-        
+        props.history.push(`/city/venue/${city}`)
         
     }
     

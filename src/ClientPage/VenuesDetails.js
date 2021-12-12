@@ -1,60 +1,76 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ServicesListaction } from '../Action/ServicesAction';
-import { VenueDetails } from '../Action/VenueAction';
+import { createComment, VenueDetails, VenueReviewAction } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {Link} from 'react-scroll'
 import { VenueImageList } from '../Action/ImageAction';
 
-import { addtoCartS, reomveFromCartS } from '../Action/CartAction';
-
-
-
+import { addtoCartS, reomveFromCart, } from '../Action/CartAction';
+import swal from 'sweetalert';
+import { ADD_REVIEW_RESET } from '../Constants/venueConstants';
 
 function VenueDetailsPage(props){
     // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
 
     const venueId = props.match.params.id;
-
     const dispatch = useDispatch();
-   
     const DetailsVenue = useSelector((state) =>state.DetailsVenue);
     const {loading, error, venue} = DetailsVenue;
-    
     const venueService =useSelector(state =>state.venueService);
     const {loading:loading_service, error:error_service, vService} = venueService;
     const venueImage = useSelector(state => state.venueImage);
-    const { loading:loadingImage, error:errorImage, venImg} = venueImage
+    const { loading:loadingImage, error:errorImage, venImg} = venueImage;
+    const userProfileView = useSelector((state) => state.userProfileView);
+    const {profile} = userProfileView;
+    const ReviewAdd = useSelector((state) => state.ReviewAdd);
+    const {loading:loading_addreview, ReviewAdd:success,error:ReviewAddError} = ReviewAdd;
+    const ReviewDisplay = useSelector((state) => state.ReviewDisplay);
+    const {loading:VenueReviewLoading,venueReview,error:ReviewDisplayError} = ReviewDisplay;
 
-
-    const [serviceADD, setserviceADD] = useState(['']);
+    const [, setserviceADD] = useState(['']);
     const [total, setTotal] = useState();
     const [people, SetPeople] = useState(0);
     const [checkedState, setCheckedState] = useState([false, false, false,false])
-
     const [imageDisplay , setImageDispaly] = useState(false);
     const [videoDisplay , setVideoDispaly] = useState(false);
-    
+    const [rating, setRating] = useState();
+    const [comment, setComment] = useState();
 
+
+
+    const AddReview =(e) =>{
+        e.preventDefault();
+        if(comment ){
+            dispatch(createComment(venueId, comment));
+        }
+    }
    
-    useEffect(() =>{
-        
-        
-        
+    useEffect(() =>{ 
+
+
+        if(success){
+            setRating('');
+            setComment('')
+            swal("Review Added successfully", "Wait For Approval", "success");
+            dispatch({
+                type:ADD_REVIEW_RESET
+            })
+        }
+        dispatch(VenueReviewAction(venueId))
         dispatch(VenueDetails(venueId));
-       
-      
         dispatch(ServicesListaction(venueId))
         dispatch(VenueImageList(venueId))
-        setTotal( venue.display_price);
+
+        
+
+      
+      
        
         
-    }, [dispatch, venueId] );
-    
-
-    
-    
+   
+    }, [dispatch, venueId, success] );
   
   
   const DisplayImage = () => {
@@ -111,15 +127,9 @@ function VenueDetailsPage(props){
                 dispatch(addtoCartS(serviceId))
                 console.log(serviceId)
                 return serviceId;
-                
-
             }
            else{
-                
-
-                dispatch(reomveFromCartS(serviceId));
-                
-
+                dispatch(reomveFromCart(venueId));
             }
             return serviceId;
         },
@@ -133,15 +143,18 @@ function VenueDetailsPage(props){
 
 
     
-    const addtoCart=()=>{
+    const Carthandaler=()=>{
         
-        props.history.push(`/cart/${venueId}`,{totalPrice:total,service:serviceADD});
-        // ?total=${total}?services=${serviceADD}
+        setTotal( 0);
+        props.history.push(`/cart/${venueId}`);
+    //    setTimeout ((e)=>{
+    //     
+    //     console.log("bibash")
+    //    }, 3000)
+       
         
 
     }
-    
-    
 
     const [IsOpen, setIsOpen] = useState(false);
     return(
@@ -155,6 +168,11 @@ function VenueDetailsPage(props){
         loadingImage? <LoadingBox></LoadingBox>
         :
             errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
+        :
+        VenueReviewLoading ? <LoadingBox></LoadingBox>
+        :
+        ReviewDisplayError ? <MessageBox variant="danger">{ReviewDisplayError}</MessageBox>
+        
         :
         <div> 
         <div className="main top_center">
@@ -377,7 +395,7 @@ function VenueDetailsPage(props){
                         </div>
                         
                         <div className="single_row">
-                            <button className="secondary block" onClick={addtoCart}>Continue</button>
+                            <button className="secondary block" onClick={Carthandaler}>Continue</button>
                         </div>
                         <div className ="single_row">
                                 <input type="text" placeholder="leave a comment"></input>
@@ -439,8 +457,73 @@ function VenueDetailsPage(props){
                                <h4> Venues Features</h4>
                                 {venue.features}
                             </div>
-                            <div>
-                               Map View
+                            <div id="reviews"> 
+                                
+                                    <h4>Review</h4>
+                                   <ul>
+                                       
+                                   {venueReview.length === 0 && (
+                                           <MessageBox>There is no review </MessageBox>
+                                       )}
+                                     
+                                     {
+                                         venueReview.map((review)=>(
+                                            <div>
+                                              
+                                                    <li>
+                                                    <p>{review.feedback}</p>
+                                                </li>
+                                             
+                                            </div>
+                                         ))
+                                     }
+                                      
+                                    
+                                       
+                                       <li>
+                                           {profile ?(
+                                               <form onSubmit={AddReview} className="form-dts">
+                                                   <div>
+                                                       <h4>
+                                                           Write a Review
+                                                       </h4>
+                                                       <div className="ven_dts_fields">
+                                                           <label htmlFor="rating">Rating</label>
+                                                           <select id="rating" value={rating}
+                                                            onChange={(e)=>setRating(e.target.value)}
+                                                           >
+                                                               <option value="">select</option>
+                                                               <option value="1">1- Poor</option>
+                                                               <option value="2">2- Fair</option>
+                                                               <option value="3">3- Good</option>
+                                                               <option value="4">4- Very Good</option>
+                                                               <option value="5">5- Excelent</option>
+                                                           </select>
+                                                        </div>
+                                                        <div className="ven_dts_fields">
+                                                            <label htmlFor="comment">
+                                                                Comment
+                                                            </label>
+                                                            <textarea id="comment" value={comment} onChange={(e)=>setComment(e.target.value)}>
+
+                                                            </textarea>
+                                                        </div>
+                                                        <div>
+                                                            {loading_addreview && <LoadingBox></LoadingBox> }
+                                                            { ReviewAddError && <MessageBox variant="danger">{ReviewAddError}</MessageBox> }
+                                                        </div>
+                                                        <div >
+                                                            <label/>
+                                                            <button className="primary" type="submit">Submit</button>
+                                                        </div>
+                                                   </div>
+                                                
+                                                </form>
+                                           ):
+                                           <MessageBox><Link to="/signin">Sign In</Link> to write a review</MessageBox>
+                                           }
+                                       </li>
+                                   </ul>
                             </div>
                         </div>
         </div>

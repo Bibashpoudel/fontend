@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addtoCart, reomveFromCart } from '../Action/CartAction';
@@ -8,30 +8,48 @@ import { addtoCart, reomveFromCart } from '../Action/CartAction';
 import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
-    const venueId = props.match.params.id;
+    const venueId = props.match.params.amount;
     
     
-
+   
     
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
+    
+    
 
     const dispatch = useDispatch();
+    
 
-    useEffect(() =>{
-        if(venueId){
-            dispatch(addtoCart(venueId));
-        }
-    },[dispatch, venueId]);
+  
 
     const removeCartHandaler =(venueId) =>{
         dispatch(reomveFromCart(venueId))
 
     }
-    const amount = cartItems.reduce((a,c)=> a + c.price,0  )
+    const amount = parseInt(cartItems.reduce((a,c)=> a + c.price,0))
+   
     const checkOuthandaler =()=>{
-        props.history.push('/signin?redirect=payment',{amount: amount*100 }) // if user is already login it will redirect to shiping
+        props.history.push(`/signin?redirect=/payment/${amount}`)
+       
+       
+        // dispatch(Payorder(amount)); // if user is already login it will redirect to shiping
+        
     }
+    
+    
+  
+
+    useEffect(() =>{
+        
+        dispatch(addtoCart(venueId));
+        
+        
+    
+   
+   
+    },[dispatch,venueId]);
+
     
 
     return(
@@ -95,12 +113,10 @@ function CartScreen(props){
             <div className="cart-col-1">
                 <div className="card card-body">
                     <ul>
-                        {
-                            cartItems.map((item) =>(
+                       
                         
                             <li>
-                                    {
-                                            item.totalPrice === '0' ?
+                                    
                                                     
                                             
                                     <h2>
@@ -108,16 +124,16 @@ function CartScreen(props){
                                         $ ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
 
                                     </h2>
-                                    :
-                                    <h2>
+                                    
+                                    {/* <h2>
                                         Subtotal:
                                         $ ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
 
-                                    </h2>
+                                    </h2> */}
 
-                                    }
+                                   
                             </li>
-                            ))}
+                            
                         <li>
                             <button type="button" onClick={checkOuthandaler} className="primary block " disabled={cartItems.length === 0}>Check Out</button>
                         </li>

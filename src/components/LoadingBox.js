@@ -1,14 +1,22 @@
 import React from 'react';
-
+import './LoadingBox.scss'
 
 export default function LoadingBox(){
     return(
         <div className="load-spinner">
-        <i className="fa fa-spinner fa-pulse"></i>
+        <div className="ring">
+        </div>
+        <div className="ring">
+        </div>
+        <div className="ring">
+        
+        </div>
+        <div className="loading-text">
+            Loading...
 
-            <span>
-            Loading ...
-            </span>
+        </div>
+
+        
        </div> 
     )
 }

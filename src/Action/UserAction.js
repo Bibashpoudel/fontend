@@ -133,6 +133,7 @@ export const signout = () => (dispatch)=>{
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
     localStorage.removeItem('profile');
+    localStorage.removeItem('Razorpay');
     dispatch({
         type:USER_SIGNOUT,
     });

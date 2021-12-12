@@ -573,15 +573,12 @@ footer {
 }
 .pto_section_column2{
   max-height: 26rem;
-  
 }
 
 
 .trend_venues{
   margin: 0 4rem;
  
-  
-  
 }
 .trend_text{
   display: flex;
@@ -589,12 +586,6 @@ footer {
   flex-wrap: wrap;
   margin:0 6rem;
 }
-
-
-
-
-
-
 /* designing cart for venders and venues  */
 
 /* card*/
@@ -606,6 +597,7 @@ footer {
   border-radius: 0.5rem;
   margin: 1rem;
   transition: transform 450ms;
+  
   
 }
 .card:hover{
@@ -624,8 +616,9 @@ footer {
 .card-body > * {
   margin-bottom: 0.5rem;
 }
-.product-name {
-  font-weight: bold;
+.card-body a h2 {
+  font-weight: 500;
+  width:50%;
 }
 .price {
   font-size: 2rem;
@@ -813,6 +806,26 @@ footer {
   height:30rem;
 }
 
+.ven_dts_fields{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.form-dts select{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:50%;
+}
+.form-dts textarea{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:50%;
+}
+
+
 
 /* --------------signup screen design--------------- */
 
@@ -845,7 +858,12 @@ footer {
   margin-bottom:1.2rem;
   width:54%;
 }
-
+.form textarea{
+  outline: none;
+  background-color:white ;
+  margin-bottom:1.2rem;
+  width:53%;
+}
 img.ven_reg{
   max-width: 62rem;
   width: 100%;
@@ -1238,6 +1256,7 @@ button.close-sidebar {
 
 /* carousel design */
 /* square buttons */
+
 .rec.rec-arrow {
   border-radius: 0;
 }

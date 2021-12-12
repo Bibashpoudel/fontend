@@ -45,7 +45,7 @@ function TrendingSlider( ){
     return(
      
            
-           <div  >
+           <div className="carousel"  >
                 {
                             loading? <LoadingBox></LoadingBox>
                         :

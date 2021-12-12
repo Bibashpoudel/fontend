@@ -1,4 +1,4 @@
-import { CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_RESET, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_RESET, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
+import { ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_RESET, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_RESET, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_RESET, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_REVIEW_FAIL,    VENUE_REVIEW_REQUEST,    VENUE_REVIEW_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
 
 
 
@@ -180,4 +180,50 @@ export const venueDeleteReducer = (state={}, action) =>{
             return state
     }
 
+}
+
+// add review
+
+export const AddvenueReviewReducer = (state={},action)=>{
+    switch(action.type){
+        case ADD_REVIEW_REQUEST:
+            return{
+                loading:true,
+
+            }
+        case  ADD_REVIEW_SUCCESS:
+            return{
+                loading:false,
+                ReviewAdd:action.payload
+            }
+        case  ADD_REVIEW_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        case  ADD_REVIEW_RESET:
+        return{}
+        default:
+            return state
+    }
+}
+export const VenueReviewListReducer = (state = {venueReview:[]}, action) =>{
+    switch(action.type){
+        case VENUE_REVIEW_REQUEST:
+            return{
+                loading:true
+            }
+        case VENUE_REVIEW_SUCCESS:
+            return{
+                loading:false,
+                venueReview:action.payload
+            }
+        case VENUE_REVIEW_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }    
+        default:
+            return state
+    }
 }
