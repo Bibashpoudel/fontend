@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { CityVenueList } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -25,15 +26,19 @@ export default function CityVenue(props) {
             :
                 error? <MessageBox variant="danger">{error}</MessageBox>
             :  
-                <div className="City_Venue">
-                    {
-                        cityvenue.map((venue)=>(
-                            <Venue key={venue.id} venue={venue}></Venue>
+            <div>
+                  { cityvenue.length === 0 && (<MessageBox>Venue Not Found <Link to="/" style={{color:'red'}}>Go back</Link></MessageBox>)}
+                    <div className="City_Venue">
+                        {
+                            cityvenue.map((venue)=>(
+                                <Venue key={venue.id} venue={venue}></Venue>
 
-                        ))
-                    }
-                </div>
-            }
+                            ))
+                        }
+                    </div>
+              
+            </div>
+              }
         </div>
     )
 }

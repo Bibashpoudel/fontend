@@ -26,6 +26,7 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
             
         })
         localStorage.removeItem('Razorpay');
+        localStorage.removeItem('cartItems');
     } catch (error) {
         dispatch({
             type:CREATE_ORDER_FAIL,

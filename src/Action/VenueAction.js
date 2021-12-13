@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_REVIEW_FAIL,  VENUE_REVIEW_REQUEST,  VENUE_REVIEW_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
+import {ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, PARTICULAR_VENUE_TYPE_LIST_FAIL, PARTICULAR_VENUE_TYPE_LIST_REQUEST, PARTICULAR_VENUE_TYPE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_REVIEW_FAIL,  VENUE_REVIEW_REQUEST,  VENUE_REVIEW_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
 
 
 export const VenueTypeList = () =>async(dispatch)=>{
@@ -258,6 +258,32 @@ export const CityVenueList = (cityId) => async(dispatch) =>{
     } catch (error) {
         dispatch({
             type:CITY_VENUE_LIST_FAIL,
+            payload:
+            error.response && error.response.data.message 
+                ? error.response.data.message 
+                : error
+            
+        })
+    }
+}
+export const VenueTypeParticularList = (typeId) => async(dispatch) =>{
+    dispatch({
+        type:PARTICULAR_VENUE_TYPE_LIST_REQUEST,
+        payload:typeId
+      
+    })
+   
+    try {
+        
+      
+        const {data} = await axios.get(`/api/venue/particularvendor//${typeId}/`)
+    dispatch({
+        type:PARTICULAR_VENUE_TYPE_LIST_SUCCESS,
+        payload:data
+    })
+    } catch (error) {
+        dispatch({
+            type:PARTICULAR_VENUE_TYPE_LIST_FAIL,
             payload:
             error.response && error.response.data.message 
                 ? error.response.data.message 

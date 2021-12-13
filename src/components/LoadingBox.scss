@@ -3,6 +3,7 @@
 
 
 .load-spinner{
+    backdrop-filter: blur(5rem);
     body{
         opacity: .5 !important;
         background-color: black !important;

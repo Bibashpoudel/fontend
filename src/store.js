@@ -2,20 +2,16 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer } from './Reducer/venueReducer';
+import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
+import { OrderReducer } from './Reducer/orderReducer';
 
 
 const initialState = {
-    // userRegister:{
-    //     userInfo: localStorage.getItem('userInfo')
-    //     ? JSON.parse(localStorage.getItem('userInfo'))
-    //     : null,
-    // }
-    // ,
+   
     userSignin:{
         userInfo: localStorage.getItem('userInfo')
         ? JSON.parse(localStorage.getItem('userInfo'))
@@ -45,10 +41,12 @@ const reducer = combineReducers({
     CityVenue:CityVenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
     servicelist:ServiceListReducer,
+    typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
     ReviewAdd:AddvenueReviewReducer,
     ReviewDisplay:VenueReviewListReducer,
     Razorpay:PayReducer,
+    order:OrderReducer,
     
 
 

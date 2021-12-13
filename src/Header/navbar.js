@@ -248,12 +248,7 @@ function  NavBar(props){
      <ul >
         <li onMouseEnter={() => handleOnChange(index)}>
           {t.type} 
-          {/* {
-                    checkedState[index] ?
-                      <i className="fa fa-angle-up"></i>
-                      :
-                      <i className="fa fa-angle-down"></i>
-                  } */}
+          
         </li>
       
         { checkedState[index] ?
@@ -261,9 +256,9 @@ function  NavBar(props){
           {
             t.type === "Marriage Gardens" ?
             venueType.map(VT =>(
-                <li className={`display-${index}`} key={VT.id}>
-                    {VT.type}
-                  
+                <li className={`display-${index}`} key={VT.id} >
+                  <Link to={`/type/venue/${VT.id}`} style={{color:'black'}}>  {VT.type}</Link>
+                 
                 </li>
             ))
             

@@ -8,7 +8,7 @@ import { addtoCart, reomveFromCart } from '../Action/CartAction';
 import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
-    const venueId = props.match.params.amount;
+    const venueId = props.match.params.id;
     
     
    

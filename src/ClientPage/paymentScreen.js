@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import swal from 'sweetalert';
 import { Createorder } from '../Action/OrderAction';
 
 
 import { pay, Payorder } from '../Action/PayAction';
+import LoadingBox from '../components/LoadingBox';
+import { CART_ITEM_RESET } from '../Constants/cartConstants';
+import { CREATE_ORDER_RESET } from '../Constants/orderConstants';
+import { PAY_ORDER_RESET, PAY_RESET } from '../Constants/payConstants';
 
 export default function PaymentScreen(props) {
 
@@ -12,17 +17,19 @@ export default function PaymentScreen(props) {
     // const location = useLocation()
     const [total_price , setAmounts] = useState();
     const [OrderId , setOrderId] = useState();
-    const [count , SetCount] = useState(0)
+    
 
     const cart = useSelector(state => state.cart);
     const{cartItems } = cart;
     const payOrder = useSelector(state => state.payOrder);
-    const {orderCreatesuccess}  = payOrder;
+    const {loading:orderloading, orderCreatesuccess}  = payOrder;
     const Razorpay = useSelector(state =>state.Razorpay);
-    const {paysuccess }= Razorpay;
+    const {loading:payloading,paysuccess }= Razorpay;
+    const order = useSelector(state =>state.order);
+    const {loading, OderCreateSuccess }= order;
 
     const amo =cartItems.reduce((a,c)=> a + c.price,0)
-    const amounts = parseInt(amo)
+    const amounts = 26250;
  
  
     
@@ -42,37 +49,34 @@ export default function PaymentScreen(props) {
             },3000)
       }
      }
-    //  }else{
-    //       setAmounts(success.amount);
-    //       setOrderId(success.id)
-    //       // dispatch(pay(Amounts, OrderId))
-    //  }
-    // const orders =cart.cartItems;
-    //   if(!paysuccess){
-      
-    //  }
-    //  else{
-    //    console.log("Bibash")
-    //   setrazorpayOrderId(paysuccess.razorpay_order_id);
-    //   setrazorpayPaymentId(paysuccess.razorpay_payment_id);
-    //   setrazorpaySignature(paysuccess.razorpay_signature);
-    //   setTimeout((e)=>{
-    //     dispatch(Createorder( amounts, razorpayOrderId, razorpayPaymentId, razorpaySignature, orders))
-    //   },5000)
-  
-    //  }
-     
- 
-   }, [OrderId, amounts, dispatch, orderCreatesuccess, paysuccess, total_price])
-   
-   const orders =cart.cartItems;
-   if(count === 0 && paysuccess){
-     
+     if(paysuccess){
+      const orders =cart.cartItems;
       setTimeout((e)=>{
         dispatch(Createorder(amounts,orders))
       },5000)
-      SetCount(1);
+      if(OderCreateSuccess){
+
+        swal("Order Created Successfully", "We Will Contact You Soon", "success")
+        dispatch({
+          type:PAY_RESET
+        })
+        dispatch({
+          type:CART_ITEM_RESET
+        })
+        dispatch({type:CREATE_ORDER_RESET})
+        setTimeout(()=>{
+          props.location.push('/orders')
+        },5000)
+      }
+      
   }
+   
+     
+ 
+   }, [OderCreateSuccess, OrderId, amounts, cart.cartItems, dispatch, orderCreatesuccess, paysuccess, props.history, total_price])
+   
+   
+   
   
   const showRazorpay = async () => {
      
@@ -82,10 +86,15 @@ export default function PaymentScreen(props) {
     
     return (
         <div>
-          <button onClick={showRazorpay} className="btn btn-primary btn-block">
-        Pay with razorpay
-      </button>
+          {loading && <LoadingBox></LoadingBox>}
+          {orderloading && <LoadingBox></LoadingBox>}
+          {payloading && <LoadingBox></LoadingBox>}
+            <div style={{justifyContent:'center'}}>
+            <button onClick={showRazorpay} className="btn btn-primary btn-block">
+              Pay with razorpay
+          </button>
 
+          </div>
         </div>
     )
 }

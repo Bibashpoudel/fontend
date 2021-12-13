@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM,  REOMVE_CART_ITEM } from "../Constants/cartConstants"
+import { ADD_CART_ITEM,  CART_ITEM_RESET,  REOMVE_CART_ITEM } from "../Constants/cartConstants"
 
 
 
@@ -24,9 +24,8 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
                 ...state,
                 cartItems: state.cartItems.filter(x => x.venue !== action.payload)
             }  
-            
-       
-            
+        case CART_ITEM_RESET:
+            return {}
         default:
             return state;
     }

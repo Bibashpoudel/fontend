@@ -13,6 +13,8 @@ export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
             price:data.display_price,
             name:data.name,
             image:data.display_image,
+            no_of_days:0,
+            no_of_guest:0,
            
         }
     });
