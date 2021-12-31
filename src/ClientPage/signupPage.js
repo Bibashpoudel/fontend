@@ -12,6 +12,8 @@ function SignupPage(props){
 
 
     const[name, SetName] =useState();
+    const [FirstName, SetFirstName] = useState();
+    const [LastName, SetLastName] = useState();
     const [email, SetEmail] =useState();
     const [phone, SetPhone] = useState();
     const [password, setPassword] = useState();
@@ -25,12 +27,15 @@ function SignupPage(props){
     const dispatch = useDispatch();
     const SignUphandaler =(e)=>{
         e.preventDefault();
-        
-        dispatch(Signup(name, email, phone, customer_type, password));
+        SetName(`${FirstName} ${LastName}`)
+        setTimeout(()=>{
+            dispatch(Signup(name, email, phone, customer_type, password));
+        },5000)
+      
         setTimeout((e) => {
             dispatch(Signin(email, password))
-            console.log("run after 3 second")
-        }, 3000);
+            
+        }, 2000);
     }
     useEffect(() =>{
         if(userInfo){
@@ -48,74 +53,93 @@ function SignupPage(props){
             </div>
             <div className="form col-2">
 
-            <div>
-                    {
-                            loading? <LoadingBox></LoadingBox>
-                        :
-                            error? <MessageBox variant="danger">{error}</MessageBox>
-                        : " "    
-                    }
-                </div>
+           
+                    {loading &&<LoadingBox></LoadingBox>}
+                      
+                         {   error &&<MessageBox variant="danger">{error}</MessageBox>}
+                        
+                    
+          
 
-                <form onSubmit={SignUphandaler}>
+              <div>
+              <form onSubmit={SignUphandaler}>
                     <div>
                         <h2>Welcome !</h2>
                     </div>
                     
                     <div className=" fields">
+                        <div>
+                            <label>First Name</label>
+                        </div>
                        
-                        <input 
-                            type="text" 
-                            id="name" 
-                            placeholder="First Name"
-                            onChange={(e) => SetName(e.target.value)}
-                            
-                        ></input>
-                        <label>First Name</label>
+                        <div>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                placeholder="First Name"
+                                onChange={(e) => SetFirstName(e.target.value)}
+                                
+                            ></input>
+                        </div>
+                      
                     </div>
                     <div className=" fields">
+                    <div>
+                            <label>Last Name</label>
+                        </div>
                        
-                        <input 
-                            type="text" 
-                            id="name" 
-                            placeholder="Last Name"
-                            onChange={(e) => SetName(e.target.value)}
-                            
-                        ></input>
-                        <label>Last Name</label>
+                        <div>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                placeholder="First Name"
+                                onChange={(e) => SetLastName(e.target.value)}
+                                
+                            ></input>
+                        </div>
                     </div>
                     <div className=" fields">
+                        <div>
+                            <label>Email</label>
+                        </div>
+                       <div>
+                        <input 
+                                type="text" 
+                                id="email" 
+                                placeholder="Email"
+                                onChange={(e) => SetEmail(e.target.value)}
+                            ></input>
+                       </div>
                         
-                        <input 
-                            type="text" 
-                            id="email" 
-                            placeholder="Email"
-                            onChange={(e) => SetEmail(e.target.value)}
-                        ></input>
-                         <label>Email</label>
                     </div>
                     <div className="fields">
-                        
-                        <input 
+                        <div>
+                            <label>Phone number</label>
+                        </div>
+                      <div>
+                      <input 
                             type="text" 
                             id="phone" 
                             placeholder="Phone"
                             onChange={(e)=>SetPhone(e.target.value)}
                             
                         ></input>
-                         <label>Phone</label>
+                      </div>
+                        
                     </div>
                     
                     <div className=" fields">
-                       
-                        <input 
-                            type="password" 
-                            id="password" 
-                            placeholder="Password"
-                            onChange={(e)=>setPassword(e.target.value)}
-                            
-                        ></input>
-                         <label>Password</label>
+                       <div>
+                           <label>Password</label>
+                       </div>
+                        <div>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                placeholder="Password"
+                                onChange={(e)=>setPassword(e.target.value)}
+                            ></input>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" className="block primary">Sign Up</button>
@@ -130,6 +154,7 @@ function SignupPage(props){
                     </div>
                     
                 </form>
+              </div>
                 <div className="social_items">
                     <div>
                         or

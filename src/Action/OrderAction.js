@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS } from "../Constants/orderConstants"
+import { CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, USER_ORDER_FAIL, USER_ORDER_REQUEST, USER_ORDER_SUCCESS } from "../Constants/orderConstants"
 
 export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
 
@@ -36,6 +36,39 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
             : error.message
         })
         localStorage.removeItem('Razorpay');
+    }
+
+}
+export const UserOrderList =() => async(dispatch, getState)=>{
+
+
+    dispatch({
+        type:USER_ORDER_REQUEST,
+      
+    })
+    try {
+        const {userSignin:{userInfo}} = getState()
+        
+        const {data} = await axios.get('/api/order/customer/',{
+            headers:{
+                'Authorization': `Bearer ${userInfo}`
+            }
+        }) 
+        dispatch({
+            type:USER_ORDER_SUCCESS,
+            payload:data
+            
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:USER_ORDER_FAIL,
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+       
     }
 
 }

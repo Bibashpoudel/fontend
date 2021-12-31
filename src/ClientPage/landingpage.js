@@ -8,10 +8,6 @@ import { VendorCityList } from '../Action/vendorAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-
-
-
-
 function LandingPage(props){
 
     const [ city, setCity] = useState()
@@ -27,8 +23,6 @@ function LandingPage(props){
         props.history.push(`/city/venue/${city}`)
         
     }
-    
-    
     return(
         <div className="land-top">
         <div className="main ">
@@ -52,8 +46,6 @@ function LandingPage(props){
                                         {citys.map(c=>(
                                                 <option key={c.id} value={c.id}>{c.city}</option>
                                         ))}
-                                        
-                                        
                                     </select>
                                     :<span>{error_city}</span>
                             }
@@ -67,6 +59,7 @@ function LandingPage(props){
                 </div>
 
             </div>
+            <div style={{height: "11.67px"}}/>
             <div className="wg2_gallary">
                 <div className="wg2_title">
                     Wedding Gallery
@@ -76,6 +69,7 @@ function LandingPage(props){
                         <div className="pto_sec_col1_content">
                             <div className="pto_sec_col1_text">
                                 Browse 100+ wedding photos
+                                
                             </div>
                             <div>
                                 <button>

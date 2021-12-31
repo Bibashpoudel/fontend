@@ -48,8 +48,7 @@ function SignInPage(props){
             </div>
             <div className="form col-2">
 
-
-
+                <div>
                 <form onSubmit={Signinhandaler}>
                     <div>
                         <h2>Log In  !</h2>
@@ -59,48 +58,52 @@ function SignInPage(props){
                         :
                         error ? <MessageBox variant="danger">{error}</MessageBox>
                         : <span></span>
-}
+                    }
                     
                     
                     
                     <div className="fields">
+                   
+                      
+                            
+                        
                         
                         <input 
                             type="text" 
                             id="phone" 
-                            placeholder="Email Or Phone"
+                          
                             onChange ={(e) => SetPhone(e.target.value)}
                             
                         ></input>
-                        <span>
-                            <label>Email Or phone</label>
-                        </span>
-                        
+                             <span></span>
+                       <label className='labels'>Email or Phone</label>
+                           
+                      
                     </div>
                     
                     <div className="fields">
+                        
+                            <input 
+                                type="password" 
+                                id="password" 
+                              
+                                onChange ={(e) => setPassword(e.target.value)}
+                                
+                            ></input>
+                             <span></span>
                        
-                        <input 
-                            type="password" 
-                            id="password" 
-                            placeholder="Password"
-                            onChange ={(e) => setPassword(e.target.value)}
-                            
-                        ></input>
-                      
-                            <span>
-                                <label> Password</label>
-                            </span>
-                        <div>
-                           <Link to='/forget'> Forget Password</Link>
+                            <label className='p_labels'>Password</label>
+                       
+                        <div className='forget'>
+                           <Link to='/forget'> Forget Password?</Link>
                         </div>
                     </div>
                     <div>
-                        <button type="submit" className="block primary">Sign Up</button>
+                        <button type="submit" className="block primary">Sign In</button>
                     </div>
-                    <div>
+                    <div className='user_Create'>
                         <span>
-                           New Customer? { ' '} 
+                           New User? { ' '} 
                             <Link to={`/register?redirect=${redirect}`} style={{ color:"blue"}}>
                             Create A account
                             </Link> 
@@ -108,6 +111,9 @@ function SignInPage(props){
                     </div>
                     
                 </form>
+                </div>
+
+            
                 <div className="social_items">
                     <div>
                         or

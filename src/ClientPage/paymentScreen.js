@@ -8,7 +8,7 @@ import { pay, Payorder } from '../Action/PayAction';
 import LoadingBox from '../components/LoadingBox';
 import { CART_ITEM_RESET } from '../Constants/cartConstants';
 import { CREATE_ORDER_RESET } from '../Constants/orderConstants';
-import { PAY_ORDER_RESET, PAY_RESET } from '../Constants/payConstants';
+import { PAY_RESET } from '../Constants/payConstants';
 
 export default function PaymentScreen(props) {
 
@@ -20,7 +20,7 @@ export default function PaymentScreen(props) {
     
 
     const cart = useSelector(state => state.cart);
-    const{cartItems } = cart;
+    // const{cartItems } = cart;
     const payOrder = useSelector(state => state.payOrder);
     const {loading:orderloading, orderCreatesuccess}  = payOrder;
     const Razorpay = useSelector(state =>state.Razorpay);
@@ -28,7 +28,7 @@ export default function PaymentScreen(props) {
     const order = useSelector(state =>state.order);
     const {loading, OderCreateSuccess }= order;
 
-    const amo =cartItems.reduce((a,c)=> a + c.price,0)
+    // const amo =cartItems.reduce((a,c)=> a + c.price,0)
     const amounts = 26250;
  
  
@@ -46,7 +46,7 @@ export default function PaymentScreen(props) {
       if(!paysuccess){
         setTimeout((e)=>{
           dispatch(pay(total_price, OrderId))
-            },3000)
+            },2000)
       }
      }
      if(paysuccess){
@@ -57,6 +57,8 @@ export default function PaymentScreen(props) {
       if(OderCreateSuccess){
 
         swal("Order Created Successfully", "We Will Contact You Soon", "success")
+        props.history.push('/order')
+       
         dispatch({
           type:PAY_RESET
         })
@@ -64,16 +66,15 @@ export default function PaymentScreen(props) {
           type:CART_ITEM_RESET
         })
         dispatch({type:CREATE_ORDER_RESET})
-        setTimeout(()=>{
-          props.location.push('/orders')
-        },5000)
+       
+          
       }
       
   }
    
      
  
-   }, [OderCreateSuccess, OrderId, amounts, cart.cartItems, dispatch, orderCreatesuccess, paysuccess, props.history, total_price])
+   }, [OderCreateSuccess, OrderId, amounts, cart.cartItems, dispatch, orderCreatesuccess, paysuccess, props.history, props.location, total_price])
    
    
    

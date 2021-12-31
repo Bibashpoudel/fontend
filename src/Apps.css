@@ -73,7 +73,18 @@ a:hover {
 }
 input,
 select,
-textarea,
+textarea
+ {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.6rem;
+  font-family: helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
 button {
   padding: 1rem;
   border-radius: 0.5rem;
@@ -217,23 +228,23 @@ tr:nth-child(even) {
     "main"
     "footer";
   grid-template-columns: 1fr;
-  grid-template-rows: 5.4rem 1fr 20rem;
- 
+  grid-template-rows: 3.6rem 1fr 20rem;
   height: 100vh;
 }
 
 /* header design */
 
-.top_section{
+header{
   grid-area: header;
+  background-color: rgba(212.50, 19.48, 61.87, 0.77);
   position: fixed !important;
   z-index: 100000000;
   width: 100%;
   top: 0;
-  background-color: rgb(212, 19, 61);
- 
 }
 .header{
+    
+   
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -386,7 +397,7 @@ main{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 47%;
+ 
 }
 .row.center{
   justify-content: center;
@@ -439,7 +450,7 @@ footer {
   margin-bottom: -2rem;
 }
 .sub-footer{
-  background-color:rgb(212, 19, 61);
+  background-color:rgba(212.50, 19.48, 61.87, 0.77);
   display: flex;
   justify-content: space-between;
   padding:2rem;
@@ -455,7 +466,7 @@ footer {
   padding: 1rem;
 }
 .main-footer{
-  background-color: rgb(212, 19, 61);
+  background-color: rgba(212.50, 19.48, 61.87, 0.77);
   padding:2rem;
   display: flex;
   justify-content: center;
@@ -531,7 +542,7 @@ footer {
 }
 .wg2_title{
   font-size: 2.3rem;
-  color: rgb(212, 19, 61);
+  color: rgba(212.50, 19.48, 61.87, 0.77);
   font-weight: 500;
 
 }
@@ -720,7 +731,7 @@ footer {
   flex-direction: column;
 }
 .g_ser_hed{
-  background-color: rgb(212, 19, 61);
+  background-color: rgba(212.50, 19.48, 61.87, 0.77);
   color:White;
   text-align: center;
 }
@@ -759,12 +770,12 @@ footer {
 }
 .fa-angle-down{
   font-size: 3rem;
-  color:rgb(212, 19, 61);
+  color:rgba(212.50, 19.48, 61.87, 0.77);
   cursor: pointer;
 }
 .fa-angle-up{
   font-size: 3rem;
-  color:rgb(212, 19, 61);
+  color:rgba(212.50, 19.48, 61.87, 0.77);
   cursor: pointer;
 }
 .hide_content span{
@@ -919,7 +930,7 @@ img.cus_log{
   color:black;
 }
 .das_aside div a:hover{
-  color:rgb(212, 19, 61);
+  color:rgba(212.50, 19.48, 61.87, 0.77);
 }
 
 .ven_col-2{
@@ -1113,7 +1124,7 @@ aside {
   z-index: 1000;
   transform: translateX(-30rem);
   transition: all 0.5s;
-  margin-top: 0rem;
+  margin-top: 5.3rem;
   padding-top: 1rem;
   
 }
@@ -1208,7 +1219,7 @@ button.close-sidebar {
   color:black;
 }
 .dropdown-content li a:hover{
-  color:rgb(212, 19, 61);
+  color:rgba(212.50, 19.48, 61.87, 0.77);
 }
 
 
@@ -1221,11 +1232,11 @@ button.close-sidebar {
 
 .cart-col-1 {
   flex: 1 1 25rem;
-  border: 0.5rem dashed #ff8000;
+ 
 }
 .cart-col-2 {
   flex: 2 1 40rem;
-  border: 0.5rem dashed #ff8000;
+
 }
 .cart-row{
   
@@ -1387,9 +1398,9 @@ button.close-sidebar {
   }
 }
 @media only screen and (max-width:687px){
-  main{
-    margin-top:3.2rem;
-  }
+ .grid-container{
+  grid-template-rows: 10.5rem 1fr 20rem;
+ }
 
  
   .nav-search{
@@ -1470,7 +1481,7 @@ button.close-sidebar {
     display: flex;
     flex-wrap: wrap;
     font-size: 1.5rem;
-    background-color:rgb(212, 19, 61);
+    background-color:rgba(212.50, 19.48, 61.87, 0.77);
   }
   .mob-footer div {
     padding:1rem 0.5rem;

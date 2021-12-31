@@ -25,7 +25,9 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
                 cartItems: state.cartItems.filter(x => x.venue !== action.payload)
             }  
         case CART_ITEM_RESET:
-            return {}
+            return {
+                ...state, cartItems:[]
+            }
         default:
             return state;
     }

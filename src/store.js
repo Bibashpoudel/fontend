@@ -7,7 +7,7 @@ import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorT
 import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
-import { OrderReducer } from './Reducer/orderReducer';
+import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
 
 
 const initialState = {
@@ -43,6 +43,7 @@ const reducer = combineReducers({
     servicelist:ServiceListReducer,
     typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
+    UserOrders:UserOrderReducer,
     ReviewAdd:AddvenueReviewReducer,
     ReviewDisplay:VenueReviewListReducer,
     Razorpay:PayReducer,

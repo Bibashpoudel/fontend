@@ -1,0 +1,39 @@
+.home-fluid {
+    background-image: url('../assets/wp.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    color: white;
+    font-size: 35px;
+    height:40rem;
+
+   .col {
+       margin-top: 15vh;
+       margin-bottom: 10vh;
+   }
+
+   @media(max-width:527px){
+       .col {
+           margin-top: 8vh;
+       }
+   }
+   select:focus {
+        box-shadow: none;
+        border: 1px solid white;
+   }
+   button:focus {
+       box-shadow: none;;
+   }
+
+}
+
+:root {
+    --swiper-theme-color : rgb(255, 58, 107) !important; 
+}
+
+.swiper-button-prev, .swiper-button-next {
+    top: 40% !important;
+}
+
+.swiper-pagination {
+    bottom: 0px !important;
+}
