@@ -21,7 +21,7 @@ export const VenueServiceListReducer = (state ={vService:[]}, action) =>{
     }
 }
 
-export const ServiceListReducer = (state ={services:[]}, action) =>{
+export const ServiceReducer = (state ={services:[]}, action) =>{
     switch(action.type){
         case SERVICE_LIST_REQUEST:
             return{

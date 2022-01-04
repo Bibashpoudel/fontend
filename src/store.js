@@ -4,7 +4,7 @@ import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Re
 import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
-import { detailsServiceReducer, ServiceAddReducer, ServiceListReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
+import { detailsServiceReducer, ServiceAddReducer, ServiceReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
@@ -40,7 +40,7 @@ const reducer = combineReducers({
     Listvenue:VenueListReducer,
     CityVenue:CityVenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
-    servicelist:ServiceListReducer,
+    servicelist:ServiceReducer,
     typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
     UserOrders:UserOrderReducer,

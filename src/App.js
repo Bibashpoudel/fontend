@@ -9,6 +9,9 @@ import SignInPage from './ClientPage/signinPage';
 import Vendorpage from './VenderPage/VenderPage';
 import CartScreen from './ClientPage/Cartpage';
 
+
+import './App.css'
+
 import ProfilePage from './ClientPage/Profile';
 import  Footer  from './components/Footer';
 import { Orders } from './ClientPage/Profile/orders';

@@ -1,31 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
-
+import "./Card.scss";
 
  function Venue(props){
     const {venue} = props;
     return(
-        <div key={Venue._id} className="card">
-                    
-                      <Link to={`/venue/${venue.id}`}>
-                        <img style={{zIndex:'-1000000',position:"absolute"}} className="medium" src={venue.display_image} alt ={venue.name}></img>
-                      </Link>
-                      <div className="card-body">
-                        
-                          <Link to={`/venue/${venue.id}`}>
-                              <h2 >
-                                {venue.name}
-                              </h2>
-                          </Link>
-                          <Rating rating={venue.rating} numReviews={venue.numReviews}></Rating>
-                        
-                        
-                        {/* <div className="price">
-                            Price: {Venue.price}
-                        </div> */}
-                    </div>
-                  </div>
+      <div className="row align-items-center"  >
+      <div className="col-12">
+       <Link to={`/venue/${venue.id}`}>
+       <img
+           src={venue.display_image}
+          className="img-fluid"
+          alt="img"
+          style={{ width: "100%" }}
+        />
+       </Link>
+      </div>
+      <div className="col pb-4 card-text ps-3" >
+        <Link  to={`/venue/${venue.id}`}>{venue.name}</Link>
+        <div>{venue.city[1]}</div>
+      </div>
+      <div className="col-auto text-center pb-4 pe-4 card-text">{venue.display_price}</div>
+    </div>
     )
 }
 

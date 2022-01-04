@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
-import { ServiceAdd, VenueServicesList } from '../../Action/ServicesAction';
+import { ServiceAdd, VenueServices } from '../../Action/ServicesAction';
 
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/LoadingBox'
@@ -67,7 +67,7 @@ export function ServiceManage(props) {
               }
 
               dispatch(VendorVenueList())
-              dispatch(VenueServicesList())
+              dispatch(VenueServices())
              
               
               

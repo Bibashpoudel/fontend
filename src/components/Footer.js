@@ -4,7 +4,7 @@ import "./Footer.scss"
 export default function Footer(){
     return (
        <footer>
-            <div className="container-fluid pt-3 pb-2 footer-text" style={{backgroundColor:"rgba(212, 19, 62, 0.77)", color:"white"}}>
+            <div className="container-fluid pt-3 pb-2 footer-text" style={{backgroundColor:"rgba(212.50, 19.48, 61.87, 0.77)", color:"white"}}>
         <div className="container">
         <div className="row" >
             <div className="col">

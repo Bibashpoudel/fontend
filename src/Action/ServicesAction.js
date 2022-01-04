@@ -59,7 +59,7 @@ export const ServicesListaction =(venueId) =>async(dispatch)=>{
 
 // //////////////////////////////////////////////////
 
-export const VenueServicesList =() =>async(dispatch, getState)=>{
+export const VenueServices =() =>async(dispatch, getState)=>{
     dispatch({
         type:VENUE_SERVICE_LIST_REQUEST,
         

@@ -98,9 +98,7 @@ function LandingPage(props){
                   
                 <div className="trends" >
                    
-                        <TrendingSlider>
                       
-                        </TrendingSlider>
                     
                 </div>
                 

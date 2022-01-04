@@ -18,6 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { VendorCityList } from "../Action/vendorAction";
 import { useEffect } from "react";
 import { VenueList } from "../Action/VenueAction";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import Venue from "../components/venues";
+import { ServicesList } from "../Action/ServicesAction";
 
 // install Swiper modules
 SwiperCore.use([Autoplay, Pagination, Navigation]);
@@ -29,11 +33,14 @@ export default function HomePage(props) {
     const {loading:loading_city, error:error_city, citys} = VendorCitys;
     const Listvenue =  useSelector((state) => state.Listvenue);
     const {loading, error, venues} = Listvenue
+    const servicelist = useSelector(state => state.servicelist);
+    const {loading:loading_ser, error:error_ser,services} = servicelist
 
     const dispatch = useDispatch();
     useEffect(() =>{
         dispatch(VendorCityList());
         dispatch(VenueList());
+        dispatch(ServicesList())
     },[dispatch])
 
     const Venuehandaler = ()=>{
@@ -130,6 +137,7 @@ export default function HomePage(props) {
               See All
             </div>
           </div>
+          
           <Swiper
             slidesPerView={3}
             spaceBetween={30}
@@ -155,17 +163,28 @@ export default function HomePage(props) {
                 }}
             className="mySwiper mt-4 mb-2"
           >
-            <SwiperSlide>
             {
-                                venues.map((venue)=>(
-                                    <Card key={venue.id} venue={venue}></Card>
-    
-                                ))
-                                }
+              loading ? <div>Loading</div>
+           : error ? <MessageBox variant="danger">{error}</MessageBox>
+           :
+
+
+           <span>
+           {
+              venues ? 
+                venues.map((item) =>(
+              <SwiperSlide>
+                
+                <Venue venue={item} key={item.id}></Venue>
+              </SwiperSlide>
             
-            </SwiperSlide>
-            
+                ))
+              :<span>bibash</span>
+              }
+           </span>
+}
           </Swiper>
+
           <div className="row align-items-end" style={{ fontSize: "1.5rem", color: "rgba(255, 0, 56, 0.77)" }}>
             <div className="col">
               Services
@@ -199,18 +218,26 @@ export default function HomePage(props) {
                 }}
             className="mySwiper mt-4 mb-2"
           >
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
+            {
+              loading_ser ? <div>Loading</div>
+           : error_ser ? <MessageBox variant="danger">{error}</MessageBox>
+           :
+           <span>
+           {
+              services ? 
+              services.map((service) =>(
+              <SwiperSlide>
+                
+                <Card service={service} key={service.id}></Card>
+              </SwiperSlide>
+            
+                ))
+              :<span>bibash</span>
+              
+              }
+           </span>
+}
+           
           </Swiper>
         </div>
       </div>
