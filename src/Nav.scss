@@ -1,6 +1,11 @@
 
 .nav-left-menu {
     
+
+    .col, .col-auto {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
     
     .mob {
       display: none;
@@ -30,9 +35,9 @@
     position: fixed;
     z-index: 20;
     top: 0;
-    right: 0;
+    right:-2rem;
     background-color: rgb(194, 61, 90);
-    overflow-x: hidden;
+    // overflow-x: hidden;
     transition: 0.5s;
     padding-top: 6rem;
   }

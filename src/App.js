@@ -1,6 +1,6 @@
 // import pictures from './images/wp.png';
 
-import { BrowserRouter,  Link,  Route } from 'react-router-dom'
+import { BrowserRouter,  Link,  NavLink,  Route } from 'react-router-dom'
 import Home from './ClientPage/Home.js';
 import VenueDetailsPage from './ClientPage/VenuesDetails';
 import SignupPage from './ClientPage/signupPage';
@@ -10,7 +10,7 @@ import Vendorpage from './VenderPage/VenderPage';
 import CartScreen from './ClientPage/Cartpage';
 
 
-import './App.css'
+import './App.scss'
 
 import ProfilePage from './ClientPage/Profile';
 import  Footer  from './components/Footer';
@@ -34,7 +34,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from './components/LoadingBox';
 import MessageBox from './components/MessageBox';
 import Nav from './components/Nav';
-
+import './Nav.scss'
+import LandingPage from './ClientPage/landingpage.js';
+import NewLanding from './ClientPage/newland.js';
 
 
 
@@ -92,6 +94,14 @@ function App() {
         setSidebarIsOpen(false)
     }
   
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
  
  
   return (
@@ -99,36 +109,44 @@ function App() {
     <div className="grid-container">  
 
     <Nav/>
-    {/* <header >
+     <header >
         <div className="header" >
         <div className="brand" >
-        <button
-                    type="button"
-                    className="open-sidebar"
-                    onClick={() => setSidebarIsOpen(true)}
-                   
-                  >
-                    <i className="fa fa-bars" style={{color:"whitesmoke"}}></i>
-                  </button>
+       
            <span onClick={loadCategory} >
               <  Link to='' > Sevenoath</Link>
            </span>
         </div>
-        <div className="nav-search" onClick={loadCategory}>
+        {/* <div className="nav-search" onClick={loadCategory}>
                 <input  className="search" type="text" placeholder="search"></input>
                 <span className="btn-search"><i className="fa fa-search"></i></span>
-              </div>
+              </div> */}
         <div onClick={loadCategory}>
             <div className="nav-left-menu">
-              <div>
-              < Link to="/cart">cart
+              <div className="col-auto desk">
+              < Link to="/cart"><i className="ai-cart" />
                     {cartItems.length > 0 && (
                       <span className="badge">{cartItems.length}</span>
                       )
                     }
                     </Link>
               </div>
-              <div>
+            
+              <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
+                
+              <div className="col-auto bar" onClick={()=> openNav()} style={{fontSize:"2.3rem"}}><i className="ai-three-line-horizontal" /></div>
+             
+              <div id="mySidenav" className="sidenav">
+             <span href="#" className="closebtn" onClick={()=> closeNav()}>&times;</span>
+              <NavLink to="/signin" className="mob" style={{textAlign:'center'}} onClick={()=> closeNav()}>SignIn <i className="ai-lock-on" /></NavLink>
+              <NavLink to="/cart" className="mob" onClick={()=> closeNav()}>Cart <i className="ai-cart" /></NavLink>
+            
+              <NavLink to="/venues" onClick={()=> closeNav()}>Venues</NavLink>
+              <NavLink to="/services" onClick={()=> closeNav()}>Services</NavLink>
+              <NavLink to="/gallery" onClick={()=> closeNav()}>Gallery</NavLink>             
+              <NavLink to="/contactus" onClick={()=> closeNav()}>Contact Us</NavLink>
+            </div>
+              {/* <div>
               {
               profile ?(
                 <span className="dropdown">
@@ -162,9 +180,9 @@ function App() {
                   <Link to="/register">Sign Up</Link>
                 </div>
                 }
-            </div>
+            </div> */}
            </div>
-           <div className="hidden">
+           {/* <div className="hidden">
              <div className="hidden-display">
                
              {
@@ -226,17 +244,18 @@ function App() {
                 }
              </div>
             
-           </div>
+           </div> */}
            
            
 
         </div>
     </div>
-        <div className="mob-search">
+        {/* <div className="mob-search">
                 <input  className="search" type="text" placeholder="search"></input>
                 <span className="btn-search"><i className="fa fa-search"></i></span>
-        </div>     
-        </header>
+        </div>      */}
+        </header> 
+  {/*
      <aside className={sidebarIsOpen ? 'open' : ''} >
       <div className="aside-padding">
      <div className="aside-top" style={{color:'black', textAlign:'center'}} onClick={loadCategory}>
@@ -390,7 +409,8 @@ function App() {
                 <Route path='/signin' component={SignInPage}></Route>
                 <Route path="/register" component={SignupPage}></Route>
                 <Route path="/venue/:id" component={VenueDetailsPage}></Route>
-                <Route path="/" component={Home } exact></Route>
+                <Route path="/new" component={NewLanding } ></Route>
+                <Route path="/" component={LandingPage } exact></Route>
             
             
            
