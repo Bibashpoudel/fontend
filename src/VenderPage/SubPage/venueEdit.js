@@ -178,7 +178,7 @@ export default function VenueEdit(props) {
                                     ></input>
                                 </div>
                                 <div>
-                                    <img src={display_image} alt={name}></img>
+                                    <img  className="small" src={display_image} alt={name}></img>
                                 </div>
                                 {/* <div className="">
                                     

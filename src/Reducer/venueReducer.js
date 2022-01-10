@@ -44,7 +44,7 @@ export const CityVenueListReducer = (state ={cityvenue:[]},action) =>{
     }
 
 }
-export const VenueTypeParticularListReducer =(state={particularVenue:[]}, action)=>{
+export const VenueTypeParticularListReducer =(state={particulartypeVenue:[]}, action)=>{
     switch(action.type){
         case PARTICULAR_VENUE_TYPE_LIST_REQUEST:
             return{
@@ -53,7 +53,7 @@ export const VenueTypeParticularListReducer =(state={particularVenue:[]}, action
         case PARTICULAR_VENUE_TYPE_LIST_SUCCESS:
             return{
                 loading:false,
-                particularVenue:action.payload
+                particulartypeVenue:action.payload
             }
         case PARTICULAR_VENUE_TYPE_LIST_FAIL:
             return{

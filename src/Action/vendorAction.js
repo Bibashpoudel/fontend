@@ -119,7 +119,7 @@ export const VendorVenueList = () => async(dispatch, getState) =>{
         const {userSignin:{userInfo}} = getState();
         const{userProfileView:{profile}} = getState();
       
-        const {data} = await axios.get(`/api/venue/particularvendor/${profile.id}/`, {
+        const {data} = await axios.get(`/api/venue/particulartype/${profile.id}/`, {
         headers:{
             'Authorizations': 'Bearer '+ userInfo
         }

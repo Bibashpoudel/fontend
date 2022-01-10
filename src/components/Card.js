@@ -8,7 +8,7 @@ import Card from '../assets/card.png'
     const {service} = props;
    
     return(
-      <div className="row align-items-center"  >
+      <div className="row align-items-center"  style={{margin:'0'}}>
       <div className="col-12">
         <Link to={`/service/${service.id}`}>
           <img
@@ -23,7 +23,12 @@ import Card from '../assets/card.png'
         {service.name}
         <div>{}</div>
       </div>
-      <div className="col-auto text-center pb-4 pe-4 card-text">{service.display_price}</div>
+     {
+       service.is_true === true ?
+       <div className="col-auto text-center pb-4 pe-4 card-text">Per Plates: {service.display_price}</div>
+       :
+       <div className="col-auto text-center pb-4 pe-4 card-text">price: {service.display_price}</div>
+     }
     </div>
     )
 }

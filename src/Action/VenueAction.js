@@ -207,7 +207,7 @@ export const venueDeleteAction = (venueId) => async(dispatch, getState)=>{
     })
     try {
 
-        const {userSignin:{userInfo}} = getState()
+        const {userSignin:{userInfo}} = getState();
         const {data} = await axios.delete(`/api/venue/vendor/${venueId}`,{
             headers:{
                 'Authorization': 'Bearer ' + userInfo
@@ -276,7 +276,7 @@ export const VenueTypeParticularList = (typeId) => async(dispatch) =>{
     try {
         
       
-        const {data} = await axios.get(`/api/venue/particularvendor//${typeId}/`)
+        const {data} = await axios.get(`/api/venue/particulartype/${typeId}/`)
     dispatch({
         type:PARTICULAR_VENUE_TYPE_LIST_SUCCESS,
         payload:data

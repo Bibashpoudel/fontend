@@ -25,10 +25,10 @@ import Terms from './ImpFiles/Terms';
 import Policy from './ImpFiles/Policy';
 import PaymentScreen from './ClientPage/paymentScreen';
 import CityVenue from './ClientPage/CityVenue';
-import VenueTypeScreen from './ClientPage/VenueTypeScreen';
+
 import { signout } from './Action/UserAction';
 import { useEffect, useState } from 'react';
-import { VendorTypeList } from './Action/vendorAction';
+
 import { VenueTypeList } from './Action/VenueAction';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from './components/LoadingBox';
@@ -37,15 +37,22 @@ import Nav from './components/Nav';
 import './Nav.scss'
 import LandingPage from './ClientPage/landingpage.js';
 import NewLanding from './ClientPage/newland.js';
+import { ServicesTypeList } from './Action/ServicesAction.js';
+import ServiceDetailsPage from './ClientPage/ServiceDetailsPage.js';
+import VenueDisplay from './ClientPage/VenueDisplay.js';
+import ServiceDisplay from './ClientPage/serviceTypeDisplay.js';
 
 
 
 function App() {
 
-  const userProfileView = useSelector((state) => state.userProfileView);
+    const userProfileView = useSelector((state) => state.userProfileView);
     const {profile} = userProfileView;
-    const VendorTypes = useSelector((state) => state.VendorTypes);
-    const {loading:loading_types, error:error_types, types} =VendorTypes;
+    // const VendorTypes = useSelector((state) => state.VendorTypes);
+    // const {loading:loading_types, error:error_types, types} =VendorTypes;
+
+    const typeService = useSelector(state => state.typeService);
+    const {loading:serv_loading, error:serv_error, servicetype} = typeService;
     const venueTypeList = useSelector(state =>state.venueTypeList)
     const {loading, error, venueType} = venueTypeList;
     const cart = useSelector((state) => state.cart);
@@ -54,26 +61,29 @@ function App() {
     const dispatch = useDispatch();
     useEffect(()=>{
           
-        dispatch(VendorTypeList())
-        dispatch(VenueTypeList())
+        
+        
+          dispatch(VenueTypeList())
+          dispatch(ServicesTypeList())
+       
         
 
         
     },[dispatch])
-    const [checkedState, setCheckedState] = useState([false, false, false,false, false, false, false, false,false,false])
+    // const [checkedState, setCheckedState] = useState([false, false, false,false, false, false, false, false,false,false])
  
     
     
-    // console.log(services)
-    const handleOnChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : false
+    // // console.log(services)
+    // const handleOnChange = (position) => {
+    // const updatedCheckedState = checkedState.map((item, index) =>
+    //   index === position ? !item : false
      
-    );
+    // );
     
 
-    setCheckedState(updatedCheckedState);
-    }
+    // setCheckedState(updatedCheckedState);
+    // }
    
     
 
@@ -86,42 +96,53 @@ function App() {
       
     }
 
-    const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+    const [loadvenue, setloadvenue] = useState(false);
+    const [loadservice, setloadService] = useState(false)
     
-
-    const loadCategory =(e)=>{
+    const [blur, setBlur] = useState(false);
+    const loadVenue =(e)=>{
         e.preventDefault()
-        setSidebarIsOpen(false)
+        setloadvenue(true)
+    }
+    const loadService = (e) =>{
+      e.preventDefault()
+      setloadService(true)
+    }
+    const CancelVenue  = (e) =>{
+      e.preventDefault()
+      setloadvenue(false)
+      setloadService(false)
     }
   
 
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
+      setBlur(true);
     }
+    console.log(blur)
     
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
+      setBlur(false);
     }
- 
+    
+    
  
   return (
-      <BrowserRouter>
-    <div className="grid-container">  
-
-    <Nav/>
+      <BrowserRouter  >
+    <div   className={blur ? 'scroll-disable grid-container' : 'grid-container'} >  
+    <div className={blur ? 'actives' : 'overlay'}></div>
+   
      <header >
         <div className="header" >
         <div className="brand" >
        
-           <span onClick={loadCategory} >
+           <span >
               <  Link to='' > Sevenoath</Link>
            </span>
         </div>
-        {/* <div className="nav-search" onClick={loadCategory}>
-                <input  className="search" type="text" placeholder="search"></input>
-                <span className="btn-search"><i className="fa fa-search"></i></span>
-              </div> */}
-        <div onClick={loadCategory}>
+        
+        <div >
             <div className="nav-left-menu">
               <div className="col-auto desk">
               < Link to="/cart"><i className="ai-cart" />
@@ -132,246 +153,134 @@ function App() {
                     </Link>
               </div>
             
-              <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
+              {
+                profile ? 
+                <div className="col-auto desk"><NavLink to="/profile">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
+                :
+                <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
+              }
                 
               <div className="col-auto bar" onClick={()=> openNav()} style={{fontSize:"2.3rem"}}><i className="ai-three-line-horizontal" /></div>
-             
-              <div id="mySidenav" className="sidenav">
-             <span href="#" className="closebtn" onClick={()=> closeNav()}>&times;</span>
-              <NavLink to="/signin" className="mob" style={{textAlign:'center'}} onClick={()=> closeNav()}>SignIn <i className="ai-lock-on" /></NavLink>
-              <NavLink to="/cart" className="mob" onClick={()=> closeNav()}>Cart <i className="ai-cart" /></NavLink>
-            
-              <NavLink to="/venues" onClick={()=> closeNav()}>Venues</NavLink>
-              <NavLink to="/services" onClick={()=> closeNav()}>Services</NavLink>
-              <NavLink to="/gallery" onClick={()=> closeNav()}>Gallery</NavLink>             
-              <NavLink to="/contactus" onClick={()=> closeNav()}>Contact Us</NavLink>
             </div>
-              {/* <div>
-              {
-              profile ?(
-                <span className="dropdown">
-                  <Link to="#">
-                    {profile.fullname} {' '}
-                      <i className="fa fa-caret-down"></i>
-                    </Link>
-                    <ul className="dropdown-content">
-                      
-                      <li>
-                        <Link to={`/profile`} >Profile</Link>
-                      </li>
-                      <li>
-                        <Link to="/order" >My Order</Link>
-                      </li>
-                      {
-                        profile && profile.user_type === "Vendor" &&(
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                        
-                        )
-                        
-                      }
-                      <li>
-                          <Link to="/" onClick={Signouthandler}>sign out</Link>
-                      </li>
-                      </ul>
-                 </span>
-              
-                ):
-                <div style={{marginTop:"-0.5rem"}}> 
-                  <Link to="/register">Sign Up</Link>
-                </div>
-                }
-            </div> */}
-           </div>
-           {/* <div className="hidden">
-             <div className="hidden-display">
-               
+        </div>
+        </div>
+        
+        </header> 
+            <div id="mySidenav" className="sidenav">
+             <span href="#" className="closebtn" onClick={()=> closeNav()}>&times;</span>
              {
-              profile ?(
-                <span className="dropdown">
-                  <Link to="#">
-                    
-                      <i className="fa fa-user"></i>
-                    </Link>
-                    <ul className="dropdown-content">
-                      
-                      <li>
-                        <Link to={`/profile`} >Profile</Link>
-                      </li>
-                      <li>
-                      < Link to="/cart">cart
-                        {cartItems.length > 0 && (
-                          <span className="badge">{cartItems.length}</span>
-                          )
-                        }
-                    </Link>
-                      </li>
-                      <li>
-                        <Link to="/order" >My Order</Link>
-                      </li>
-                      {
-                        profile && profile.user_type === "Vendor" &&(
-                        <li><Link to="/dashboard">Dashboard</Link></li>
-                        
-                        )
-                        
-                      }
-                      <li>
-                          <Link to="/" onClick={Signouthandler}>sign out</Link>
-                      </li>
-                      </ul>
-                 </span>
+                profile ? 
+                <NavLink to="/profile" className="mg-bot" onClick={()=> closeNav()}>{profile.fullname} <i className="fa fa-user-circle" /></NavLink>
+                :
+                <NavLink to="/signin" className="mob mg-bot" onClick={()=> closeNav()}><i className="ai-lock-on" /></NavLink>
+              }
               
-                ):
-             
-                  <span className="dropdown">
-                 
+           
+                
+              
+              <div className={loadvenue ? 'hidecat' : '' || loadservice ? 'hidecat' :''}>
+              <div className='side-head'>Our Services</div>
+                <div className ="row-hover" style={{display:'flex', justifyContent:"space-between"}}>
+                    <div>
+                      <NavLink to="/venues" onClick={()=> closeNav()}>Venues</NavLink>
+                    </div>
+                    <div className='right-angle'  onClick={loadVenue}>
+                        <i className="fa fa-angle-right" />
+                    </div>
+                </div>
+                <div className ="row-hover" style={{display:'flex', justifyContent:"space-between"}}>
+                    <div>
+                    <NavLink to="/services" onClick={()=> closeNav()}>Services</NavLink>
+                    </div>
+                    <div className='right-angle'  onClick={loadService}>
+                        <i className="fa fa-angle-right" />
+                    </div>
+                </div>
+                <div>
+                <div className='side-head'>Helps & Settings</div>
+                  <div>
+                    <NavLink to="/profile"  onClick={()=> closeNav()}>Accounts</NavLink>
+                    </div>
+                    {
+                      profile ?
+                      <div>
+                      <NavLink to="/" onClick={ Signouthandler}>Sign Out</NavLink>
+                    </div>
+                    :
+                    <div>
+                    <NavLink to="/signin" onClick={()=> closeNav()} >Sign In</NavLink>
+                  </div>
+                    }
+                </div>
                   
-                        <i className="fa fa-user"></i>
+                </div>
+              <div  className={loadvenue ? 'animated fadeIn ' : 'hidecat'}>
+                <div className='back-head row-hover ' onClick={CancelVenue}>
+                  <div className='left-angle'> 
+                    <i className='fa fa-angle-left'></i>
+                     
+                  </div>
+                  <div>
+                  Main Menu
+                  </div>
+                </div>
+                <div className='subcat-head'>
+                  Venues
+                </div>
+                { 
+                  loading ? <LoadingBox></LoadingBox>
+                  :
+                  error ? <MessageBox>{error}</MessageBox>
+                  :
+                  <div>
+                    {
+                      venueType.map((t) =>(
+                        <NavLink className='row-hover' to={`/type/venue/${t.id}`}>{t.type}{t.id}</NavLink>
+
+                      ))
+                    }
+
                     
-                      <ul className="dropdown-content">
-                        
-                        <li>
-                          <Link to="/register">Sign Up</Link>
-                        </li>
-                        <li>
-                          <Link to="/vendor_register">Vendor Register</Link>
-                        </li>
-                        
-                      
-                      </ul>
-                 </span>
+                  </div>
                 
                 }
-             </div>
-            
-           </div> */}
-           
-           
-
-        </div>
-    </div>
-        {/* <div className="mob-search">
-                <input  className="search" type="text" placeholder="search"></input>
-                <span className="btn-search"><i className="fa fa-search"></i></span>
-        </div>      */}
-        </header> 
-  {/*
-     <aside className={sidebarIsOpen ? 'open' : ''} >
-      <div className="aside-padding">
-     <div className="aside-top" style={{color:'black', textAlign:'center'}} onClick={loadCategory}>
-       {
-         profile ? (
-             <Link style={{color:'black',fontSize:'2.3rem'}} to={`/profile`} >
-               {profile.fullname}
-             </Link> 
-         )
-         :
-         <div>
-                <div > 
-                  <Link style={{color:"black"}} to="/signin">Sign In</Link>
+              </div>
+              <div  className={loadservice ? 'animated fadeIn ' : 'hidecat'}>
+                <div className='back-head row-hover ' onClick={CancelVenue}>
+                  <div className='left-angle'> 
+                    <i className='fa fa-angle-left'></i>
+                     
+                  </div>
+                  <div>
+                  Main Menu
+                  </div>
                 </div>
-         </div>
-       }
-     </div>
-     {
-                loading_types ? <LoadingBox></LoadingBox>
-                :      
-                error_types ? <MessageBox variant="danger">{error_types}</MessageBox>
-                :
-                loading ?<LoadingBox></LoadingBox>
-                :
-                error ? <MessageBox>{error}</MessageBox>
-                :
-        <div>
-          <div>
-          <strong>Our Services</strong>
-         <button
-           onClick={() => setSidebarIsOpen(false)}
-           className="close-sidebar"
-           type="button"
-           style={{float:"right"}}
-         >
-           <i className="fa fa-close"></i>
-         </button>
-          </div>
-     {
-            types.map((t, index) =>(
-     <div className="categories" key={t.id}>
-     <ul >
-        <li onMouseEnter={() => handleOnChange(index)}>
-         {
-           t.type === "Marriage Gardens" ?
-           <Link 
-            to={`/venue/${t.id}`} 
-            style={{color:'black'}}  
-            onClick={() => setSidebarIsOpen(false)}> 
-              {t.type}
-            </Link> 
-           :
-           <Link 
-           to={`/services/${t.id}`} 
-           style={{color:'black'}}
-           onClick={() => setSidebarIsOpen(false)}> 
-           {t.type}</Link> 
-         }
-          
-        </li>
-      
-        { checkedState[index] ?
-        <div className="sub_category" onClick={loadCategory}>
-          {
-            t.type === "Marriage Gardens" ?
-            venueType.map(VT =>(
-                <li className={`display-${index}`} key={VT.id} >
-                  <Link to={`/type/venue/${VT.id}`} style={{color:'black'}}>  {VT.type}</Link>
-                 
-                </li>
-            ))
-            
-            :<li></li>
-          }   
-        </div>
-        
-        
-        :<span></span>
-        
-      }
-      </ul>
-      </div>
-              ))}
-      </div>
-    }
-      <div className="aside-menu" onClick={loadCategory}>
-        <h3>Helps And Settings</h3>
-        {
-          profile ?
-          <ul>
-              <li>
-                <Link to='/profile'>
-                  Your Account
-                </Link>
-              </li>
-              <li>
-                <Link to="/" onClick={Signouthandler}>Sign Out</Link>
-              </li>
-          </ul>:
-          <ul>
-          <li>
-            <Link to="/signin">Sign In</Link>
-            
-          </li>
-          <li>
-            <Link to="/vendor_register">Vendor Register</Link>
-          </li>
-        </ul>
+                <div className='subcat-head'>
+                  Services
+                </div>
+                {
+                    serv_loading ? <LoadingBox></LoadingBox>
+                    :
+                    serv_error ? <MessageBox>{error}</MessageBox>
+                    :
+                    <div >
+                      {
+                        servicetype.map((service) =>(
+                          <NavLink  className='row-hover' to={`/type/service/${service.id}`}>{service.type}</NavLink>
+  
+                        ))
+                      }
 
-        }
-       
-        
-      </div>
-      </div>
-    </aside> */}
-        <main  >
+                    
+                  </div>
+                
+                }
+              </div>
+              
+              
+            </div>
+   
+        <main >
               {/* Admin Screen */}
 
 
@@ -403,11 +312,13 @@ function App() {
                 <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>      
                 <Route path="/terms&Conditions" component={Terms}></Route>
                 <Route path="/PrivacyPolicy" component={Policy}></Route>
-                <Route path="/type/venue/:id" component={VenueTypeScreen}></Route>
+                <Route path="/type/service/:id" component={ServiceDisplay}></Route>
+                <Route path="/type/venue/:id" component={VenueDisplay}></Route>
                 <Route path="/city/venue/:id" component={CityVenue}></Route>
                 <Route path='/cart/:id?' component={CartScreen}></Route>
                 <Route path='/signin' component={SignInPage}></Route>
                 <Route path="/register" component={SignupPage}></Route>
+                <Route path="/service/:id" component={ServiceDetailsPage}></Route>
                 <Route path="/venue/:id" component={VenueDetailsPage}></Route>
                 <Route path="/new" component={NewLanding } ></Route>
                 <Route path="/" component={LandingPage } exact></Route>
@@ -415,111 +326,7 @@ function App() {
             
            
 
-        </main>
-        {/* <footer>
-        <div className=" sub-footer">
-              <div className="column1">
-               
-                <h4> Get to Know Us</h4>
-              
-              
-                <div className="footerlink">
-                  <Link to="/about">Careers</Link>
-                </div>
-                <div className="footerlink">
-                  <Link to="about">Blog</Link>
-                </div>
-                <div className="footerlink">
-                  <Link to="about">About Sevenoath</Link>
-                </div>
-              </div>
-              <div className="column1">
-                <div>
-                   <h4> Make A Money With us</h4>
-                </div>
-                  <div>
-                  <div className="footerlink">
-                    <Link to="about">Affilate With us</Link>
-                  </div>
-                  <div className="footerlink">
-                    <Link to="about">Advertise Your Service</Link>
-                  </div >                   
-                  </div>
-                  
-                </div>
-                <div className="column1">
-                <div>
-                  <h4> Download Our Apps</h4>
-                </div>
-                  <div style={{display:'flex',  fontSize:'2.3rem',justifyContent:'center'}}>
-                    <div className="footerlink" style={{padding:'2rem',color:"black", fontSize:'3rem'}}>
-                       
-                       <i className="fa fa-android"></i>
-                    </div>
-                    <div className="footerlink" style={{padding:'2rem',color:"black", fontSize:'3rem'}}>
-                         <i className="fa fa-apple"></i>
-                    </div>
-                  
-                  </div>
-                
-              </div>
-                
-              <div className="column1">
-                <div>
-                  <h4> Let us help You</h4>
-                </div>
-                  <div>
-                    <div className="footerlink">
-                        <Link to="/signin">Account</Link>
-                    </div>
-                    <div className="footerlink">
-                        <Link to="/orders">Orders</Link>
-                    </div>
-                  
-                  </div>
-                
-              </div>
-
-            </div>
-             <div className="mob-footer">
-                <div>
-                  <div className="footerlink">
-                    <Link to="/about">Careers</Link>
-                  </div>
-                  <div className="footerlink">
-                    <Link to="about">Blog</Link>
-                  </div>
-                  <div className="footerlink">
-                    <Link to="about">About Sevenoath</Link>
-                  </div>
-                </div>
-                <div>
-                  <div className="footerlink">
-                    <Link to="about">Affilate With us</Link>
-                  </div>
-                  <div className="footerlink">
-                    <Link to="about">Advertise Your Service</Link>
-                  </div > 
-                </div>
-
-             </div>
-             <div className="main-footer  center">
-              <div className=" main center footer_items">
-                  <div>
-                   <Link to="/terms&Conditions"> Terms and Conditions </Link>
-                  </div>
-                  <div>
-                    <Link to="PrivacyPolicy">Privacy and Policy</Link>
-                  </div>
-              </div>
-
-              
-              <div style={{textAlign:'center'}}>
-              All Right Reserved 
-              </div>
-             
-             </div>
-        </footer> */}
+        </main>     
         <Footer/>
     </div>
     </BrowserRouter>

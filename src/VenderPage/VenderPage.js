@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import Account from './SubPage/Account';
 import Bookingorder from './SubPage/BookingOrders';
@@ -13,13 +14,16 @@ import Venuemanage from './SubPage/Venuemanage';
 
 
 function Vendorpage(){
+
+   const userProfileView = useSelector(state => state.userProfileView);
+   const{profile} = userProfileView;
+
+
     return (
         <BrowserRouter>
         <div className="dashboard">
            <div className="main space">
                <div className="das_aside ">
-
-                    
                         <div>
                            <NavLink to='/dashboard' activeStyle={{color: "red"}} >
                                 <i className="fa fa-dashboard"></i>
@@ -75,8 +79,39 @@ function Vendorpage(){
                   <Route path="/orders"exact  component={Bookingorder}></Route>
                   <Route path="/dashboard" exact component={Dashboard}></Route>
                </div>
+               
 
            </div>
+           <div className='mob_bottom_nav'>
+               <div>
+                  <NavLink to='/dashboard' activeStyle={{color: "red"}} >
+                        <span><i className="fa fa-dashboard"></i></span>
+                           <span>{' '} Dashboard</span>
+                  </NavLink>
+                  
+               </div>
+               <div>
+                  <NavLink to='/orders'activeStyle={{color: "red"}}>
+                        <span><i className="fa fa-dashboard"></i></span>
+                           <span>{' '} Booking Orders</span>
+                  </NavLink>
+                  
+               </div>
+               <div>
+                  <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
+                        <span><i className="fa fa-dashboard"></i></span>
+                           <span>{' '}  Venue Manage</span>
+                  </NavLink>
+                  
+               </div>
+               <div>
+                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                        <span><i className="fa fa-dashboard"></i></span>
+                        <span>   {' '} Service Manage</span>
+                  </NavLink>
+                  
+               </div>
+            </div>
         </div>
         </BrowserRouter>
     )

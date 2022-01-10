@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
+import { SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
 
 
 
@@ -88,8 +88,6 @@ export const VenueServices =() =>async(dispatch, getState)=>{
 export const ServicesList =() =>async(dispatch)=>{
     dispatch({
         type:SERVICE_LIST_REQUEST,
-        
-        
     });
 
     try {
@@ -109,6 +107,82 @@ export const ServicesList =() =>async(dispatch)=>{
                 ? error.response.data.message
                 : error.message
         });
+    }
+}
+export const ServiceDetails = (serviceId) => async(dispatch, getState)=>{
+    dispatch({
+        type:SERVICE_DETAILS_REQUEST,
+        payload:serviceId
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        const {data} = await axios.get(`/api/service/admin/${serviceId}`,{
+            headers:{
+                'Authorization': 'Bearer '+ userInfo
+            }
+        })
+        dispatch({
+            type:SERVICE_DETAILS_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:SERVICE_DETAILS_FAIL,
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+    }
+}
+
+// service type get action
+export const ServicesTypeList =() =>async(dispatch)=>{
+    dispatch({
+        type:SERVICE_TYPE_LIST_REQUEST,
+        
+        
+    });
+
+    try {
+        
+        const {data} = await axios.get('/api/service/type/')
+
+        dispatch({
+            type:SERVICE_TYPE_LIST_SUCCESS,
+            payload:data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:SERVICE_TYPE_LIST_FAIL,
+            payload: 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        });
+    }
+}
+export const ServiceTypeDetails = (typeID) => async(dispatch, getState)=>{
+    dispatch({
+        type:SERVICE_TYPE_DETAILS_REQUEST,
+        payload:typeID
+    })
+    try {
+        
+        const {data} = await axios.get(`/api/service/type/${typeID}/`)
+        dispatch({
+            type:SERVICE_TYPE_DETAILS_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:SERVICE_TYPE_DETAILS_FAIL,
+            payload:
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
     }
 }
 
@@ -179,7 +253,7 @@ export const ServiceUpdateAction = (service)=>async(dispatch, getState)=>{
 }
 export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{
     dispatch({
-        type:SERVICE_DETAILS_REQUEST,
+        type:VENDOR_SERVICE_DETAILS_REQUEST,
         payload:serviceId
     })
     try {
@@ -190,12 +264,12 @@ export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{
             }
         })
         dispatch({
-            type:SERVICE_DETAILS_SUCCESS,
+            type:VENDOR_SERVICE_DETAILS_SUCCESS,
             payload:data
         })
     } catch (error) {
         dispatch({
-            type:SERVICE_DETAILS_FAIL,
+            type:VENDOR_SERVICE_DETAILS_FAIL,
             payload:
             error.response && error.response.data.message
             ? error.response.data.message

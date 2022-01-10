@@ -7,7 +7,7 @@ import Card from '../assets/card.png'
  function Venue(props){
     const {venue} = props;
     return(
-      <div className="row align-items-center"  >
+      <div className="row align-items-center"  style={{margin:'0'}}>
       <div className="col-12">
        <Link to={`/venue/${venue.id}`}>
        <img
