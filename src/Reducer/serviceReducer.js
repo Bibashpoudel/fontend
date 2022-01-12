@@ -1,4 +1,4 @@
-import { SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_RESET, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
+import { ADD_SERVICE_REVIEW_FAIL, ADD_SERVICE_REVIEW_REQUEST, ADD_SERVICE_REVIEW_RESET, ADD_SERVICE_REVIEW_SUCCESS, SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_REVIEW_LIST_FAIL, SERVICE_REVIEW_LIST_REQUEST, SERVICE_REVIEW_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_RESET, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
 
 export const VenueServiceListReducer = (state ={vService:[]}, action) =>{
     switch(action.type){
@@ -169,5 +169,50 @@ export const ServiceupdateReducer = (state ={}, action) =>{
             }
         default:
             return state;            
+    }
+}
+
+// review Reducer
+
+export const AddServiceReviewReducer = (state={},action)=>{
+    switch(action.type){
+        case ADD_SERVICE_REVIEW_REQUEST:
+            return{
+                loading:true,
+            }
+        case  ADD_SERVICE_REVIEW_SUCCESS:
+            return{
+                loading:false,
+                SReviewAdd:action.payload
+            }
+        case  ADD_SERVICE_REVIEW_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        case  ADD_SERVICE_REVIEW_RESET:
+        return{}
+        default:
+            return state
+    }
+}
+export const ServiceReviewListReducer = (state = {serviceReview:[]}, action) =>{
+    switch(action.type){
+        case SERVICE_REVIEW_LIST_REQUEST:
+            return{
+                loading:true
+            }
+        case SERVICE_REVIEW_LIST_SUCCESS:
+            return{
+                loading:false,
+                serviceReview:action.payload
+            }
+        case SERVICE_REVIEW_LIST_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }    
+        default:
+            return state
     }
 }

@@ -18,6 +18,8 @@ function SignupPage(props){
     const [phone, SetPhone] = useState();
     const [password, setPassword] = useState();
     const customer_type ="Customer"
+    const [Otp, SetOtp] = useState();
+    const [OtpState, setOtpState] = useState(false);
 
     const redirect = props.location.search ? props.location.search.split('=')[1]: '/';
 
@@ -25,17 +27,19 @@ function SignupPage(props){
     const { loading, userInfo, error} =userRegister;
 
     const dispatch = useDispatch();
-    const SignUphandaler =(e)=>{
+    const OtpVerify =(e)=>{
         e.preventDefault();
-        SetName(`${FirstName} ${LastName}`)
-        setTimeout(()=>{
-            dispatch(Signup(name, email, phone, customer_type, password));
-        },5000)
-      
-        setTimeout((e) => {
-            dispatch(Signin(email, password))
-            
-        }, 2000);
+        setOtpState(true)
+        dispatch(Otp)
+       
+    }
+    const SignUphandaler = (e)=>{
+        e.preventDefault()
+        dispatch(Signup(`${FirstName} ${LastName}`, email, phone, customer_type, password));
+    }
+    const changeState = (e)=>{
+        e.preventDefault()
+        setOtpState(false)
     }
     useEffect(() =>{
         if(userInfo){
@@ -62,14 +66,14 @@ function SignupPage(props){
           
 
               <div>
-              <form onSubmit={SignUphandaler}>
+              <form onSubmit={OtpVerify} className={OtpState ? 'hide_otp':'show_otp'}>
                     <div>
                         <h2>Welcome !</h2>
                     </div>
                     
                     <div className=" fields">
                         <div>
-                            <label>First Name</label>
+                            <label>First Name <span style={{color:'red', fontSize:'1rem'}}>  *</span></label>
                         </div>
                        
                         <div>
@@ -78,14 +82,15 @@ function SignupPage(props){
                                 id="name" 
                                 placeholder="First Name"
                                 onChange={(e) => SetFirstName(e.target.value)}
-                                
+                                required='true'
                             ></input>
                         </div>
                       
                     </div>
                     <div className=" fields">
                     <div>
-                            <label>Last Name</label>
+                            <label>Last Name<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
+                            
                         </div>
                        
                         <div>
@@ -94,13 +99,14 @@ function SignupPage(props){
                                 id="name" 
                                 placeholder="First Name"
                                 onChange={(e) => SetLastName(e.target.value)}
+                                required='true'
                                 
                             ></input>
                         </div>
                     </div>
                     <div className=" fields">
                         <div>
-                            <label>Email</label>
+                            <label>Email<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                         </div>
                        <div>
                         <input 
@@ -108,13 +114,14 @@ function SignupPage(props){
                                 id="email" 
                                 placeholder="Email"
                                 onChange={(e) => SetEmail(e.target.value)}
+                                required='true'
                             ></input>
                        </div>
                         
                     </div>
                     <div className="fields">
                         <div>
-                            <label>Phone number</label>
+                            <label>Phone number<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                         </div>
                       <div>
                       <input 
@@ -122,7 +129,7 @@ function SignupPage(props){
                             id="phone" 
                             placeholder="Phone"
                             onChange={(e)=>SetPhone(e.target.value)}
-                            
+                            required='true'
                         ></input>
                       </div>
                         
@@ -130,7 +137,7 @@ function SignupPage(props){
                     
                     <div className=" fields">
                        <div>
-                           <label>Password</label>
+                           <label>Password<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                        </div>
                         <div>
                             <input 
@@ -138,11 +145,12 @@ function SignupPage(props){
                                 id="password" 
                                 placeholder="Password"
                                 onChange={(e)=>setPassword(e.target.value)}
+                                required='true'
                             ></input>
                         </div>
                     </div>
                     <div>
-                        <button type="submit" className="block primary">Sign Up</button>
+                        <button type="submit"  className="block primary">Sign Up</button>
                     </div>
                     <div>
                         <span>
@@ -154,8 +162,21 @@ function SignupPage(props){
                     </div>
                     
                 </form>
+               
+                <form className={OtpState ? 'show_otp': "hide_otp"} >
+                    <h2>Enter OTP</h2>
+                    <input type="text" placeholder='Enter Otp' onChange={(e) => SetOtp(e.target.value)}></input>
+                    <div >
+                        <button onClick={changeState}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>
+                        <button className='primary' onClick={SignUphandaler}>Verify</button>
+                    </div>
+                    
+                </form>
+               
+               
+               
               </div>
-                <div className="social_items">
+                <div className="social_items" style={{display:'none'}}>
                     <div>
                         or
                     </div>

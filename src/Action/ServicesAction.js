@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
+import { ADD_SERVICE_REVIEW_FAIL, ADD_SERVICE_REVIEW_REQUEST, ADD_SERVICE_REVIEW_SUCCESS, SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_REVIEW_LIST_FAIL, SERVICE_REVIEW_LIST_REQUEST, SERVICE_REVIEW_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
 
 
 
@@ -116,11 +116,7 @@ export const ServiceDetails = (serviceId) => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        const {data} = await axios.get(`/api/service/admin/${serviceId}`,{
-            headers:{
-                'Authorization': 'Bearer '+ userInfo
-            }
-        })
+        const {data} = await axios.get(`/api/service/admin/${serviceId}`)
         dispatch({
             type:SERVICE_DETAILS_SUCCESS,
             payload:data
@@ -275,5 +271,63 @@ export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{
             ? error.response.data.message
             : error.message
         })
+    }
+}
+
+
+// service Review
+
+export const CreateServiceComment = (serviceId, comment) =>async(dispatch, getState)=>{
+    dispatch({
+        type:ADD_SERVICE_REVIEW_REQUEST,
+        payload:serviceId, comment
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        
+        // const now = new Date();
+        const {data} = await axios.post(`/api/review/customer/service/${serviceId}/`, {feedback:comment},{
+            headers:{
+                'Authorization': 'Bearer '+userInfo
+            }
+        })
+        dispatch({
+            type:ADD_SERVICE_REVIEW_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADD_SERVICE_REVIEW_FAIL,
+            payload:
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        })
+        
+    }
+
+}
+export const ServiceReviewListAction =(serviceId) =>async(dispatch)=>{
+    dispatch({
+        type:SERVICE_REVIEW_LIST_REQUEST,
+        payload:serviceId
+    });
+
+    try {
+        const {data} = await axios.get(`/api/review/service/${serviceId}/`);
+
+        dispatch({
+            type:SERVICE_REVIEW_LIST_SUCCESS,
+            payload:data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:SERVICE_REVIEW_LIST_FAIL,
+            payload: 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        });
     }
 }

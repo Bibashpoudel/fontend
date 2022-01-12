@@ -1,6 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
+import { userDetailsAction } from '../Action/UserAction';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 import Account from './SubPage/Account';
 import Bookingorder from './SubPage/BookingOrders';
 import Dashboard from './SubPage/Dashboard';
@@ -15,12 +19,20 @@ import Venuemanage from './SubPage/Venuemanage';
 
 function Vendorpage(){
 
-   const userProfileView = useSelector(state => state.userProfileView);
-   const{profile} = userProfileView;
+   const vendorDetails = useSelector(state => state.vendorDetails);
+   const{loading, error, userDetails} = vendorDetails;
 
+  
+   const dispatch = useDispatch()
+   
+   useEffect(() => {
+      dispatch(userDetailsAction())
+      
+   }, [dispatch])
 
     return (
         <BrowserRouter>
+        
         <div className="dashboard">
            <div className="main space">
                <div className="das_aside ">
@@ -31,6 +43,8 @@ function Vendorpage(){
                            </NavLink>
                            
                         </div>
+                        
+                        
                         <div>
                            <NavLink to='/orders'activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
@@ -38,20 +52,41 @@ function Vendorpage(){
                            </NavLink>
                            
                         </div>
-                        <div>
-                           <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
-                                <i className="fa fa-dashboard"></i>
-                                    {' '}  Venue Manage
-                           </NavLink>
-                           
-                        </div>
-                        <div>
-                           <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
-                                <i className="fa fa-dashboard"></i>
-                                    {' '} Service Manage
-                           </NavLink>
-                           
-                        </div>
+                        {loading ? <LoadingBox></LoadingBox>
+                        :
+                        error ? <MessageBox>{error}</MessageBox>
+                        :
+                        <span> {userDetails.vendor_type.type === 'Marriage Gardens' 
+                        ?
+                           <span>
+                              <div>
+                                 <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '}  Venue Manage
+                                 </NavLink>
+                                 
+                              </div>
+                              <div>
+                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '} Service Manage
+                                 </NavLink>
+                                 
+                              </div>
+                           </span>
+                           :
+                           <div>
+                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '} Service Manage
+                                 </NavLink>
+                                 
+                              </div>
+                        }
+                        
+                        </span>
+                        }
+                        
                         <div>
                            <NavLink to='/upload_image' activeStyle={{color: "red"}}>
                                 <i className="fa fa-dashboard"></i>
@@ -97,20 +132,34 @@ function Vendorpage(){
                   </NavLink>
                   
                </div>
-               <div>
-                  <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
-                        <span><i className="fa fa-dashboard"></i></span>
-                           <span>{' '}  Venue Manage</span>
-                  </NavLink>
-                  
-               </div>
-               <div>
-                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
-                        <span><i className="fa fa-dashboard"></i></span>
-                        <span>   {' '} Service Manage</span>
-                  </NavLink>
-                  
-               </div>
+               {loading ? <LoadingBox></LoadingBox>
+                        :
+                        error ? <MessageBox>{error}</MessageBox>
+                        :
+                        <span> {userDetails.vendor_type.type === 'Marriage Gardens' 
+                        ?
+                           <span>
+                              <div>
+                                 <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '}  Venue Manage
+                                 </NavLink>
+                                 
+                              </div>
+                             
+                           </span>
+                           :
+                           <div>
+                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '} Service Manage
+                                 </NavLink>
+                                 
+                              </div>
+                        }
+                        
+                        </span>
+                        }
             </div>
         </div>
         </BrowserRouter>

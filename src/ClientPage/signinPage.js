@@ -63,11 +63,7 @@ function SignInPage(props){
                     
                     
                     <div className="fields">
-                   
-                      
-                            
-                        
-                        
+                    <label className='labels'>Email or Phone</label>
                         <input 
                             type="text" 
                             id="phone" 
@@ -76,13 +72,10 @@ function SignInPage(props){
                             
                         ></input>
                              <span></span>
-                       <label className='labels'>Email or Phone</label>
-                           
-                      
                     </div>
                     
                     <div className="fields">
-                        
+                    <label className='p_labels'>Password</label>
                             <input 
                                 type="password" 
                                 id="password" 
@@ -92,7 +85,7 @@ function SignInPage(props){
                             ></input>
                              <span></span>
                        
-                            <label className='p_labels'>Password</label>
+                           
                        
                         <div className='forget'>
                            <Link to='/forget'> Forget Password?</Link>

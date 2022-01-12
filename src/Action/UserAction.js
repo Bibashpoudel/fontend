@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { USER_REGISTER_REQUEST, USER_REGISTER_FAIL,  USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL } from "../Constants/UserConstant";
+import { USER_REGISTER_REQUEST, USER_REGISTER_FAIL,  USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL, USER_TYPE_DETAILS_LIST_REQUEST, USER_TYPE_DETAILS_LIST_SUCCESS, USER_TYPE_DETAILS_LIST_FAIL } from "../Constants/UserConstant";
 
 export const Signup = (name, email, phone, customer_type, password) => async( dispatch) =>{
     dispatch({
@@ -8,7 +8,11 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
         payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password}
     });
     try {
-        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password})
+        const {data} = await axios.post('https://gardendatabase.herokuapp.com/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password},{
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
         dispatch({
             type:USER_REGISTER_SUCCESS,
             payload:data
@@ -20,9 +24,9 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
         dispatch({
             type:USER_REGISTER_FAIL,
             payload: 
-                error.response && error.response.data.message.mobile 
-                    ? error.response.data.message.mobile 
-                    : error.mobile
+                error.response && error.response.data
+                    ? error.response.data
+                    : error
                     
         })
         
@@ -102,7 +106,7 @@ export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        console.log(userInfo)
+        
         const {data} = await axios.put('/api/user/profile/',user,{
             headers: { 
                 
@@ -127,6 +131,32 @@ export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
                         : error.message
             })
         
+    }
+}
+
+export const userDetailsAction = () => async(dispatch, getState)=>{
+    dispatch({
+        type:USER_TYPE_DETAILS_LIST_REQUEST,
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        const {data} = await axios.get('/api/user/vendordetails',{
+            headers:{
+                'Authorization': 'Bearer ' + userInfo
+            }
+        })
+        dispatch({
+            type:USER_TYPE_DETAILS_LIST_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:USER_TYPE_DETAILS_LIST_FAIL,
+            payload: 
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
     }
 }
 export const signout = () => (dispatch)=>{

@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { VendorCityList, VendorVenueList } from '../../Action/vendorAction';
 import {  addVenueAction, venueDeleteAction, VenueTypeList } from '../../Action/VenueAction';
@@ -255,6 +256,7 @@ function Venuemanage(props){
                             <th>
                                 Action
                             </th>
+                            
                         </tr>
                     </thead>
                     {VendorVenues ?
@@ -271,20 +273,26 @@ function Venuemanage(props){
                                     {vv.name}
                                 </td>
                                 <td>
-                                    {vv.venue_type}
+                                    {vv.venue_type.type}
                                 </td>
                                 <td>
                                     {vv.actual_price}
                                 </td>
                                 <td>
-                                    {vv.city}
+                                    {vv.city.city}
                                 </td>
                                 <td>
                                     <div>
                                         <button className="btn_edit" onClick={() => props.history.push(`/venue/${vv.id}/edit`)}>edit</button>
                                         {'    '}
                                         <button className="btn_danger" onClick={() => deleteHandaler(vv)}>Delete</button>
+                                        { '   '}
+                                        <button onClick={props.history.push('/serviceManage')}>Add Service</button>
                                     </div>
+                                    <div>
+                                 
+                                 
+                              </div>
                                 </td>
                             </tr>
                                 

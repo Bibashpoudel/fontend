@@ -23,8 +23,8 @@ function CartScreen(props){
 
   
 
-    const removeCartHandaler =(venueId) =>{
-        dispatch(reomveFromCart(venueId))
+    const removeCartHandaler =(id) =>{
+        dispatch(reomveFromCart(id))
 
     }
     const amount = parseInt(cartItems.reduce((a,c)=> a + c.price,0))
@@ -42,11 +42,9 @@ function CartScreen(props){
 
     useEffect(() =>{
         
+     if(venueId){
         dispatch(addtoCart(venueId));
-        
-        
-    
-   
+     }
    
     },[dispatch,venueId]);
 
@@ -67,40 +65,64 @@ function CartScreen(props){
                             cartItems.map((item) =>(
                                 <li key={item._id}>
                                     <div className="cart-main">
-                                        <div>
-                                            <img src={item.image} alt={item.name} className="small"></img>
-                                        </div>
-
-                                    
-                                        <div className="min-30">
-                                            <label>Garden Name:</label>{' '}
-                                            <Link to={`/venue/${item.id}`}>{item.name}</Link>
-
-                                        </div>
-                                        {item.service === '' ?
+                                        
+                                        {item.service ?
                                             <div>
+                                                <div className="min-30">
+                                                    <label>Service Name:</label>{' '}
+                                                    <Link style={{color:'blue'}}to={`/service/${item.id}`}>{item.name}</Link>
+
+                                                </div>
+                                                <div>
+                                                    <label>Service Price:</label>{' '}
+                                                    {item.price}
+                                                </div>
+                                                {
+                                                    item.no_of_guest === 0 ?
+                                                    <div>
+                                                    </div>
+                                                    :
+                                                    <div>
+                                                        {item.no_of_guest}
+                                                    </div>
+                                                }
+                                                 {
+                                                    item.no_of_days === 0 ?
+                                                    <div>
+                                                    </div>
+                                                    :
+                                                    <div>
+                                                        {item.no_of_days}
+                                                    </div>
+                                                }
+                                                <div>
+                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler(item.service)}>Delete</button>
+                                                </div>
+                                            
                                                 
                                             </div>
                                             :<div>
-                                            <label>Selected Services:</label>{' '}
-                                                {item.service}
+                                                <div>
+                                                    <img src={item.image} alt={item.name} className="small"></img>
+                                                </div>
+
+                                            
+                                                <div className="min-30">
+                                                    <label>Garden Name:</label>{' '}
+                                                    <Link style={{color:'blue'}} to={`/venue/${item.id}`}>{item.name}</Link>
+
+                                                </div>
+                                                <div>
+                                                    <label>Venue Price:</label>{' '}
+                                                    {item.price}
+                                                </div>
+                                                <div>
+                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler(item.venue)}>Delete</button>
+                                                </div>
                                             </div>
                                         }
-                                        {
-                                            item.totalPrice === '0' ?
-                                            <div>
-                                                <label>Venue Price:</label>{' '}
-                                                {item.price}
-                                            </div>
-                                            :
-                                            <div>
-                                                <label>Total Price:</label>{' '}
-                                                {item.totalPrice}
-                                            </div>
-                                        }
-                                        <div>
-                                            <button type="button" onClick={()=> removeCartHandaler(item.venue)}>Delete</button>
-                                        </div>
+                                        
+                                        
                                     </div>
                                 </li>
                             ))

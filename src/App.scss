@@ -289,6 +289,7 @@ main{
     
     min-height: 95vh;
     margin-top:6.5rem;
+    font-size:1.6rem !important
 }
 
 
@@ -915,12 +916,23 @@ img.ven_reg{
 .cli_log{
   position: absolute;
   top: 25%;
-  left: 20%;
+  left: 30%;
   transform: translate(-50%, -50%);
   color: white;
   font-size: 2.3rem;
   width:20rem;
   text-align: center;
+  @media(max-width:1250px){
+    left:25%;
+  }
+  @media(max-width:990px){
+    left:18%;
+  }
+ 
+  @media(max-width:860px){
+    top:40%;
+    left: 50%;
+  }
 }
 
 img.cus_log{
@@ -1437,11 +1449,7 @@ button.close-sidebar {
     border-bottom-left-radius: 0;
   }
 }
-@media only screen and (max-width: 920px){
-  .cli_log{
-    left:50%;
-  }
-}
+
 @media only screen and (max-width: 856px){
   .nav-search{
     width:40%;

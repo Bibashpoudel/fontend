@@ -1,10 +1,10 @@
 import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
-import { UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
+import { userDetailsReducer, UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
-import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, ServiceReducer, ServiceTypeReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
+import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
@@ -23,6 +23,11 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('cartItems'))
         : []
     },
+    // cartS:{
+    //     cartItems:localStorage.getItem('cartItems')
+    //     ? JSON.parse(localStorage.getItem('cartItems'))
+    //     : []
+    // },
     userProfileView:{
         profile: localStorage.getItem('profile')
         ? JSON.parse(localStorage.getItem('profile'))
@@ -37,6 +42,7 @@ const reducer = combineReducers({
     userSignin:userSigninReducer,
     userRegister:userRegisterReducer,
     cart:cartReducer,
+    // cartS:cartSReducer,
     Listvenue:VenueListReducer,
     CityVenue:CityVenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
@@ -48,12 +54,14 @@ const reducer = combineReducers({
     UserOrders:UserOrderReducer,
     ReviewAdd:AddvenueReviewReducer,
     ReviewDisplay:VenueReviewListReducer,
+    serviceReviewView:ServiceReviewListReducer,
     Razorpay:PayReducer,
     order:OrderReducer,
     
 
 
     // vendor Reducer
+    vendorDetails:userDetailsReducer,
     VendorCitys:VendorCityListReducer,
     VendorTypes:VendorTypeListReducer,
     vendorRegister:VendorRegisterReducer,

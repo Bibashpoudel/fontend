@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { ServiceDetails, ServicesListaction } from '../Action/ServicesAction';
+import { CreateServiceComment, ServiceDetails, ServicesListaction } from '../Action/ServicesAction';
 import { createComment, VenueDetails, VenueReviewAction } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -10,6 +10,7 @@ import { VenueImageList } from '../Action/ImageAction';
 import { addtoCartS, reomveFromCart, } from '../Action/CartAction';
 import swal from 'sweetalert';
 import { ADD_REVIEW_RESET } from '../Constants/venueConstants';
+import { ADD_SERVICE_REVIEW_RESET } from '../Constants/servicesConstants';
 
 function ServiceDetailsPage(props){
     // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
@@ -26,8 +27,8 @@ function ServiceDetailsPage(props){
     const {profile} = userProfileView;
     const ReviewAdd = useSelector((state) => state.ReviewAdd);
     const {loading:loading_addreview, ReviewAdd:success,error:ReviewAddError} = ReviewAdd;
-    const ReviewDisplay = useSelector((state) => state.ReviewDisplay);
-    const {loading:VenueReviewLoading,venueReview,error:ReviewDisplayError} = ReviewDisplay;
+    const serviceReviewView = useSelector((state) => state.serviceReviewView);
+    const {loading:ServiceReviewLoading,serviceReview,error:ServiceReviewError} = serviceReviewView;
 
     const [, setserviceADD] = useState(['']);
     const [total, setTotal] = useState();
@@ -43,7 +44,7 @@ function ServiceDetailsPage(props){
     const AddReview =(e) =>{
         e.preventDefault();
         if(comment ){
-            dispatch(createComment(serviceId, comment));
+            dispatch(CreateServiceComment(serviceId, comment));
         }
     }
    
@@ -55,10 +56,10 @@ function ServiceDetailsPage(props){
             setComment('')
             swal("Review Added successfully", "Wait For Approval", "success");
             dispatch({
-                type:ADD_REVIEW_RESET
+                type:ADD_SERVICE_REVIEW_RESET
             })
         }
-        dispatch(VenueReviewAction(serviceId))
+       
         dispatch(ServiceDetails(serviceId));
    
     }, [dispatch, serviceId, success] );
@@ -135,9 +136,9 @@ function ServiceDetailsPage(props){
 
     
     const Carthandaler=()=>{
-        
+        dispatch(addtoCartS(serviceId))
         setTotal( 0);
-        props.history.push(`/cart/${serviceId}`);
+        props.history.push(`/cart/`);
     //    setTimeout ((e)=>{
     //     
     //     console.log("bibash")
@@ -160,9 +161,9 @@ function ServiceDetailsPage(props){
         :
             errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
         :
-        VenueReviewLoading ? <LoadingBox></LoadingBox>
+        ServiceReviewLoading ? <LoadingBox></LoadingBox>
         :
-        ReviewDisplayError ? <MessageBox variant="danger">{ReviewDisplayError}</MessageBox>
+        ServiceReviewError ? <MessageBox variant="danger">{ServiceReviewError}</MessageBox>
         
         :
         <div> 
@@ -225,116 +226,9 @@ function ServiceDetailsPage(props){
                             </div>
                     </div>
                 </div>
-                <form className="form col-2">
-                <div className="">
-                {
-                loading_service? <LoadingBox></LoadingBox>
-            :
-                error_service? <MessageBox variant="danger">{error_service}</MessageBox>
-            :
-                    <div className="g_service">
-                        <div className="g_ser_hed">
-                            <h3>
-                                Available Services
-                            </h3>
-                        </div>
-                        {
-                            vService.map((serv, index) =>(
-                            
-                                <div key={serv.id} className="Ven_service">
-                            <div className="dts_service">
-                            <div className="dts_col_1">
-                                    {serv.is_true? (
-                                        <span>
-                                            {/* <i className="fa fa-plus"></i> */}
-
-                                            <div className="tooltip">
-                                                <input className="tooltip"
-                                                type="checkbox"
-                                                    id={`custom-checkbox-${index}`}
-                                                    name={serv.name}
-                                                    value={serv.id}
-                                                    checked={serv[index]}
-                                                    onChange={() => handleOnChange(index)}
-                                                />
-                                        
-                                                <span class="tooltiptext">First Enter the number of guest and click me</span>
-                                            </div>
-                                        </span>
-
-                                    ):
-                                        <span>
-                                        {/* <i className="fa fa-plus"></i> */}
-
-                                    
-                                        <input
-                                        type="checkbox"
-                                            id={`custom-checkbox-${index}`}
-                                            name={serv.name}
-                                            value={serv.id}
-                                            checked={serv[index]}
-                                            onChange={() => handleOnChange(index)}
-                                        />
-                                    </span>
-                                    }
-                                <span>
-                                <label htmlFor={`custom-checkbox-${index}`}>{serv.name}</label>
-                                </span>
-                                <span>
-                                    {serv.display_price}
-                                    {
-                                        serv.is_true ? (
-                                            <span> Per Plate</span>
-                                        ):
-                                        <span></span>
-                                    }
-                                </span>
-                            </div>
-                            <div className="dts_col_2">
-                                    <span className={IsOpen ? 'hide_content' : ''}>
-                                    
-                                        <span >
-                                                <i className ="fa fa fa-angle-down"
-                                                        onClick={() => setIsOpen(true)}
-                                                ></i>
-
-                                        </span>
-                                </span>
-                                <span className="hide_content">
-                                <span className={IsOpen ? 'open' : ''}>
-                                <i className ="fa fa fa-angle-up"
-                                        onClick={() => setIsOpen(false)}
-                                ></i>
-                                </span>
-                                </span>
-
-                                
-                            </div>
-                            </div>
-                            <div className="hide_content dts_desc">
-                                <span className={IsOpen ? 'open' : ''}>
-                                    
-                                    {
-                                        serv.is_true ? (
-                                            <span  className={IsOpen ? 'open' : ''}>
-                                            <input type="number" placeholder="no of guest eg(50)" onChange={(e) =>SetPeople(e.target.value)}></input>
-                                        </span>
-
-                                        
-                                        ):
-                                        <span></span>
-                                    }
-                                        {serv.description}
-                                    
-                                </span>
-                            </div>
-                            
-
-                        </div>
-
-                            ))
-                        }
-                        
+                    <form className="form col-2">
+                        <div>
+             
                         <div className="g_details">
                             <div className="ven_price_loc">
                                 <div>
@@ -392,9 +286,9 @@ function ServiceDetailsPage(props){
                                     <input type="text" placeholder="leave a comment"></input>
                             </div>
                         </div>
+                    
+    
                     </div>
-    }
-                </div>
                 </form>
                 
             </div>
@@ -446,19 +340,19 @@ function ServiceDetailsPage(props){
                             </div>
                             <div id="features">
                                <h4> Venues Features</h4>
-                                {serviceD.features}
+                                {serviceD.description}
                             </div>
                             <div id="reviews"> 
                                 
                                     <h4>Review</h4>
                                    <ul>
                                        
-                                   {venueReview.length === 0 && (
+                                   {serviceReview.length === 0 && (
                                            <MessageBox>There is no review </MessageBox>
                                        )}
                                      
                                      {
-                                         venueReview.map((review)=>(
+                                         serviceReview.map((review)=>(
                                             <div>
                                               
                                                     <li>

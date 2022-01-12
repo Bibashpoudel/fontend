@@ -1,4 +1,4 @@
-import { USER_REGISTER_REQUEST,USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL } from "../Constants/UserConstant";
+import { USER_REGISTER_REQUEST,USER_REGISTER_FAIL, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL, USER_TYPE_DETAILS_LIST_SUCCESS, USER_TYPE_DETAILS_LIST_REQUEST, USER_TYPE_DETAILS_LIST_FAIL } from "../Constants/UserConstant";
 
 
 
@@ -72,5 +72,26 @@ export const UserProfileReducer =(state ={}, action) =>{
             }    
         default:
             return state
+    }
+}
+export const userDetailsReducer = (state ={loading:true}, action) =>{
+    switch(action.type){
+        case USER_TYPE_DETAILS_LIST_REQUEST:
+            return{
+                loading:true
+            } 
+        case USER_TYPE_DETAILS_LIST_SUCCESS:
+            return{
+                loading:false,
+                userDetails:action.payload
+            }
+        case USER_TYPE_DETAILS_LIST_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        default:
+            return state 
+
     }
 }

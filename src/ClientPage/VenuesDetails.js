@@ -129,7 +129,7 @@ function VenueDetailsPage(props){
                 return serviceId;
             }
            else{
-                dispatch(reomveFromCart(venueId));
+                dispatch(reomveFromCart(serviceId));
             }
             return serviceId;
         },
