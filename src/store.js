@@ -8,6 +8,7 @@ import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, Se
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
+import { RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
 
 
 const initialState = {
@@ -57,6 +58,8 @@ const reducer = combineReducers({
     serviceReviewView:ServiceReviewListReducer,
     Razorpay:PayReducer,
     order:OrderReducer,
+    regOtpSend:RegisterOtpsendReducer,
+    regOtpVerify:RegisterOtpverifyReducer,
     
 
 

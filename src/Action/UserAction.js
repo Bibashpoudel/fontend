@@ -8,7 +8,7 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
         payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password}
     });
     try {
-        const {data} = await axios.post('https://gardendatabase.herokuapp.com/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password},{
+        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password},{
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -17,8 +17,6 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
             type:USER_REGISTER_SUCCESS,
             payload:data
         })
-        
-        
         
     } catch (error) {
         dispatch({
