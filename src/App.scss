@@ -144,6 +144,9 @@ button.primary{
   background-color:#d4133ddc;
   color:White;
   font-size: 2rem;
+  @media(max-width:500px){
+    font-size: 1.5rem;
+  }
 }
 button.secondary {
   background-color: #26A412;
@@ -896,7 +899,8 @@ footer {
   outline: none;
   background-color:white ;
   margin-bottom:1.2rem;
-  width:54%;
+  border-bottom:.1rem solid grey;
+  width:65%;
 }
 .form textarea{
   outline: none;
@@ -1092,6 +1096,7 @@ max-width:100rem;
   background-color:white ;
   margin-bottom:1.2rem;
   width:109%;
+
 }
 .ser-mng-col-3 {
   margin-left:1.8rem;

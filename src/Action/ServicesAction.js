@@ -27,7 +27,7 @@ export const ServicesListaction =(venueId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
@@ -81,7 +81,7 @@ export const VenueServices =() =>async(dispatch, getState)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
@@ -105,17 +105,17 @@ export const ServicesList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
-export const ServiceDetails = (serviceId) => async(dispatch, getState)=>{
+export const ServiceDetails = (serviceId) => async(dispatch)=>{
     dispatch({
         type:SERVICE_DETAILS_REQUEST,
         payload:serviceId
     })
     try {
-        const {userSignin:{userInfo}} = getState();
+        
         const {data} = await axios.get(`/api/service/admin/${serviceId}`)
         dispatch({
             type:SERVICE_DETAILS_SUCCESS,
@@ -127,7 +127,7 @@ export const ServiceDetails = (serviceId) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
     }
 }
@@ -155,7 +155,7 @@ export const ServicesTypeList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
@@ -177,7 +177,7 @@ export const ServiceTypeDetails = (typeID) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
     }
 }
@@ -217,7 +217,7 @@ export const ServiceAdd = (name, venue, actual_price, display_price, display_ima
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 }
@@ -243,7 +243,7 @@ export const ServiceUpdateAction = (service)=>async(dispatch, getState)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 }
@@ -269,7 +269,7 @@ export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
     }
 }
@@ -301,7 +301,7 @@ export const CreateServiceComment = (serviceId, comment) =>async(dispatch, getSt
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
         
     }
@@ -327,7 +327,7 @@ export const ServiceReviewListAction =(serviceId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }

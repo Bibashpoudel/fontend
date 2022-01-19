@@ -8,7 +8,7 @@ import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, Se
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
-import { RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
+import { PasswordForgetOtpsendReducer, PasswordForgetOtpverifyReducer, RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
 
 
 const initialState = {
@@ -49,7 +49,7 @@ const reducer = combineReducers({
     DetailsVenue:VenueDetailsListReducer,
     typeService:ServiceTypeReducer,
     particularSType:detailsServiceTypeReducer,
-    servicelist:ServiceReducer,
+    servicelist:ServiceReducer, 
     typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
     UserOrders:UserOrderReducer,
@@ -58,8 +58,10 @@ const reducer = combineReducers({
     serviceReviewView:ServiceReviewListReducer,
     Razorpay:PayReducer,
     order:OrderReducer,
-    regOtpSend:RegisterOtpsendReducer,
+    otpSendReg:RegisterOtpsendReducer,
     regOtpVerify:RegisterOtpverifyReducer,
+    optsendForget:PasswordForgetOtpsendReducer,
+    otpverifyForget:PasswordForgetOtpverifyReducer,
     
 
 
@@ -89,7 +91,7 @@ const reducer = combineReducers({
 
 
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = compose;
 const store = createStore(
     reducer,
     initialState,

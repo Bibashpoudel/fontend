@@ -36,7 +36,7 @@ export const Payorder = (amount)=> async(dispatch, getState )=>{
            payload:
            error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
        })
        
    }
@@ -91,7 +91,7 @@ export const pay = (amounts, orderid) => async(dispatch)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
 
         })
         

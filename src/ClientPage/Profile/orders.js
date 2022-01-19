@@ -9,7 +9,7 @@ export function Orders(){
 
 
     const UserOrders = useSelector(state => state.UserOrders)
-    const {loading, error, userOrder} =UserOrders;
+    const {loading, error} =UserOrders;
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(UserOrderList())

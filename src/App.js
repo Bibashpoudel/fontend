@@ -1,7 +1,7 @@
 // import pictures from './images/wp.png';
 
 import { BrowserRouter,  Link,  NavLink,  Route } from 'react-router-dom'
-import Home from './ClientPage/Home.js';
+
 import VenueDetailsPage from './ClientPage/VenuesDetails';
 import SignupPage from './ClientPage/signupPage';
 import SignupPageVendor from './VenderPage/signupPage';
@@ -32,8 +32,6 @@ import { useEffect, useState } from 'react';
 import { VenueTypeList } from './Action/VenueAction';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from './components/LoadingBox';
-import MessageBox from './components/MessageBox';
-import Nav from './components/Nav';
 import './Nav.scss'
 import LandingPage from './ClientPage/landingpage.js';
 import NewLanding from './ClientPage/newland.js';
@@ -41,6 +39,8 @@ import { ServicesTypeList } from './Action/ServicesAction.js';
 import ServiceDetailsPage from './ClientPage/ServiceDetailsPage.js';
 import VenueDisplay from './ClientPage/VenueDisplay.js';
 import ServiceDisplay from './ClientPage/serviceTypeDisplay.js';
+import MessageBox from './components/MessageBox';
+import ForgetPassword from './ClientPage/forgetPassword';
 
 
 
@@ -117,12 +117,14 @@ function App() {
 
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById('btnclose').style.right = '25px'
       setBlur(true);
     }
-    console.log(blur)
+    
     
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
+      document.getElementById('btnclose').style.right = '0'
       setBlur(false);
     }
     
@@ -167,7 +169,7 @@ function App() {
         
         </header> 
             <div id="mySidenav" className="sidenav">
-             <span href="#" className="closebtn" onClick={()=> closeNav()}>&times;</span>
+             <span href="#" id="btnclose" className="closebtn" onClick={()=> closeNav()}>&times;</span>
              {
                 profile ? 
                 <NavLink to="/profile" className="mg-bot" onClick={()=> closeNav()}>{profile.fullname} <i className="fa fa-user-circle" /></NavLink>
@@ -211,6 +213,7 @@ function App() {
                     <NavLink to="/signin" onClick={()=> closeNav()} >Sign In</NavLink>
                   </div>
                     }
+                     <NavLink to="/vendor_register"  onClick={()=> closeNav()}>Vendor Register</NavLink>
                 </div>
                   
                 </div>
@@ -238,9 +241,7 @@ function App() {
                         <NavLink className='row-hover' to={`/type/venue/${t.id}`}>{t.type}{t.id}</NavLink>
 
                       ))
-                    }
-
-                    
+                    } 
                   </div>
                 
                 }
@@ -299,7 +300,7 @@ function App() {
 
 
                 {/* Client screen */}
-
+ 
                 
                 <PrivateRoute path="/user"  component={Accounts}></PrivateRoute>
                 <PrivateRoute path="/order" component={Orders}></PrivateRoute>
@@ -316,6 +317,7 @@ function App() {
                 <Route path="/type/venue/:id" component={VenueDisplay}></Route>
                 <Route path="/city/venue/:id" component={CityVenue}></Route>
                 <Route path='/cart/:id?' component={CartScreen}></Route>
+                <Route path='/forget' component={ForgetPassword}></Route>
                 <Route path='/signin' component={SignInPage}></Route>
                 <Route path="/register" component={SignupPage}></Route>
                 <Route path="/service/:id" component={ServiceDetailsPage}></Route>

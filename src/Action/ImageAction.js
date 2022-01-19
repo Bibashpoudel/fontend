@@ -21,7 +21,7 @@ export const VenueImageList =(venueId) => async(dispatch)=>{
             payload:
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 
@@ -55,7 +55,7 @@ export const VenueImageadd =(venue, media) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 

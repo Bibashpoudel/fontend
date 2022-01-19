@@ -31,8 +31,12 @@
     min-width: 83%;
     
     @media(max-width:600px){
-      margin-left:-2rem !important;
+      margin-left:-2rem ;
       min-width:80%  !important;
+    }
+    @media(max-width:450px) {
+      font-size: 1.3rem !important;
+      
     }
     
     
@@ -51,7 +55,7 @@
   
   
   .social_items{
-    display: flex;
+    display: none !important;
     flex-wrap: wrap;
     flex-direction: column;
     
@@ -275,4 +279,15 @@
 }
 .hide_otp{
   display: none;
+}
+.code-row{
+  margin-top:-1.2rem
+}
+
+.resend-Code{
+  cursor: pointer;
+  color:dodgerblue;
+}
+.resend-Code:hover{
+  color:blue;
 }

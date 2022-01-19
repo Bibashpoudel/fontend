@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Rating from './Rating';
 import "./Card.scss";
 import Card from '../assets/card.png'
 

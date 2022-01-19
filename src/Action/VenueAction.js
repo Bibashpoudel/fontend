@@ -18,7 +18,7 @@ export const VenueTypeList = () =>async(dispatch)=>{
             payload:
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 }
@@ -44,7 +44,7 @@ export const VenueList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
@@ -70,7 +70,7 @@ export const VenueDetails =(venueId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }
@@ -136,7 +136,7 @@ export const addVenueAction =( Name, price, displayprice, city, venue_type, imag
                 payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
             })
     }
 }
@@ -163,7 +163,7 @@ export const vendorVenueDetails = (venueId) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
     }
 }
@@ -192,7 +192,7 @@ export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
         
     }
@@ -224,7 +224,7 @@ export const venueDeleteAction = (venueId) => async(dispatch, getState)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
         
     }
@@ -320,7 +320,7 @@ export const createComment = (venueId, comment) =>async(dispatch, getState)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
         
     }
@@ -346,7 +346,7 @@ export const VenueReviewAction =(venueId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         });
     }
 }

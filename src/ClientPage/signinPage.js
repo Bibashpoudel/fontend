@@ -63,7 +63,7 @@ function SignInPage(props){
                     
                     
                     <div className="fields">
-                    <label className='labels'>Email or Phone</label>
+                    <label className='labels'>Phone</label>
                         <input 
                             type="text" 
                             id="phone" 

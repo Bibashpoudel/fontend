@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateServiceComment, ServiceDetails, ServicesListaction } from '../Action/ServicesAction';
-import { createComment, VenueDetails, VenueReviewAction } from '../Action/VenueAction';
+import { CreateServiceComment, ServiceDetails } from '../Action/ServicesAction';
+
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {Link} from 'react-scroll'
-import { VenueImageList } from '../Action/ImageAction';
 
-import { addtoCartS, reomveFromCart, } from '../Action/CartAction';
+
+import { addtoCartS } from '../Action/CartAction';
 import swal from 'sweetalert';
-import { ADD_REVIEW_RESET } from '../Constants/venueConstants';
 import { ADD_SERVICE_REVIEW_RESET } from '../Constants/servicesConstants';
 
 function ServiceDetailsPage(props){
@@ -19,8 +18,7 @@ function ServiceDetailsPage(props){
     const dispatch = useDispatch();
     const serviceDetails = useSelector((state) =>state.serviceDetails);
     const {loading, error, serviceD} = serviceDetails;
-    const venueService =useSelector(state =>state.venueService);
-    const {loading:loading_service, error:error_service, vService} = venueService;
+   
     const venueImage = useSelector(state => state.venueImage);
     const { loading:loadingImage, error:errorImage, venImg} = venueImage;
     const userProfileView = useSelector((state) => state.userProfileView);
@@ -30,10 +28,10 @@ function ServiceDetailsPage(props){
     const serviceReviewView = useSelector((state) => state.serviceReviewView);
     const {loading:ServiceReviewLoading,serviceReview,error:ServiceReviewError} = serviceReviewView;
 
-    const [, setserviceADD] = useState(['']);
+    // const [, setserviceADD] = useState(['']);
     const [total, setTotal] = useState();
-    const [people, SetPeople] = useState(0);
-    const [checkedState, setCheckedState] = useState([false, false, false,false])
+    // const [people, SetPeople] = useState(0);
+    // const [checkedState, setCheckedState] = useState([false, false, false,false])
     const [imageDisplay , setImageDispaly] = useState(false);
     const [videoDisplay , setVideoDispaly] = useState(false);
     const [rating, setRating] = useState();
@@ -77,61 +75,61 @@ function ServiceDetailsPage(props){
   }
     
     // console.log(services)
-  const handleOnChange = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) =>
-      index === position ? !item : item
-    );
+//   const handleOnChange = (position) => {
+//     const updatedCheckedState = checkedState.map((item, index) =>
+//       index === position ? !item : item
+//     );
 
-    setCheckedState(updatedCheckedState);
+//     setCheckedState(updatedCheckedState);
     
     
-    const totalPrice = updatedCheckedState.reduce(
-      (sum,  currentState, index) => {
+//     const totalPrice = updatedCheckedState.reduce(
+//       (sum,  currentState, index) => {
          
-        if (currentState === true) {
+//         if (currentState === true) {
            
-            const calcpric = parseInt(vService[index].display_price);
+//             const calcpric = parseInt(vService[index].display_price);
 
-          if(vService[index].is_true ===true){
+//           if(vService[index].is_true ===true){
 
             
 
-            return sum +  calcpric * people;
-          }
-          else{
-            return sum + calcpric;
-          }
-        }
-        return sum ;
-      },
-      0
-    );
-    const venueprice = parseInt(serviceD.display_price);
-    const finalprice  = venueprice + totalPrice;
-    setTotal( finalprice);
+//             return sum +  calcpric * people;
+//           }
+//           else{
+//             return sum + calcpric;
+//           }
+//         }
+//         return sum ;
+//       },
+//       0
+//     );
+//     const venueprice = parseInt(serviceD.display_price);
+//     const finalprice  = venueprice + totalPrice;
+//     setTotal( finalprice);
 
-    // for adding service name
-    const SelectedService = updatedCheckedState.reduce(
-        (serviceId, currentState, index) =>{
-            if(currentState === true){
-                // return  names = names + ","+ vService[index].id;
-                const serviceId = vService[index].id
-                dispatch(addtoCartS(serviceId))
-                console.log(serviceId)
-                return serviceId;
-            }
-           else{
-                dispatch(reomveFromCart(serviceId));
-            }
-            return serviceId;
-        },
-        ''
+//     // for adding service name
+//     const SelectedService = updatedCheckedState.reduce(
+//         (serviceId, currentState, index) =>{
+//             if(currentState === true){
+//                 // return  names = names + ","+ vService[index].id;
+//                 const serviceId = vService[index].id
+//                 dispatch(addtoCartS(serviceId))
+//                 console.log(serviceId)
+//                 return serviceId;
+//             }
+//            else{
+//                 dispatch(reomveFromCart(serviceId));
+//             }
+//             return serviceId;
+//         },
+//         ''
 
-    );
-    setserviceADD(SelectedService)
+//     );
+//     setserviceADD(SelectedService)
     
    
-  };
+//   };
 
 
     
@@ -148,7 +146,7 @@ function ServiceDetailsPage(props){
 
     }
 
-    const [IsOpen, setIsOpen] = useState(false);
+    // const [IsOpen, setIsOpen] = useState(false);
     return(
         
         <div>

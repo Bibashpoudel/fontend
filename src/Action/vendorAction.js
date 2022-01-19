@@ -21,7 +21,7 @@ export const VendorCityList = () => async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 
@@ -45,19 +45,19 @@ export const VendorTypeList = () => async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
-                : error.message
+                : error
         })
     }
 
 }
 
-export const VendorSignup = (name, email, phone, customer_type, vendor_type, city,  password) => async( dispatch) =>{
+export const VendorSignup = (name, email, phone, customer_type, vendor_type, city,  password,otp) => async( dispatch) =>{
     dispatch({
         type:VENDOR_REGISTER_REQUEST,
-        payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, vendor_type:vendor_type, city:city, password:password}
+        payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, vendor_type:vendor_type, city:city, password:password,code:otp}
     });
     try {
-        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, vendor_type:vendor_type, city:city, password:password})
+        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, vendor_type:vendor_type, city:city, password:password,code:otp})
         dispatch({
             type:VENDOR_REGISTER_SUCCESS,
             payload:data

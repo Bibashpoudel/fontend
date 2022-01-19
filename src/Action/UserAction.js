@@ -2,13 +2,13 @@
 import axios from 'axios'
 import { USER_REGISTER_REQUEST, USER_REGISTER_FAIL,  USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_PROFILE_FAIL, USER_TYPE_DETAILS_LIST_REQUEST, USER_TYPE_DETAILS_LIST_SUCCESS, USER_TYPE_DETAILS_LIST_FAIL } from "../Constants/UserConstant";
 
-export const Signup = (name, email, phone, customer_type, password) => async( dispatch) =>{
+export const Signup = (name, email, phone, customer_type, password,code) => async( dispatch) =>{
     dispatch({
         type:USER_REGISTER_REQUEST,
-        payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password}
+        payload: {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password,code:code}
     });
     try {
-        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password},{
+        const {data} = await axios.post('/api/user/add/', {fullname:name, email:email, mobile:phone, user_type:customer_type, password:password,code:code},{
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -16,6 +16,10 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
         dispatch({
             type:USER_REGISTER_SUCCESS,
             payload:data
+        })
+        dispatch({
+            type: USER_SIGNIN_REQUEST,
+            payload:{email:email, password:password}
         })
         
     } catch (error) {
@@ -31,13 +35,13 @@ export const Signup = (name, email, phone, customer_type, password) => async( di
     }
 }
 
-export const Signin = (email, password) => async(dispatch) =>{
+export const Signin = (phone, password) => async(dispatch) =>{
     dispatch({
         type: USER_SIGNIN_REQUEST,
-        payload:{email:email, password:password}
+        payload:{phone, password}
     })
     try {
-        const {data} = await axios.post('/api/user/token/', {email:email, password:password},{
+        const {data} = await axios.post('/api/user/token/', {mobile:phone, password},{
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -57,7 +61,7 @@ export const Signin = (email, password) => async(dispatch) =>{
             payload: 
                 error.response && error.response.data.message
                     ? error.response.data.message
-                    : error.message
+                    : error
         })   
     }
     
@@ -91,7 +95,7 @@ export const UserProfileViewAction = () => async(dispatch, getState)=>{
                 payload: 
                     error.response && error.response.data.message
                         ? error.response.data.message
-                        : error.message
+                        : error
             })
         
     }
@@ -126,7 +130,7 @@ export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
                 payload: 
                     error.response && error.response.data.message
                         ? error.response.data.message
-                        : error.message
+                        : error
             })
         
     }
@@ -153,7 +157,7 @@ export const userDetailsAction = () => async(dispatch, getState)=>{
             payload: 
                 error.response && error.response.data.message
                     ? error.response.data.message
-                    : error.message
+                    : error
         })
     }
 }

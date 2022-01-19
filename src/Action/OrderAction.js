@@ -33,7 +33,7 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
         localStorage.removeItem('Razorpay');
     }
@@ -66,7 +66,7 @@ export const UserOrderList =() => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
-            : error.message
+            : error
         })
        
     }

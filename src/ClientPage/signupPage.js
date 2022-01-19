@@ -4,16 +4,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Signin, Signup } from '../Action/UserAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Load from '../assets/load.gif'
 
 import regimg from '../registerclient.png'
-import { registerSendOtp, registerVerifyOtp } from '../Action/OtpAction';
-import swal from 'sweetalert';
+import { registerSendOtp } from '../Action/OtpAction';
 
 function SignupPage(props){
 
 
 
-    const[name, SetName] =useState();
+   
     const [FirstName, SetFirstName] = useState();
     const [LastName, SetLastName] = useState();
     const [email, SetEmail] =useState();
@@ -27,41 +27,49 @@ function SignupPage(props){
 
     const userRegister = useSelector(state => state.userRegister);
     const { loading, userInfo, error} =userRegister;
-    const regOtpSend = useSelector(state => state.regOtpsend);
-    const {loading:otploading, error:otpError} = regOtpSend;
+    const otpSendReg = useSelector(state => state.otpSendReg);
+    const {loading:otploading, success, error:sendError } = otpSendReg;
 
-    const regOtpVerify = useSelector(state => regOtpVerify);
-    const {loading:VOloading, code, error:VerifyError} = regOtpVerify;
+    const regOtpVerify = useSelector(state => state.regOtpVerify);
+    const { error:verifyError } = regOtpVerify;
+
     const dispatch = useDispatch();
     const OtpVerify =(e)=>{
         e.preventDefault();
         
         dispatch(registerSendOtp(phone))
-        if(!otploading){
-            setOtpState(true)
-        }
+       
+            
+       
+            
        
     }
     const SignUphandaler = (e)=>{
         e.preventDefault()
-        dispatch(registerVerifyOtp(otp));
+        dispatch(Signup(`${FirstName} ${LastName}`, email, phone, customer_type, password,otp));
 
-       if(code){
-        swal("Verify", "OTP verify Successfully", "success")
-        dispatch(Signup(`${FirstName} ${LastName}`, email, phone, customer_type, password));
-       }
+       
     }
     const changeState = (e)=>{
         e.preventDefault()
         setOtpState(false)
     }
     useEffect(() =>{
+        if(success){
+            setOtpState(true)
+        }
         if(userInfo){
-            props.history.push(redirect);
+            dispatch(Signin(phone, password));
+            setTimeout(()=>{
+                props.history.push(redirect);
+            }, 3000)
             
         }
+       
+           
+           
 
-    }, [props.history,redirect,  userInfo]);
+    }, [dispatch, password, phone, props.history, redirect, success, userInfo]);
 
 
     return(
@@ -76,11 +84,12 @@ function SignupPage(props){
                       
                          {   error &&<MessageBox variant="danger">{error}</MessageBox>}
                         
-                    
+                  
           
 
               <div>
               <form onSubmit={OtpVerify} className={OtpState ? 'hide_otp':'show_otp'}>
+              {sendError && <MessageBox>{sendError}</MessageBox>}
                     <div>
                         <h2>Welcome !</h2>
                     </div>
@@ -179,7 +188,11 @@ function SignupPage(props){
                
                 <form className={OtpState ? 'show_otp': "hide_otp"} >
                     <h2>Enter OTP</h2>
+                    <h4>{verifyError && <MessageBox>{verifyError}</MessageBox>}</h4>
                     <input type="text" placeholder='Enter Otp' onChange={(e) => SetOtp(e.target.value)}></input>
+                    <div className='code-row'>{verifyError && <span className='resend-Code' onClick={OtpVerify}> Resend Code?</span>}
+                    {'  '} {otploading && <img className="img small" src={Load} alt="loading"></img>}
+                    </div>
                     <div >
                         <button onClick={changeState}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>
                         <button className='primary' onClick={SignUphandaler}>Verify</button>

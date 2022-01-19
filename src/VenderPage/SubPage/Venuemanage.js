@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { VendorCityList, VendorVenueList } from '../../Action/vendorAction';
 import {  addVenueAction, venueDeleteAction, VenueTypeList } from '../../Action/VenueAction';

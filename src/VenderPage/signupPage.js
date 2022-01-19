@@ -1,14 +1,16 @@
 import React, { useEffect, useState, } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Signin, } from '../Action/UserAction.js';
+
 
 import { GSTPANAdd, VendorCityList,    VendorSignup,    VendorTypeList } from '../Action/vendorAction.js';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import venimg  from '../vreg.jpg'
+import Load from '../assets/load.gif'
 
 import swal from 'sweetalert'
+import { registerSendOtp } from '../Action/OtpAction.js';
 
 window.Swal = swal;
 
@@ -30,7 +32,7 @@ function SignupPageVendor(props){
 
     // const userRegister = useSelector(state => state.userRegister);
     // const {  userInfo, } =userRegister;
-    const redirect = props.location.search ? props.location.search.split('=')[1]: '/'
+   
 
     const VendorCitys = useSelector((state) => state.VendorCitys);
     const {loading:loading_city, error:error_city, citys} = VendorCitys;
@@ -39,40 +41,46 @@ function SignupPageVendor(props){
     const {loading:loading_types, error:error_types, types} =VendorTypes;
 
     const vendorRegister = useSelector(state => state.vendorRegister);
-    const{loading:loading_user, error:error_user, VendorInfo} = vendorRegister
-    const userSignin = useSelector(state => state.userSignin);
-    const{ userInfo} = userSignin;
+    const{ VendorInfo} = vendorRegister
+    // const userSignin = useSelector(state => state.userSignin);
+    // const{ userInfo} = userSignin;
     const addGstPan = useSelector(state => state.addGstPan);
     const {gstpan} = addGstPan
+    const otpSendReg = useSelector(state => state.otpSendReg);
+    const {loading:otploading, success} = otpSendReg;
+
+    const regOtpVerify = useSelector(state => state.regOtpVerify);
+    const { error:verifyError } = regOtpVerify;
 
 
     const [form, setform] = useState(true);
     const [otpform, setOtpform] = useState(false);
     const [panform, setPanform] = useState(false);
 
+
+
     const dispatch = useDispatch();
     const SignUphandaler =(e)=>{
         e.preventDefault();
         
-      
-            // const data = {Name:name, email:email, phone: phone, type: type, password:password, city :city}
-            // localStorage.setItem("register", JSON.stringify(data))
-            setform(false);
-            setOtpform(true)
+            dispatch(registerSendOtp(phone))
+
+            
         
     }
     const otphandaler = (e) =>{
         e.preventDefault();
-        if(otp ==='1234'){
-            dispatch(VendorSignup(name, email, phone, customer_type, vendor_type, city,  password));
-            console.log(VendorInfo)
-             setTimeout((e) => {
-                dispatch(Signin(email, password))
-                console.log("run after 3 second")
-            }, 5000);
-        }
-        setOtpform(false);
-        setPanform(true)
+       
+            dispatch(VendorSignup(name, email, phone, customer_type, vendor_type, city,  password,otp));
+            // console.log(VendorInfo)
+            //  setTimeout((e) => {
+            //     dispatch(Signin(email, password))
+            //     console.log("run after 3 second")
+            // }, 5000);
+            // setOtpform(false);
+            // setPanform(true)
+        
+        
     }
     const panhandaler = (e) =>{
 
@@ -86,8 +94,14 @@ function SignupPageVendor(props){
         setOtpform(false)
     }
     useEffect(() =>{
+
+
+        if(success){
+            setform(false);
+            setOtpform(true)
+        }
         
-       if(!VendorInfo ){
+       if(!types || ! citys ){
            
             dispatch(VendorCityList())
             dispatch(VendorTypeList())
@@ -95,20 +109,20 @@ function SignupPageVendor(props){
        
        
            
-        if(userInfo && VendorInfo ){
+        if(VendorInfo ){
             
             setOtpform(false)
             setPanform(true)
         }
         if(gstpan){
            swal("Account Approval in process!!!", "You will be notified soon checked your mail ", "success");
-           window.alert('bibash')
+           
         }
         
         
         
 
-    }, [dispatch,VendorInfo,userInfo,gstpan]);
+    }, [dispatch, VendorInfo, gstpan, success, types, citys]);
 
     
 
@@ -133,7 +147,7 @@ function SignupPageVendor(props){
             <div className="form col-2">
 
                 {form ? 
-                <form onSubmit={SignUphandaler}>
+                <form onSubmit={SignUphandaler} style={{marginLeft:'2rem'}}>
                    <div>
                    <div>
                         <h2>
@@ -228,7 +242,7 @@ function SignupPageVendor(props){
                     <div>
                         <span>
                             Already Have account? { ' '}
-                            <Link to={`/signin?redirect=${redirect}`}   style={{ color:"blue"}}>
+                            <Link to={`/dashboard`}   style={{ color:"blue"}}>
                                 Sign In
                             </Link> 
                         </span>
@@ -236,7 +250,7 @@ function SignupPageVendor(props){
                     </div>
                     
                     <div className="btn_center">
-                        <button onClick={()=>props.history.push('/signin')} className="block primary">Sign in as Customer</button>
+                        <button onClick={()=>props.history.push('/signin')} className="block primary">Signup as User</button>
                     </div>
                     
                 </form>
@@ -247,27 +261,12 @@ function SignupPageVendor(props){
                 <div className="form_hide">
                    
                     
-                    <form className="form" onSubmit={otphandaler}>
-                    <div>
-                        <h2>
-                            “Business with Sevenoath"<br></br>
-                            Sign Up to access your Dashboard
-                        </h2>
-                        {
-                            loading_user ? <LoadingBox></LoadingBox>
-                            :
-                                error_user? <span>
-                                    <MessageBox variant="danger">{error_user}</MessageBox>
-                                    <div className="btn_center">
-                                        <button type="submit" onClick={backButton} className="block primary">back</button>
-                                    </div>
-                                </span>
-                            :<span> </span>
-                        }
-                        
-                    </div>
-                        <div> 
-                            <div>
+                    <form className="form" >
+                    <   div>
+                            <h2> Enter Your Otp</h2>            
+                        </div>
+                         
+                        <div>
                             <input 
                                     type="text" 
                                     id="otp" 
@@ -275,13 +274,17 @@ function SignupPageVendor(props){
                                     onChange={e =>setOtp(e.target.value)}
                                     
                                 ></input>
-                            </div>
-                            <div className="btn_center">
-                                <button type="submit" className="block secondary">verify</button>
-                            </div>
-                                
                         </div>
-                    
+                        <div className='code-row'>{verifyError && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
+                                {'  '} {otploading && <img className="img small" src={Load} alt="loading"></img>}
+                            </div>
+                        <div className="btn_center">
+                            <button onClick={backButton}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>
+
+                            <button type="submit" onClick={otphandaler} className="block secondary">verify</button>
+                        </div>
+                                
+                        
                     </form>
 
                 </div>
@@ -297,7 +300,7 @@ function SignupPageVendor(props){
                         </h2>
                         
                     </div>
-                        <div> 
+                       
                             <div>
                             <input 
                                     type="text" 
@@ -319,7 +322,7 @@ function SignupPageVendor(props){
                                 <div className="btn_center">
                                     <button type="submit" className="block secondary">Save </button>
                                 </div>
-                        </div>
+                       
                     </form>
                 </div>
                 :<span></span>

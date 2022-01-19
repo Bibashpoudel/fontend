@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM,  ADD_SERVICE_CART_ITEM,  CART_ITEM_RESET,  REOMVE_CART_ITEM } from "../Constants/cartConstants"
+import { ADD_CART_ITEM,  CART_ITEM_RESET,  REOMVE_CART_ITEM } from "../Constants/cartConstants"
 
 
 

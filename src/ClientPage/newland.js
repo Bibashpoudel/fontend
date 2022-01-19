@@ -5,7 +5,6 @@ import Gallery from "../assets/wp.png";
 import Categories from '../components/Categories';
 import { useDispatch, useSelector } from 'react-redux';
 import { VendorCityList } from '../Action/vendorAction';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 import Card from "../components/Card";
@@ -33,7 +32,7 @@ function NewLanding(props){
 
     const [ city, setCity] = useState()
     const VendorCitys = useSelector((state) => state.VendorCitys);
-    const {loading:loading_city, error:error_city, citys} = VendorCitys;
+    const { citys} = VendorCitys;
     const Listvenue =  useSelector((state) => state.Listvenue);
     const {loading, error, venues} = Listvenue
     const servicelist = useSelector(state => state.servicelist);
