@@ -23,8 +23,9 @@ function CartScreen(props){
 
   
 
-    const removeCartHandaler =(id) =>{
-        dispatch(reomveFromCart(id))
+    const removeCartHandaler =(name,id) =>{
+        console.log('clicked')
+        dispatch(reomveFromCart(name, id))
 
     }
     const amount = parseInt(cartItems.reduce((a,c)=> a + c.price,0))
@@ -57,25 +58,25 @@ function CartScreen(props){
                 {cartItems.length === 0?
                 <MessageBox>
                     Cart is Empty.
-                    <Link to ="/">Go to shop</Link>
+                    <Link style={{color:'dodgerblue'}} to ="/">Go to shop</Link>
                 </MessageBox> 
                 :(
                     <ul>
                         {
                             cartItems.map((item) =>(
-                                <li key={item._id}>
+                                <li key={item.id}>
                                     <div className="cart-main">
                                         
                                         {item.service ?
-                                            <div>
+                                            <div >
                                                 <div className="min-30">
                                                     <label>Service Name:</label>{' '}
-                                                    <Link style={{color:'blue'}}to={`/service/${item.id}`}>{item.name}</Link>
+                                                    <Link style={{color:'blue'}}to={`/service/${item.service}`}>{item.name}</Link>
 
                                                 </div>
                                                 <div>
-                                                    <label>Service Price:</label>{' '}
-                                                    {item.price}
+                                                    <label>Service Price: RS </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.price}</span>
                                                 </div>
                                                 {
                                                     item.no_of_guest === 0 ?
@@ -96,12 +97,12 @@ function CartScreen(props){
                                                     </div>
                                                 }
                                                 <div>
-                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler(item.service)}>Delete</button>
+                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler('service', item.service)}>Delete</button>
                                                 </div>
                                             
                                                 
                                             </div>
-                                            :<div>
+                                            :<div key={item.venue}>
                                                 <div>
                                                     <img src={item.image} alt={item.name} className="small"></img>
                                                 </div>
@@ -109,15 +110,15 @@ function CartScreen(props){
                                             
                                                 <div className="min-30">
                                                     <label>Garden Name:</label>{' '}
-                                                    <Link style={{color:'blue'}} to={`/venue/${item.id}`}>{item.name}</Link>
+                                                    <Link style={{color:'blue'}} to={`/venue/${item.venue}`}>{item.name}</Link>
 
                                                 </div>
                                                 <div>
-                                                    <label>Venue Price:</label>{' '}
-                                                    {item.price}
+                                                    <label>Venue Price: Rs </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.price}</span>
                                                 </div>
                                                 <div>
-                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler(item.venue)}>Delete</button>
+                                                    <button type="button" className='btn_danger' onClick={()=> removeCartHandaler('venue', item.venue)}>Delete</button>
                                                 </div>
                                             </div>
                                         }
@@ -143,7 +144,7 @@ function CartScreen(props){
                                             
                                     <h2>
                                         Subtotal:
-                                        $ ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
+                                        Rs ( {cartItems.reduce((a,c)=> a + c.price,0  ) } )
 
                                     </h2>
                                     

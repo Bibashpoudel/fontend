@@ -262,6 +262,11 @@ header{
 .nav-left-menu{
     display: flex;
     padding: .5rem;
+    @media(max-width:527px){
+      .desk{
+        display: none;
+      }
+    }
 }
 .nav-left-menu div{
     padding: 0.5rem;
@@ -756,11 +761,12 @@ footer {
 .col-2 {
   flex:70%;
 
-}
+}  
 
 .g_service{
   display: flex;
   flex-direction: column;
+  width:100%
 }
 .g_ser_hed{
   background-color: rgba(212.50, 19.48, 61.87, 0.77);
@@ -866,6 +872,10 @@ footer {
   background-color:white ;
   margin-bottom:1.2rem;
   width:50%;
+}
+
+.form-fst-div{
+  margin: 0rem !important;
 }
 
 
@@ -1610,4 +1620,184 @@ button.close-sidebar {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+}
+
+
+
+// *************************************************** design for navigation bar nav bar
+.sidenav {
+  height: 100% !important;
+  width: 0;
+  position: fixed !important;
+  z-index: 100000000000;
+  top: 0 !important;
+  right:0 !important;
+  right:-2rem;
+  background-color: rgb(194, 61, 90);
+  transition: 0.5s;
+  padding-top: 6rem;
+ 
+}
+.sidenav a {
+  padding: 0.8rem 0.8rem 0.8rem 2rem;
+  text-decoration: none;
+  font-size: 1.4rem;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  font-size: 3.6rem;
+  margin-left: 5rem;
+  cursor: pointer;
+}
+.sidenavs {
+  
+  .col, .col-auto {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+  }
+  
+  .mob {
+    display: none;
+
+  @media(max-width:527px){
+      .col-auto {
+          display: none;
+      }
+      .bar {
+          display: block;
+      }
+      .desk {
+        display: none !important;
+      }
+      .mob {
+        display: block;
+      }
+  }
+  
+}
+
+.mg-bot{
+margin-top: -5rem;
+margin-bottom: 2rem;
+text-align: center;
+font-size: 2.0rem !important;
+}
+.overlay {
+display: none;
+
+}
+
+.actives {
+display: block;
+position: fixed;
+margin-right:25rem;
+width: 100vw;
+height: 100vh;
+background: rgba(41, 39, 39, 0.7);
+z-index: 10000000000;
+overflow-x: hidden;
+opacity: 0.5;
+transition: all .5s ease-in-out;
+overflow: hidden;
+}
+.scroll-disable{
+overflow:hidden !important;
+height: 630px;
+}
+
+
+
+
+
+.side-head{
+  margin-left: 2rem;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 600;
+  border-bottom: solid 0.1rem;
+  width: 80%;
+}
+.row-hover{
+  margin:0.5rem 0;
+  width: 92%;
+  
+}
+.row-hover:hover{
+  background-color: #c0c0c0;
+
+}
+.row-hover .right-angle {
+  cursor: pointer;
+  margin-right:.5rem;
+}
+.row-hover .right-angle i {
+  color: white;
+  font-size: 3rem;
+}
+.back-head{
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 500;
+  border-bottom: solid 0.1rem;
+  padding:0.8rem;
+ 
+}
+.left-angle i{
+  cursor: pointer;
+ font-size: 2rem;
+}
+
+
+
+
+.subcat-head{
+  margin-top:1rem;
+  margin-left: 2rem;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 600;
+  
+  
+}
+
+//************************************
+// for hiding category and display sub category in side bar
+
+
+
+.hidecat{
+  display: none;
+}
+  .animated {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+  @-webkit-keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
 }

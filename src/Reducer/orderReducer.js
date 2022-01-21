@@ -24,7 +24,7 @@ export const OrderReducer = (state={}, action)=>{
         
     }
 }
-export const UserOrderReducer = (state={}, action)=>{
+export const UserOrderReducer = (state={userOrder:[]}, action)=>{
     switch(action.type){
         case USER_ORDER_REQUEST:
             return {

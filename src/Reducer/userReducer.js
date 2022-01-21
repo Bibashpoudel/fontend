@@ -11,7 +11,6 @@ export const userSigninReducer = (state ={}, action)=>{
         case USER_SIGNIN_SUCCESS:
             return{
                 loading:false,
-               
                 userInfo:action.payload
                 
             }

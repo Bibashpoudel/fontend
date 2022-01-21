@@ -6,8 +6,8 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
     switch(action.type){
         case ADD_CART_ITEM:
             const item = action.payload;
-            if(item.venue){
-                const exitsItem = state.cartItems.find(x => x.venue === item.venue); // check the current adding item is already added or not
+            if(item === 'venue'){
+                const exitsItem = state.cartItems.find(x => x.venue === item.id); // check the current adding item is already added or not
                 if(exitsItem){
                     return{
                         ...state,
@@ -22,7 +22,7 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
                 }
             }
             else{
-                const exitsItem = state.cartItems.find(x => x.service === item.service); // check the current adding item is already added or not
+                const exitsItem = state.cartItems.find(x => x.service === item.id); // check the current adding item is already added or not
                 if(exitsItem){
                    
                     return{
@@ -41,18 +41,18 @@ export const cartReducer=(state = {cartItems:[]}, action) =>{
             
         case REOMVE_CART_ITEM:
             const items = action.payload;
-            if(items.venue){
+            if(items === 'venue'){
                 return {
              
                     ...state,
-                    cartItems: state.cartItems.filter(x => x.venue !== action.payload)
+                    cartItems: state.cartItems.filter(x => x.venue !== action.id)
                 } 
             } 
             else{
                 return {
              
                     ...state,
-                    cartItems: state.cartItems.filter(x => x.service !== action.payload)
+                    cartItems: state.cartItems.filter(x => x.service !== action.id)
                 } 
 
             }

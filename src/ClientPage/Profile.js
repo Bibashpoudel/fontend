@@ -23,7 +23,7 @@ export default function ProfilePage(){
                                <img className="extra-small"src={profile} alt="profile" ></img>
                                 <div style={{display:'grid'}}>
                                     <h5 style={{color:'black'}}> Your Profiles </h5>
-                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                    <p style={{color:'#262626', marginTop:'-2rem',fontSize:'1rem'}}>View , Modify Name, Email, Phone</p>
                                 </div>
                                 
                             
@@ -33,7 +33,7 @@ export default function ProfilePage(){
                                <img className="extra-small"src={ordertrack} alt="order" ></img>
                                 <div style={{display:'grid'}}>
                                     <h5 style={{color:'black'}}>Orders </h5>
-                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                    <p style={{color:'#262626', marginTop:'-2rem',fontSize:'1rem'}}>View and Manage Your Order</p>
                                 </div>
                                 
                             
@@ -43,7 +43,7 @@ export default function ProfilePage(){
                                <img className="extra-small"src={wishlist} alt="wishlist" ></img>
                                 <div style={{display:'grid'}}>
                                     <h5 style={{color:'black'}}> Your Wishlist </h5>
-                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                    <p style={{color:'#262626', marginTop:'-2rem',fontSize:'1rem'}}>View, modify, share your list</p>
                                 </div>
                                 
                             
@@ -53,7 +53,7 @@ export default function ProfilePage(){
                                <img className="extra-small"src={positivereview} alt="review" ></img>
                                 <div style={{display:'grid'}}>
                                     <h5 style={{color:'black'}}> Your Reviews </h5>
-                                    <p style={{color:'#262626', marginTop:'-2rem'}}>bibash</p>
+                                    <p style={{color:'#262626', marginTop:'-2rem',fontSize:'1rem'}}>View Your Review</p>
                                 </div>
                                 
                             

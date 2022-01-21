@@ -7,10 +7,12 @@ import { GSTPANAdd, VendorCityList,    VendorSignup,    VendorTypeList } from '.
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import venimg  from '../vreg.jpg'
-import Load from '../assets/load.gif'
+import Load from '../load.gif'
 
 import swal from 'sweetalert'
 import { registerSendOtp } from '../Action/OtpAction.js';
+import { Signin, signout } from '../Action/UserAction.js';
+import { USER_SIGNOUT } from '../Constants/UserConstant.js';
 
 window.Swal = swal;
 
@@ -41,13 +43,13 @@ function SignupPageVendor(props){
     const {loading:loading_types, error:error_types, types} =VendorTypes;
 
     const vendorRegister = useSelector(state => state.vendorRegister);
-    const{ VendorInfo} = vendorRegister
-    // const userSignin = useSelector(state => state.userSignin);
-    // const{ userInfo} = userSignin;
+    const{error:reg_error, VendorInfo} = vendorRegister
+    const userSignin = useSelector(state => state.userSignin);
+    const{ userInfo} = userSignin;
     const addGstPan = useSelector(state => state.addGstPan);
     const {gstpan} = addGstPan
     const otpSendReg = useSelector(state => state.otpSendReg);
-    const {loading:otploading, success} = otpSendReg;
+    const {loading:otploading, success,error:otpsend_error} = otpSendReg;
 
     const regOtpVerify = useSelector(state => state.regOtpVerify);
     const { error:verifyError } = regOtpVerify;
@@ -109,20 +111,27 @@ function SignupPageVendor(props){
        
        
            
-        if(VendorInfo ){
-            
+        if(VendorInfo && !userInfo){
+            dispatch(Signin(phone,password))
+           
+        }
+        if(userInfo){
             setOtpform(false)
             setPanform(true)
         }
         if(gstpan){
-           swal("Account Approval in process!!!", "You will be notified soon checked your mail ", "success");
+           
+           swal("Account Approval is in process!!!", "You will be notified once our team verify your details.", "success");
+           dispatch(signout())
+           props.history.push('/signin')
+           window.location.reload();
            
         }
         
         
         
 
-    }, [dispatch, VendorInfo, gstpan, success, types, citys]);
+    }, [dispatch, VendorInfo, gstpan, success, types, citys, userInfo, phone, password, props.history]);
 
     
 
@@ -157,7 +166,7 @@ function SignupPageVendor(props){
                         
                     </div>
                     
-                    
+                    {otpsend_error&& <MessageBox>{otpsend_error}</MessageBox>}
                     <div className="">
                        
                         <input 
@@ -260,8 +269,9 @@ function SignupPageVendor(props){
             {otpform ?
                 <div className="form_hide">
                    
-                    
+                   
                     <form className="form" >
+                    {reg_error ? <MessageBox>{reg_error}</MessageBox>: ''}
                     <   div>
                             <h2> Enter Your Otp</h2>            
                         </div>
@@ -275,7 +285,7 @@ function SignupPageVendor(props){
                                     
                                 ></input>
                         </div>
-                        <div className='code-row'>{verifyError && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
+                        <div className='code-row'>{reg_error && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
                                 {'  '} {otploading && <img className="img small" src={Load} alt="loading"></img>}
                             </div>
                         <div className="btn_center">

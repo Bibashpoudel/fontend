@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./Card.scss";
-import Card from '../assets/card.png'
+
 
  function Venue(props){
     const {venue} = props;
@@ -10,7 +10,7 @@ import Card from '../assets/card.png'
       <div className="col-12">
        <Link to={`/venue/${venue.id}`}>
        <img
-           src={Card}
+           src={venue.display_image}
           className="img-fluid"
           alt="img"
           style={{ width: "100%" }}

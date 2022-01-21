@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./Card.scss";
-import Card from '../assets/card.png'
+
 
  function Service(props){
     const {service} = props;
@@ -11,7 +11,7 @@ import Card from '../assets/card.png'
       <div className="col-12">
         <Link to={`/service/${service.id}`}>
           <img
-            src={Card}
+            src={service.display_image}
             className="img-fluid"
             alt="img"
             style={{ width: "100%" }}

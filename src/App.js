@@ -11,7 +11,6 @@ import CartScreen from './ClientPage/Cartpage';
 
 
 import './App.scss'
-
 import ProfilePage from './ClientPage/Profile';
 import  Footer  from './components/Footer';
 import { Orders } from './ClientPage/Profile/orders';
@@ -32,9 +31,8 @@ import { useEffect, useState } from 'react';
 import { VenueTypeList } from './Action/VenueAction';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from './components/LoadingBox';
-import './Nav.scss'
+
 import LandingPage from './ClientPage/landingpage.js';
-import NewLanding from './ClientPage/newland.js';
 import { ServicesTypeList } from './Action/ServicesAction.js';
 import ServiceDetailsPage from './ClientPage/ServiceDetailsPage.js';
 import VenueDisplay from './ClientPage/VenueDisplay.js';
@@ -117,14 +115,14 @@ function App() {
 
     function openNav() {
       document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById('btnclose').style.right = '25px'
+      document.getElementById('btnclose').style.right = '5px'
       setBlur(true);
     }
     
     
     function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
-      document.getElementById('btnclose').style.right = '0'
+      document.getElementById('btnclose').style.right = '-20px'
       setBlur(false);
     }
     
@@ -146,7 +144,7 @@ function App() {
         
         <div >
             <div className="nav-left-menu">
-              <div className="col-auto desk">
+              <div className="col-auto ">
               < Link to="/cart"><i className="ai-cart" />
                     {cartItems.length > 0 && (
                       <span className="badge">{cartItems.length}</span>
@@ -168,7 +166,7 @@ function App() {
         </div>
         
         </header> 
-            <div id="mySidenav" className="sidenav">
+            <div id="mySidenav" className="sidenav sidenavs">
              <span href="#" id="btnclose" className="closebtn" onClick={()=> closeNav()}>&times;</span>
              {
                 profile ? 
@@ -322,7 +320,7 @@ function App() {
                 <Route path="/register" component={SignupPage}></Route>
                 <Route path="/service/:id" component={ServiceDetailsPage}></Route>
                 <Route path="/venue/:id" component={VenueDetailsPage}></Route>
-                <Route path="/new" component={NewLanding } ></Route>
+                
                 <Route path="/" component={LandingPage } exact></Route>
             
             

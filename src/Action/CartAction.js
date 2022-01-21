@@ -3,7 +3,7 @@ import { ADD_CART_ITEM,  REOMVE_CART_ITEM } from "../Constants/cartConstants";
 
 export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
    try {
-    const {data} = await axios.get(`/api/venue/admin/${venueId}`);
+    const {data} = await axios.get(`/api/venue/admin/${venueId}/`);
     
     console.log(data)
     dispatch({
@@ -44,10 +44,10 @@ export const addtoCartS = (serviceId) =>async(dispatch, getState)=>{
 }
 
 
-export const reomveFromCart =(venueId)=>(dispatch, getState)=>{
+export const reomveFromCart =(name, id)=>(dispatch, getState)=>{
     dispatch({
         type: REOMVE_CART_ITEM,
-        payload:venueId
+        payload:name,id
     });
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))

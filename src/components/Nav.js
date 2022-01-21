@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import './Nav.scss'
+
 
 export default function Nav(){
     // function openNav() {

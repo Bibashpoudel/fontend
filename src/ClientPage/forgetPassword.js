@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import swal from 'sweetalert';
 import { PasswordForgetSendOtp, PasswordforgetVerifyOtp } from '../Action/OtpAction';
-import Load from '../assets/load.gif'
+import Load from '../load.gif'
 import MessageBox from '../components/MessageBox';
 
 
