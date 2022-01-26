@@ -10,6 +10,8 @@ import { VenueImageList } from '../Action/ImageAction';
 import { addtoCartS, reomveFromCart, } from '../Action/CartAction';
 import swal from 'sweetalert';
 import { ADD_REVIEW_RESET } from '../Constants/venueConstants';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 function VenueDetailsPage(props){
     // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
@@ -385,15 +387,23 @@ function VenueDetailsPage(props){
                             <div className="g_details">
                                 <div className="ven_price_loc">
                                     <div>
-                                        Start Date
+                                                                                        <label>Start Date</label>
+                                                                                        <div>
+                                                                                            <input type='date' style={{ width: '100%', border: 'none',borderRadius:'.5rem',borderBottom:'none'}}></input>
+                                                                                        </div>
                                     </div>
                                     <div>
                                         
-                                            Number of days
+                                                                                        <label>End Date</label>
+                                                                                       
+                                                                                        <div>
+                                                                                            <input type='date' style={{width:'100%'}}></input>
+                                                                                        </div>
+                                                                                      
                                         
                                         </div>
                                         <div>
-                                            Search Availablity
+                                            <button className='primary' style={{fontSize:'1rem'}}>Check Availability</button>
                                         </div>
                                     </div>
                                     

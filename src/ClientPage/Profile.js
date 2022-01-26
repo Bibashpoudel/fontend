@@ -1,9 +1,9 @@
 import React, {  } from'react'
 import {Link } from 'react-router-dom'
-import profile from  '../profile.png'
-import wishlist from '../wishlist.png'
-import ordertrack from '../order.png'
-import positivereview from '../review.png'
+import profile from  '../images/profile.png'
+import wishlist from '../images/wishlist.png'
+import ordertrack from '../images/order.png'
+import positivereview from '../images/review.png'
 
 
 

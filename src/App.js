@@ -31,7 +31,6 @@ import { useEffect, useState } from 'react';
 import { VenueTypeList } from './Action/VenueAction';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from './components/LoadingBox';
-
 import LandingPage from './ClientPage/landingpage.js';
 import { ServicesTypeList } from './Action/ServicesAction.js';
 import ServiceDetailsPage from './ClientPage/ServiceDetailsPage.js';
@@ -39,6 +38,7 @@ import VenueDisplay from './ClientPage/VenueDisplay.js';
 import ServiceDisplay from './ClientPage/serviceTypeDisplay.js';
 import MessageBox from './components/MessageBox';
 import ForgetPassword from './ClientPage/forgetPassword';
+import VenueLists from './ClientPage/VenueLists';
 
 
 
@@ -131,7 +131,7 @@ function App() {
   return (
       <BrowserRouter  >
     <div   className={blur ? 'scroll-disable grid-container' : 'grid-container'} >  
-    <div className={blur ? 'actives' : 'overlay'}></div>
+    <div className={blur ? 'actives' : 'overlay'} onClick={()=> closeNav()}></div>
    
      <header >
         <div className="header" >
@@ -204,14 +204,36 @@ function App() {
                     {
                       profile ?
                       <div>
-                      <NavLink to="/" onClick={ Signouthandler}>Sign Out</NavLink>
-                    </div>
-                    :
-                    <div>
-                    <NavLink to="/signin" onClick={()=> closeNav()} >Sign In</NavLink>
-                  </div>
+                        <NavLink to="/" onClick={ Signouthandler}>Sign Out</NavLink>
+                      </div>
+                      :
+                      <div>
+                        <NavLink to="/signin" onClick={()=> closeNav()} >Sign In</NavLink>
+                      </div>
                     }
-                     <NavLink to="/vendor_register"  onClick={()=> closeNav()}>Vendor Register</NavLink>
+                    {
+                      profile ?
+
+                      <div>
+                        { profile.user_type === 'Vendor' ?
+
+                            <div>
+                              <NavLink to="/dashboard"  onClick={()=> closeNav()}>Dashboard</NavLink>
+                            </div>
+                            :
+                            <div>
+                            <NavLink to="/vendor_register"  onClick={()=> closeNav()}>Vendor Register</NavLink>
+                          </div>
+                        }
+                      </div>
+                      :
+                      <div>
+                        <NavLink to="/vendor_register"  onClick={()=> closeNav()}>Vendor Register</NavLink>
+                      </div>
+                      
+                      
+                    }
+                    
                 </div>
                   
                 </div>
@@ -231,7 +253,7 @@ function App() {
                 { 
                   loading ? <LoadingBox></LoadingBox>
                   :
-                  error ? <MessageBox>{error}</MessageBox>
+                  error ? <MessageBox>{error.message}</MessageBox>
                   :
                   <div>
                     {
@@ -260,7 +282,7 @@ function App() {
                 {
                     serv_loading ? <LoadingBox></LoadingBox>
                     :
-                    serv_error ? <MessageBox>{error}</MessageBox>
+                    serv_error ? <MessageBox>{error.message}</MessageBox>
                     :
                     <div >
                       {
@@ -320,6 +342,7 @@ function App() {
                 <Route path="/register" component={SignupPage}></Route>
                 <Route path="/service/:id" component={ServiceDetailsPage}></Route>
                 <Route path="/venue/:id" component={VenueDetailsPage}></Route>
+                <Route path='/venues' component={VenueLists}></Route>
                 
                 <Route path="/" component={LandingPage } exact></Route>
             

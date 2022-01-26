@@ -22,7 +22,7 @@ export function Orders(){
          
            {loading ? <LoadingBox></LoadingBox>
            :
-           error ? <MessageBox>{error}</MessageBox>
+           error ? <MessageBox>{error.message}</MessageBox>
            :
            <div  >
              <div >Your Orders</div>

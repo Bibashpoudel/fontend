@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
-import { ServiceAdd, VenueServices } from '../../Action/ServicesAction';
+import { ServiceAdd, serviceDeleteAction, VenueServices } from '../../Action/ServicesAction';
 
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/LoadingBox'
 import { VendorVenueList } from '../../Action/vendorAction';
+import { SERVICE_ADD_RESET, SERVICE_DELETE_RESET } from '../../Constants/servicesConstants';
 
 export function ServiceManage(props) {
 
@@ -19,12 +20,17 @@ export function ServiceManage(props) {
     const [venue, setVenue] = useState('');
 
     const addService = useSelector(state =>state.addService);
-    const{loading:addloading, error:adderror, success} =addService;
+    const{loading:addloading, error:adderror, success:addsuccess} =addService;
     const venueService =useSelector(state =>state.venueService);
     const {loading:loading_vs, error:error_vs, vService} = venueService;
     const VVenues = useSelector(state =>state.VVenues)
     const{loading:loading_vv,error:error_vv, VendorVenues} = VVenues;
     const  dispatch = useDispatch();
+    const typeService = useSelector(state => state.typeService);
+    const {loading:ST_loading, error:ST_error,servicetype} = typeService;
+
+    const serviceDelete = useSelector(state =>state.serviceDelete);
+    const {success:deleteSuccess} = serviceDelete;
     
     const chekcedhandaler = ()=>{
              
@@ -32,12 +38,8 @@ export function ServiceManage(props) {
         }
     const addServicehandaler = ( e) =>{
             e.preventDefault();
-
-          
             dispatch(ServiceAdd(name, venue ,actual_price, display_price, display_image,description, is_true))
     } 
-  
-
     const annotate =() =>{
         const typed= document.getElementById("gardenPrice").value;
 
@@ -61,17 +63,45 @@ export function ServiceManage(props) {
           setImages(event.target.files[0]);
         }
        }
+       const DeleteService = (vs)=>{
+        swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this Service!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                        dispatch(serviceDeleteAction(vs.id))
+                        
+                }
+              });
+              
+              
+       }
       useEffect(()=>{
-              if(success){
-                      swal("congratulations! your Services has been added successfully", "Thanks for believing us", "success")
-              }
+              if(addsuccess){
+                      swal("congratulations! your Services has been added successfully", "Thanks for believing us", "info")
+                        dispatch({
+                                type:SERVICE_ADD_RESET  
+                        })
+                }
 
               dispatch(VendorVenueList())
               dispatch(VenueServices())
+              if(deleteSuccess){
+                swal("Your Service has been Deleted", {
+                        icon: "success",
+                        });
+                        dispatch({
+                                type:SERVICE_DELETE_RESET
+                        })
+              }
              
               
               
-      },[dispatch,success])
+      },[addsuccess, deleteSuccess, dispatch])
      
         return(
                 <div>{
@@ -79,14 +109,18 @@ export function ServiceManage(props) {
                         :
                         adderror ? <MessageBox variant="danger">{adderror}</MessageBox>
                         :
-                        loading_vv ? <LoadingBox></LoadingBox>
+                        loading_vv ? ''
                         :
                         error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
                         
                         :
-                        loading_vs ?<LoadingBox></LoadingBox>
+                        loading_vs ? ''
                         :
                         error_vs ? <MessageBox variant="danger">{error_vs}</MessageBox>
+                        :
+                        ST_loading ? ' '
+                        :
+                        ST_error ? <MessageBox>{ST_error}</MessageBox>
                         :
                         <div className="ven_serv_manage">
                                 <form className=" " onSubmit={addServicehandaler}>
@@ -124,15 +158,15 @@ export function ServiceManage(props) {
                                                 </div>
                                                 <div className="ser-mng-col-3">
                                                         
-                                                        <div className="tooltip">
-                                                                <input className="tooltip"
+                                                        <div className="tooltips">
+                                                        <input className="tooltips"
+                                                                        style={{border:'1rem'}}
                                                                         type="checkbox"
                                                                         id="isTrue"   
                                                                         onChange={chekcedhandaler} 
                                                                 />
-                                                        
                                                                 <span class="tooltiptext">For Cattering Services and Price is PerPlate </span>
-                                                                </div>
+                                                        </div>
                                                         
                                                         <div className=" image_field">
                                                         
@@ -241,7 +275,7 @@ export function ServiceManage(props) {
                                     <div>
                                         <button className="btn_edit" onClick={() => props.history.push(`/service/${vs.id}/edit`)}>edit</button>
                                         {'    '}
-                                        <button className="btn_danger">Delete</button>
+                                        <button className="btn_danger" onClick={ ()=> DeleteService(vs)}>Delete</button>
                                     </div>
                                 </td>
                             </tr>

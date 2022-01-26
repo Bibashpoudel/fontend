@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 import { GSTPANAdd, VendorCityList,    VendorSignup,    VendorTypeList } from '../Action/vendorAction.js';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import venimg  from '../vreg.jpg'
-import Load from '../load.gif'
+import venimg  from '../images/vreg.jpg'
+import Load from '../images/load.gif'
 
 import swal from 'sweetalert'
 import { registerSendOtp } from '../Action/OtpAction.js';
 import { Signin, signout } from '../Action/UserAction.js';
-import { USER_SIGNOUT } from '../Constants/UserConstant.js';
 
 window.Swal = swal;
 
@@ -153,10 +152,13 @@ function SignupPageVendor(props){
             <div className="col-1">
                 <img className="large" src={venimg} alt="register"></img>
             </div>
-            <div className="form col-2">
+                                    <div className="form col-2">
+                                        {otploading && <LoadingBox></LoadingBox>}
+                                        {otpsend_error && <MessageBox>{ otpsend_error}</MessageBox>}
 
                 {form ? 
-                <form onSubmit={SignUphandaler} style={{marginLeft:'2rem'}}>
+                                            <form onSubmit={SignUphandaler} style={{ marginLeft: '2rem' }}>
+                                               
                    <div>
                    <div>
                         <h2>
@@ -165,7 +167,7 @@ function SignupPageVendor(props){
                         </h2>
                         
                     </div>
-                    
+                    {otploading && <span><img className='load-small' src={Load} alt='load'></img></span>}
                     {otpsend_error&& <MessageBox>{otpsend_error}</MessageBox>}
                     <div className="">
                        
@@ -286,7 +288,7 @@ function SignupPageVendor(props){
                                 ></input>
                         </div>
                         <div className='code-row'>{reg_error && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
-                                {'  '} {otploading && <img className="img small" src={Load} alt="loading"></img>}
+                                {'  '} {otploading && <img className="img load-small" src={Load} alt="loading"></img>}
                             </div>
                         <div className="btn_center">
                             <button onClick={backButton}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>

@@ -1,19 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Privacy } from '../Action/ImpfileAction';
-import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 import parse from 'html-react-parser';
- 
-export default function Policy() {
+export default function FAQ() {
 
-    
-    const privacyList = useSelector(state => state.privacyList);
-    const {loading, error, privacy} = privacyList;
+    const faqList = useSelector(state => state.faqList);
+    const {loading, error, faq} = faqList;
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(Privacy())
+        dispatch(FAQ())
 
     },[dispatch])
     return (
@@ -22,11 +19,11 @@ export default function Policy() {
                 loading ? <LoadingBox></LoadingBox>
                 :
                 error ? <MessageBox>{error.message}</MessageBox>
-                : 
+                :
                 <div style={{margin:'1.5rem'}}>
-                    <h2>Privacy Policy</h2>
+                    <h2>FAQ</h2>
                     {
-                        privacy.map(pp=>(
+                        faq.map(pp=>(
                             <div style={{textAlign:'justify'}} key={pp.id}>
                                 {parse(pp.description)}
                             </div>
@@ -35,5 +32,5 @@ export default function Policy() {
                 </div>
             }
         </div>
-    )
+  )
 }

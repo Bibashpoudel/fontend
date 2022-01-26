@@ -26,6 +26,8 @@ export default function ServiceEdit(props) {
     const {loading:updateLoading,error:updateError, success:updateSuccess} = updateService;
     const VVenues = useSelector(state =>state.VVenues)
     const{loading:loading_vv,error:error_vv, VendorVenues} = VVenues;
+    const typeService = useSelector(state => state.typeService);
+    const {loading:serv_loading, error:serv_error, servicetype} = typeService;
 
 
     const updateServicehandaler =(e) =>{

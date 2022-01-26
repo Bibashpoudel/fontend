@@ -1,6 +1,21 @@
 
 
-
+.loading{
+   
+        display: block;
+        position: fixed;
+        width: 100%;
+        min-height: 300vh;
+        background: rgba(184, 183, 183, 0.7);
+        z-index: 10000000000;
+        overflow: hidden;
+        opacity: 0.8;   
+}
+.loading-item{
+    margin-top:50rem;
+    margin-left:30rem;
+    opacity:1 !important;
+}
 
 .load-spinner{
     // backdrop-filter: blur(50rem);

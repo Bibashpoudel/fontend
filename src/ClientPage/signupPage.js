@@ -4,9 +4,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Signin, Signup } from '../Action/UserAction';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Load from '../load.gif'
+import Load from '../images/load.gif'
 
-import regimg from '../registerclient.png'
+import regimg from '../images/registerclient.png'
 import { registerSendOtp } from '../Action/OtpAction';
 
 function SignupPage(props){

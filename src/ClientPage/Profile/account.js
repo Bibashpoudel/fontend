@@ -27,7 +27,7 @@ export function Accounts(props){
             
            {loading ? <LoadingBox></LoadingBox> 
            :
-           error ? <MessageBox variant="danger">{error}</MessageBox>
+           error ? <MessageBox variant="danger">{error.message}</MessageBox>
            :
             <div>
             

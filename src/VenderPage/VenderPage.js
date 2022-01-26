@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, NavLink, Route } from 'react-router-dom';
 import { userDetailsAction } from '../Action/UserAction';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Account from './SubPage/Account';
 import Bookingorder from './SubPage/BookingOrders';
@@ -52,7 +51,7 @@ function Vendorpage(){
                            </NavLink>
                            
                         </div>
-                        {loading ? <LoadingBox></LoadingBox>
+                        {loading ? ' '
                         :
                         error ? <MessageBox>{error}</MessageBox>
                         :
@@ -132,7 +131,7 @@ function Vendorpage(){
                   </NavLink>
                   
                </div>
-               {loading ? <LoadingBox></LoadingBox>
+               {loading ? ' '
                         :
                         error ? <MessageBox>{error}</MessageBox>
                         :

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_SERVICE_REVIEW_FAIL, ADD_SERVICE_REVIEW_REQUEST, ADD_SERVICE_REVIEW_SUCCESS, SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_REVIEW_LIST_FAIL, SERVICE_REVIEW_LIST_REQUEST, SERVICE_REVIEW_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
+import { ADD_SERVICE_REVIEW_FAIL, ADD_SERVICE_REVIEW_REQUEST, ADD_SERVICE_REVIEW_SUCCESS, SERVICE_ADD_FAIL, SERVICE_ADD_REQUEST, SERVICE_ADD_SUCCESS, SERVICE_DELETE_FAIL, SERVICE_DELETE_REQUEST, SERVICE_DELETE_SUCCESS, SERVICE_DETAILS_FAIL, SERVICE_DETAILS_REQUEST, SERVICE_DETAILS_SUCCESS, SERVICE_LIST_FAIL, SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_REVIEW_LIST_FAIL, SERVICE_REVIEW_LIST_REQUEST, SERVICE_REVIEW_LIST_SUCCESS, SERVICE_TYPE_DETAILS_FAIL, SERVICE_TYPE_DETAILS_REQUEST, SERVICE_TYPE_DETAILS_SUCCESS, SERVICE_TYPE_LIST_FAIL, SERVICE_TYPE_LIST_REQUEST, SERVICE_TYPE_LIST_SUCCESS, SERVICE_UPDATE_FAIL, SERVICE_UPDATE_REQUEST, SERVICE_UPDATE_SUCCESS, VENDOR_SERVICE_DETAILS_FAIL, VENDOR_SERVICE_DETAILS_REQUEST, VENDOR_SERVICE_DETAILS_SUCCESS, VENUE_SERVICE_LIST_FAIL, VENUE_SERVICE_LIST_REQUEST, VENUE_SERVICE_LIST_SUCCESS } from "../Constants/servicesConstants";
 
 
 
@@ -245,6 +245,35 @@ export const ServiceUpdateAction = (service)=>async(dispatch, getState)=>{
                 ? error.response.data.message
                 : error
         })
+    }
+}
+export const serviceDeleteAction = (serviceId) => async(dispatch, getState)=>{
+    dispatch({
+        type:SERVICE_DELETE_REQUEST,
+        payload:serviceId
+    })
+    try {
+
+        const {userSignin:{userInfo}} = getState();
+        const {data} = await axios.delete(`/api/service/vendor/${serviceId}`,{
+            headers:{
+                'Authorization': 'Bearer ' + userInfo
+            }
+        })
+        dispatch({
+            type:SERVICE_DELETE_SUCCESS,
+            payload:data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:SERVICE_DELETE_FAIL,
+            payload:
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error
+        })
+        
     }
 }
 export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{

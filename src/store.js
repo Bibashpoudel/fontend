@@ -4,11 +4,12 @@ import { userDetailsReducer, UserProfileReducer, userRegisterReducer, userSignin
 import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
-import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
+import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
 import { PasswordForgetOtpsendReducer, PasswordForgetOtpverifyReducer, RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
+import { FAQReducer, PrivacyReducer, termsConditionReducer } from './Reducer/impFIlesReducer';
 
 
 const initialState = {
@@ -34,9 +35,6 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('profile'))
         : null
     }
-
-
-   
 };
 const reducer = combineReducers({
     
@@ -62,6 +60,10 @@ const reducer = combineReducers({
     regOtpVerify:RegisterOtpverifyReducer,
     optsendForget:PasswordForgetOtpsendReducer,
     otpverifyForget:PasswordForgetOtpverifyReducer,
+
+    privacyList: PrivacyReducer,
+    tcList: termsConditionReducer,
+    faqList:FAQReducer,
     
 
 
@@ -74,6 +76,9 @@ const reducer = combineReducers({
     venueTypeList:VenuetypeListReducer,
     addVenue:AddvenueReducer,
     VVenues:VendorVenueListReducer,
+    vsDetails:VendordetailsServiceReducer,
+
+    serviceDelete:serviceDeleteReducer,
 
     vvDetailsList:detailsVenueReducer,
     venueUpdate:updateVenueReducer,

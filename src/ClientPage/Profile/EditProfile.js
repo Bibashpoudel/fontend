@@ -48,7 +48,7 @@ export default function EditProfile() {
             
            {loading ? <LoadingBox></LoadingBox> 
            :
-           error ? <MessageBox variant="danger">{error}</MessageBox>
+           error ? <MessageBox variant="danger">{error.message}</MessageBox>
            :
             <div>
             <form onSubmit={submitHandaler}>

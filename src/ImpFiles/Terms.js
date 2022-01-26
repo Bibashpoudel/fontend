@@ -1,155 +1,38 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import {  termscondition } from '../Action/ImpfileAction';
+import MessageBox from '../components/MessageBox';
+import LoadingBox from '../components/LoadingBox';
+import parse from 'html-react-parser';
+ 
 export default function Terms() {
+    
+    const tcList = useSelector(state => state.tcList);
+    const {loading, error, tc} = tcList;
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(termscondition())
+
+    },[dispatch])
     return (
-        <div className="main " >
-            <div >
-                <h1 style={{textAlign:'center'}}>
-                    Terms & Conditions 
-                </h1>
+        <div className="main top center">
+        {
+            loading ? <LoadingBox></LoadingBox>
+            :
+            error ? <MessageBox>{error.message}</MessageBox>
+            :
+            <div style={{margin:'1.5rem'}}>
+                <h2>Terms & Conditions</h2>
+                {
+                    tc.map(pp=>(
+                        <div style={{textAlign:'justify'}} key={pp.id}>
+                            {parse(pp.description)}
+                        </div>
+                    ))
+                }
             </div>
-            <div  style={{textAlign:'justify', margin:'2rem 1rem'}}>
-                <div>
-                    <h2>
-                        General Terms
-                    </h2>
-                </div>
-                <div>
-                    <p >
-                        By accessing and placing an order with Sevenoath, 
-                        you confirm that you are in agreement with and bound by the terms of 
-                        service contained in the Terms & Conditions outlined below. These terms 
-                        apply to the entire website and any email or other type of communication between you and Seven Oath. 
-                    </p>
-                    <p >
-                        Under no circumstances shall Seven Oath team be liable 
-                        for any direct, indirect, special, incidental or consequential damages,
-                        including, but not limited to, loss of data or profit, arising out of the use, 
-                        or the inability to use, the materials on this site, even if
-                        Seven Oath team or an authorized representative has been advised of 
-                        the possibility of such damages. If your use of materials
-                        from this site results in the need for servicing, repair or correction of 
-                        equipment or data, you assume any costs thereof.
-                    </p>
-                    <p  >
-                    Seven Oath will not be responsible for any
-                     outcome that may occur during the course of usage of our resources. We reserve the
-                        rights to change prices and revise the 
-                        resources usage policy in any moment.
-                    </p>
-                </div>
-            </div>
-           
-            <div style={{textAlign:'justify', margin:'2rem 1rem'}}>
-                <div>
-                    <h2>
-                        License
-                    </h2>
-                </div>
-                <div>
-                    <p >
-                    Seven Oath grants you a revocable, non-exclusive, non-transferable, limited license to download, install and use the website/app strictly in accordance with the terms of this Agreement. 
-
-                    </p>
-                    <p >
-                    These Terms & Conditions are a contract between you and Seven Oath (referred to in these Terms & Conditions as "Seven Oath", "us", "we" or "our"), the provider of the Seven Oath website, and the services accessible from the
-                     Seven Oath website (which are collectively referred to in these Terms & Conditions as the "Seven Oath Service").
-                    </p>
-                    <p >
-                    You are agreeing to be bound by these Terms & Conditions.
-                     If you do not agree to these Terms & Conditions, please do not use the Seven Oath Service. In these Terms & Conditions, "you" refers both to you as an individual and to the entity you represent. If you violate any of these Terms & Conditions, 
-                    we reserve the right to cancel your account or block access to your account without notice
-                    </p>
-                </div>
-            </div>
-            
-            <div style={{textAlign:'justify', margin:'2rem 1rem'}}>
-                <div>
-                    <h2>
-                    Definitions and key terms 
-                    </h2>
-                </div>
-                <div>
-                    <h4 >
-                    To help explain things as clearly as possible in this Terms & Conditions, 
-                    every time any of these terms are referenced, are strictly defined as:
-                    </h4>
-                </div>
-                <div>
-                    <ul style={{textAlign:'justify'}}>
-                        <li>
-                        Cookie: small amount of data generated by a website and saved by 
-                        your web browser. It is used to identify your browser, provide analytics, remember information about 
-                        you such as your language preference or login information.
-                        </li>
-                        <li>
-                        Company: when this policy mentions “Company,” “we,” “us,” or “our,” it refers to Sevenoath Private Limited, 122/39, Vijaypath, Mansarovar, Jaipur that is responsible for your information under this Terms & Conditions. ● Country: where Seven Oath or the owners/founders of Seven Oath are based, in this case, is India ● Device: any internet-connected device such as a phone, tablet, 
-                        computer, or any other device that can be used to visit Seven Oath and use the services. 
-                        </li>
-                        <li>
-                        Service: refers to the service provided by Seven Oath as described in the 
-                        relative terms (if available) and on this platform. ● Third-party service: refers to advertisers, 
-                        contest sponsors, promotional and marketing partners, 
-                        and others who provide our content or whose products or services we think may interest you.
-                        </li>
-                        <li>
-                        Website: Seven Oath."’s" site, which can be accessed via this URL:<Link style={{color:'black'}} to='/'> https://sevenoath.com/</Link>
-
-                        </li>
-                        <li>
-                            You: a person or entity that is registered with Seven Oath to use the Services. 
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div style={{textAlign:'justify', margin:'2rem 1rem'}}>
-                <div>
-                    <h2>
-                    Restrictions
-                    </h2>
-                </div>
-                <div>
-                    <h4 >
-                    You agree not to, and you will not permit others to:
-                    </h4>
-                </div>
-                <div>
-                    <ul style={{textAlign:'justify'}}>
-                        <li>
-                        License, sell, rent, lease, assign, distribute, transmit, host, outsource, disclose or otherwise commercially exploit the website/app or make the platform available to any third party.
-                        </li>
-                        <li>
-                        Modify, make derivative works of, disassemble, decrypt, reverse compile or reverse engineer any part of the website/app. 
-                        </li>
-                        <li>
-                        Remove, alter or obscure any proprietary notice (including any notice of copyright or trademark) of Seven Oath or its affiliates, partners, suppliers, or the licensors of the website/app.
-                        </li>
-                    
-                    </ul>
-                </div>
-            </div>
-            <div style={{textAlign:'justify', margin:'2rem 1rem'}}>
-                <div>
-                    <h2>
-                        Return and Refund Policy 
-                    </h2>
-                </div>
-                <div>
-                    <p >
-                    Thanks for shopping at Seven Oath. We appreciate the fact that you like to buy the stuff we build. We also want to make sure you have a rewarding experience while you’re exploring, evaluating, and purchasing our products.
-                    </p>
-                    <p >
-                    As with any shopping experience, there are terms and conditions that apply to transactions at Seven Oath. We’ll be as brief as our attorneys will allow. The main thing to remember is that by placing an order or making a purchase at Seven Oath, you agree to the terms along with Seven Oath."’s" Privacy Policy.
-                    </p>
-                    <p >
-                    If, for any reason, You are not completely satisfied with any good or service that we provide, don't hesitate to contact us and we will discuss any of the issues you are going through with our product.
-                    </p>
-                </div>
-            </div>
-            
-            
-        </div>
+        }
+    </div>
     )
 }

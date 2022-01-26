@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Signin, UserProfileViewAction } from '../Action/UserAction';
-import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import loginimg from '../login.png'
+import loginimg from '../images/login.png'
 import '../sass/signin.scss'
+import Load from '../images/load.gif'
 
 
 function SignInPage(props){
@@ -54,7 +54,7 @@ function SignInPage(props){
                         <h2>Log In  !</h2>
                     </div>
                     {
-                        loading ? <LoadingBox></LoadingBox>
+                        loading ? <img className='load-small' src={Load} alt='load'></img>
                         :
                         error ? <MessageBox variant="danger">{error}</MessageBox>
                         : <span></span>

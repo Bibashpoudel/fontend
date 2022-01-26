@@ -19,13 +19,13 @@ body {
 
 /* ------------------------------------tooltip design */
 
-.tooltip {
+.tooltips {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+ 
 }
 
-.tooltip .tooltiptext {
+.tooltips .tooltiptext {
   visibility: hidden;
   width: 120px;
   background-color: #555;
@@ -42,7 +42,7 @@ body {
   transition: opacity 0.3s;
 }
 
-.tooltip .tooltiptext::after {
+.tooltips .tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -52,7 +52,7 @@ body {
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.tooltip:hover .tooltiptext {
+.tooltips:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
@@ -111,6 +111,11 @@ img.extra-small{
   width:100%;
   padding:1rem;
 }
+img.load-small{
+  max-width: 5rem;
+  width:100%;
+  padding:1rem;
+}
 img.small{
   max-width: 10rem;
   width:100%;
@@ -152,6 +157,9 @@ button.secondary {
   background-color: #26A412;
   color:White;
   font-size: 2.3rem;
+  @media(max-width:360px){
+    font-size: 1.7rem;
+  }
 }
 button.secondary_size{
   background-color: #26A412;
@@ -498,7 +506,7 @@ footer {
 /* landing page design */
 .ms1_search {
   
-  background-image: url(./wp.png);
+  background-image: url(./images/wp.png);
 	background-repeat: no-repeat;
   background-size: cover;
 	height:55rem;
@@ -1625,7 +1633,28 @@ button.close-sidebar {
 
 
 // *************************************************** design for navigation bar nav bar
-.sidenav {
+
+.scroll-disable{
+  overflow:hidden !important;
+  height: 630px;
+  }
+
+  .actives {
+    display: block;
+    position: fixed;
+    margin-right:25rem;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(41, 39, 39, 0.7);
+    z-index: 10000000000;
+    overflow-x: hidden;
+    opacity: 0.5;
+    transition: all .5s ease-in-out;
+    overflow: hidden;
+    }
+
+
+.sidenavs {
   height: 100% !important;
   width: 0;
   position: fixed !important;
@@ -1638,7 +1667,7 @@ button.close-sidebar {
   padding-top: 6rem;
  
 }
-.sidenav a {
+.sidenavs a {
   padding: 0.8rem 0.8rem 0.8rem 2rem;
   text-decoration: none;
   font-size: 1.4rem;
@@ -1647,11 +1676,11 @@ button.close-sidebar {
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.sidenavs a:hover {
   color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+.sidenavs .closebtn {
   position: absolute;
   top: 0;
   right: -20px;
@@ -1697,23 +1726,8 @@ display: none;
 
 }
 
-.actives {
-display: block;
-position: fixed;
-margin-right:25rem;
-width: 100vw;
-height: 100vh;
-background: rgba(41, 39, 39, 0.7);
-z-index: 10000000000;
-overflow-x: hidden;
-opacity: 0.5;
-transition: all .5s ease-in-out;
-overflow: hidden;
-}
-.scroll-disable{
-overflow:hidden !important;
-height: 630px;
-}
+
+
 
 
 

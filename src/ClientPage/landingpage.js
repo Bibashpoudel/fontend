@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import pwed from '../pwed.png'
+import pwed from '../images/pwed.png'
 ;
 
 import Categories from '../components/Categories';
@@ -30,7 +30,7 @@ function LandingPage(props){
 
     const [ city, setCity] = useState()
     const VendorCitys = useSelector((state) => state.VendorCitys);
-    const { citys} = VendorCitys;
+    const { error:city_error, citys} = VendorCitys;
     const Listvenue =  useSelector((state) => state.Listvenue);
     const {loading, error, venues} = Listvenue
     const servicelist = useSelector(state => state.servicelist);
@@ -54,7 +54,8 @@ function LandingPage(props){
                     <div className="ms1_text">
                       <h1>Select best venues for your wedding</h1>
                       <div className="mt-3">
-                            <div className="d-inline-flex">
+                <div className="d-inline-flex">
+                  {city_error && <MessageBox>{ city_error.message}</MessageBox>}
                                 {
                                 citys ?
                                 <select className="form-select rounded-0" onChange={e=>setCity(e.target.value)}>
@@ -144,7 +145,7 @@ function LandingPage(props){
           >
             {
               loading ? <div>Loading</div>
-           : error ? <MessageBox variant="danger">{error}</MessageBox>
+           : error ? <MessageBox variant="danger">{error.message}</MessageBox>
            :
 
 
@@ -199,7 +200,7 @@ function LandingPage(props){
           >
             {
               loading_ser ? <div>Loading</div>
-          : error_ser ? <MessageBox variant="danger">{error}</MessageBox>
+          : error_ser ? <MessageBox variant="danger">{error_ser.message}</MessageBox>
           :
           <span>
           {
@@ -221,9 +222,7 @@ function LandingPage(props){
                 
                         
             </div>
-            <div>
-                    <Categories></Categories>
-            </div>
+            
         </div>
     )
     
