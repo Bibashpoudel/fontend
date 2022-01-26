@@ -13,7 +13,7 @@ function SignupPage(props){
 
 
 
-   
+
     const [FirstName, SetFirstName] = useState();
     const [LastName, SetLastName] = useState();
     const [email, SetEmail] =useState();
@@ -38,17 +38,17 @@ function SignupPage(props){
         e.preventDefault();
         
         dispatch(registerSendOtp(phone))
-       
+    
             
-       
+    
             
-       
+    
     }
     const SignUphandaler = (e)=>{
         e.preventDefault()
         dispatch(Signup(`${FirstName} ${LastName}`, email, phone, customer_type, password,otp));
 
-       
+    
     }
     const changeState = (e)=>{
         e.preventDefault()
@@ -65,9 +65,9 @@ function SignupPage(props){
             }, 3000)
             
         }
-       
-           
-           
+    
+        
+        
 
     }, [dispatch, password, phone, props.history, redirect, success, userInfo]);
 
@@ -79,17 +79,17 @@ function SignupPage(props){
             </div>
             <div className="form col-2">
 
-           
+        
                     {loading &&<LoadingBox></LoadingBox>}
-                      
-                         {   error &&<MessageBox variant="danger">{error}</MessageBox>}
+                    
+                        {   error &&<MessageBox variant="danger">{error}</MessageBox>}
                         
-                  
-          
+                
+        
 
-              <div>
-              <form onSubmit={OtpVerify} className={OtpState ? 'hide_otp':'show_otp'}>
-              {sendError && <MessageBox>{sendError}</MessageBox>}
+            <div>
+            <form onSubmit={OtpVerify} className={OtpState ? 'hide_otp':'show_otp'}>
+            {sendError && <MessageBox>{sendError}</MessageBox>}
                     <div>
                         <h2>Welcome !</h2>
                     </div>
@@ -98,9 +98,10 @@ function SignupPage(props){
                         <div>
                             <label>First Name <span style={{color:'red', fontSize:'1rem'}}>  *</span></label>
                         </div>
-                       
-                        <div>
-                            <input 
+                    
+                        <div className='mb-4'> 
+                                <input 
+                                     style={{width:"65%"}}
                                 type="text" 
                                 id="name" 
                                 placeholder="First Name"
@@ -108,16 +109,17 @@ function SignupPage(props){
                                 required='true'
                             ></input>
                         </div>
-                      
+                    
                     </div>
                     <div className=" fields">
                     <div>
                             <label>Last Name<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                             
                         </div>
-                       
-                        <div>
-                            <input 
+                    
+                        <div className='mb-4'>
+                                <input 
+                                     style={{width:"65%"}}
                                 type="text" 
                                 id="name" 
                                 placeholder="First Name"
@@ -131,39 +133,42 @@ function SignupPage(props){
                         <div>
                             <label>Email<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                         </div>
-                       <div>
-                        <input 
+                    <div className='mb-4'>
+                                <input
+                         style={{width:"65%"}}            
                                 type="text" 
                                 id="email" 
                                 placeholder="Email"
                                 onChange={(e) => SetEmail(e.target.value)}
                                 required='true'
                             ></input>
-                       </div>
+                    </div>
                         
                     </div>
                     <div className="fields">
                         <div>
                             <label>Phone number<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                         </div>
-                      <div>
-                      <input 
+                    <div className='mb-4'>
+                                <input 
+                                     style={{width:"65%"}}
                             type="text" 
                             id="phone" 
                             placeholder="Phone"
                             onChange={(e)=>SetPhone(e.target.value)}
                             required='true'
                         ></input>
-                      </div>
+                    </div>
                         
                     </div>
                     
                     <div className=" fields">
-                       <div>
-                           <label>Password<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
-                       </div>
-                        <div>
-                            <input 
+                    <div>
+                        <label>Password<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
+                    </div>
+                        <div className='mb-4'>
+                                <input 
+                                    style={{width:"65%"}}
                                 type="password" 
                                 id="password" 
                                 placeholder="Password"
@@ -185,7 +190,7 @@ function SignupPage(props){
                     </div>
                     
                 </form>
-               
+            
                 <form className={OtpState ? 'show_otp': "hide_otp"} >
                     <h2>Enter OTP</h2>
                     <h4>{verifyError && <MessageBox>{verifyError}</MessageBox>}</h4>
@@ -199,10 +204,10 @@ function SignupPage(props){
                     </div>
                     
                 </form>
-               
-               
-               
-              </div>
+            
+            
+            
+            </div>
                 <div className="social_items" style={{display:'none'}}>
                     <div>
                         or
@@ -219,7 +224,7 @@ function SignupPage(props){
                         {"    "}Google
                     </div>
                 </div>
-           
+        
             </div>
             
         </div>

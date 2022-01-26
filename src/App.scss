@@ -682,6 +682,9 @@ footer {
 .rating span {
   color: #f0c040;
   margin: 0.1rem;
+  @media(max-width:500px){
+      font-size: 1rem;
+  }
 }
 .rating span:last-child {
   color: #404040;
@@ -869,18 +872,7 @@ footer {
   flex-wrap: wrap;
 }
 
-.form-dts select{
-  outline: none;
-  background-color:white ;
-  margin-bottom:1.2rem;
-  width:50%;
-}
-.form-dts textarea{
-  outline: none;
-  background-color:white ;
-  margin-bottom:1.2rem;
-  width:50%;
-}
+
 
 .form-fst-div{
   margin: 0rem !important;
@@ -906,26 +898,19 @@ footer {
 
 
 /* -------------------design Vendor Sign up page-------------------- */
-
+input:focus{
+  outline: .1rem solid #d43 !important;
+}
+select:focus{
+  outline: .1rem solid #d43 !important;
+}
 .vendor{
   margin:8rem 6.5rem;
   
   background-color: #FCE4E4;
 }
 
-.form select{
-  outline: none;
-  background-color:white ;
-  margin-bottom:1.2rem;
-  border-bottom:.1rem solid grey;
-  width:65%;
-}
-.form textarea{
-  outline: none;
-  background-color:white ;
-  margin-bottom:1.2rem;
-  width:53%;
-}
+
 img.ven_reg{
   max-width: 62rem;
   width: 100%;

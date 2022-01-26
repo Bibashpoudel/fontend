@@ -22,8 +22,8 @@ import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper";
 
 
 
-import { VenueList } from '../Action/VenueAction';
-import { ServicesList } from '../Action/ServicesAction';
+import { TrendingVenueList, VenueList } from '../Action/VenueAction';
+import { ServicesList, TrendingServicesList } from '../Action/ServicesAction';
 import Venue from '../components/venues';
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 function LandingPage(props){
@@ -31,16 +31,16 @@ function LandingPage(props){
     const [ city, setCity] = useState()
     const VendorCitys = useSelector((state) => state.VendorCitys);
     const { error:city_error, citys} = VendorCitys;
-    const Listvenue =  useSelector((state) => state.Listvenue);
-    const {loading, error, venues} = Listvenue
-    const servicelist = useSelector(state => state.servicelist);
-    const {loading:loading_ser, error:error_ser,services} = servicelist
+    const ListTrendingVenue =  useSelector((state) => state.ListTrendingVenue);
+    const {loading, error, Tvenues} = ListTrendingVenue
+    const trendingservicelist = useSelector(state => state.trendingservicelist);
+    const {loading:loading_ser, error:error_ser,Tservices} = trendingservicelist
 
     const dispatch = useDispatch();
     useEffect(() =>{
         dispatch(VendorCityList());
-        dispatch(VenueList());
-        dispatch(ServicesList())
+        dispatch(TrendingVenueList());
+        dispatch(TrendingServicesList())
     },[dispatch])
     const Venuehandaler = ()=>{
         props.history.push(`/city/venue/${city}`)
@@ -151,15 +151,15 @@ function LandingPage(props){
 
            <span>
            {
-              venues ? 
-                venues.map((item) =>(
-              <SwiperSlide>
+              Tvenues ? 
+                Tvenues.map((item) =>(
+              <SwiperSlide key={item.id}>
                 
                 <Venue venue={item} key={item.id}></Venue>
               </SwiperSlide>
             
                 ))
-              :<span>bibash</span>
+              :<span>No Venues </span>
               }
            </span>
 }
@@ -204,15 +204,15 @@ function LandingPage(props){
           :
           <span>
           {
-              services ? 
-              services.map((service) =>(
-              <SwiperSlide>
+              Tservices ? 
+              Tservices.map((service) =>(
+              <SwiperSlide key={service.id}>
                 
                 <Card service={service} key={service.id}></Card>
               </SwiperSlide>
             
                 ))
-              :<span>bibash</span>
+              :<span>No services</span>
               
               }
           </span>

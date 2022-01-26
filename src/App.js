@@ -258,7 +258,7 @@ function App() {
                   <div>
                     {
                       venueType.map((t) =>(
-                        <NavLink className='row-hover' to={`/type/venue/${t.id}`}>{t.type}{t.id}</NavLink>
+                        <NavLink key={t.id} className='row-hover' to={`/type/venue/${t.id}`}>{t.type}{t.id}</NavLink>
 
                       ))
                     } 
@@ -287,7 +287,7 @@ function App() {
                     <div >
                       {
                         servicetype.map((service) =>(
-                          <NavLink  className='row-hover' to={`/type/service/${service.id}`}>{service.type}</NavLink>
+                          <NavLink  key={service.id} className='row-hover' to={`/type/service/${service.id}`}>{service.type}</NavLink>
   
                         ))
                       }

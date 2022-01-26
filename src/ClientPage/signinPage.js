@@ -63,11 +63,11 @@ function SignInPage(props){
                     
                     
                     <div className="fields">
-                    <label className='labels'>Phone</label>
+                    <label className='labels'>Phone <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
                         <input 
                             type="text" 
                             id="phone" 
-                          
+                            required='true'
                             onChange ={(e) => SetPhone(e.target.value)}
                             
                         ></input>
@@ -75,11 +75,11 @@ function SignInPage(props){
                     </div>
                     
                     <div className="fields">
-                    <label className='p_labels'>Password</label>
+                    <label className='p_labels'>Password <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
                             <input 
                                 type="password" 
                                 id="password" 
-                              
+                                required='true'
                                 onChange ={(e) => setPassword(e.target.value)}
                                 
                             ></input>

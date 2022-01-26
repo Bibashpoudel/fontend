@@ -44,15 +44,17 @@
   
   
   
-  .form input{
-    outline: none;
-    background-color:white ;
-    margin-bottom:1.2rem;
-    width:65%;
-    border-bottom: .1rem solid grey !important;
-    border-radius: 0 !important;
+  // .form input{
+  //   outline: none;
+  //   background-color:white ;
+  //   margin-bottom:1.2rem;
+  //   width:65%;
+  //   border-bottom: .1rem solid grey !important;
+  //   border-radius: 0 !important;
+  // }
+  .form input:focus{
+    outline:.1rem solid #d43;
   }
-  
   
   .social_items{
     display: none !important;

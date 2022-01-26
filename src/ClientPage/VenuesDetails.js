@@ -389,7 +389,7 @@ function VenueDetailsPage(props){
                                     <div>
                                                                                         <label>Start Date</label>
                                                                                         <div>
-                                                                                            <input type='date' style={{ width: '100%', border: 'none',borderRadius:'.5rem',borderBottom:'none'}}></input>
+                                                                                            <input type='date' className='form-select form-select-lg mb-3 w-100'></input>
                                                                                         </div>
                                     </div>
                                     <div>
@@ -397,7 +397,7 @@ function VenueDetailsPage(props){
                                                                                         <label>End Date</label>
                                                                                        
                                                                                         <div>
-                                                                                            <input type='date' style={{width:'100%'}}></input>
+                                                                                            <input type='date' className=' form-select form-select-lg mb-3 w-100'></input>
                                                                                         </div>
                                                                                       
                                         

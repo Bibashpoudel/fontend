@@ -2,9 +2,9 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { userDetailsReducer, UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
+import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, TrendingVenueListReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
-import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
+import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
@@ -42,12 +42,14 @@ const reducer = combineReducers({
     userRegister:userRegisterReducer,
     cart:cartReducer,
     // cartS:cartSReducer,
-    Listvenue:VenueListReducer,
+    Listvenue: VenueListReducer,
+    ListTrendingVenue:TrendingVenueListReducer,
     CityVenue:CityVenueListReducer,
     DetailsVenue:VenueDetailsListReducer,
     typeService:ServiceTypeReducer,
     particularSType:detailsServiceTypeReducer,
-    servicelist:ServiceReducer, 
+    servicelist: ServiceReducer, 
+    trendingservicelist:TrendingServiceReducer,
     typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
     UserOrders:UserOrderReducer,
