@@ -29,6 +29,7 @@ export const ServicesListaction =(venueId) =>async(dispatch)=>{
                 ? error.response.data.message
                 : error
         });
+        
     }
 }
 
@@ -154,6 +155,7 @@ export const ServiceDetails = (serviceId) => async(dispatch)=>{
             ? error.response.data.message
             : error
         })
+       
     }
 }
 

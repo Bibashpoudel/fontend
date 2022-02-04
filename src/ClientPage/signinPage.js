@@ -5,6 +5,7 @@ import { Signin, UserProfileViewAction } from '../Action/UserAction';
 import MessageBox from '../components/MessageBox';
 import loginimg from '../images/login.png'
 import '../sass/signin.scss'
+import './signinPage.scss'
 import Load from '../images/load.gif'
 
 
@@ -38,7 +39,7 @@ function SignInPage(props){
 
     
     return(
-        <div className="main ">
+        <div className="sigin-main">
             <div className="col-1_signin">
                 <div className="cli_log">
                     <h3>Book your wedding venue now !!</h3>
@@ -67,7 +68,7 @@ function SignInPage(props){
                         <input 
                             type="text" 
                             id="phone" 
-                            required='true'
+                            required={true}
                             onChange ={(e) => SetPhone(e.target.value)}
                             
                         ></input>
@@ -79,7 +80,7 @@ function SignInPage(props){
                             <input 
                                 type="password" 
                                 id="password" 
-                                required='true'
+                                required={true}
                                 onChange ={(e) => setPassword(e.target.value)}
                                 
                             ></input>
@@ -96,7 +97,7 @@ function SignInPage(props){
                     </div>
                     <div className='user_Create'>
                         <span>
-                           New User? { ' '} 
+                        Don't have an account? { ' '} 
                             <Link to={`/register?redirect=${redirect}`} style={{ color:"blue"}}>
                             Create A account
                             </Link> 
@@ -127,6 +128,7 @@ function SignInPage(props){
             </div>
             
         </div>
+      
     )
 }
 export default SignInPage;

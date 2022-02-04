@@ -1,12 +1,20 @@
 import React from 'react';
-
+import './rating.scss'
 
 export default function Rating(props){
 
     const {rating, numReviews} = props;
     return (
         <div className="rating">
-            <span>
+            <span className='rating_box'>
+            <i className=
+                    
+                     'fa fa-star'/>
+                {' '}
+                {rating}
+            </span>
+            
+            {/* <span>
                 <i className={
                     rating >=1 ? 'fa fa-star'
                     : rating >=0.5 ? 'fa fa-star-half-o'
@@ -48,7 +56,7 @@ export default function Rating(props){
             </span>
             <span>
                 {numReviews + 'Reviews'}
-            </span>
+            </span> */}
             
         </div>
 

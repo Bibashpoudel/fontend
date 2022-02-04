@@ -25,9 +25,9 @@ export default function Terms() {
             <div style={{margin:'1.5rem'}}>
                 <h2>Terms & Conditions</h2>
                 {
-                    tc.map(pp=>(
-                        <div style={{textAlign:'justify'}} key={pp.id}>
-                            {parse(pp.description)}
+                    tc.map(t=>(
+                        <div style={{textAlign:'justify'}} key={t.id}>
+                            {parse(t.description)}
                         </div>
                     ))
                 }

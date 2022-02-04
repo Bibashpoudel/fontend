@@ -10,6 +10,7 @@ import {Link} from 'react-scroll'
 import { addtoCartS } from '../Action/CartAction';
 import swal from 'sweetalert';
 import { ADD_SERVICE_REVIEW_RESET } from '../Constants/servicesConstants';
+import { CheckServiceStatusAction } from '../Action/OrderAction';
 
 function ServiceDetailsPage(props){
     // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
@@ -27,7 +28,8 @@ function ServiceDetailsPage(props){
     const {loading:loading_addreview, ReviewAdd:success,error:ReviewAddError} = ReviewAdd;
     const serviceReviewView = useSelector((state) => state.serviceReviewView);
     const {loading:ServiceReviewLoading,serviceReview,error:ServiceReviewError} = serviceReviewView;
-
+    const CheckStatus = useSelector(state => state.CheckStatus)
+    const { loading: statusLoading, eror: statusError, status } = CheckStatus;
     // const [, setserviceADD] = useState(['']);
     const [total, setTotal] = useState();
     // const [people, SetPeople] = useState(0);
@@ -36,8 +38,9 @@ function ServiceDetailsPage(props){
     const [videoDisplay , setVideoDispaly] = useState(false);
     const [rating, setRating] = useState();
     const [comment, setComment] = useState();
-
-
+    const [dateErrorMessage, setDateErrorMessage] = useState("");
+    const [from, setFrom] = useState(' ');
+    const [to, setTo] = useState(' ');
 
     const AddReview =(e) =>{
         e.preventDefault();
@@ -59,8 +62,11 @@ function ServiceDetailsPage(props){
         }
        
         dispatch(ServiceDetails(serviceId));
+        if (error || errorImage || ReviewAddError || ServiceReviewError || statusError) {
+            console.log(error.status)
+        }
    
-    }, [dispatch, serviceId, success] );
+    }, [ReviewAddError, ServiceReviewError, dispatch, error, errorImage, serviceId, statusError, success] );
   
   
   const DisplayImage = () => {
@@ -131,6 +137,41 @@ function ServiceDetailsPage(props){
    
 //   };
 
+const CheckAvailable = (e) => {
+    e.preventDefault();
+    
+    const date = new Date()
+    function addLeadingZeros(n) {
+        if (n <= 9) {
+          return "0" + n;
+        }
+        return n
+      }
+    const today =date.getFullYear()+ "-" + addLeadingZeros(date.getMonth() + 1) + "-" + addLeadingZeros(date.getDate())
+    
+    console.log(from , to,today)
+    if (from === ' ') {
+        setDateErrorMessage("Please Select Start Date")
+        return
+    }
+    if(to === '') {
+        setDateErrorMessage("Please Select end Date")
+        return
+    }
+    
+    if (from > to) {
+        setDateErrorMessage("End date can not be smaller")
+        return
+    }
+    if(from < today || to < today)
+    {
+        setDateErrorMessage("Your Can't Select this format of date")
+        return
+        }
+        setDateErrorMessage('')
+        dispatch(CheckServiceStatusAction(from, to,serviceId))
+}
+
 
     
     const Carthandaler=()=>{
@@ -153,32 +194,29 @@ function ServiceDetailsPage(props){
         {
             loading? <LoadingBox></LoadingBox>
         :
-            error? <MessageBox variant="danger">{error}</MessageBox>
+            error? <MessageBox variant="danger">{error || error.message}</MessageBox>
         :
         loadingImage? <LoadingBox></LoadingBox>
         :
-            errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
+            errorImage? <MessageBox variant="danger">{errorImage || errorImage.message}</MessageBox>
         :
         ServiceReviewLoading ? <LoadingBox></LoadingBox>
         :
-        ServiceReviewError ? <MessageBox variant="danger">{ServiceReviewError}</MessageBox>
+        ServiceReviewError ? <MessageBox variant="danger">{ServiceReviewError || ServiceReviewError.message}</MessageBox>
         
         :
         <div> 
             <div className="main top_center">
-            
-                <div className="col-1">
-                
-                        <img id="myimage"  className="large" src={serviceD.display_image} alt={serviceD.name}></img>
-                
+                <div className="det-col-1">
+                    
+                        <img id="myimage"  className="det-large" src={serviceD.display_image} alt={serviceD.name}></img>
+                    
                 <div className="venue_details_margin">
                     <div className="venue_details_row">
                         <div>{serviceD.name}</div>
-                        <div>
-                            
+                        <div>  
                             {/* <Rating rating={venue.rating} numReviews={venue.numReviews}></Rating> */}
-                        
-                            </div>
+                        </div>
                     </div>
                     <div className="venue_details_row">
                         <span>
@@ -187,107 +225,166 @@ function ServiceDetailsPage(props){
                         </span>
                     </div>
                     <div className="venue_details_row_buttom">
-                            <div className="colm-4">
-                                <i className="fa fa-image"></i>
-                                {/* {venue.gallery.length} */}
-                            </div>
-                            <div className="colm-4">
+                        <div className="colm-4">
                             <i className="fa fa-image"></i>
-                            
-                            </div>
-                            <div className="colm-4">
+                            {/* {venue.gallery.length} */}
+                        </div>
+                        <div className="colm-4">
+                            <i className="fa fa-image"></i>
+                        </div>
+                        <div className="colm-4">
                             <i className="fa fa-share"></i>
-                            
-                            
-                            </div>
-                            <div className="colm-4">
+                        </div>
+                        <div className="colm-4">
                             <i className="fa fa-heart-o" aria-hidden="true"></i>
-
-                            </div>
-                    </div>
-                    
+                        </div>
+                    </div> 
                 </div>
                 <div className="venue_details">
-                            <div className="venue_details_row">
-                                <div>
-                                <Link to='photo' activeStyle={{color: "red"}} activeClass="active" style={{color:'black',cursor:'pointer'}} spy={true} smooth={true}>Photo</Link>
-                                </div>
-                                <div>
-                                <Link to ='about' activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>About</Link>
-                                </div>
-                                <div>
-                                    <Link to='features'  activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Features</Link>
-                                </div>
-                                <div>
-                                <Link to="reviews"  activeStyle={{color: "red"}} spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Reviews</Link>
-                                </div>
-                            </div>
+                    <div className="venue_details_row">
+                        <div>
+                            <Link to='photo'  activeClass="active" style={{color:'black',cursor:'pointer'}} spy={true} smooth={true}>Photo</Link>
+                        </div>
+                        <div>
+                            <Link to ='about' spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>About</Link>
+                        </div>
+                        <div>
+                            <Link to='features'   spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Features</Link>
+                        </div>
+                        <div>
+                            <Link to="reviews"  spy={true} style={{color:'black',cursor:'pointer'}}  smooth={true}>Reviews</Link>
+                        </div>
                     </div>
                 </div>
-                    <form className="form col-2">
-                        <div>
-             
-                        <div className="g_details">
-                            <div className="ven_price_loc">
-                                <div>
-                                    Price
+                </div>
+                <div className='det-col-2'>
+                    <form className="form ">
+                        <span className="form-fst-div">
+                            <div className="g_service" >
+                                <div className="g_ser_hed">
+                                    <h3>
+                                        Available Services
+                                    </h3>
                                 </div>
-                                
-                                <div>
+                                <div className="g_details">
+                                    <div className="ven_price_loc">
+                                        <div>
+                                            Price
+                                        </div>
+                                        
+                                        <div>
+                                            
+                                            {serviceD.display_price}
+                                                                                
+                                        </div>
+                                    </div>
+                                    <div className="ven_price_loc">
+                                        <div>
+                                            Location
+                                        </div>
+                                        <div>
+                                            
+                                                {serviceD.location}
+                                            
+                                        </div>
+                                    </div>
+                                    <div className="ven_price_loc">
+                                        <div>
+                                            final Price
+                                        </div>
+                                        <div>
+                                            
+                                            {total}
+                                            
+                                        </div>
+                                    </div>
                                     
-                                        {serviceD.display_price}
-                                                                        
-                                </div>
-                            </div>
-                            <div className="ven_price_loc">
-                                <div>
-                                    Location
-                                </div>
-                                <div>
-                                    
-                                        {serviceD.location}
-                                    
-                                </div>
-                            </div>
-                            <div className="ven_price_loc">
-                                <div>
-                                    final Price
-                                </div>
-                                <div>
-                                    
-                                    {total}
-                                    
-                                </div>
-                            </div>
-                            
 
-                        </div>
-                        <div className="g_details">
-                            <div className="ven_price_loc">
-                                <div>
-                                    Start Date
                                 </div>
-                                <div>
-                                    
-                                        Number of days
-                                    
+                                <div className="g_details">
+                                    <div className="ven_price_loc">
+                                        <div>
+                                        <label>Start Date</label>
+                                            <div>
+                                                <input
+                                                    type='date'
+                                                    className='form-select form-select-lg mb-3 w-100'
+                                                    onChange={e => setFrom(e.target.value)}   
+                                                >   
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label>End Date</label>
+                                            <div>
+                                                <input
+                                                    type='date'
+                                                    className=' form-select form-select-lg mb-3 w-100'
+                                                    onChange={e => setTo(e.target.value)}
+                                                ></input>
+                                            </div> 
+                                        </div>
+                                        <div>
+                                            <button className='primary' style={{fontSize:'1rem'}} onClick={CheckAvailable} >Check Availability</button>
+                                        </div>
+                                    </div>
+                                    <div className='single_row'>
+                                        { dateErrorMessage !== ' ' &&
+                                            <div style={{ color: 'rgba(213, 19, 62, 0.77)' }}>
+                                                {dateErrorMessage}
+                                            </div>    
+                                        }
+                                        {statusLoading ?
+                                            <div style={{ color: 'rgba(213, 19, 62, 0.77)' }} >
+                                                Loading...
+                                            </div>
+                                        :
+                                        statusError ?
+                                            <div style={{color:'rgba(213, 19, 62, 0.77)'}}>
+                                                {status }
+                                            </div>
+                                        :
+                                            <div style={{ color: 'rgba(213, 19, 62, 0.77)' }}>
+                                                {status.status}
+                                            </div>
+                                        }
+                                        </div>
+                                        {statusLoading ?
+                                            <div style={{ color: 'rgba(213, 19, 62, 0.77)' }} >
+                                               ''
+                                            </div>
+                                            :
+                                            statusError ?
+                                                <div style={{ color: 'rgba(213, 19, 62, 0.77)' }}>
+                                                    {statusError || statusError.message}
+                                                </div>
+                                                :
+                                            <span>
+                                               { status.status === 'Available' &&
+                                                <div className="single_row">
+                                                    <button className="secondary block"  onClick={Carthandaler}>Continue</button>
+                                                </div>
+                                                }
+                                            
+                                            
+                                        
+                                                {
+                                                    status.status === 'Unavailable' &&
+                                                    <div style={{color: 'rgba(213, 19, 62, 0.77)'}}>
+                                                        Already booked
+                                                    </div>
+                                                }                                                  
+                                            </span>
+                                        }
+                                    <div className ="single_row" style={{display:'none'}}>
+                                            <input type="text" placeholder="leave a comment"></input>
+                                    </div>
                                 </div>
-                                <div>
-                                    Search Availablity
-                                </div>
-                            </div>
-                            
-                            <div className="single_row">
-                                <button className="secondary block" onClick={Carthandaler}>Continue</button>
-                            </div>
-                            <div className ="single_row">
-                                    <input type="text" placeholder="leave a comment"></input>
-                            </div>
-                        </div>
-                    
-    
-                    </div>
-                </form>
+                            </div>    
+                        </span>
+                    </form>
+                
+                </div>
                 
             </div>
             <div className="main top">
@@ -295,7 +392,7 @@ function ServiceDetailsPage(props){
                             {
                                 loadingImage? <LoadingBox></LoadingBox>
                                 :
-                                    errorImage? <MessageBox variant="danger">{errorImage}</MessageBox>
+                                    errorImage? <MessageBox variant="danger">{errorImage || errorImage.message}</MessageBox>
                                 :
                                 
                            
@@ -393,7 +490,7 @@ function ServiceDetailsPage(props){
                                                         </div>
                                                         <div>
                                                             {loading_addreview && <LoadingBox></LoadingBox> }
-                                                            { ReviewAddError && <MessageBox variant="danger">{ReviewAddError}</MessageBox> }
+                                                            { ReviewAddError && <MessageBox variant="danger">{ReviewAddError || ReviewAddError.message}</MessageBox> }
                                                         </div>
                                                         <div >
                                                             <label/>

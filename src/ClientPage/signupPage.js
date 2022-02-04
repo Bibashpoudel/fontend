@@ -9,6 +9,7 @@ import Load from '../images/load.gif'
 import regimg from '../images/registerclient.png'
 import { registerSendOtp } from '../Action/OtpAction';
 
+
 function SignupPage(props){
 
 
@@ -106,7 +107,7 @@ function SignupPage(props){
                                 id="name" 
                                 placeholder="First Name"
                                 onChange={(e) => SetFirstName(e.target.value)}
-                                required='true'
+                                required={true}
                             ></input>
                         </div>
                     
@@ -124,7 +125,7 @@ function SignupPage(props){
                                 id="name" 
                                 placeholder="First Name"
                                 onChange={(e) => SetLastName(e.target.value)}
-                                required='true'
+                                required={true}
                                 
                             ></input>
                         </div>
@@ -140,7 +141,7 @@ function SignupPage(props){
                                 id="email" 
                                 placeholder="Email"
                                 onChange={(e) => SetEmail(e.target.value)}
-                                required='true'
+                                required={true}
                             ></input>
                     </div>
                         
@@ -156,7 +157,7 @@ function SignupPage(props){
                             id="phone" 
                             placeholder="Phone"
                             onChange={(e)=>SetPhone(e.target.value)}
-                            required='true'
+                            required={true}
                         ></input>
                     </div>
                         
@@ -173,7 +174,7 @@ function SignupPage(props){
                                 id="password" 
                                 placeholder="Password"
                                 onChange={(e)=>setPassword(e.target.value)}
-                                required='true'
+                                required={true}
                             ></input>
                         </div>
                     </div>

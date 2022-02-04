@@ -6,6 +6,7 @@ import { Createorder } from '../Action/OrderAction';
 
 import { pay, Payorder } from '../Action/PayAction';
 import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 import { CART_ITEM_RESET } from '../Constants/cartConstants';
 import { CREATE_ORDER_RESET } from '../Constants/orderConstants';
 import { PAY_RESET } from '../Constants/payConstants';
@@ -22,11 +23,11 @@ export default function PaymentScreen(props) {
     const cart = useSelector(state => state.cart);
     // const{cartItems } = cart;
     const payOrder = useSelector(state => state.payOrder);
-    const {loading:orderloading, orderCreatesuccess}  = payOrder;
+    const {loading:orderloading, orderCreatesuccess , error:orderPayError}  = payOrder;
     const Razorpay = useSelector(state =>state.Razorpay);
-    const {loading:payloading,paysuccess }= Razorpay;
+    const {loading:payloading,paysuccess,error:payError }= Razorpay;
     const order = useSelector(state =>state.order);
-    const {loading, OderCreateSuccess }= order;
+    const {loading, OderCreateSuccess, error:orderError }= order;
 
     // const amo =cartItems.reduce((a,c)=> a + c.price,0)
     const amounts = 26250;
@@ -66,14 +67,8 @@ export default function PaymentScreen(props) {
           type:CART_ITEM_RESET
         })
         dispatch({type:CREATE_ORDER_RESET})
-       
-          
       }
-      
   }
-   
-     
- 
    }, [OderCreateSuccess, OrderId, amounts, cart.cartItems, dispatch, orderCreatesuccess, paysuccess, props.history, props.location, total_price])
    
    
@@ -86,12 +81,17 @@ export default function PaymentScreen(props) {
 };   
     
     return (
-        <div>
-          {loading && <LoadingBox></LoadingBox>}
-          {orderloading && <LoadingBox></LoadingBox>}
-          {payloading && <LoadingBox></LoadingBox>}
-            <div style={{justifyContent:'center'}}>
-            <button onClick={showRazorpay} className="btn btn-primary btn-block">
+        <div className='main top_center'>
+        {loading ? <LoadingBox></LoadingBox>
+          :orderError ? <MessageBox>{orderError.message || orderError}</MessageBox>
+            : orderloading ? <LoadingBox></LoadingBox>
+            :orderPayError ? <MessageBox>{orderPayError.message || orderPayError}</MessageBox>
+        : payloading ? <LoadingBox></LoadingBox>
+        :payError && <MessageBox>{payError.message || payError}</MessageBox>
+        
+        }
+            <div style={{justifyContent:'center', fontSize:'2rem'}}>
+            <button onClick={showRazorpay} className="btn btn-primary btn-block" style={{position:'absolute',top:'40%',left:'40%', fontSize:'2rem'}}>
               Pay with razorpay
           </button>
 

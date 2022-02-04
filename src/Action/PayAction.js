@@ -18,7 +18,6 @@ export const Payorder = (amount)=> async(dispatch, getState )=>{
 
    try {
     const {userSignin:{userInfo}} = getState();
-    console.log("useringo " +userInfo )
     const {data} = await axios.post( '/api/order/create/',{amount},{
         headers:{
             'Authorization': 'Bearer '+ userInfo

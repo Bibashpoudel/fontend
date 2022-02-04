@@ -410,12 +410,7 @@ main{
   margin: .1rem;
  
 }
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
- 
-}
+
 .row.center{
   justify-content: center;
 }
@@ -609,22 +604,21 @@ footer {
   background: none;
   border-width:.1rem;
   border-color:rgba(212, 19, 62, 0.77);
-  border-radius: 2rem;
-  padding: 2.5rem;
+  border-radius: 1rem;
+  padding: 1.2rem;
   margin-top:1rem;
   font-size: 2rem;
   @media(max-width:835px){
     padding:1rem;
     font-size:1.3rem;
-
   }
   @media(max-width:553px){
     padding:0.3rem;
-    font-size:.9rem;
-    
+    font-size:.9rem; 
   }
-  
-
+}
+.pto_sec_col1_content button:hover{
+  background-color: rgba(212, 19, 61, 0.055) !important;
 }
 .pto_section_column2{
   max-height: 26rem;
@@ -679,16 +673,7 @@ footer {
 .price {
   font-size: 2rem;
 }
-.rating span {
-  color: #f0c040;
-  margin: 0.1rem;
-  @media(max-width:500px){
-      font-size: 1rem;
-  }
-}
-.rating span:last-child {
-  color: #404040;
-}
+
 
 
 /* design venues  details page */
@@ -1799,4 +1784,21 @@ display: none;
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
 }
+}
+
+
+// for gallery page
+
+.custom-img{
+  max-width:50rem !important;
+  width:100% !important;
+  max-height:50rem !important;
+  height:100% !important;
+}
+.rows{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center !important;
+  flex-direction: column;
+
 }

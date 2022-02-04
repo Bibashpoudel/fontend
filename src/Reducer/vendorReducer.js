@@ -3,7 +3,7 @@ import { VENDOR_CITY_FAIL, VENDOR_CITY_REQUEST, VENDOR_CITY_SUCCESS, VENDOR_GST_
 
 
 
-export const VendorCityListReducer = (state = {citys:[]}, action ) =>{
+export const VendorCityListReducer = (state = {loading:true}, action ) =>{
     switch(action.type){
         case VENDOR_CITY_REQUEST:
             return{
@@ -24,7 +24,7 @@ export const VendorCityListReducer = (state = {citys:[]}, action ) =>{
     }
 }
 
-export const VendorTypeListReducer = (state = {types:[]}, action ) =>{
+export const VendorTypeListReducer = (state = {loading:true}, action ) =>{
     switch(action.type){
         case VENDOR_TYPE_REQUEST:
             return{

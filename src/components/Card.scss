@@ -1,15 +1,13 @@
 .card-text {
     @media(max-width:454px) {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 
 .sub-text{
     color:#c0c0c0;
     font-size: 1.5rem;
-    @media(max-width:500px){
-        font-size:0.9rem;
-    }
+    
 }
 
 .start-texts{
@@ -18,13 +16,35 @@
         text-align: start !important;
     
 }
-.card-design:hover{
-    background-color: #eeeeee;
-   
-    border-radius: 2rem;
-   
-    img{
-        border-top-right-radius:1rem ;
-        border-top-left-radius:1rem ;
+.card-data{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:1rem;
+    @media(max-width:400px){
+        flex-direction: column;
+    }
+    
+}
+
+.show-less{
+    display: inline-block;
+    max-height:4.4rem !important;
+    overflow:hidden;
+}
+.show-less:hover{
+    max-height: auto;
+    overflow: visible;
+}
+
+
+.swiper-button-prev{
+    @media(max-width:500px){
+        display: none !important;
+    }
+}
+.swiper-button-next{
+    @media(max-width:500px){
+        display: none !important;
     }
 }

@@ -84,12 +84,10 @@ export const GSTPANAdd =(gst, pan) => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        console.log(userInfo)
         const {data} = await axios.post('/api/user/addgstandpan/',{gst_number:gst, pan_number:pan},{
             headers:{
                 'Authorization': 'Bearer '+ userInfo
-            }
-            
+            }    
         });
         dispatch({
             type:VENDOR_GST_PAN_ADD_SUCCESS,

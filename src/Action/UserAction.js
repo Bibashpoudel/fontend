@@ -56,7 +56,7 @@ export const Signin = (phone, password) => async(dispatch) =>{
     } 
     
     catch (error) {
-        console.log(error)
+      
         dispatch({
             type:USER_SIGNIN_FAIL,
             payload: 
@@ -75,15 +75,12 @@ export const UserProfileViewAction = () => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        console.log(userInfo)
         const {data} = await axios.get('/api/user/profile/',{
             headers: { 
                 
                 'Authorization': 'Bearer ' + userInfo
              }
-            
         })
-        console.log( data)
         dispatch({
             type:USER_PROFILE_SUCCESS,
             payload:data
@@ -118,7 +115,6 @@ export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
              }
             
         })
-        console.log( data)
         dispatch({
             type:USER_PROFILE_SUCCESS,
             payload:data

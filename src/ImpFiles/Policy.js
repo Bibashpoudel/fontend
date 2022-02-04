@@ -25,13 +25,15 @@ export default function Policy() {
                 : 
                 <div style={{margin:'1.5rem'}}>
                     <h2>Privacy Policy</h2>
-                    {
-                        privacy.map(pp=>(
-                            <div style={{textAlign:'justify'}} key={pp.id}>
-                                {parse(pp.description)}
-                            </div>
-                        ))
-                    }
+                            {
+                                privacy.map(p => (
+                                    
+                                    <div style={{textAlign:'justify'}} key={p.id}>
+                                        <div dangerouslySetInnerHTML={{__html: p.description}} />
+                                    </div>
+                                ))
+                   }
+                       
                 </div>
             }
         </div>

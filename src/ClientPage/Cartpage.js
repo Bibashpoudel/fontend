@@ -9,6 +9,12 @@ import MessageBox from '../components/MessageBox';
 
 function CartScreen(props){
     const venueId = props.match.params.id;
+
+    const location = window.location.search;
+    var url = new URLSearchParams(location);
+    var from = url.get("from");
+    var to = url.get("to");
+    
     
     
    
@@ -43,11 +49,11 @@ function CartScreen(props){
 
     useEffect(() =>{
         
-     if(venueId){
-        dispatch(addtoCart(venueId));
+     if(venueId && from && to){
+        dispatch(addtoCart(from, to, venueId));
      }
    
-    },[dispatch,venueId]);
+    },[dispatch, from, to, venueId]);
 
     
 
@@ -77,6 +83,14 @@ function CartScreen(props){
                                                 <div>
                                                     <label>Service Price: RS </label>{' '}
                                                     <span style={{color:'#808080'}}>{item.price}</span>
+                                                </div>
+                                                <div>
+                                                    <label>Start Date </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.From}</span>
+                                                </div>
+                                                <div>
+                                                    <label>End Date </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.To}</span>
                                                 </div>
                                                 {
                                                     item.no_of_guest === 0 ?
@@ -116,6 +130,14 @@ function CartScreen(props){
                                                 <div>
                                                     <label>Venue Price: Rs </label>{' '}
                                                     <span style={{color:'#808080'}}>{item.price}</span>
+                                                </div>
+                                                <div>
+                                                    <label>Start Date: </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.From}</span>
+                                                </div>
+                                                <div>
+                                                    <label>End Date: </label>{' '}
+                                                    <span style={{color:'#808080'}}>{item.To}</span>
                                                 </div>
                                                 <div>
                                                     <button type="button" className='btn_danger' onClick={()=> removeCartHandaler('venue', item.venue)}>Delete</button>

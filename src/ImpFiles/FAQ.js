@@ -23,9 +23,9 @@ export default function FAQ() {
                 <div style={{margin:'1.5rem'}}>
                     <h2>FAQ</h2>
                     {
-                        faq.map(pp=>(
-                            <div style={{textAlign:'justify'}} key={pp.id}>
-                                {parse(pp.description)}
+                        faq.map(f=>(
+                            <div style={{textAlign:'justify'}} key={f.id}>
+                                {parse(f.description)}
                             </div>
                         ))
                     }

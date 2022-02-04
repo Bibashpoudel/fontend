@@ -1,6 +1,29 @@
 import axios from "axios"
-import { VENUE_IMAGE_ADD_FAIL, VENUE_IMAGE_ADD_REQUEST, VENUE_IMAGE_ADD_SUCCESS, VENUE_IMAGE_LIST_FAIL, VENUE_IMAGE_LIST_REQUEST, VENUE_IMAGE_LIST_SUCCESS } from "../Constants/imageConstants";
+import { IMAGE_LIST_FAIL, IMAGE_LIST_REQUEST, IMAGE_LIST_SUCCESS, VENUE_IMAGE_ADD_FAIL, VENUE_IMAGE_ADD_REQUEST, VENUE_IMAGE_ADD_SUCCESS, VENUE_IMAGE_LIST_FAIL, VENUE_IMAGE_LIST_REQUEST, VENUE_IMAGE_LIST_SUCCESS } from "../Constants/imageConstants";
 
+export const ImageList =(venueId) => async(dispatch)=>{
+    dispatch({
+        type:IMAGE_LIST_REQUEST,
+        payload:venueId
+    })
+    try {
+        const {data} = await axios.get(`/api/gallery/all/`);
+        dispatch({
+            type:IMAGE_LIST_SUCCESS,
+            payload:data
+        })
+
+    } catch (error) {
+        dispatch({
+            type:IMAGE_LIST_FAIL,
+            payload:
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error
+        })
+    }
+
+}
 
 
 export const VenueImageList =(venueId) => async(dispatch)=>{

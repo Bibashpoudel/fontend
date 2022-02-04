@@ -1,11 +1,11 @@
 import axios from "axios"
 import { ADD_CART_ITEM,  REOMVE_CART_ITEM } from "../Constants/cartConstants";
 
-export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
+export const addtoCart = (from, to, venueId, ) =>async(dispatch, getState)=>{
    try {
     const {data} = await axios.get(`/api/venue/admin/${venueId}/`);
     
-    console.log(data)
+    
     dispatch({
         type:ADD_CART_ITEM,
         payload:{
@@ -14,7 +14,9 @@ export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
             name:data.name,
             image:data.display_image,
             no_of_days:0,
-            no_of_guest:0,
+            no_of_guest: 0,
+            From: from,
+            To: to
            
         }
     });
@@ -27,7 +29,6 @@ export const addtoCart = (venueId, ) =>async(dispatch, getState)=>{
 export const addtoCartS = (serviceId) =>async(dispatch, getState)=>{
     const {data} = await axios.get(`/api/service/admin/${serviceId}`);
     
-    console.log(data)
     dispatch({
         type:ADD_CART_ITEM,
         payload:{

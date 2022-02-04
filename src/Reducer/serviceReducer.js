@@ -41,7 +41,7 @@ export const ServiceReducer = (state ={services:[]}, action) =>{
             return state;            
     }
 }
-export const TrendingServiceReducer = (state ={Tservices:[]}, action) =>{
+export const TrendingServiceReducer = (state ={loading:true}, action) =>{
     switch(action.type){
         case TRENDING_SERVICE_LIST_REQUEST:
             return{

@@ -39,6 +39,7 @@ import ServiceDisplay from './ClientPage/serviceTypeDisplay.js';
 import MessageBox from './components/MessageBox';
 import ForgetPassword from './ClientPage/forgetPassword';
 import VenueLists from './ClientPage/VenueLists';
+import Gallery from './ClientPage/Gallery';
 
 
 
@@ -330,7 +331,8 @@ function App() {
                 <PrivateRoute path ='/profile' component ={ProfilePage}></PrivateRoute>
               
               
-                <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>      
+          <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>   
+          <Route path="/gallery" component={Gallery}></Route>
                 <Route path="/terms&Conditions" component={Terms}></Route>
                 <Route path="/PrivacyPolicy" component={Policy}></Route>
                 <Route path="/type/service/:id" component={ServiceDisplay}></Route>

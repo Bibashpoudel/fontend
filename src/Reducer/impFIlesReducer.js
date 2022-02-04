@@ -3,7 +3,7 @@ import { FAQ_LIST_FAIL, FAQ_LIST_REQUEST, FAQ_LIST_SUCCESS, PRIVACY_LIST_FAIL, P
 
 
 
-export const PrivacyReducer = (state={privacy:[]}, action)=>{
+export const PrivacyReducer = (state={loading:true}, action)=>{
     switch(action.type){
         case PRIVACY_LIST_REQUEST:
             return{
@@ -23,7 +23,7 @@ export const PrivacyReducer = (state={privacy:[]}, action)=>{
             return state
     }
 }
-export const termsConditionReducer = (state={tc:[]}, action)=>{
+export const termsConditionReducer = (state={loading:true}, action)=>{
     switch(action.type){
         case TC_LIST_REQUEST:
             return{
@@ -43,7 +43,7 @@ export const termsConditionReducer = (state={tc:[]}, action)=>{
             return state
     }
 }
-export const FAQReducer = (state={faq:[]}, action)=>{
+export const FAQReducer = (state={loading:true}, action)=>{
     switch(action.type){
         case FAQ_LIST_REQUEST:
             return{

@@ -5,9 +5,9 @@ import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, TrendingVenueListReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
-import { addimageReducer, venueImageListReducer } from './Reducer/imageReducer';
+import { addimageReducer, ImageListReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
-import { OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
+import { CheckAvailableReducer, OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
 import { PasswordForgetOtpsendReducer, PasswordForgetOtpverifyReducer, RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
 import { FAQReducer, PrivacyReducer, termsConditionReducer } from './Reducer/impFIlesReducer';
 
@@ -49,14 +49,16 @@ const reducer = combineReducers({
     typeService:ServiceTypeReducer,
     particularSType:detailsServiceTypeReducer,
     servicelist: ServiceReducer, 
-    trendingservicelist:TrendingServiceReducer,
+    trendingservicelist: TrendingServiceReducer,
+    imgList:ImageListReducer,   
     typeList:VenueTypeParticularListReducer,
     userProfileView:UserProfileReducer,
     UserOrders:UserOrderReducer,
     ReviewAdd:AddvenueReviewReducer,
     ReviewDisplay:VenueReviewListReducer,
     serviceReviewView:ServiceReviewListReducer,
-    Razorpay:PayReducer,
+    Razorpay: PayReducer,
+    CheckStatus:CheckAvailableReducer,
     order:OrderReducer,
     otpSendReg:RegisterOtpsendReducer,
     regOtpVerify:RegisterOtpverifyReducer,
