@@ -25,8 +25,10 @@ export const CheckStatusAction = (from, to, id) => async (dispatch) => {
             type: CHECK_AVAILABLE_FAIL,
             payload:
                 error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
     }
 }
@@ -53,8 +55,10 @@ export const CheckServiceStatusAction = (from, to, id) => async (dispatch) => {
             type: CHECK_AVAILABLE_FAIL,
             payload:
                 error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
     }
 }
@@ -88,9 +92,11 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
         dispatch({
             type:CREATE_ORDER_FAIL,
             payload:
-            error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
         localStorage.removeItem('Razorpay');
     }
@@ -115,9 +121,11 @@ export const UserOrderList =() => async(dispatch, getState)=>{
         dispatch({
             type:USER_ORDER_FAIL,
             payload:
-            error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })  
     }
 }

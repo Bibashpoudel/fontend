@@ -45,6 +45,8 @@ export const VendorTypeList = () => async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
@@ -69,8 +71,10 @@ export const VendorSignup = (name, email, phone, customer_type, vendor_type, cit
         dispatch({
             type:VENDOR_REGISTER_FAIL,
             payload: 
-                error.response && error.response.data.message 
-                ? error.response.data.message 
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
                 : error 
         })
         
@@ -99,8 +103,10 @@ export const GSTPANAdd =(gst, pan) => async(dispatch, getState)=>{
         dispatch({
             type:VENDOR_GST_PAN_ADD_FAIL,
             payload: 
-                error.response && error.response.data.message 
-                ? error.response.data.message 
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
@@ -117,11 +123,13 @@ export const VendorVenueList = () => async(dispatch, getState) =>{
         const {userSignin:{userInfo}} = getState();
         const{userProfileView:{profile}} = getState();
       
-        const {data} = await axios.get(`/api/venue/particulartype/${profile.id}/`, {
+        const {data} = await axios.get(`/api/venue/vendors/${profile.id}/`, {
         headers:{
             'Authorizations': 'Bearer '+ userInfo
-        }
-    })
+            }
+       
+        })
+       
     dispatch({
         type:VENDOR_VENUE_LIST_SUCCESS,
         payload:data
@@ -130,8 +138,10 @@ export const VendorVenueList = () => async(dispatch, getState) =>{
         dispatch({
             type:VENDOR_VENUE_LIST_FAIL,
             payload:
-            error.response && error.response.data.message 
-                ? error.response.data.message 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
             
         })

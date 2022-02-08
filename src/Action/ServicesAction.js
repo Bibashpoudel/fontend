@@ -27,34 +27,13 @@ export const ServicesListaction =(venueId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -82,6 +61,8 @@ export const VenueServices =() =>async(dispatch, getState)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -106,6 +87,8 @@ export const ServicesList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -131,6 +114,8 @@ export const TrendingServicesList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -152,8 +137,10 @@ export const ServiceDetails = (serviceId) => async(dispatch)=>{
             type:SERVICE_DETAILS_FAIL,
             payload:
             error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
        
     }
@@ -182,6 +169,8 @@ export const ServicesTypeList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -203,8 +192,10 @@ export const ServiceTypeDetails = (typeID) => async(dispatch, getState)=>{
             type:SERVICE_TYPE_DETAILS_FAIL,
             payload:
             error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
     }
 }
@@ -244,6 +235,8 @@ export const ServiceAdd = (name, venue, actual_price, display_price, display_ima
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
@@ -270,6 +263,8 @@ export const ServiceUpdateAction = (service)=>async(dispatch, getState)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
@@ -296,9 +291,11 @@ export const serviceDeleteAction = (serviceId) => async(dispatch, getState)=>{
         dispatch({
             type:SERVICE_DELETE_FAIL,
             payload:
-                error.response && error.response.data.message
-                ? error.response.data.message
-                : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })
         
     }
@@ -324,8 +321,10 @@ export const vendorServiceDetails = (serviceId) => async(dispatch, getState)=>{
             type:VENDOR_SERVICE_DETAILS_FAIL,
             payload:
             error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })
     }
 }
@@ -355,9 +354,11 @@ export const CreateServiceComment = (serviceId, comment) =>async(dispatch, getSt
         dispatch({
             type:ADD_SERVICE_REVIEW_FAIL,
             payload:
-                error.response && error.response.data.message
-                ? error.response.data.message
-                : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })
         
     }
@@ -383,6 +384,8 @@ export const ServiceReviewListAction =(serviceId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }

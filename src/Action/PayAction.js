@@ -34,8 +34,10 @@ export const Payorder = (amount)=> async(dispatch, getState )=>{
            type:PAY_ORDER_FAIL,
            payload:
            error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
        })
        
    }
@@ -89,8 +91,10 @@ export const pay = (amounts, orderid) => async(dispatch)=>{
             type:PAY_FAIL,
             payload:
             error.response && error.response.data.message
-            ? error.response.data.message
-            : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
 
         })
         

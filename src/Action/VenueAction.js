@@ -18,6 +18,8 @@ export const VenueTypeList = () =>async(dispatch)=>{
             payload:
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
@@ -44,6 +46,8 @@ export const VenueList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -68,6 +72,8 @@ export const TrendingVenueList =() =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -94,6 +100,8 @@ export const VenueDetails =(venueId) =>async(dispatch)=>{
             payload: 
             error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         });
     }
@@ -104,21 +112,6 @@ export const VenueDetails =(venueId) =>async(dispatch)=>{
 
 
 // --------------------------------venue gallery action
-
-// export const VenueGalleryList = () =>async (dispatch) =>{
-//     dispatch({
-//         type:VENUE_GALLERY_REQUEST
-//     })
-//     try {
-//         const {data } = await axios.get('/api/')
-//     } catch (error) {
-        
-//     }
-// }
-
-// Name, price, displayprice, city, venue_type, image, about, features
-// ame:Name, actual_price:price, display_price:displayprice, city:city, venue_type:venue_type, display_image:image, about:about, features:features
-
 
 export const addVenueAction =( Name, price, displayprice, city, venue_type, image, about, features)=> async(dispatch, getState)=>{
     dispatch({
@@ -160,6 +153,8 @@ export const addVenueAction =( Name, price, displayprice, city, venue_type, imag
                 payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
             })
     }
@@ -187,6 +182,8 @@ export const vendorVenueDetails = (venueId) => async(dispatch, getState)=>{
             payload:
             error.response && error.response.data.message
             ? error.response.data.message
+            : error.message
+            ? error.message
             : error
         })
     }
@@ -214,9 +211,11 @@ export const updateVeneAction = (venue) =>async(dispatch, getState)=>{
         dispatch({
             type:VENUE_UPDATE_FAIL,
             payload:
-                error.response && error.response.data.message
-                ? error.response.data.message
-                : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })
         
     }
@@ -248,6 +247,8 @@ export const venueDeleteAction = (venueId) => async(dispatch, getState)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
         
@@ -283,8 +284,10 @@ export const CityVenueList = (cityId) => async(dispatch) =>{
         dispatch({
             type:CITY_VENUE_LIST_FAIL,
             payload:
-            error.response && error.response.data.message 
-                ? error.response.data.message 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
             
         })
@@ -309,8 +312,10 @@ export const VenueTypeParticularList = (typeId) => async(dispatch) =>{
         dispatch({
             type:PARTICULAR_VENUE_TYPE_LIST_FAIL,
             payload:
-            error.response && error.response.data.message 
-                ? error.response.data.message 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
             
         })

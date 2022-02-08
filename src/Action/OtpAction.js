@@ -21,9 +21,11 @@ export const registerSendOtp = (phone) =>async(dispatch) =>{
         dispatch({
             type:USER_OTP_SEND_FAIL,
             payload: 
-                error.response && error.response.data
-                    ? error.response.data
-                    : error
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })  
     }
 
@@ -46,8 +48,10 @@ export const registerVerifyOtp = (mobile, otp) =>async(dispatch) =>{
             type:USER_OTP_VERIFY_FAIL,
             payload: 
                 error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
         })  
     }
 
@@ -69,9 +73,11 @@ export const PasswordForgetSendOtp = (phone) =>async(dispatch) =>{
         dispatch({
             type:USER_PASSWORD_FORGET_OTP_SEND_FAIL,
             payload: 
-                error.response && error.response.data
-                    ? error.response.data
-                    : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })  
     }
 
@@ -93,9 +99,11 @@ export const PasswordforgetVerifyOtp = (phone, otp, password) =>async(dispatch) 
         dispatch({
             type:USER_PASSWORD_FORGET_OTP_VERIFY_FAIL,
             payload: 
-                error.response && error.response.data
-                    ? error.response.data
-                    : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })  
     }
 }

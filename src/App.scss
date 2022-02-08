@@ -978,7 +978,9 @@ img.cus_log{
 .ven_col-2{
  
     flex: 1 2 25rem;
-  margin:2rem;
+    margin:2rem;
+    max-height: 95vh;
+    overflow-y: scroll;
     
 }
 
@@ -1055,7 +1057,6 @@ img.cus_log{
 display: flex;
 justify-content: center;
 align-content: center;
-text-align: center;
 align-items: center;
 flex-direction: column;
 max-width:100rem;

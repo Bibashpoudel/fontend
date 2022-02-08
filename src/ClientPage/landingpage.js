@@ -118,7 +118,7 @@ function LandingPage(props){
 
             </div>
             <div className="mgall">
-            <div className="row align-items-end" style={{ fontSize: "1.5rem", color: "rgba(255, 0, 56, 0.77)" ,marginBottom:'-3.5rem'}}>
+            <div className="row align-items-end" style={{ fontSize: "1.5rem", color: "rgba(255, 0, 56, 0.77)" ,marginBottom:'-1.8rem'}}>
               <div className="col">
                 Venues
               </div>
@@ -135,7 +135,7 @@ function LandingPage(props){
                 "clickable": true,
                 dynamicBullets: true,
             }}
-            Autoplay ={{
+            autoplay ={{
                 "delay": 2500,
                 "disableOnInteraction": false }}
                 breakpoints={{
@@ -164,6 +164,7 @@ function LandingPage(props){
            : error ? <MessageBox variant="danger">{error.message}</MessageBox>
            :
            <span>
+             <div>{Tvenues.length === 0 && <span>No Venue Available</span>}</div>
            {
               Tvenues ? 
                 Tvenues.map((item) =>(
@@ -179,7 +180,7 @@ function LandingPage(props){
           }
           </Swiper>
                     
-          <div className="row align-items-end" style={{ fontSize: "1.5rem", color: "rgba(255, 0, 56, 0.77)" }}>
+          <div className="row align-items-end" style={{ fontSize: "1.5rem", color: "rgba(255, 0, 56, 0.77)"  ,marginBottom:'-1.8rem'}}>
             <div className="col">
               Services
             </div>
@@ -222,6 +223,7 @@ function LandingPage(props){
           : error_ser ? <MessageBox variant="danger">{error_ser.message}</MessageBox>
           :
           <span>
+             <div>{Tservices.length === 0 && <span>No Service Available</span>}</div>
           {
               Tservices ? 
               Tservices.map((service) =>(

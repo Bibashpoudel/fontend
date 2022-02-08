@@ -45,11 +45,13 @@ export const termscondition = () => async(dispatch)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }
 }
-export const FAQ = () => async(dispatch)=>{
+export const FAQAction = () => async(dispatch)=>{
     dispatch({
         type:FAQ_LIST_REQUEST
     })
@@ -69,6 +71,8 @@ export const FAQ = () => async(dispatch)=>{
             payload:
                 error.response && error.response.data.message
                 ? error.response.data.message
+                : error.message
+                ? error.message
                 : error
         })
     }

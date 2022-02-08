@@ -119,24 +119,27 @@ function Venuemanage(props){
                     </div>
                         <div className="form-col-2">
                             <div>
-                                <div className="">
-                                    
+                                <div className="fields mb-4">
+                                    <label>Garden Name</label>
                                     <input 
+                                        className=''
                                         type="text" 
                                         id="gardenname" 
                                         placeholder="Garden Name"
                                         onChange={e => setName(e.target.value)}
-                                        
+                                        required={true} 
+                                        style={{width:'80%'}}
                                     ></input>
                                 </div>
                             
-                                <div className="">
-                                    
+                                <div className="fields mb-4">
+                                    <label>Garden Price</label>
                                     <input 
                                         type="text" 
                                         id="gardenPrice" 
                                         placeholder="Garden Price"
-                                        
+                                        required={true} 
+                                        style={{width:'80%'}}
                                         onChange={annotate}
                                         
                                     ></input>
@@ -149,9 +152,14 @@ function Venuemanage(props){
                                     error ? <MessageBox variant="danger">{error}</MessageBox>
                                     
                                     :
-                                    <div className="">
+                                    <div className="fields mb-4">
+                                    <label>Garden Type</label>
                                     
-                                       <select onChange={e =>setVenueType(e.target.value)}>
+                                       <select 
+                                            onChange={e =>setVenueType(e.target.value)}
+                                            required={true} 
+                                            style={{width:'80%'}}
+                                        >
                                        <option  value="">Select Your garden type</option>
                                            {venueType.map(ven =>(
                                                <option key={ven.id} value={ven.id}>{ven.type}</option>
@@ -163,29 +171,28 @@ function Venuemanage(props){
                                 
                             </div>
                             <div className="ser-mng-col-3">
-                                <div className=" image_field">
-                                    
+                            <div className="fields mb-4">
+                                    <label>Image</label>
                                     <input 
                                         type="file" 
                                         id="image" 
                                         placeholder="image"
                                         onChange={e =>setImage(e.target.files[0])}
-                                        
+                                        required={true} 
+                                        style={{width:'80%'}}
                                     ></input>
                                 </div>
-                                {/* <div className="">
-                                    
-                                    <select>
-                                        <option>Available</option>
-                                        <option>UnAvailable</option>
-                                    </select>
-                                </div> */}
-                                <div className="">
+                               
+                                <div className="fields mb-4">
+                                    <label>City</label>
                                 { loading_city ?<LoadingBox></LoadingBox>
                                     :
                                     error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
                                     :
-                                    <select onChange={e=>setCity(e.target.value)}>
+                                    <select 
+                                        onChange={e=>setCity(e.target.value)} 
+                                        required={true} 
+                                        style={{width:'80%'}}>
                                         <option  value="">Select Your Venue City</option>
                                         {citys.map(c=>(
                                                 <option key={c.id} value={c.id}>{c.city}</option>
@@ -198,25 +205,28 @@ function Venuemanage(props){
                             </div>
                         </div>
                         <div className="form-row-2">
-                            <div className="">
+                        <div className="fields mb-4">
+                                    <label>About Garden</label>
                                 
                                 <textarea 
                                     type="text" 
                                     id="textcontent"
                                     placeholder=" About Garden"
                                     onChange={e =>setAbout(e.target.value)}
-                                    
+                                    required={true} 
+                                    style={{width:'80%'}}
                                 ></textarea>
                                 <div id="countWord"></div>
                             </div>
-                            <div className="">
-                                
+                            <div className="fields mb-4">
+                                    <label>Features</label>
                                 <textarea 
                                     type="text" 
                                     id="garden name" 
                                     placeholder="Features of Garden"
                                     onChange={e =>setFeatures(e.target.value)}
-                                    
+                                    required={true} 
+                                    style={{width:'80%'}}
                                 ></textarea>
                             </div>
                             <div className="btn_center">
@@ -286,7 +296,7 @@ function Venuemanage(props){
                                         {'    '}
                                         <button className="btn_danger" onClick={() => deleteHandaler(vv)}>Delete</button>
                                         { '   '}
-                                        <button onClick={props.history.push('/serviceManage')}>Add Service</button>
+                                       
                                     </div>
                                     <div>
                                  

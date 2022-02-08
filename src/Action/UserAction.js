@@ -26,9 +26,11 @@ export const Signup = (name, email, phone, customer_type, password,code) => asyn
         dispatch({
             type:USER_REGISTER_FAIL,
             payload: 
-                error.response && error.response.data
-                    ? error.response.data
-                    : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
                     
         })
         
@@ -60,9 +62,11 @@ export const Signin = (phone, password) => async(dispatch) =>{
         dispatch({
             type:USER_SIGNIN_FAIL,
             payload: 
-                error.response && error.response.data.detail
-                    ? error.response.data.detail
-                    : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
                    
         })   
     }
@@ -92,9 +96,11 @@ export const UserProfileViewAction = () => async(dispatch, getState)=>{
             dispatch({
                 type:USER_PROFILE_FAIL,
                 payload: 
-                    error.response && error.response.data.message
-                        ? error.response.data.message
-                        : error
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
             })
         
     }
@@ -126,9 +132,11 @@ export const updateUserProfileAction = (user) => async(dispatch, getState)=>{
             dispatch({
                 type:USER_PROFILE_FAIL,
                 payload: 
-                    error.response && error.response.data.message
-                        ? error.response.data.message
-                        : error
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+                ? error.message
+                : error
             })
         
     }
@@ -140,7 +148,7 @@ export const userDetailsAction = () => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        const {data} = await axios.get('/api/user/vendordetails',{
+        const {data} = await axios.get('/api/user/vendordetails/',{
             headers:{
                 'Authorization': 'Bearer ' + userInfo
             }
@@ -153,9 +161,11 @@ export const userDetailsAction = () => async(dispatch, getState)=>{
         dispatch({
             type:USER_TYPE_DETAILS_LIST_FAIL,
             payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+            ? error.message
+            : error
         })
     }
 }

@@ -113,7 +113,7 @@ function SignupPage(props){
                     
                     </div>
                     <div className=" fields">
-                    <div>
+                        <div>
                             <label>Last Name<span style={{color:'red',fontSize:'1rem'}}>  *</span></label>
                             
                         </div>

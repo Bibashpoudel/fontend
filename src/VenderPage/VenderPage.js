@@ -53,7 +53,7 @@ function Vendorpage(){
                         </div>
                         {loading ? ' '
                         :
-                        error ? <MessageBox>{error}</MessageBox>
+                        error ? <MessageBox>{error || error.message}</MessageBox>
                         :
                         <span> {userDetails.vendor_type.type === 'Marriage Gardens' 
                         ?
@@ -65,13 +65,7 @@ function Vendorpage(){
                                  </NavLink>
                                  
                               </div>
-                              <div>
-                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
-                                    <i className="fa fa-dashboard"></i>
-                                          {' '} Service Manage
-                                 </NavLink>
-                                 
-                              </div>
+                              
                            </span>
                            :
                            <div>
@@ -104,13 +98,13 @@ function Vendorpage(){
                    
                </div>
                <div className="ven_col-2">
-                  <Route path="/service/:id/edit" exact component={ServiceEdit}></Route>
-                  <Route path="/venue/:id/edit" exact component={VenueEdit}></Route>
-                  <Route path="/serviceManage" exact component={ServiceManage}></Route>
-                  <Route path="/account" exact component={Account}></Route>
-                  <Route path="/upload_image" exact  component={UploadImage}></Route>
-                  <Route path="/VenueManage" exact component={Venuemanage}></Route>
-                  <Route path="/orders"exact  component={Bookingorder}></Route>
+                  <Route path="/service/:id/edit"  component={ServiceEdit}></Route>
+                  <Route path="/venue/:id/edit"  component={VenueEdit}></Route>
+                  <Route path="/serviceManage"  component={ServiceManage}></Route>
+                  <Route path="/account"  component={Account}></Route>
+                  <Route path="/upload_image"   component={UploadImage}></Route>
+                  <Route path="/VenueManage" exct component={Venuemanage}></Route>
+                  <Route path="/orders"  component={Bookingorder}></Route>
                   <Route path="/dashboard" exact component={Dashboard}></Route>
                </div>
                
@@ -142,6 +136,13 @@ function Vendorpage(){
                                  <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '}  Venue Manage
+                                 </NavLink>
+                                 
+                            </div>
+                            <div>
+                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '} Service Manage
                                  </NavLink>
                                  
                               </div>

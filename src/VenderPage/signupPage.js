@@ -42,16 +42,16 @@ function SignupPageVendor(props){
     const {loading:loading_types, error:error_types, types} =VendorTypes;
 
     const vendorRegister = useSelector(state => state.vendorRegister);
-    const{error:reg_error, VendorInfo} = vendorRegister
+    const{error:reg_error, VendorInfo, loading:reg_loading} = vendorRegister
     const userSignin = useSelector(state => state.userSignin);
     const{ userInfo} = userSignin;
     const addGstPan = useSelector(state => state.addGstPan);
-    const {gstpan} = addGstPan
+    const {gstpan, loading:addLoading, error:adderror} = addGstPan
     const otpSendReg = useSelector(state => state.otpSendReg);
     const {loading:otploading, success,error:otpsend_error} = otpSendReg;
 
     const regOtpVerify = useSelector(state => state.regOtpVerify);
-    const { error:verifyError } = regOtpVerify;
+    const { error:verifyError, loading, error} = regOtpVerify;
 
 
     const [form, setform] = useState(true);
@@ -138,226 +138,202 @@ function SignupPageVendor(props){
 
     return(
         <div>
-
-{
-            loading_city  ? <LoadingBox></LoadingBox>
-        :
-            error_city? <MessageBox variant="danger">{error_city}</MessageBox>
-        :
-        loading_city? <LoadingBox></LoadingBox>
-        :
-            error_city? <MessageBox variant="danger">{error_city}</MessageBox>
-        :
-    
-
-        <div className="main  ">
-            <div className="col-1">
-                <img className="large" src={venimg} alt="register"></img>
-            </div>
-                                    <div className="form col-2">
-                                        {otploading && <LoadingBox></LoadingBox>}
-                                        {otpsend_error && <MessageBox>{ otpsend_error}</MessageBox>}
-
-                {form ? 
-                                            <form onSubmit={SignUphandaler} style={{ marginLeft: '2rem' }}>
-                                            
-                <div>
-                <div>
-                        <h2>
-                            “Business with Sevenoath"<br></br>
-                            Sign Up to access your Dashboard
-                        </h2>
-                        
+            {
+                loading_types  ? <LoadingBox></LoadingBox>
+                :
+                error_types? <MessageBox variant="danger">{error_types || error_types.message}</MessageBox>
+                :
+                loading_city? <LoadingBox></LoadingBox>
+                :
+                error_city? <MessageBox variant="danger">{error_city || error_city.message}</MessageBox>
+                :
+                verifyError ? <MessageBox>{verifyError || verifyError.message }</MessageBox>
+                :
+                <div className="main  ">
+                    <div className="col-1">
+                        <img className="large" src={venimg} alt="register"></img>
                     </div>
-                    {otploading && <span><img className='load-small' src={Load} alt='load'></img></span>}
-                    {otpsend_error&& <MessageBox>{otpsend_error}</MessageBox>}
-                                                    <div className="fields mb-4">
-                                                        <label>Company Name <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                    <div className="form col-2">
+                       
                     
-                                                        <input 
-                                                            style={{width:'65%'}}
-                                                            
-                            type="text" 
-                            id="brand_name" 
-                            placeholder="Name"
-                            onChange={e => SetName(e.target.value)}
-                            
-                        ></input>
-                    </div>
-                                                    <div className="fields mb-4">
-                                                        <label>Select City <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
-                    {
-                            loading_city? <LoadingBox></LoadingBox>
-                        :
-                            error_city? <MessageBox variant="danger">{error_city}</MessageBox>
-                        :
-                        <select  onChange={(e)=> setCity(e.target.value)} required style={{width:'65%'}}> 
-                            <option  value="">Select City</option>
-                        {
-                            citys.map((c) =>(
-                                <option key={c.id} id={c.id} value={c.id}  >
-                                    {c.city}   
-                                    </option>
-                            ))
-                        }
-                        </select>
-}
-                    </div>
-                                                    <div className=" fields mb-4">
-                                                        <label>Select Vendor Type <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
-                    {
-                            loading_types? <LoadingBox></LoadingBox>
-                        :
-                            error_types? <MessageBox variant="danger">{error_types}</MessageBox>
-                        :
-                        <select  onChange={e => setType(e.target.value)} required style={{width:'65%'}}>
-                            <option value ="" >Select Type</option>
-                        {
-                            types.map((t) =>(
-                                    
-                                    <option key={t.id} id={t.id} value={t.id}>
-                                    {t.type}
-                                    </option>
-                                
-                            ))
-                        }
-                        </select>
-}
-                    </div>
-                                                    <div className="fields mb-4">
-                                                        <label>Email <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
-                        
-                                                        <input 
-                                                            style={{width:'65%'}}
-                            type="text" 
-                            id="email" 
-                            placeholder="Email"
-                            onChange={e => SetEmail(e.target.value)}
-                        ></input>
-                    </div>
-                    <div className=" fields mb-4">
-                        <label> Phone <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
-                                                        <input 
-                                                            style={{width:'65%'}}
-                            type="text" 
-                            id="phone" 
-                            placeholder="Phone"
-                            onChange={e => SetPhone(e.target.value)}
-                            
-                        ></input>
-                    </div>
-                    
-                                                    <div className="fields mb-4">
-                                                        <label>Password <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
-                    
-                                                        <input 
-                                                            style={{width:'65%'}}
-                            type="password" 
-                            id="password" 
-                            placeholder="Password"
-                            onChange={e =>setPassword(e.target.value)}
-                            
-                        ></input>
-                    </div>
-                    <div className="btn_center">
-                        <button type="submit" className="block primary">Continue</button>
-                    </div>
-                    <div>
-                        <span>
-                            Already Have account? { ' '}
-                            <Link to={`/dashboard`}   style={{ color:"blue"}}>
-                                Sign In
-                            </Link> 
-                        </span>
-                    </div>
-                    </div>
-                    
-                    <div className="btn_center">
-                        <button onClick={()=>props.history.push('/signin')} className="block primary">Signup as User</button>
-                    </div>
-                    
-                </form>
 
-                : <span> </span>
-}
-            {otpform ?
-                <div className="form_hide">
-                
-                
-                    <form className="form" >
-                    {reg_error ? <MessageBox>{reg_error}</MessageBox>: ''}
-                    <   div>
-                            <h2> Enter Your Otp</h2>            
-                        </div>
-                        
-                        <div>
-                            <input 
-                                    type="text" 
-                                    id="otp" 
-                                    placeholder="otp"
-                                    onChange={e =>setOtp(e.target.value)}
-                                    
-                                ></input>
-                        </div>
-                        <div className='code-row'>{reg_error && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
-                                {'  '} {otploading && <img className="img load-small" src={Load} alt="loading"></img>}
-                            </div>
-                        <div className="btn_center">
-                            <button onClick={backButton}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>
-
-                            <button type="submit" onClick={otphandaler} className="block secondary">verify</button>
-                        </div>
-                                
-                        
-                    </form>
-
-                </div>
-                :<span></span>
-            }
-            {panform ?
-                <div className="form_hide">
-                    <form className="form" onSubmit={panhandaler}>
-                    <div>
-                        <h2>
-                            Enter Pan And GST Number<br></br>
-                            To approve as a Vendor
-                        </h2>
-                        
-                    </div>
-                    
-                            <div>
-                            <input 
-                                    type="text" 
-                                    id="pan" 
-                                    placeholder="pan Number"
-                                    onChange={e =>setPan(e.target.value)}
-                                    
-                                ></input>
-                            </div>
+                        {form ? 
+                            <form onSubmit={SignUphandaler} style={{ marginLeft: '2rem' }}>                       
                                 <div>
-                                    <input 
-                                        type="text" 
-                                        id="gst" 
-                                        placeholder="GSt Number"
-                                        onChange={e =>setGst(e.target.value)}
-                                        
-                                    ></input>
+                                    <div>
+                                        <h2>
+                                            “Business with Sevenoath"<br></br>
+                                            Sign Up to access your Dashboard
+                                        </h2>
+                                    </div>
+                                    {otploading && <span><img className='load-small' src={Load} alt='load'></img></span>}
+                                    {otpsend_error&& <MessageBox varient={'danger'}>{otpsend_error}</MessageBox>}
+                                    <div className="fields mb-4">
+                                        <label>Company Name <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        <input 
+                                            style={{width:'65%'}}                            
+                                            type="text" 
+                                            id="brand_name" 
+                                            placeholder="Name"
+                                            onChange={e => SetName(e.target.value)}
+                                        ></input>
+                                    </div>
+                                    <div className="fields mb-4">
+                                        <label>Select City <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        {
+                                            loading_city? <LoadingBox></LoadingBox>
+                                            :
+                                            error_city? <MessageBox variant="danger">{error_city || error_city.message}</MessageBox>
+                                            :
+                                            <select  onChange={(e)=> setCity(e.target.value)} required style={{width:'65%'}}> 
+                                                <option  value="">Select City</option>
+                                                {
+                                                    citys.map((c) =>(
+                                                        <option key={c.id} id={c.id} value={c.id}  >
+                                                            {c.city}   
+                                                            </option>
+                                                    ))
+                                                }
+                                            </select>
+                                        }
+                                    </div>
+                                    <div className=" fields mb-4">
+                                        <label>Select Vendor Type <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        {
+                                            loading_types? <LoadingBox></LoadingBox>
+                                            :
+                                            error_types? <MessageBox variant="danger">{error_types || error_types.message}</MessageBox>
+                                            :
+                                            <select  onChange={e => setType(e.target.value)} required={true} style={{width:'65%'}}>
+                                            <option value ="" >Select Type</option>
+                                            {
+                                                types.map((t) =>(
+                                                    <option key={t.id} id={t.id} value={t.id}>
+                                                    {t.type}
+                                                    </option>
+                                                ))
+                                            }
+                                            </select>
+                                        }
+                                    </div>
+                                    <div className="fields mb-4">
+                                        <label>Email <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        <input 
+                                            style={{width:'65%'}}
+                                            type="text" 
+                                            id="email" 
+                                            placeholder="Email"
+                                            onChange={e => SetEmail(e.target.value)}
+                                        ></input>
+                                    </div>
+                                    <div className=" fields mb-4">
+                                        <label> Phone <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        <input 
+                                            style={{width:'65%'}}
+                                            type="text" 
+                                            id="phone" 
+                                            placeholder="Phone"
+                                            onChange={e => SetPhone(e.target.value)} 
+                                        ></input>
+                                    </div>
+                                    <div className="fields mb-4">
+                                        <label>Password <span style={{color:'red', fontSize:'1rem'}}> *</span></label>   
+                                        <input 
+                                            style={{width:'65%'}}
+                                            type="password" 
+                                            id="password" 
+                                            placeholder="Password"
+                                            onChange={e =>setPassword(e.target.value)}    
+                                        ></input>
+                                    </div>
+                                    <div className="btn_center">
+                                        <button type="submit" className="block primary">Continue</button>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            Already Have account? { ' '}
+                                            <Link to={`/dashboard`}   style={{ color:"blue"}}>
+                                                Sign In
+                                            </Link> 
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="btn_center">
-                                    <button type="submit" className="block secondary">Save </button>
+                                    <button onClick={()=>props.history.push('/signin')} className="block primary">Signup as User</button>
                                 </div>
-                    
-                    </form>
+                            </form>
+                            : <span> </span>
+                        }
+                        {otpform ?
+                            <div className="form_hide">
+                                <form className="form" >
+                                    {reg_error ? <MessageBox>{reg_error || reg_error.message}</MessageBox>: ''}
+                                    {error && <MessageBox>{error || error.message}</MessageBox>}
+                                    {reg_loading && <img className="img load-small" src={Load} alt="loading"></img>}
+                                    <div>
+                                        <h2> Enter Your Otp <span style={{color:'red', fontSize:'1rem'}}> *</span></h2>            
+                                    </div>
+                                    <div>
+                                        <input 
+                                            type="text" 
+                                            id="otp" 
+                                            placeholder="otp"
+                                            onChange={e =>setOtp(e.target.value)}   
+                                            required={true}
+                                        ></input>
+                                    </div>
+                                    <div className='code-row'>{reg_error && <span className='resend-Code' onClick={SignUphandaler}> Resend Code?</span>}
+                                            {'  '} {otploading && <img className="img load-small" src={Load} alt="loading"></img>}
+                                        </div>
+                                    <div className="btn_center">
+                                        <button onClick={backButton}  style={{backgroundColor:"grey",fontSize:'2rem',marginRight:'.5rem',color:'white'}}   ><i className='fa fa-arrow-left' style={{fontSize:'2rem',color:'white'}}> </i>{' '} Back</button>
+                                        <button type="submit" onClick={otphandaler} className="block secondary">verify</button>
+                                    </div>
+                                </form>
+                            </div>
+                            :<span></span>
+                        }
+                        {panform ?
+                            <div className="form_hide">
+                                <form className="form" onSubmit={panhandaler}>
+                                    {addLoading && <img className="img load-small" src={Load} alt="loading"></img> }
+                                    {adderror && <MessageBox>{adderror || adderror.message}</MessageBox>}
+                                    <div>
+                                        <h2>
+                                            Enter Pan And GST Number<br></br>
+                                            To approve as a Vendor
+                                        </h2>
+                                    </div>
+                                    <div className="fields mb-4">
+                                        <label>Pan Number <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        <input 
+                                            type="text" 
+                                            id="pan" 
+                                            placeholder="pan Number"
+                                            onChange={e =>setPan(e.target.value)}
+                                            required={true}
+                                        ></input>
+                                    </div>
+                                    <div className="fields mb-4">
+                                        <label>Gst Number <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                                        <input 
+                                            type="text" 
+                                            id="gst" 
+                                            placeholder="GSt Number"
+                                            onChange={e =>setGst(e.target.value)}
+                                            required={true}
+                                        ></input>
+                                    </div>
+                                    <div className="btn_center">
+                                        <button type="submit" className="block secondary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            :<span></span>
+                        }
+                    </div>
                 </div>
-                :<span></span>
             }
-                
-                
-        
-            </div>
-            
-        </div>
-}
         </div>
     )
 }
