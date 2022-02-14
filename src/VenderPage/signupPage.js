@@ -57,6 +57,8 @@ function SignupPageVendor(props){
     const [form, setform] = useState(true);
     const [otpform, setOtpform] = useState(false);
     const [panform, setPanform] = useState(false);
+    const [show, setShow] = useState(true);
+    const [passwordError, setPasswordError] = useState(" ");
 
 
 
@@ -94,6 +96,50 @@ function SignupPageVendor(props){
         setform(true)
         setOtpform(false)
     }
+    const showPassword = (e) => {
+        e.preventDefault()
+        setShow(false)
+        var temp = document.getElementById("typepass");
+        
+        if (temp.type === "password") {
+            temp.type = "text";
+        }
+        else {
+            temp.type = "password";
+        }
+    }
+    const hidePassword = (e) => {
+        e.preventDefault()
+        setShow(true)
+        var temp = document.getElementById("typepass");
+        if (temp.type === "password") {
+            temp.type = "text";
+        }
+        else {
+            temp.type = "password";
+        }
+    }
+    const passwordCheck = (e) => {
+        e.preventDefault()
+        var messg = document.getElementById("passworderrormessage");
+        const npassword = e.target.value;
+        if (npassword.length === 0) {
+            setPasswordError("Password can't be empty");
+            messg.style.color = 'red'
+            
+        }
+        else if (npassword.length >= 8) {
+            setPassword(npassword)
+            setPasswordError("Password Okay");
+            messg.style.color ='green'
+            
+        }
+        else if(npassword.length < 8) {
+            setPasswordError("Password length must be at least 8 characters");
+            messg.style.color= 'red'
+             
+        }
+    }
     useEffect(() => {
         
        console.log(citys, types)
@@ -108,9 +154,6 @@ function SignupPageVendor(props){
         if (!citys) {
             dispatch(VendorCityList())
         }
-        
-    
-    
         
         if(VendorInfo && !userInfo){
             dispatch(Signin(phone,password))
@@ -128,9 +171,6 @@ function SignupPageVendor(props){
         window.location.reload();
         
         }
-        
-        
-        
 
     }, [dispatch, VendorInfo, gstpan, success, types, citys, userInfo, phone, password, props.history]);
 
@@ -241,10 +281,22 @@ function SignupPageVendor(props){
                                         <input 
                                             style={{width:'65%'}}
                                             type="password" 
-                                            id="password" 
+                                            id="typepass" 
                                             placeholder="Password"
-                                            onChange={e =>setPassword(e.target.value)}    
+                                            onChange={passwordCheck}    
                                         ></input>
+                                        <div className="show-eye-icon-vendor">
+                                            {
+                                                show ?
+                                                    <ion-icon name="eye" onClick={showPassword}></ion-icon>
+                                                    :
+                                                    <ion-icon name="eye-off"  onClick={hidePassword}></ion-icon>
+                                            }
+                                            
+                                        </div>
+                                        <div id="passworderrormessage">
+                                                {passwordError}
+                                        </div>
                                     </div>
                                     <div className="btn_center">
                                         <button type="submit" className="block primary">Continue</button>

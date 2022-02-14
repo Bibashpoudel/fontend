@@ -15,3 +15,40 @@
     }
       
 }
+.input-fields{
+    width:93%;
+    @media(max-width:923px){
+        width:100%;
+    }
+}
+
+.show-eye-icon{
+    position: absolute;
+    left:88%;
+    margin-top:3.3rem;
+    font-size: 1.8rem;
+    @media(max-width:922px){
+        left:73%;
+    }
+    @media(max-width:448px){
+        left:68%;
+    }
+}
+.show-eye-icon-siginin{
+    position: absolute;
+    left:92%;
+    margin-top:3.3rem;
+    font-size: 1.8rem;
+    @media(max-width:1250px){
+        left:89%;
+    }
+    @media(max-width:900px){
+        left:70%;
+    }
+    @media(max-width:500px){
+        left:70%;
+    }
+    @media(max-width:400px){
+        left:65%;
+    }
+}

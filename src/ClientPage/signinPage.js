@@ -12,7 +12,8 @@ import Load from '../images/load.gif'
 function SignInPage(props){
 
     const [phone ,SetPhone] = useState();
-    const [password , setPassword] =useState()
+    const [password, setPassword] = useState();
+    const [show, setShow] = useState(true);
 
 
     const userSignin = useSelector(state => state.userSignin);
@@ -26,6 +27,28 @@ function SignInPage(props){
     const Signinhandaler = (e) =>{
         e.preventDefault();
         dispatch(Signin(phone, password));
+    }
+    const showPassword = (e) => {
+        e.preventDefault()
+        setShow(false)
+        var temp = document.getElementById("typepass");
+        if (temp.type === "password") {
+            temp.type = "text";
+        }
+        else {
+            temp.type = "password";
+        }
+    }
+    const hidePassword = (e) => {
+        e.preventDefault()
+        setShow(true)
+        var temp = document.getElementById("typepass");
+        if (temp.type === "password") {
+            temp.type = "text";
+        }
+        else {
+            temp.type = "password";
+        }
     }
     useEffect(() =>{
         if(userInfo){
@@ -60,9 +83,6 @@ function SignInPage(props){
                         error ? <MessageBox variant="danger">{error}</MessageBox>
                         : <span></span>
                     }
-                    
-                    
-                    
                     <div className="fields">
                     <label className='labels'>Phone <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
                         <input 
@@ -70,25 +90,30 @@ function SignInPage(props){
                             id="phone" 
                             required={true}
                             onChange ={(e) => SetPhone(e.target.value)}
-                            
                         ></input>
                              <span></span>
                     </div>
                     
-                    <div className="fields">
-                    <label className='p_labels'>Password <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
+                    <div className="fields" >
+                            <label className='p_labels'>Password <span style={{color:'red', fontSize:'1rem'}}> *</span></label>
                             <input 
                                 type="password" 
-                                id="password" 
+                                id="typepass" 
                                 required={true}
-                                onChange ={(e) => setPassword(e.target.value)}
-                                
+                                onChange ={(e) => setPassword(e.target.value)}   
                             ></input>
+                            <div className="show-eye-icon-siginin">
+                                {
+                                    show ?
+                                        <ion-icon name="eye" onClick={showPassword}></ion-icon>
+                                        :
+                                        <ion-icon name="eye-off"  onClick={hidePassword}></ion-icon>
+                                }
+                                
+                            </div>
                              <span></span>
                        
-                           
-                       
-                        <div className='forget'>
+                        <div className='forget' style={{marginTop:"1rem"}}>
                            <Link to='/forget'> Forget Password?</Link>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import { USER_OTP_SEND_FAIL, USER_OTP_SEND_REQUEST, USER_OTP_SEND_SUCCESS, USER_OTP_VERIFY_FAIL, USER_OTP_VERIFY_REQUEST, USER_OTP_VERIFY_SUCCESS, USER_PASSWORD_FORGET_OTP_SEND_FAIL, USER_PASSWORD_FORGET_OTP_SEND_REQUEST, USER_PASSWORD_FORGET_OTP_SEND_SUCCESS, USER_PASSWORD_FORGET_OTP_VERIFY_FAIL, USER_PASSWORD_FORGET_OTP_VERIFY_REQUEST, USER_PASSWORD_FORGET_OTP_VERIFY_SUCCESS } from "../Constants/otpConstants";
+import { USER_OTP_SEND_FAIL, USER_OTP_SEND_REQUEST, USER_OTP_SEND_RESET, USER_OTP_SEND_SUCCESS, USER_OTP_VERIFY_FAIL, USER_OTP_VERIFY_REQUEST, USER_OTP_VERIFY_SUCCESS, USER_PASSWORD_FORGET_OTP_SEND_FAIL, USER_PASSWORD_FORGET_OTP_SEND_REQUEST, USER_PASSWORD_FORGET_OTP_SEND_RESET, USER_PASSWORD_FORGET_OTP_SEND_SUCCESS, USER_PASSWORD_FORGET_OTP_VERIFY_FAIL, USER_PASSWORD_FORGET_OTP_VERIFY_REQUEST, USER_PASSWORD_FORGET_OTP_VERIFY_SUCCESS } from "../Constants/otpConstants";
 
 
 
@@ -22,6 +22,8 @@ export const RegisterOtpsendReducer = (state={}, action)=>{
                 loading:false,
                 error:action.payload
             }
+        case USER_OTP_SEND_RESET:
+            return {}
         default:
             return state
     }
@@ -65,6 +67,8 @@ export const PasswordForgetOtpsendReducer = (state={}, action)=>{
                 loading:false,
                 error:action.payload
             }
+        case USER_PASSWORD_FORGET_OTP_SEND_RESET:
+            return {}
         default:
             return state
     }

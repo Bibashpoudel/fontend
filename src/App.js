@@ -358,8 +358,9 @@ function App(props) {
             <Route path='/venues' component={VenueLists}></Route>
             
             <Route path="/" component={LandingPage } exact></Route>
-          </main>     
-          <Footer/>
+        </main>     
+        <Footer/>
+         
       </div>
     </BrowserRouter>
   );

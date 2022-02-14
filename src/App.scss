@@ -81,8 +81,7 @@ textarea
   font-family: helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8f8f8;
-  cursor: pointer;
+  background-color: #e4e4e4;
 }
 button {
   padding: 1rem;
@@ -128,11 +127,11 @@ img.medium {
   max-height: 25rem;
 }
 img.large {
-  max-width: 62rem;
+  max-width: 60rem;
  
   width: 100%;
   min-width: 30rem;
-  max-height:62rem;
+  max-height:60rem;
 
   
 }
@@ -144,6 +143,15 @@ img.large {
   padding:1rem;
   
   
+}
+button.back{
+  background-color:grey;
+  color:White;
+  font-size: 2rem;
+  margin-right:0.5rem;
+  @media(max-width:500px){
+    font-size: 1.5rem;
+  }
 }
 button.primary{
   background-color:#d4133ddc;
@@ -239,7 +247,7 @@ tr:nth-child(even) {
   //   "footer";
   // grid-template-columns: 1fr;
   // grid-template-rows: 5rem 1fr 5rem;
-  height: 100vh;
+  height: 80vh;
 }
 
 /* header design */
@@ -302,14 +310,10 @@ header{
 
 main{
     grid-area: main;
-    
-    min-height: 95vh;
+    min-height: 82vh;
     margin-top:6.5rem;
     font-size:1.6rem !important
 }
-
-
-
 
 
 /* design nav search section */
@@ -320,9 +324,7 @@ main{
 .nav-search{
 	display: flex;
 	justify-content: center;
-  
   width: 40%;
-  
 }
  .nav-search .search{
 	border:.1rem solid #F80E0E ;

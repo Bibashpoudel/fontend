@@ -18,7 +18,7 @@
       margin-left:0rem;
     }
     @media(max-width:500px){
-      margin-left:5rem !important;
+      margin-left:1.5rem !important;
       margin-right:5rem !important;
     }
   
@@ -283,7 +283,7 @@
   display: none;
 }
 .code-row{
-  margin-top:-1.2rem
+  margin-top:1rem
 }
 
 .resend-Code{
@@ -292,4 +292,30 @@
 }
 .resend-Code:hover{
   color:blue;
+}
+
+
+// vendor signin
+
+.show-eye-icon-vendor{
+    position: absolute;
+    left:82%;
+    margin-top:3.5rem;
+    font-size: 1.8rem;
+    @media(max-width:1245px){
+      left:80%;
+
+    }
+    @media(max-width:1125px){
+      left:78%;
+
+    }
+    @media(max-width:1020px){
+      left:75%;
+
+    }
+    @media(max-width:923px){
+      left:57%;
+
+    }
 }

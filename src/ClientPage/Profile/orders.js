@@ -41,22 +41,19 @@ export function Orders(){
                           <div>
                             Status ; {order.status}
                           </div>
-                          
                         </div>
                       </div>
                       
                    {
-                    
-
                     order.detail.map(o =>(
                       <div>
                         {o.service === null ?
                         <div>
-                          <OrderVCard  venues={o.venue} key={o.id}></OrderVCard>
+                          <OrderVCard  venues={o.venue} details={{from:o.From, to:o.To}} key={o.id}></OrderVCard>
                         </div>  
                         :
                         <div>
-                         <OrderSCard services={o.service} key={o.id}></OrderSCard>
+                         <OrderSCard services={o.service} details={{from:o.From, to:o.To}} key={o.id}></OrderSCard>
                           </div>
                       }
                         </div>
