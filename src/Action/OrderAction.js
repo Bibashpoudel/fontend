@@ -136,7 +136,7 @@ export const VendorOrderList = () => async (dispatch, getState) => {
     })
     try {
         const {userSignin:{userInfo}} = getState()
-        const { data } = await axios.get('/api/order/customer', {
+        const { data } = await axios.get('/api/order/vendor', {
             headers: {
                 'Authorization': `Bearer ${userInfo}`
             }

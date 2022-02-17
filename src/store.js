@@ -7,7 +7,7 @@ import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorT
 import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, ImageListReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
-import { CheckAvailableReducer, OrderReducer, UserOrderReducer } from './Reducer/orderReducer';
+import { CheckAvailableReducer, OrderReducer, UserOrderReducer, VendorOrderListReducer } from './Reducer/orderReducer';
 import { PasswordForgetOtpsendReducer, PasswordForgetOtpverifyReducer, RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
 import { FAQReducer, PrivacyReducer, termsConditionReducer } from './Reducer/impFIlesReducer';
 
@@ -34,7 +34,13 @@ const initialState = {
         profile: localStorage.getItem('profile')
         ? JSON.parse(localStorage.getItem('profile'))
         : null
-    }
+    },
+    // vendorDetails: {
+    //     userDetails: localStorage.getItem('VendorDetails')
+    //         ? JSON.parse(localStorage.getItem('VendorDetails'))
+    //         :
+    //         null
+    // }
 };
 const reducer = combineReducers({
     
@@ -93,7 +99,8 @@ const reducer = combineReducers({
     imageAdd:addimageReducer,
     deleteVenue:venueDeleteReducer,
     venueImage:venueImageListReducer,
-    payOrder:PayOrderReducer,
+    payOrder: PayOrderReducer,
+    orderList:VendorOrderListReducer,
 
 
 });

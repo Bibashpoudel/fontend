@@ -995,16 +995,18 @@ img.cus_log{
 
   display: none;
   @media(max-width:500px){
+    border-top: .1rem solid #c0c0c0;
     display: flex;
     position: fixed;
     bottom:0;
     width:100%;
-    height:5.2rem;
+    height:10rem;
     background-color: whitesmoke;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     overflow-x: auto;
     justify-content: space-around;
-    padding:0.3rem
+    padding:0.3rem;
+    z-index:10000;
 
   }
   a {
@@ -1024,7 +1026,9 @@ img.cus_log{
     transition: background-color 0.1s ease-in-out;
   }
 }
-
+.mob_bottom_nav div{
+  margin-top: 2rem;
+}
 
 .box{
   max-width:15rem;
@@ -1086,7 +1090,7 @@ max-width:100rem;
   outline: none;
   background-color:white ;
   margin-bottom:1.2rem;
-  width:109%;
+  width:100%;
 
 }
 .ser-mng-col-3 {

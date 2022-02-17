@@ -1,0 +1,41 @@
+.modals {
+    font-size: 1.7rem;
+    background-color: #404040;
+    color:white;
+    font-weight: bolder;
+    position: relative;
+    top: 30%;
+    left: 20%;
+    border-radius: 1rem;
+    padding:2rem;
+  }
+  .modals > .headers {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  }
+  .modals > .contents {
+    width: 100%;
+    padding: 10px 5px;
+  }
+  .modals > .actionss {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  }
+  .modals > .closes {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  }

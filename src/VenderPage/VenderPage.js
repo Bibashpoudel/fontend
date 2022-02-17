@@ -129,17 +129,17 @@ function Vendorpage(){
                         :
                         error ? <MessageBox>{error}</MessageBox>
                         :
-                        <span> {userDetails.vendor_type.type === 'Marriage Gardens' 
+                        < div> {userDetails.vendor_type.type === 'Marriage Gardens' 
                         ?
-                           <span>
-                              <div>
+                           <span style={{display:'flex', }}>
+                              <div style={{marginTop:'.5rem',paddingRight:'.8 rem'}}>
                                  <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '}  Venue Manage
                                  </NavLink>
                                  
                             </div>
-                            <div>
+                            <div  style={{marginTop:'.5rem'}}>
                                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '} Service Manage
@@ -149,7 +149,7 @@ function Vendorpage(){
                              
                            </span>
                            :
-                           <div>
+                           <div style={{marginTop:'.5rem'}}>
                                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '} Service Manage
@@ -158,7 +158,7 @@ function Vendorpage(){
                               </div>
                         }
                         
-                        </span>
+                        </div>
                         }
             </div>
         </div>

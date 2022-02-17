@@ -42,6 +42,7 @@ import VenueLists from './ClientPage/VenueLists';
 import Gallery from './ClientPage/Gallery';
 import swal from 'sweetalert';
 import FAQ from './ImpFiles/FAQ';
+import Contactus from './ClientPage/contactus';
 
 
 
@@ -152,51 +153,51 @@ function App(props) {
         <div className={blur ? 'actives' : 'overlay'} onClick={()=> closeNav()}></div>
           <header >
           <div className="header" >
-          <div className="brand" >
-        
-            <span >
-                <  Link to='' > Sevenoath</Link>
-            </span>
-          </div>
-          
-          <div >
-              <div className="nav-left-menu">
-                <div className="col-auto ">
-                < Link to="/cart"><i className="ai-cart" />
-                      {cartItems.length > 0 && (
-                        <span className="badge">{cartItems.length}</span>
-                        )
-                      }
-                      </Link>
+            <div className="brand" >  
+              <span >
+                  <  Link to='' > Sevenoath</Link>
+              </span>
+            </div>
+            <div >
+                <div className="nav-left-menu">
+                  <div className="col-auto ">
+                  < Link to="/cart"><i className="ai-cart" />
+                        {cartItems.length > 0 && (
+                          <span className="badge">{cartItems.length}</span>
+                          )
+                        }
+                        </Link>
+                  </div>
+                
+                  {
+                    profile ? 
+                    <div className="col-auto desk"><NavLink to="/profile">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
+                    :
+                    <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
+                  }
+                    
+                  <div className="col-auto bar" onClick={()=> openNav()} style={{fontSize:"2.3rem"}}><i className="ai-three-line-horizontal" /></div>
                 </div>
-              
-                {
-                  profile ? 
-                  <div className="col-auto desk"><NavLink to="/profile">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
-                  :
-                  <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
-                }
-                  
-                <div className="col-auto bar" onClick={()=> openNav()} style={{fontSize:"2.3rem"}}><i className="ai-three-line-horizontal" /></div>
-              </div>
+            </div>
           </div>
-          </div>
-          
           </header> 
           <div id="mySidenav" className="sidenav sidenavs">
             <span href="#" id="btnclose" className="closebtn" onClick={()=> closeNav()}>&times;</span>
             {
               profile ? 
-              <NavLink to="/profile" className="mg-bot" onClick={()=> closeNav()}>{profile.fullname} <i className="fa fa-user-circle" /></NavLink>
+              <>
+                {
+                  profile.user_type === 'Vendor' ?
+                  <NavLink to="/dashboard" className="mg-bot" onClick={()=> closeNav()}>{profile.fullname} <i className="fa fa-user-circle" /></NavLink>
+                    :
+                    <NavLink to="/profile" className="mg-bot" onClick={()=> closeNav()}>{profile.fullname} <i className="fa fa-user-circle" /></NavLink>
+                }
+              </>
               :
               <NavLink to="/signin" className="mob mg-bot" onClick={()=> closeNav()}><i className="ai-lock-on" /></NavLink>
             }
-            
-          
-              
-            
             <div className={loadvenue ? 'hidecat' : '' || loadservice ? 'hidecat' :''}>
-            <div className='side-head'>Our Services</div>
+              <div className='side-head'>Our Services</div>
               <div className ="row-hover" style={{display:'flex', justifyContent:"space-between"}}>
                   <div>
                     <NavLink to="/venues" onClick={()=> closeNav()}>Venues</NavLink>
@@ -214,7 +215,7 @@ function App(props) {
                   </div>
               </div>
               <div>
-              <div className='side-head'>Helps & Settings</div>
+                <div className='side-head'>Helps & Settings</div>
                 <div>
                   <NavLink to="/profile"  onClick={()=> closeNav()}>Accounts</NavLink>
                   </div>
@@ -247,18 +248,13 @@ function App(props) {
                     <div>
                       <NavLink to="/vendor_register"  onClick={()=> closeNav()}>Vendor Register</NavLink>
                     </div>
-                    
-                    
                   }
-                  
               </div>
-                
-              </div>
+            </div>
             <div  className={loadvenue ? 'animated fadeIn ' : 'hidecat'}>
               <div className='back-head row-hover ' onClick={CancelVenue}>
                 <div className='left-angle'> 
                   <i className='fa fa-angle-left'></i>
-                    
                 </div>
                 <div>
                 Main Menu
@@ -276,18 +272,15 @@ function App(props) {
                   {
                     venueType.map((t) =>(
                       <NavLink key={t.id} className='row-hover' to={`/type/venue/${t.id}`}>{t.type}{t.id}</NavLink>
-
                     ))
                   } 
                 </div>
-              
               }
             </div>
             <div  className={loadservice ? 'animated fadeIn ' : 'hidecat'}>
               <div className='back-head row-hover ' onClick={CancelVenue}>
                 <div className='left-angle'> 
                   <i className='fa fa-angle-left'></i>
-                    
                 </div>
                 <div>
                 Main Menu
@@ -307,15 +300,10 @@ function App(props) {
                         <NavLink  key={service.id} className='row-hover' to={`/type/service/${service.id}`}>{service.type}</NavLink>
 
                       ))
-                    }
-
-                  
+                    }  
                 </div>
-              
               }
             </div>
-            
-            
           </div>
           <main >
             {/*vender Screeen  */}
@@ -341,7 +329,8 @@ function App(props) {
             <PrivateRoute path ='/profile' component ={ProfilePage}></PrivateRoute>
           
           
-            <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>   
+          <PrivateRoute path="/payment/:amount" component={PaymentScreen}></PrivateRoute>  
+          <Route path='/contactUs' component={Contactus}></Route>
             <Route path="/gallery" component={Gallery}></Route>
             <Route path="/faq" component={FAQ}></Route>
             <Route path="/terms&Conditions" component={Terms}></Route>
@@ -356,7 +345,6 @@ function App(props) {
             <Route path="/service/:id" component={ServiceDetailsPage}></Route>
             <Route path="/venue/:id" component={VenueDetailsPage}></Route>
             <Route path='/venues' component={VenueLists}></Route>
-            
             <Route path="/" component={LandingPage } exact></Route>
         </main>     
         <Footer/>
@@ -364,6 +352,6 @@ function App(props) {
       </div>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

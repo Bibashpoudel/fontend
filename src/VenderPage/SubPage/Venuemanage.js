@@ -118,7 +118,7 @@ function Venuemanage(props){
                             <h2 style={{textAlign:'center'}}>Update Your's venue Details !</h2>
                     </div>
                         <div className="form-col-2">
-                            <div>
+                            <div className='form-first-fields'>
                                 <div className="fields mb-4">
                                     <label>Garden Name</label>
                                     <input 

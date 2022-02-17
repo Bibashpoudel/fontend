@@ -20,7 +20,7 @@ export default function Footer() {
             </div>
             <div className="col">
                 <span className="footer-header"> Let Us Help You</span><br />
-                <span><Link to='/contactus'>Contact us</Link></span><br />
+                <span><Link to='/contactUs'>Contact us</Link></span><br />
                 <span><Link to='/faq'>FAQ</Link></span>
             </div>
             <div className="col">

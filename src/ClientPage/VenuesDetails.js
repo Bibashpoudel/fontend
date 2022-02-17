@@ -177,8 +177,6 @@ function VenueDetailsPage(props){
             }
             return serviceId;
         },
-        '' 
-
     );
     setserviceADD(SelectedService)
     

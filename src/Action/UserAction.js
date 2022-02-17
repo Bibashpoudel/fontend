@@ -156,6 +156,7 @@ export const userDetailsAction = () => async(dispatch, getState)=>{
                 'Authorization': 'Bearer ' + userInfo
             }
         })
+        // localStorage.setItem('userDetails',JSON.stringify(data))
         dispatch({
             type:USER_TYPE_DETAILS_LIST_SUCCESS,
             payload:data
