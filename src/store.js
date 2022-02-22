@@ -4,7 +4,7 @@ import { userDetailsReducer, UserProfileReducer, userRegisterReducer, userSignin
 import { cartReducer } from './Reducer/cartReducer';
 import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, TrendingVenueListReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
-import { detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
+import { CityServiceListReducer, detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, ImageListReducer, venueImageListReducer } from './Reducer/imageReducer';
 import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { CheckAvailableReducer, OrderReducer, UserOrderReducer, VendorOrderListReducer } from './Reducer/orderReducer';
@@ -55,6 +55,7 @@ const reducer = combineReducers({
     typeService:ServiceTypeReducer,
     particularSType:detailsServiceTypeReducer,
     servicelist: ServiceReducer, 
+    CityService:CityServiceListReducer,
     trendingservicelist: TrendingServiceReducer,
     imgList:ImageListReducer,   
     typeList:VenueTypeParticularListReducer,

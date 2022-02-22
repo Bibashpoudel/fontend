@@ -43,6 +43,7 @@ import Gallery from './ClientPage/Gallery';
 import swal from 'sweetalert';
 import FAQ from './ImpFiles/FAQ';
 import Contactus from './ClientPage/contactus';
+import ServiceLists from './ClientPage/ServiceLists';
 
 
 
@@ -309,7 +310,7 @@ function App(props) {
             {/*vender Screeen  */}
             <VendorRoute path="/dashboard" component={Vendorpage}></VendorRoute>
             <VendorRoute path="/service/:id/edit"  component={Vendorpage}></VendorRoute>
-            <VendorRoute path="/venue/:id/edit" component={Vendorpage}>  </VendorRoute>
+            <VendorRoute path="/edit/:id/venue" component={Vendorpage}>  </VendorRoute>
             <VendorRoute path="/accounts"  component={Vendorpage}></VendorRoute>
             <VendorRoute path="/upload_image"   component={Vendorpage}></VendorRoute>
             <VendorRoute path="/serviceManage"  component={Vendorpage}></VendorRoute>
@@ -344,6 +345,7 @@ function App(props) {
             <Route path="/register" component={SignupPage}></Route>
             <Route path="/service/:id" component={ServiceDetailsPage}></Route>
             <Route path="/venue/:id" component={VenueDetailsPage}></Route>
+            <Route path='/services' component={ServiceLists}></Route>
             <Route path='/venues' component={VenueLists}></Route>
             <Route path="/" component={LandingPage } exact></Route>
         </main>     

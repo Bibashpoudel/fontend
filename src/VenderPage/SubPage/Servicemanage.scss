@@ -2,18 +2,24 @@
 
 
 .form-first-fields{
+    @media(max-width:763px){
+        width:80%;
+    }
     @media(max-width:500px){
         width:95%;
     }
 }
 .ser-mng-col-3{
+    @media(max-width:763px){
+        width:80%;
+    }
     @media(max-width:500px){
         width:95%;
         margin:0rem !important;
     }
     select{
         @media(max-width:500px){
-            width:100% !important;
+            width:800% !important;
            
         } 
     }

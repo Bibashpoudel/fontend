@@ -93,117 +93,127 @@ export default function ServiceEdit(props) {
 
       }, [dispatch, vService,serviceId,updateSuccess,props.history])
       console.log(display_price)
-    return (
-        <div>{
-            loading ? <LoadingBox></LoadingBox>
-            :
-            error ? <MessageBox variant="danger">{error}</MessageBox>
-            :
-            updateLoading ? <LoadingBox></LoadingBox>
-            :
-            updateError ? <MessageBox variant="danger">{updateError}</MessageBox>
-            :
-            
-            <div className="ven_serv_manage">
-                    <form className=" " onSubmit={updateServicehandaler}>
-                            <div>
-                                    <h2 style={{textAlign:'center'}}>Update Your's venue Details !</h2>
-                            </div>
-                            <div className="form-col-2">
-                                    <div>
-                                            <div className="">
-                                                    
-                                                    <input 
-                                                            type="text" 
-                                                            id="gardenname" 
-                                                            placeholder="Serice Name"
-                                                            onChange={e => setName(e.target.value)}
-                                                            value={name}
-                                                    ></input>
-                                            </div>
-                            
-                                            <div className="">
-                                            
-                                                    <input 
-                                                            type="text" 
-                                                            id="gardenPrice" 
-                                                            placeholder=" service Price"
-                                                            value={actual_price}
-                                                            onChange={annotate}
-                                                            
-                                                    ></input>
-                                                    
-                                                    <span>
-                                                    <div id='printchatbox'></div>
-                                                    </span>
-                                            </div>
-                                    </div>
-                                    <div className="ser-mng-col-3">
-                                            
-                                            <div className="tooltip">
-                                                    <input className="tooltip"
-                                                            type="checkbox"
-                                                            id="isTrue"   
-                                                            checked={is_true}
-                                                            onChange={chekcedhandaler} 
-                                                    />
-                                            
-                                                    <span class="tooltiptext">For Cattering Services and Price is PerPlate </span>
-                                                </div>
-                                            
-                                                <div className=" image_field">
-                                                
-                                                        <input 
-                                                                type="text" 
-                                                                id="image" 
-                                                                placeholder="image"
-                                                                value={display_image}
-                                                                onChange={e =>setImage(e.target.value)}
-                                                                
-                                                        ></input>
-                                                </div>
-                                                <div>
-                                                {loading_vv ? <LoadingBox></LoadingBox>
+        return (
+                <div>{
+                        loading ? <LoadingBox></LoadingBox>
+                                :
+                                error ? <MessageBox variant="danger">{error}</MessageBox>
+                                        :
+                                        updateLoading ? <LoadingBox></LoadingBox>
+                                                :
+                                                updateError ? <MessageBox variant="danger">{updateError}</MessageBox>
                                                         :
-                                                        error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
-                                                        
-                                                        :
-                                                        <div className="">
-                                                        
-                                                        <select value={venue} onChange={e =>setVenue(e.target.value)}>
-                                                        <option  value="">Select Your venue</option>
-                                                                {VendorVenues.map(ven =>(
-                                                                <option key={ven.id} value={ven.id}>{ven.type}</option>
-                                                                ))}
-                                                        </select>
+
+                                                        <div className="ven_serv_manage">
+                                                                <form className=" " onSubmit={updateServicehandaler}>
+                                                                        <div>
+                                                                                <h2 style={{ textAlign: 'center' }}>Update Your's venue Details !</h2>
+                                                                        </div>
+                                                                        <div className="form-col-2">
+                                                                                <div>
+                                                                                        <div className="">
+                                                                                                <input
+                                                                                                        type="text"
+                                                                                                        id="gardenname"
+                                                                                                        placeholder="Serice Name"
+                                                                                                        onChange={e => setName(e.target.value)}
+                                                                                                        value={name}
+                                                                                                        required={true}
+                                                                                                        autocomplete="off"
+                                                                                                ></input>
+                                                                                        </div>
+
+                                                                                        <div className="">
+                                                                                                <input
+                                                                                                        type="text"
+                                                                                                        id="gardenPrice"
+                                                                                                        placeholder=" service Price"
+                                                                                                        value={actual_price}
+                                                                                                        onChange={annotate}
+                                                                                                        required={true}
+                                                                                                        autocomplete="off"
+                                
+                                                                                                ></input>
+                                                                                                <span>
+                                                                                                        <div id='printchatbox'></div>
+                                                                                                </span>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div className="ser-mng-col-3">
+                
+                                                                                        <div className="tooltip">
+                                                                                                <input className="tooltip"
+                                                                                                        type="checkbox"
+                                                                                                        id="isTrue"
+                                                                                                        checked={is_true}
+                                                                                                        onChange={chekcedhandaler}
+                                                                                                        required={true}
+                                                                                                        autocomplete="off"
+                                                                                                />
+                
+                                                                                                <span class="tooltiptext">For Cattering Services and Price is PerPlate </span>
+                                                                                        </div>
+                
+                                                                                        <div className=" image_field">
+                
+                                                                                                <input
+                                                                                                        type="text"
+                                                                                                        id="image"
+                                                                                                        placeholder="image"
+                                                                                                        value={display_image}
+                                                                                                        onChange={e => setImage(e.target.value)}
+                                                                                                        required={true}
+                                                                                                        autocomplete="off"
+                                
+                                                                                                ></input>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                                {loading_vv ? <LoadingBox></LoadingBox>
+                                                                                                        :
+                                                                                                        error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+                                                                                                                :
+                                                                                                                <div className="">
+        
+                                                                                                                        <select
+                                                                                                                                value={venue}
+                                                                                                                                onChange={e => setVenue(e.target.value)}
+                                                                                                                                required={true}
+                                                                                                                                autocomplete="off"
+                                                                                                                        >
+                                                                                                                                <option value="">Select Your venue</option>
+                                                                                                                                {VendorVenues.map(ven => (
+                                                                                                                                        <option key={ven.id} value={ven.id}>{ven.type}</option>
+                                                                                                                                ))}
+                                                                                                                        </select>
+                                                                                                                </div>
+                                                                                                }
+        
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+
+                                                                        <div className="form-row-2">
+                                                                                <div className="">
+                                                                                        <textarea
+                                                                                                type="text"
+                                                                                                id="textcontent"
+                                                                                                placeholder="Describe Your Services"
+                                                                                                onChange={e => setDescription(e.target.value)}
+                                                                                                value={description}
+                                                                                                required={true}
+                                                                                                autocomplete="off"
+                                                                                        ></textarea>
+                                                                                        <div id="countWord"></div>
+                                                                                </div>
+                                                                                <div className="btn_center">
+                                                                                        <button type="submit" className="block secondary">Update Service</button>
+                                                                                </div>
+                                                                        </div>
+
+                                                                </form>
                                                         </div>
-                                                        }
-                                        
-                                                </div>
-                                        </div>
-                            </div>
-                            
-                            <div className="form-row-2">
-                                    <div className="">
-                                            
-                                            <textarea 
-                                            type="text" 
-                                            id="textcontent"
-                                            placeholder="Describe Your Services"
-                                            onChange={e =>setDescription(e.target.value)}
-                                            value={description}
-                                            ></textarea>
-                                            <div id="countWord"></div>
-                                    </div>
-                                    <div className="btn_center">
-                                    <button type="submit" className="block secondary">Update Service</button>
-                            </div>
-                            </div>
-                            
-                    </form>
-            </div>
-}
+                }
             
-        </div>
-    )
+                </div>
+        );
 }

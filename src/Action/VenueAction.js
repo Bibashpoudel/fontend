@@ -167,7 +167,7 @@ export const vendorVenueDetails = (venueId) => async(dispatch, getState)=>{
     })
     try {
         const {userSignin:{userInfo}} = getState();
-        const {data} = await axios.get(`/api/venue/vendor/${venueId}`,{
+        const {data} = await axios.get(`/api/venue/admin/${venueId}`,{
             headers:{
                 'Authorization': 'Bearer '+ userInfo
             }

@@ -99,7 +99,7 @@ function Vendorpage(){
                </div>
                <div className="ven_col-2">
                   <Route path="/service/:id/edit"  component={ServiceEdit}></Route>
-                  <Route path="/venue/:id/edit"  component={VenueEdit}></Route>
+                  <Route path="/edit/:id/venue"  component={VenueEdit}></Route>
                   <Route path="/serviceManage"  component={ServiceManage}></Route>
                   <Route path="/account"  component={Account}></Route>
                   <Route path="/upload_image"   component={UploadImage}></Route>

@@ -94,148 +94,157 @@ export default function VenueEdit(props) {
     return (
         <div className="ven_serv_manage">
             {
-                                loading ?<LoadingBox></LoadingBox>
-                                :
-                                error ? <MessageBox></MessageBox>
-                                :
-                                
-                                loading_city ?<LoadingBox></LoadingBox>
-                                :
-                                error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
-                                
-                                :
-                                loading_vtype ?<LoadingBox></LoadingBox>
-                                :
-                                error_vtype ? <MessageBox variant="danger">{error_vtype}</MessageBox>
-                                :
-                                
-                                updateLoading ?<LoadingBox></LoadingBox>
-                                :
-                                updateError ? <MessageBox variant="danger">{updateError}</MessageBox>
-                                :
-
-                           
+                loading ? <LoadingBox></LoadingBox>
+                :
+                error ? <MessageBox></MessageBox>
+                :
+                loading_city ? <LoadingBox></LoadingBox>
+                :
+                error_city ? <MessageBox varient={"danger"}>{error_city}</MessageBox>
+                :
+                loading_vtype ? <LoadingBox></LoadingBox>
+                :
+                error_vtype ? <MessageBox vareant={"danger"}>{error_vtype}</MessageBox>
+                :
+                updateLoading ? <LoadingBox></LoadingBox>
+                :
+                updateError ? <MessageBox varient={"danger"}>{updateError}</MessageBox>
+                :
                 <form className=" " onSubmit={updateVenuehandaler}>
                     <div>
-                            <h2 style={{textAlign:'center'}}>Update Your's venue Details !</h2>
+                        <h2 style={{ textAlign: 'center' }}>Update Your's venue Details !</h2>
                     </div>
-                    
-                        <div className="form-col-2">
-                            
-                            <div>
-                                <div className="">
-                                    
-                                    <input 
-                                        type="text" 
-                                        id="gardenname" 
-                                        placeholder="Garden Name"
-                                        onChange={e => setName(e.target.value)}
-                                        value={name}
-                                    ></input>
-                                </div>
-                            
-                                <div className="">
-                                    
-                                    <input 
-                                        type="text" 
-                                        id="gardenPrice" 
-                                        placeholder="Garden Price"
-                                        value={actual_price}
-                                        onChange={annotate}
-                                        
-                                    ></input>
-                                    <span>
-                                    <div id='printchatbox'></div>
-                                    </span>
-                                </div>
-                                {loading ? <LoadingBox></LoadingBox>
-                                    :
-                                    error ? <MessageBox variant="danger">{error}</MessageBox>
-                                    
-                                    :
-                                    <div className="">
-                                    
-                                       <select value={venue_type} onChange={e =>setVenueType(e.target.value)}>
-                                       <option  value="">Select Your garden type</option>
-                                           {venueType.map(ven =>(
-                                               <option key={ven.id} value={ven.id}>{ven.type}</option>
-                                           ))}
-                                       </select>
-                                    </div>
-                                }
-                            
-                                
+
+                    <div className="form-col-2">
+
+                        <div className='form-first-fields'>
+                            <div className="fields mb-4">
+                                <label>Garden Name</label>
+    
+                                <input
+                                    type="text"
+                                    id="gardenname"
+                                    placeholder="Garden Name"
+                                    onChange={e => setName(e.target.value)}
+                                    value={name}
+                                    required={true}
+                                    autocomplete="off"
+                                ></input>
                             </div>
-                            <div className="ser-mng-col-3">
-                                <div className=" image_field">
-                                    
-                                    <input 
-                                        type="file" 
-                                        id="image" 
-                                        placeholder="image"
-                                        onChange={e =>setImage(e.target.files[0])}
-                                      
-                                    ></input>
-                                </div>
-                                <div>
-                                    <img  className="small" src={display_image} alt={name}></img>
-                                </div>
-                                {/* <div className="">
-                                    
-                                    <select>
-                                        <option>Available</option>
-                                        <option>UnAvailable</option>
+
+                            <div className="fields mb-4">
+                                <label>Garden Price</label>
+                                <input
+                                    type="text"
+                                    id="gardenPrice"
+                                    placeholder="Garden Price"
+                                    value={actual_price}
+                                    onChange={annotate}
+                                    required={true}
+                                    autocomplete="off"
+                                ></input>
+                                <span>
+                                    <div id='printchatbox'></div>
+                                </span>
+                            </div>
+                            {loading ? <LoadingBox></LoadingBox>
+                                :
+                                error ? <MessageBox variant="danger">{error}</MessageBox>
+                                :
+                                <div className="fields mb-4">
+                                    <label>Garden Type</label>
+                                    <select
+                                        value={venue_type}
+                                        onChange={e => setVenueType(e.target.value)}
+                                        required={true}
+                                        autocomplete="off"
+                                    >
+                                        
+                                        {venueType.map(ven => (
+                                            <option key={ven.id} value={ven.id}>{ven.type}</option>
+                                        ))}
                                     </select>
-                                </div> */}
-                                <div className="">
-                                { loading_city ?<LoadingBox></LoadingBox>
+                                </div>
+                            }
+                        </div>
+                        <div className="ser-mng-col-3">
+                            <div className="fields mb-4">
+                                <label>Image</label>
+    
+                                <input
+                                    type="file"
+                                    id="image"
+                                    placeholder="image"
+                                    onChange={e => setImage(e.target.files[0])}
+                                    required={true}
+                                    autocomplete="off"
+        
+                                ></input>
+                            </div>
+                            <div>
+                                <img className="small" src={display_image} alt={name}></img>
+                            </div>
+                            
+                            <div className="fields mb-4" >
+                                <label>City</label>
+                                {loading_city ? <LoadingBox></LoadingBox>
                                     :
                                     error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
-                                    :
-                                    <select value={city} onChange={e=>setCity(e.target.value)}>
-                                        <option  value="">Select Your Venue City</option>
-                                        {citys.map(c=>(
+                                        :
+                                        <select
+                                            value={city}
+                                            onChange={e => setCity(e.target.value)}
+                                            required={true}
+                                            autocomplete="off"
+                                        >
+                                            
+                                            {citys.map(c => (
                                                 <option key={c.id} value={c.id}>{c.city}</option>
-                                        ))}
-                                        
-                                        <option>city2</option>
-                                    </select>
-                }
-                                </div>
+                                            ))}
+        
+                                            <option>city2</option>
+                                        </select>
+                                }
                             </div>
                         </div>
-                        <div className="form-row-2">
-                            <div className="">
-                                
-                                <textarea 
-                                    type="text" 
-                                    id="textcontent"
-                                    placeholder=" About Garden"
-                                    value={about}
-                                    onChange={e =>setAbout(e.target.value)}
-                                    
-                                ></textarea>
-                                <div id="countWord"></div>
-                            </div>
-                            <div className="">
-                                
-                                <textarea 
-                                    type="text" 
-                                    id="garden name" 
-                                    placeholder="Features of Garden"
-                                    value={features}
-                                    onChange={e =>setFeatures(e.target.value)}
-                                    
-                                ></textarea>
-                            </div>
-                            <div className="btn_center">
-                                <button type="submit" className="block secondary">Update Venue</button>
-                            </div>
+                    </div>
+                    <div className="form-row-2">
+                        <div className="fields mb-4">
+                            <label>About Garden</label>
+
+                            <textarea
+                                type="text"
+                                id="textcontent"
+                                placeholder=" About Garden"
+                                value={about}
+                                onChange={e => setAbout(e.target.value)}
+                                required={true}
+                                autocomplete="off"
+    
+                            ></textarea>
+                            <div id="countWord"></div>
                         </div>
-                        
-                        
+                        <div className="fields mb-4">
+                            <label>Features</label>
+
+                            <textarea
+                                type="text"
+                                id="garden name"
+                                placeholder="Features of Garden"
+                                value={features}
+                                onChange={e => setFeatures(e.target.value)}
+                                required={true}
+                                autocomplete="off"
+    
+                            ></textarea>
+                        </div>
+                        <div className="btn_center">
+                            <button type="submit" className="block secondary">Update Venue</button>
+                        </div>
+                    </div>
                 </form>
             }
-            </div>
+        </div>
             
-    )}
+    );
+}

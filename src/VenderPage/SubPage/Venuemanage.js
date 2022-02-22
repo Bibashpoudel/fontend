@@ -65,7 +65,7 @@ function Venuemanage(props){
               dispatch({
                   type:VENUE_DELETE_RESET
               })
-            swal("Your Venue has been deleted SuccessFully !!!", "Venue Delete", "success");
+            swal("Your Venue has been deleted Successfully !!!", "Venue Delete", "success");
           }
 
           
@@ -92,232 +92,240 @@ function Venuemanage(props){
         <div>
             {loadingDelete && <LoadingBox ></LoadingBox>}
             {
-            errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
+                errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
             {loading ? <LoadingBox ></LoadingBox>
-            :
-            error ? <MessageBox variant="danger">{error}</MessageBox>
+                :
+                error ? <MessageBox variant="danger">{error}</MessageBox>
             
-             :
-             loading_city ?<LoadingBox></LoadingBox>
-             :
-             error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
-             :
+                    :
+                    loading_city ? <LoadingBox></LoadingBox>
+                        :
+                        error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
+                            :
              
-             loading_vv ?<LoadingBox></LoadingBox>
-             :
-             error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
-             :
-             loading_venueadd ?<LoadingBox></LoadingBox>
-             :
-             error_venueadd ? <MessageBox variant="danger">{error_venueadd}</MessageBox>
-             :
-            <div>   
-            <div className="ven_serv_manage">
-                <form className=" " onSubmit={addVenuehandaler} enctype="multipart/form-data">
-                    <div>
-                            <h2 style={{textAlign:'center'}}>Update Your's venue Details !</h2>
-                    </div>
-                        <div className="form-col-2">
-                            <div className='form-first-fields'>
-                                <div className="fields mb-4">
-                                    <label>Garden Name</label>
-                                    <input 
-                                        className=''
-                                        type="text" 
-                                        id="gardenname" 
-                                        placeholder="Garden Name"
-                                        onChange={e => setName(e.target.value)}
-                                        required={true} 
-                                        style={{width:'80%'}}
-                                    ></input>
-                                </div>
+                            loading_vv ? <LoadingBox></LoadingBox>
+                                :
+                                error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+                                    :
+                                    loading_venueadd ? <LoadingBox></LoadingBox>
+                                        :
+                                        error_venueadd ? <MessageBox variant="danger">{error_venueadd}</MessageBox>
+                                            :
+                                            <div>
+                                                <div className="ven_serv_manage">
+                                                    <form className=" " onSubmit={addVenuehandaler} enctype="multipart/form-data">
+                                                        <div>
+                                                            <h2 style={{ textAlign: 'center' }}>Update Your's venue Details !</h2>
+                                                        </div>
+                                                        <div className="form-col-2">
+                                                            <div className='form-first-fields'>
+                                                                <div className="fields mb-4">
+                                                                    <label>Garden Name</label>
+                                                                    <input
+                                                                        className=''
+                                                                        type="text"
+                                                                        id="gardenname"
+                                                                        placeholder="Garden Name"
+                                                                        onChange={e => setName(e.target.value)}
+                                                                        required={true}
+                                                                        autocomplete="off"
+                                                                        style={{ width: '90%' }}
+                                                                    ></input>
+                                                                </div>
                             
-                                <div className="fields mb-4">
-                                    <label>Garden Price</label>
-                                    <input 
-                                        type="text" 
-                                        id="gardenPrice" 
-                                        placeholder="Garden Price"
-                                        required={true} 
-                                        style={{width:'80%'}}
-                                        onChange={annotate}
+                                                                <div className="fields mb-4">
+                                                                    <label>Garden Price</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="gardenPrice"
+                                                                        placeholder="Garden Price"
+                                                                        required={true}
+                                                                        autocomplete="off"
+                                                                        style={{ width: '90%' }}
+                                                                        onChange={annotate}
                                         
-                                    ></input>
-                                    <span>
-                                    <div id='printchatbox'></div>
-                                    </span>
-                                </div>
-                                {loading ? <LoadingBox></LoadingBox>
-                                    :
-                                    error ? <MessageBox variant="danger">{error}</MessageBox>
+                                                                    ></input>
+                                                                    <span>
+                                                                        <div id='printchatbox'></div>
+                                                                    </span>
+                                                                </div>
+                                                                {loading ? <LoadingBox></LoadingBox>
+                                                                    :
+                                                                    error ? <MessageBox variant="danger">{error}</MessageBox>
                                     
-                                    :
-                                    <div className="fields mb-4">
-                                    <label>Garden Type</label>
+                                                                        :
+                                                                        <div className="fields mb-4">
+                                                                            <label>Garden Type</label>
                                     
-                                       <select 
-                                            onChange={e =>setVenueType(e.target.value)}
-                                            required={true} 
-                                            style={{width:'80%'}}
-                                        >
-                                       <option  value="">Select Your garden type</option>
-                                           {venueType.map(ven =>(
-                                               <option key={ven.id} value={ven.id}>{ven.type}</option>
-                                           ))}
-                                       </select>
-                                    </div>
-                                }
+                                                                            <select
+                                                                                onChange={e => setVenueType(e.target.value)}
+                                                                                required={true}
+                                                                                autocomplete="off"
+                                                                                style={{ width: '90%' }}
+                                                                            >
+                                                                                <option value="">Select Your garden type</option>
+                                                                                {venueType.map(ven => (
+                                                                                    <option key={ven.id} value={ven.id}>{ven.type}</option>
+                                                                                ))}
+                                                                            </select>
+                                                                        </div>
+                                                                }
                             
                                 
-                            </div>
-                            <div className="ser-mng-col-3">
-                            <div className="fields mb-4">
-                                    <label>Image</label>
-                                    <input 
-                                        type="file" 
-                                        id="image" 
-                                        placeholder="image"
-                                        onChange={e =>setImage(e.target.files[0])}
-                                        required={true} 
-                                        style={{width:'80%'}}
-                                    ></input>
-                                </div>
+                                                            </div>
+                                                            <div className="ser-mng-col-3">
+                                                                <div className="fields mb-4">
+                                                                    <label>Image</label>
+                                                                    <input
+                                                                        type="file"
+                                                                        id="image"
+                                                                        placeholder="image"
+                                                                        onChange={e => setImage(e.target.files[0])}
+                                                                        required={true}
+                                                                        autocomplete="off"
+                                                                        style={{ width: '90%' }}
+                                                                    ></input>
+                                                                </div>
                                
-                                <div className="fields mb-4">
-                                    <label>City</label>
-                                { loading_city ?<LoadingBox></LoadingBox>
-                                    :
-                                    error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
-                                    :
-                                    <select 
-                                        onChange={e=>setCity(e.target.value)} 
-                                        required={true} 
-                                        style={{width:'80%'}}>
-                                        <option  value="">Select Your Venue City</option>
-                                        {citys.map(c=>(
-                                                <option key={c.id} value={c.id}>{c.city}</option>
-                                        ))}
+                                                                <div className="fields mb-4" >
+                                                                    <label>City</label>
+                                                                    {loading_city ? <LoadingBox></LoadingBox>
+                                                                        :
+                                                                        error_city ? <MessageBox variant="danger">{error_city}</MessageBox>
+                                                                            :
+                                                                            <select
+                                                                                onChange={e => setCity(e.target.value)}
+                                                                                required={true}
+                                                                                autocomplete="off"
+                                                                                style={{ width: '90%' }}>
+                                                                                <option value="">Select Your Venue City</option>
+                                                                                {citys.map(c => (
+                                                                                    <option key={c.id} value={c.id}>{c.city}</option>
+                                                                                ))}
                                         
                                         
-                                    </select>
-}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-row-2">
-                        <div className="fields mb-4">
-                                    <label>About Garden</label>
+                                                                            </select>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-row-2">
+                                                            <div className="fields mb-4">
+                                                                <label>About Garden</label>
                                 
-                                <textarea 
-                                    type="text" 
-                                    id="textcontent"
-                                    placeholder=" About Garden"
-                                    onChange={e =>setAbout(e.target.value)}
-                                    required={true} 
-                                    style={{width:'80%'}}
-                                ></textarea>
-                                <div id="countWord"></div>
-                            </div>
-                            <div className="fields mb-4">
-                                    <label>Features</label>
-                                <textarea 
-                                    type="text" 
-                                    id="garden name" 
-                                    placeholder="Features of Garden"
-                                    onChange={e =>setFeatures(e.target.value)}
-                                    required={true} 
-                                    style={{width:'80%'}}
-                                ></textarea>
-                            </div>
-                            <div className="btn_center">
-                            <button type="submit" className="block secondary">Add Venue</button>
-                            </div>
-                        </div>
+                                                                <textarea
+                                                                    type="text"
+                                                                    id="textcontent"
+                                                                    placeholder=" About Garden"
+                                                                    onChange={e => setAbout(e.target.value)}
+                                                                    required={true}
+                                                                    autocomplete="off"
+                                    
+                                                                    style={{ width: '90%' }}
+                                                                ></textarea>
+                                                                <div id="countWord"></div>
+                                                            </div>
+                                                            <div className="fields mb-4">
+                                                                <label>Features</label>
+                                                                <textarea
+                                                                    type="text"
+                                                                    id="garden name"
+                                                                    placeholder="Features of Garden"
+                                                                    onChange={e => setFeatures(e.target.value)}
+                                                                    required={true}
+                                                                    autocomplete="off"
+                                                                    style={{ width: '90%' }}
+                                                                ></textarea>
+                                                            </div>
+                                                            <div className="btn_center">
+                                                                <button type="submit" className="block secondary">Add Venue</button>
+                                                            </div>
+                                                        </div>
                         
                         
-                </form>
-            </div>
-            <div>
-            {
-                    loading_vv ?<LoadingBox></LoadingBox>
-                    :
-                    error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
-                    :
-                <table>
-                    <thead>
-                        <tr>
+                                                    </form>
+                                                </div>
+                                                <div>
+                                                    {
+                                                        loading_vv ? <LoadingBox></LoadingBox>
+                                                            :
+                                                            error_vv ? <MessageBox variant="danger">{error_vv}</MessageBox>
+                                                                :
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
                             
-                            <th>
-                                id
-                            </th>
-                            <th>
-                                Name of Venue
-                            </th>
-                            <th>
-                                Garden type
-                            </th>
-                            <th>
-                                price
-                            </th>
-                            <th>
-                                City
-                            </th>
-                            <th>
-                                Action
-                            </th>
+                                                                            <th>
+                                                                                id
+                                                                            </th>
+                                                                            <th>
+                                                                                Name of Venue
+                                                                            </th>
+                                                                            <th>
+                                                                                Garden type
+                                                                            </th>
+                                                                            <th>
+                                                                                price
+                                                                            </th>
+                                                                            <th>
+                                                                                City
+                                                                            </th>
+                                                                            <th>
+                                                                                Action
+                                                                            </th>
                             
-                        </tr>
-                    </thead>
-                    {VendorVenues ?
-                        <tbody>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    {VendorVenues ?
+                                                                        <tbody>
                         
-                            {
-                                VendorVenues.map((vv )=>(
+                                                                            {
+                                                                                VendorVenues.map((vv) => (
                             
-                            <tr key={vv.id}>
-                                <td >
-                                    {vv.id}
-                                </td>
-                                <td>
-                                    {vv.name}
-                                </td>
-                                <td>
-                                    {vv.venue_type.type}
-                                </td>
-                                <td>
-                                    {vv.actual_price}
-                                </td>
-                                <td>
-                                    {vv.city.city}
-                                </td>
-                                <td>
-                                    <div>
-                                        <button className="btn_edit" onClick={() => props.history.push(`/venue/${vv.id}/edit`)}>edit</button>
-                                        {'    '}
-                                        <button className="btn_danger" onClick={() => deleteHandaler(vv)}>Delete</button>
-                                        { '   '}
+                                                                                    <tr key={vv.id}>
+                                                                                        <td >
+                                                                                            {vv.id}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {vv.name}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {vv.venue_type.type}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {vv.actual_price}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            {vv.city.city}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div>
+                                                                                                <button className="btn_edit" onClick={() => props.history.push(`/edit/${vv.id}/venue`)}>edit</button>
+                                                                                                {'    '}
+                                                                                                <button className="btn_danger" onClick={() => deleteHandaler(vv)}>Delete</button>
+                                                                                                {'   '}
                                        
-                                    </div>
-                                    <div>
+                                                                                            </div>
+                                                                                            <div>
                                  
                                  
-                              </div>
-                                </td>
-                            </tr>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
                                 
-                                ))
-                                }
-                        </tbody>
-    :
-    <span></span>
-                            }
-                </table>
-}
-            </div>
-            </div>
-}
-        </div>   
-    )
+                                                                                ))
+                                                                            }
+                                                                        </tbody>
+                                                                        :
+                                                                        <span></span>
+                                                                    }
+                                                                </table>
+                                                    }
+                                                </div>
+                                            </div>
+            }
+        </div>
+    );
 }
 
 export default Venuemanage;

@@ -35,64 +35,64 @@ export default function VenueLists() {
   return (
 
   
-  <div className="container-fluid">
-  <div className="container">
-    <div className="row">
-        <div className="col-8 col-md-3">
-        {city_error && <MessageBox>{ city_error.message}</MessageBox>}
-          {
-            citys ?
-              <select className="form-select rounded-0 mt-2 mb-2"  onChange={e=>setCityId(e.target.value)}>
-                <option value={"all"}>Select City</option>
-                {citys.map(c => (
+    <div className="container-fluid">
+      <div className="container">
+        <div className="row">
+          <div className="col-8 col-md-3">
+            {city_error && <MessageBox>{city_error.message}</MessageBox>}
+            {
+              citys ?
+                <select className="form-select rounded-0 mt-2 mb-2" onChange={e => setCityId(e.target.value)}>
+                  <option value={"all"}>Select City</option>
+                  {citys.map(c => (
               
-                  <option key={c.id} value={c.id}>{c.city}</option>
-                ))}
-              </select>
-              : <select className="form-select rounded-0 fs-17"><option value={""}>Loading</option></select>
-          }
-      </div>
+                    <option key={c.id} value={c.id}>{c.city}</option>
+                  ))}
+                </select>
+                : <select className="form-select rounded-0 fs-17"><option value={""}>Loading</option></select>
+            }
+          </div>
        
-      <div className="w-100" />
-    {
-    loading ?<LoadingBox></LoadingBox>
-    :
-    error ? <MessageBox>{error}</MessageBox>
+          <div className="w-100" />
+          {
+            loading ? <LoadingBox></LoadingBox>
+              :
+              error ? <MessageBox>{error}</MessageBox>
                 :
-                cityloading ?<LoadingBox></LoadingBox>
-    :
-    cityerror ? <MessageBox>{cityerror}</MessageBox>
+                cityloading ? <LoadingBox></LoadingBox>
                   :
+                  cityerror ? <MessageBox>{cityerror}</MessageBox>
+                    :
                 
 
-      <div className="row-flex" >
-                  {
-                    CityId === 'all' ?
-                    <>
-                        {venues.map((venue) => (
+                    <div className="row-flex" >
+                      {
+                        CityId === 'all' ?
+                          <>
+                            {venues.map((venue) => (
         
-                <div className="col-xl-3 col-lg-4 col-6"  key={venue.id} >
-                  <Venue  venue={venue} key={venue.id}/>
-                          </div>
-                           ))}
-                    </>
-                :
-                    <>
-                        {cityvenue.map((venue) => (
+                              <div className="col-xl-3 col-lg-4 col-6" key={venue.id} >
+                                <Venue venue={venue} key={venue.id} />
+                              </div>
+                            ))}
+                          </>
+                          :
+                          <>
+                            {cityvenue.map((venue) => (
         
-                <div className="col-xl-3 col-lg-4 col-6"  key={venue.id}>
-                  <Venue  venue={venue} key={venue.id}/>
-                          </div>
-                           ))}
-                    </>
-      }
+                              <div className="col-xl-3 col-lg-4 col-6" key={venue.id}>
+                                <Venue venue={venue} key={venue.id} />
+                              </div>
+                            ))}
+                          </>
+                      }
       
    
+                    </div>
+          }
+        </div>
       </div>
-}
     </div>
-  </div>
-</div>
 
-);
+  );
 }
