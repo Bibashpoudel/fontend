@@ -9,40 +9,40 @@ import { PAY_FAIL, PAY_ORDER_FAIL, PAY_ORDER_REQUEST, PAY_ORDER_SUCCESS, PAY_REQ
 
 
 
-export const Payorder = (amount)=> async(dispatch, getState )=>{
+export const Payorder = (amount) => async (dispatch, getState) => {
 
     dispatch({
-        type:PAY_ORDER_REQUEST,
-        payload:{amount}
+        type: PAY_ORDER_REQUEST,
+        payload: { amount }
     })
 
-   try {
-    const {userSignin:{userInfo}} = getState();
-    const {data} = await axios.post( '/api/order/create/',{amount},{
-        headers:{
-            'Authorization': 'Bearer '+ userInfo
+    try {
+        const { userSignin: { userInfo } } = getState();
+        const { data } = await axios.post('/api/order/create/', { amount }, {
+            headers: {
+                'Authorization': 'Bearer ' + userInfo
 
-        }
+            }
        
-    })
-    dispatch({
-        type:PAY_ORDER_SUCCESS,
-        payload:data
-    })
-   } catch (error) {
-       dispatch({
-           type:PAY_ORDER_FAIL,
-           payload:
-           error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message
-                ? error.message
-                : error
-       })
+        })
+        dispatch({
+            type: PAY_ORDER_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PAY_ORDER_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+                        ? error.message
+                        : error
+        })
        
-   }
+    }
 
-}
+};
 export const pay = (amounts, orderid) => async(dispatch)=>{
     dispatch({
         type:PAY_REQUEST,

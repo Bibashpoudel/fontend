@@ -1,4 +1,4 @@
-import { ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_RESET, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, PARTICULAR_VENUE_TYPE_LIST_FAIL, PARTICULAR_VENUE_TYPE_LIST_REQUEST, PARTICULAR_VENUE_TYPE_LIST_SUCCESS, TRENDING_VENUE_LIST_FAIL, TRENDING_VENUE_LIST_REQUEST, TRENDING_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_RESET, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_RESET, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_REVIEW_FAIL,    VENUE_REVIEW_REQUEST,    VENUE_REVIEW_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
+import { ADD_RATING_FAIL, ADD_RATING_REQUEST, ADD_RATING_RESET, ADD_RATING_SUCCESS, ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_RESET, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, PARTICULAR_VENUE_TYPE_LIST_FAIL, PARTICULAR_VENUE_TYPE_LIST_REQUEST, PARTICULAR_VENUE_TYPE_LIST_SUCCESS, TRENDING_VENUE_LIST_FAIL, TRENDING_VENUE_LIST_REQUEST, TRENDING_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_RESET, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_RESET, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS, VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,    VENUE_RATING_FAIL,    VENUE_RATING_REQUEST,    VENUE_RATING_SUCCESS,    VENUE_REVIEW_FAIL,    VENUE_REVIEW_REQUEST,    VENUE_REVIEW_SUCCESS,    VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_RESET, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants";
 
 
 
@@ -85,7 +85,7 @@ export const VenueTypeParticularListReducer =(state={particulartypeVenue:[]}, ac
             return state
     }
 }
-export const VenueDetailsListReducer = (state = {venue:{}}, action) =>{
+export const VenueDetailsListReducer = (state = {loading:true}, action) =>{
     switch(action.type){
         case VENUE_DETAILS_REQUEST:
             return{
@@ -261,6 +261,49 @@ export const VenueReviewListReducer = (state = {venueReview:[]}, action) =>{
                 venueReview:action.payload
             }
         case VENUE_REVIEW_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }    
+        default:
+            return state
+    }
+}
+export const AddvenueRatingReducer = (state={},action)=>{
+    switch(action.type){
+        case ADD_RATING_REQUEST:
+            return{
+                loading:true,
+
+            }
+        case  ADD_RATING_SUCCESS:
+            return{
+                loading:false,
+                ReviewAdd:action.payload
+            }
+        case  ADD_RATING_FAIL:
+            return{
+                loading:false,
+                error:action.payload
+            }
+        case  ADD_RATING_RESET:
+        return{}
+        default:
+            return state
+    }
+}
+export const VenueRatingListReducer = (state = {venueRating:[]}, action) =>{
+    switch(action.type){
+        case VENUE_RATING_REQUEST:
+            return{
+                loading:true
+            }
+        case VENUE_RATING_SUCCESS:
+            return{
+                loading:false,
+                venueRating:action.payload
+            }
+        case VENUE_RATING_FAIL:
             return{
                 loading:false,
                 error:action.payload

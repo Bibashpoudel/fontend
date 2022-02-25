@@ -202,8 +202,6 @@ function Venuemanage(props){
                                                                                 {citys.map(c => (
                                                                                     <option key={c.id} value={c.id}>{c.city}</option>
                                                                                 ))}
-                                        
-                                        
                                                                             </select>
                                                                     }
                                                                 </div>

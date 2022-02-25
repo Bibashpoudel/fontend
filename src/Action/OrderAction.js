@@ -5,11 +5,11 @@ import { CHECK_AVAILABLE_FAIL, CHECK_AVAILABLE_REQUEST, CHECK_AVAILABLE_SUCCESS,
 export const CheckStatusAction = (from, to, id) => async (dispatch) => {
     dispatch({
         type: CHECK_AVAILABLE_REQUEST,
-        payload:{from, to, id}
+        payload: { from, to, id }
     })
     try {
         const { data } = await axios.post('/api/order/checkStatus/', {
-            From:from ,To:to, venue:id
+            From: from, To: to, venue: id
         }, {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -17,7 +17,7 @@ export const CheckStatusAction = (from, to, id) => async (dispatch) => {
         })
         dispatch({
             type: CHECK_AVAILABLE_SUCCESS,
-            payload:data
+            payload: data
         })
         
     } catch (error) {
@@ -31,15 +31,15 @@ export const CheckStatusAction = (from, to, id) => async (dispatch) => {
                         : error
         });
     }
-}
+};
 export const CheckServiceStatusAction = (from, to, id) => async (dispatch) => {
     dispatch({
         type: CHECK_AVAILABLE_REQUEST,
-        payload:{from, to, id}
+        payload: { from, to, id }
     })
     try {
         const { data } = await axios.post('/api/order/checkStatus/', {
-            From:from ,To:to, service:id
+            From: from, To: to, service: id
         }, {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -61,9 +61,9 @@ export const CheckServiceStatusAction = (from, to, id) => async (dispatch) => {
                         : error
         });
     }
-}
+};
 
-export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
+export const Createorder = (amounts, orders) => async (dispatch, getState) => {
 
 
     dispatch({
@@ -71,7 +71,7 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
         payload: { amounts, orders }
     });
     try {
-        const {userSignin:{userInfo}} = getState()
+        const { userSignin: { userInfo } } = getState()
         const razorpay = JSON.parse(localStorage.getItem('Razorpay'));
         const razorpayOrderId = razorpay.razorpay_order_id;
         const razorpayPaymentId = razorpay.razorpay_payment_id;
@@ -100,21 +100,21 @@ export const Createorder =(amounts,orders) => async(dispatch, getState)=>{
         });
         localStorage.removeItem('Razorpay');
     }
-}
-export const UserOrderList =() => async(dispatch, getState)=>{
+};
+export const UserOrderList = () => async (dispatch, getState) => {
     dispatch({
-        type:USER_ORDER_REQUEST, 
+        type: USER_ORDER_REQUEST,
     })
     try {
-        const {userSignin:{userInfo}} = getState()
-        const {data} = await axios.get('/api/order/customer/',{
-            headers:{
+        const { userSignin: { userInfo } } = getState()
+        const { data } = await axios.get('/api/order/customer/', {
+            headers: {
                 'Authorization': `Bearer ${userInfo}`
             }
-        }) 
+        })
         dispatch({
-            type:USER_ORDER_SUCCESS,
-            payload:data   
+            type: USER_ORDER_SUCCESS,
+            payload: data
         })
         
     } catch (error) {
@@ -128,14 +128,14 @@ export const UserOrderList =() => async(dispatch, getState)=>{
                         : error
         });
     }
-}
+};
 
 export const VendorOrderList = () => async (dispatch, getState) => {
     dispatch({
-        type:ORDER_LIST_REQUEST
+        type: ORDER_LIST_REQUEST
     })
     try {
-        const {userSignin:{userInfo}} = getState()
+        const { userSignin: { userInfo } } = getState()
         const { data } = await axios.get('/api/order/vendor', {
             headers: {
                 'Authorization': `Bearer ${userInfo}`
@@ -157,4 +157,4 @@ export const VendorOrderList = () => async (dispatch, getState) => {
                         : error
         });
     }
-}
+};

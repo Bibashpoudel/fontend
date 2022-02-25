@@ -165,8 +165,14 @@ button.secondary {
   background-color: #26A412;
   color:White;
   font-size: 2.3rem;
-  @media(max-width:360px){
-    font-size: 1.7rem;
+  @media(max-width:450px){
+    font-size: 1.5rem;
+  }
+  @media(max-width:400px){
+    font-size: 1.2rem;
+  }
+  @media(max-width:300px){
+    font-size: 1rem;
   }
 }
 button.secondary_size{
@@ -708,7 +714,6 @@ footer {
 .venue_details_row{
   display: flex;
   flex-wrap: wrap;
-  
   justify-content: space-between;
   margin:1rem;
 }
@@ -717,20 +722,20 @@ footer {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
-  margin:1rem;
+  margin:1rem 1rem 1rem 2rem;
 }
 .venue_details_row-bottom .photos{
-  display: flex;
-  
+  display: flex; 
 }
 .venue_details_row_buttom {
   background-color:rgb(233, 224, 224);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
 }
-
+.venue_details_row-bottom .icon-inner, svg{
+  display: inline !important;
+}
 .colm-4{
   padding:1rem;
   color:rgb(92, 89, 89);
@@ -739,7 +744,6 @@ footer {
 .venue_details{
   margin-top:2rem;
   background-color: #fff;
- 
   border:.2rem solid #f3f3f3;
 }
 .gallery_image{
@@ -755,12 +759,9 @@ footer {
 .gallery_image div img {
   margin: .2rem .5rem  0 0;
 }
-
 .col-2 {
   flex:70%;
-
 }  
-
 .g_service{
   display: flex;
   flex-direction: column;

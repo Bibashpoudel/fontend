@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, PARTICULAR_VENUE_TYPE_LIST_FAIL, PARTICULAR_VENUE_TYPE_LIST_REQUEST, PARTICULAR_VENUE_TYPE_LIST_SUCCESS, TRENDING_VENUE_LIST_FAIL, TRENDING_VENUE_LIST_REQUEST, TRENDING_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_REVIEW_FAIL,  VENUE_REVIEW_REQUEST,  VENUE_REVIEW_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
+import {ADD_RATING_FAIL, ADD_RATING_REQUEST, ADD_RATING_SUCCESS, ADD_REVIEW_FAIL, ADD_REVIEW_REQUEST, ADD_REVIEW_SUCCESS, CITY_VENUE_LIST_FAIL, CITY_VENUE_LIST_REQUEST, CITY_VENUE_LIST_SUCCESS, PARTICULAR_VENUE_TYPE_LIST_FAIL, PARTICULAR_VENUE_TYPE_LIST_REQUEST, PARTICULAR_VENUE_TYPE_LIST_SUCCESS, TRENDING_VENUE_LIST_FAIL, TRENDING_VENUE_LIST_REQUEST, TRENDING_VENUE_LIST_SUCCESS, VENDOR_VENUE_DETAILS_FAIL, VENDOR_VENUE_DETAILS_REQUEST, VENDOR_VENUE_DETAILS_SUCCESS, VENUE_ADD_Fail, VENUE_ADD_REQUEST, VENUE_ADD_SUCCESS, VENUE_DELETE_FAIL, VENUE_DELETE_REQUEST, VENUE_DELETE_SUCCESS, VENUE_DETAILS_FAIL, VENUE_DETAILS_REQUEST, VENUE_DETAILS_SUCCESS,  VENUE_LIST_FAIL, VENUE_LIST_REQUEST, VENUE_LIST_SUCCESS,  VENUE_RATING_FAIL,  VENUE_RATING_REQUEST,  VENUE_RATING_SUCCESS,  VENUE_REVIEW_FAIL,  VENUE_REVIEW_REQUEST,  VENUE_REVIEW_SUCCESS,  VENUE_TYPE_LIST_Fail, VENUE_TYPE_LIST_REQUEST, VENUE_TYPE_LIST_SUCCESS, VENUE_UPDATE_FAIL, VENUE_UPDATE_REQUEST, VENUE_UPDATE_SUCCESS } from "../Constants/venueConstants"
 
 
 export const VenueTypeList = () =>async(dispatch)=>{
@@ -355,6 +355,36 @@ export const createComment = (venueId, comment) =>async(dispatch, getState)=>{
     }
 
 }
+export const createRating = (venueId, rating) =>async(dispatch, getState)=>{
+    dispatch({
+        type:ADD_RATING_REQUEST,
+        payload:venueId, rating
+    })
+    try {
+        const {userSignin:{userInfo}} = getState();
+        
+        // const now = new Date();
+        const {data} = await axios.post(`/api/rating/venue/${venueId}/`, {rating},{
+            headers:{
+                'Authorization': 'Bearer '+userInfo
+            }
+        })
+        dispatch({
+            type:ADD_RATING_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:ADD_RATING_FAIL,
+            payload:
+                error.response && error.response.data.message
+                ? error.response.data.message
+                : error
+        })
+        
+    }
+
+}
 export const VenueReviewAction =(venueId) =>async(dispatch)=>{
     dispatch({
         type:VENUE_REVIEW_REQUEST,
@@ -379,3 +409,28 @@ export const VenueReviewAction =(venueId) =>async(dispatch)=>{
         });
     }
 }
+export const VenueRatingAction =(venueId) =>async(dispatch)=>{
+    dispatch({
+        type:VENUE_RATING_REQUEST,
+        payload:venueId
+    });
+
+    try {
+        const {data} = await axios.get(`/api/rating/venue/${venueId}/`);
+
+        dispatch({
+            type:VENUE_RATING_SUCCESS,
+            payload:data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:VENUE_RATING_FAIL,
+            payload: 
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error
+        });
+    }
+}
+

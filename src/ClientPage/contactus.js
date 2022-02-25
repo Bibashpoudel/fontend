@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import './contactus.scss'
+import swal from 'sweetalert';
+import { CONTACT_SEND_RESET } from '../Constants/contactConstants';
+import { ContactusAction } from '../Action/contactusAction';
 
 export default function Contactus() {
+
+    const [fullname, setFullname] = useState();
+    const [email, setEmail] = useState();
+    const [message, setMessage] = useState();
+
+    const messageSend = useSelector(state => state.messageSend);
+    const { loading, error, success } = messageSend;
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (success) {
+            swal("Message send", "We will contact soon", "success");
+            dispatch({
+                type:CONTACT_SEND_RESET
+            })
+        }
+    })
+    const sendMessage = (e) => {
+        e.preventDefault()
+        dispatch(ContactusAction(fullname, email,message))
+    }
     return (
         <div className="contact">
             <div className='content'>
@@ -17,7 +42,7 @@ export default function Contactus() {
                         </div>
                         <div className='texts'>
                             <h3>Address</h3>
-                            <p></p>
+                            <p>G4, vinayak apartment, kiran bihar, mangevas road mansarovar 302020 Jaipur Rajasthan</p>
                         </div>
                     </div>
                     <div className='boxs'>
@@ -26,7 +51,7 @@ export default function Contactus() {
                         </div>
                         <div className='texts'>
                             <h3>Email</h3>
-                            <p></p>
+                            <p>info@sevenoath.com</p>
                         </div>
                     </div>
                     <div className='boxs'>
@@ -35,23 +60,41 @@ export default function Contactus() {
                         </div>
                         <div className='texts'>
                             <h3>Phone</h3>
-                            <p></p>
+                            <p>+91 7357187164</p>
                         </div>
                     </div>
                 </div>
                 <div className='contactForm'>
-                    <form>
+                    <form onSubmit={sendMessage}>
                         <h2>Send Message</h2>
                         <div className='inputBox'>
-                            <input type="text" name='' required={true}></input>
+                            <input
+                                type="text"
+                                name='fullname'
+                                required={true}
+                                autoComplete='off'
+                                onChange={e => setFullname(e.target.value)}
+                            ></input>
                             <span>Full Name</span>
                         </div>
                         <div className='inputBox'>
-                            <input type="text" name='' required={true}></input>
+                            <input
+                                type="email"
+                                name='email'
+                                required={true}
+                                autoComplete='off'
+                                onChange={e=> setEmail(e.target.value)}
+                            ></input>
                             <span>Email</span>
                         </div>
                         <div className='inputBox'>
-                            <textarea type="text" name='' required={true}></textarea>
+                            <textarea
+                                type="text"
+                                name='message'
+                                required={true}
+                                autoComplete='off'
+                                onChange={e=>setMessage(e.target.value)}
+                            ></textarea>
                             <span>Type your Message</span>
                         </div>
                         <div className='inputBox'>

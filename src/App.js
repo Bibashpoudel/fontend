@@ -172,7 +172,15 @@ function App(props) {
                 
                   {
                     profile ? 
-                    <div className="col-auto desk"><NavLink to="/profile">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
+                    <>
+                      {
+                        profile.user_type === "Vendor" ?
+                        <div className="col-auto desk"><NavLink to="/dashboard">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
+                          :
+                          <div className="col-auto desk"><NavLink to="/profile">{profile.fullname} <i className="fa fa-user-circle" /></NavLink></div>
+                        
+                      }
+                    </>
                     :
                     <div className="col-auto desk"><NavLink to="/signin"><i className="ai-lock-on" /></NavLink></div>
                   }

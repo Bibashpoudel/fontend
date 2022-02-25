@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { ServicesListaction } from '../Action/ServicesAction';
-import { createComment, VenueDetails, VenueReviewAction } from '../Action/VenueAction';
+import { createComment, createRating, VenueDetails, VenueReviewAction } from '../Action/VenueAction';
 import LoadingBox from '../components/LoadingBox'; 
 import MessageBox from '../components/MessageBox';
 import {Link} from 'react-scroll'
@@ -13,6 +13,8 @@ import { ADD_REVIEW_RESET } from '../Constants/venueConstants';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { CheckStatusAction } from '../Action/OrderAction';
+import Rating from '../components/Rating';
+import RatingDetails from '../components/RatingDetails';
 
 function VenueDetailsPage(props){
     // const venue1 = data.venders.find((x) => x._id === props.match.params.id);
@@ -33,6 +35,8 @@ function VenueDetailsPage(props){
     const { loading: VenueReviewLoading, venueReview, error: ReviewDisplayError } = ReviewDisplay;
     const CheckStatus = useSelector(state => state.CheckStatus)
     const { loading: statusLoading, eror: statusError, status } = CheckStatus;
+    const RatingAdd = useSelector(state => state.RatingAdd);
+    const { loading: rat_loading, error: rat_error, venueRating } = RatingAdd;
     const [, setserviceADD] = useState(['']);
     const [from, setFrom] = useState(' ');
     const [to, setTo] = useState(' ');
@@ -52,15 +56,13 @@ function VenueDetailsPage(props){
     
     const AddReview =(e) =>{
         e.preventDefault();
-        if(comment ){
+        if(comment && rating){
             dispatch(createComment(venueId, comment));
+            dispatch(createRating(venueId, rating));
         }
     }
    
     useEffect(() =>{ 
-        
-
-
         if(success){
             setRating('');
             setComment('')
@@ -224,18 +226,29 @@ function VenueDetailsPage(props){
                     </div>
                     <div className="venue_details_margin">
                         <div className="venue_details_row">
-                            <div>{venue.name}</div>
-                            <div>
-                                
-                                {/* <Rating rating={venue.rating} numReviews={venue.numReviews}></Rating> */}
                             
-                                </div>
+                            <div>
+                                Name: {venue.name}
+                            </div>
+                                
+                            
+                            <div>
+                            <RatingDetails rating={venue.rating} ></RatingDetails>
+                            </div>
                         </div>
                         <div className="venue_details_row">
-                            <span>
-                            <i className="fa fa-location"></i>
-                                {venue.location}
-                            </span>
+                            <div style={{display:'flex', flexDirection:'column'}}>
+                                <div>
+                                    City: {venue.city.city}
+                                </div>
+                                <div style={{color:'#c0c0c0'}}>
+                                    Venue Type: {venue.venue_type.type}
+                                </div>
+                                <span>
+                                <i className="fa fa-location"></i>
+                                    {venue.location}
+                                </span>
+                            </div>
                         </div>
                         <div className="venue_details_row_buttom">
                                 <div className="colm-4">
@@ -433,7 +446,7 @@ function VenueDetailsPage(props){
                                             </div>
                                                
                                             <div>
-                                                <button className='primary' style={{fontSize:'1rem'}} onClick={CheckAvailable} >Check Availability</button>
+                                                <button className='primary' style={{fontSize:'1.5rem'}} onClick={CheckAvailable} >Check Availability</button>
                                             </div>
                                         </div>
                                         <div className='single_row'>
@@ -473,9 +486,6 @@ function VenueDetailsPage(props){
                                                     <button className="secondary block"  onClick={Carthandaler}>Continue</button>
                                                 </div>
                                                 }
-                                            
-                                            
-                                        
                                                 {
                                                     status.status === 'Unavailable' &&
                                                     <div style={{color: 'rgba(213, 19, 62, 0.77)'}}>
@@ -483,8 +493,7 @@ function VenueDetailsPage(props){
                                                     </div>
                                                 }                                                  
                                             </span>
-                                        }
-                                                                                        
+                                        }                                                
                                         <div className ="single_row">
                                                 <input type="text" placeholder="leave a comment"></input>
                                         </div>
@@ -508,10 +517,10 @@ function VenueDetailsPage(props){
                             <h4>Pictures</h4>   
                             <div className="photos">
                                 <div className="image" onClick={DisplayImage} style={{cursor:'pointer'}}>
-                                        Images
+                                        <h2>Images</h2>
                                 </div>
                                 <div className="video" onClick={DisplayVideo} style={{cursor:'pointer'}}>
-                                        Videos
+                                        <h2>Videos</h2>
                                 </div>
                             </div>
                             {
@@ -538,16 +547,16 @@ function VenueDetailsPage(props){
                         </div>
     }
                         <div id="about">
-                            <h4> About Venues</h4>
+                            <h2> About Venues</h2>
                             {venue.about}
                         </div>
                         <div id="features">
-                            <h4> Venues Features</h4>
+                            <h2> Venues Features</h2>
                             {venue.features}
                         </div>
                         <div id="reviews"> 
                             
-                                <h4>Review</h4>
+                                <h2>Review</h2>
                                 <ul style={{listStyle:'none'}}>
                                     
                                 {venueReview.length === 0 && (
@@ -559,18 +568,23 @@ function VenueDetailsPage(props){
                                         <div>
                                             
                                                 <li>
-                                                <p>{review.feedback}</p>
+                                                    <div style={{display:'flex'}}>
+                                                        <span style={{marginLeft:'.2rem' }}><ion-icon name="contact" style={{ fontSize: '2.5rem', paddingLeft: '0.5rem', color: '#c0c0c0', display:'inline !important'}}></ion-icon></span>
+                                                        <span style={{}}> {review.user.fullname}
+                                                            <div style={{color:'#c0c0c0', fontSize:'1.1rem'}}>{ review.date}</div>
+                                                        </span>
+                                                    </div>
+                                                    <div style={{marginLeft:'3.5rem'}}>
+                                                        <p>{review.feedback}</p>    
+                                                    </div>
                                             </li>
                                             
                                         </div>
                                         ))
                                     }
-                                    
-                                
-                                    
                                     <li>
                                         {profile ?(
-                                            <form onSubmit={AddReview} className="form-dts">
+                                            <form onSubmit={AddReview} className="form-dts" >
                                                 <div>
                                                     <h4>
                                                         Write a Review
@@ -579,6 +593,7 @@ function VenueDetailsPage(props){
                                                         <label htmlFor="rating">Rating</label>
                                                         <select id="rating" value={rating}
                                                         onChange={(e)=>setRating(e.target.value)}
+                                                        
                                                         >
                                                             <option value="">select</option>
                                                             <option value="1">1- Poor</option>
@@ -597,10 +612,16 @@ function VenueDetailsPage(props){
                                                         </textarea>
                                                     </div>
                                                     <div>
-                                                        {loading_addreview && <LoadingBox></LoadingBox> }
-                                                        { ReviewAddError && <MessageBox variant="danger">{ReviewAddError}</MessageBox> }
+                                                        {loading_addreview ? <LoadingBox></LoadingBox>
+                                                        :
+                                                            rat_loading && <LoadingBox></LoadingBox>
+                                                        }
+                                                        { ReviewAddError ? <MessageBox variant="danger">{ReviewAddError}</MessageBox>
+                                                            :
+                                                            rat_error && <MessageBox>{rat_error}</MessageBox>    
+                                                    }
                                                     </div>
-                                                    <div >
+                                                    <div style={{marginTop:'0.5rem'}} >
                                                         <label/>
                                                         <button className="primary" type="submit">Submit</button>
                                                     </div>

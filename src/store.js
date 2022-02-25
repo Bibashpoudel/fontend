@@ -2,7 +2,7 @@ import thunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import { userDetailsReducer, UserProfileReducer, userRegisterReducer, userSigninReducer } from './Reducer/userReducer';
 import { cartReducer } from './Reducer/cartReducer';
-import { AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, TrendingVenueListReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
+import { AddvenueRatingReducer, AddvenueReducer, AddvenueReviewReducer, CityVenueListReducer, detailsVenueReducer, TrendingVenueListReducer, updateVenueReducer, venueDeleteReducer, VenueDetailsListReducer, VenueListReducer, VenueReviewListReducer, VenuetypeListReducer, VenueTypeParticularListReducer } from './Reducer/venueReducer';
 import { GSTPANAddReducer, VendorCityListReducer, VendorRegisterReducer, VendorTypeListReducer, VendorVenueListReducer } from './Reducer/vendorReducer';
 import { CityServiceListReducer, detailsServiceReducer, detailsServiceTypeReducer, ServiceAddReducer, serviceDeleteReducer, ServiceReducer, ServiceReviewListReducer, ServiceTypeReducer, ServiceupdateReducer, TrendingServiceReducer, VendordetailsServiceReducer, VenueServiceListReducer } from './Reducer/serviceReducer';
 import { addimageReducer, ImageListReducer, venueImageListReducer } from './Reducer/imageReducer';
@@ -10,6 +10,7 @@ import { PayOrderReducer, PayReducer } from './Reducer/payReducer';
 import { CheckAvailableReducer, OrderReducer, UserOrderReducer, VendorOrderListReducer } from './Reducer/orderReducer';
 import { PasswordForgetOtpsendReducer, PasswordForgetOtpverifyReducer, RegisterOtpsendReducer, RegisterOtpverifyReducer } from './Reducer/otpReducer';
 import { FAQReducer, PrivacyReducer, termsConditionReducer } from './Reducer/impFIlesReducer';
+import { ContactusReducer } from './Reducer/contactusReducer';
 
 
 const initialState = {
@@ -62,7 +63,8 @@ const reducer = combineReducers({
     userProfileView:UserProfileReducer,
     UserOrders:UserOrderReducer,
     ReviewAdd:AddvenueReviewReducer,
-    ReviewDisplay:VenueReviewListReducer,
+    ReviewDisplay: VenueReviewListReducer,
+    RatingAdd:AddvenueRatingReducer,
     serviceReviewView:ServiceReviewListReducer,
     Razorpay: PayReducer,
     CheckStatus:CheckAvailableReducer,
@@ -71,7 +73,7 @@ const reducer = combineReducers({
     regOtpVerify:RegisterOtpverifyReducer,
     optsendForget:PasswordForgetOtpsendReducer,
     otpverifyForget:PasswordForgetOtpverifyReducer,
-
+    messageSend:ContactusReducer,
     privacyList: PrivacyReducer,
     tcList: termsConditionReducer,
     faqList:FAQReducer,

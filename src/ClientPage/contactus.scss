@@ -86,7 +86,8 @@
     font-size:1.6rem !important;
     margin: 1rem 0 !important;
     border:none !important;
-    border-bottom: .2rem solid #333 !important;
+    border-radius: 0rem !important;
+    border-bottom: .1rem solid #333 !important;
     outline: none   !important;
     background-color: #fff !important;
     resize: none;
@@ -118,7 +119,7 @@
     cursor: pointer;
     padding:1rem;
     font-size: 1.8rem;
-    border-radius: 0;
+    border-radius: 0rem !important;
 }
 @media(max-width:900px){
     .contact{

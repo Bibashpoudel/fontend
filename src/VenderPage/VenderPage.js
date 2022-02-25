@@ -55,18 +55,23 @@ function Vendorpage(){
                         :
                         error ? <MessageBox>{error || error.message}</MessageBox>
                         :
-                        <span> {userDetails.vendor_type.type === 'Marriage Gardens' 
+                        <> {userDetails.vendor_type.type === 'Marriage Gardens' 
                         ?
-                           <span>
+                           <>
                               <div>
                                  <NavLink to='/VenueManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '}  Venue Manage
                                  </NavLink>
+                               </div>
+                               <div  style={{marginTop:'.5rem'}}>
+                                 <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
+                                    <i className="fa fa-dashboard"></i>
+                                          {' '} Service Manage
+                                 </NavLink>
                                  
                               </div>
-                              
-                           </span>
+                           </>
                            :
                            <div>
                                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
@@ -77,7 +82,7 @@ function Vendorpage(){
                               </div>
                         }
                         
-                        </span>
+                        </>
                         }
                         
                         <div>
@@ -139,7 +144,7 @@ function Vendorpage(){
                                  </NavLink>
                                  
                             </div>
-                            <div  style={{marginTop:'.5rem'}}>
+                            <div  style={{marginTop:'.5rem', marginLeft:'1.2rem'}}>
                                  <NavLink to='/serviceManage' activeStyle={{color: "red"}}>
                                     <i className="fa fa-dashboard"></i>
                                           {' '} Service Manage

@@ -41,18 +41,12 @@ export default function Footer() {
                                 <i style={{ color: '#1DA1F2', fontSize: '2rem' }} className="ai-linked-in-v1-fill"></i>
                                 <span className="tooltiptext"> LinkedIn</span>
                             </span>
-                           
-                            
-                            
                         </div>
                         <div className="col">
                             <span className="footer-header">Download Our App</span>
                             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                 <img className="small" style={{ display: 'none' }} src={ios} alt="Download on the App store"></img>
-                                
                                 <img className="small" src={android} alt="Download on the App store" onClick={googleplay}></img>
-                                
-
                             </div>
                         </div>
                         <div className="w-100 mt-2" />
@@ -62,8 +56,7 @@ export default function Footer() {
                         </div>
                         <div className="col text-end footer-down">
                             <Link to='/terms&Conditions'>Terms & Conditions</Link> ||  <Link to="/PrivacyPolicy">Privacy Policy</Link>
-                        </div>
-                            
+                        </div>   
                     </div>
                 </div>
             </div>
